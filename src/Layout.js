@@ -839,15 +839,15 @@ var computeLayout = (function() {
             var/*float*/ totalFlexGrowFactors = 0;
             var/*float*/ totalFlexShrinkScaledFactors = 0;
 
-            i = startOfLineIndex;
+            var/*int*/ curIndex = startOfLineIndex;
 
             // Maintain a linked list of the child nodes that can shrink and/or grow.
             var/*css_node_t**/ firstRelativeChild = undefined;
             var/*css_node_t**/ currentRelativeChild = undefined;
 
             // Add items to the current line until it's full or we run out of items.
-            while (i < childCount) {
-              child = node.children[i];
+            while (curIndex < childCount) {
+              child = node.children[curIndex];
               child.lineIndex = lineCount;
 
               if (getPositionType(child) !== CSS_POSITION_ABSOLUTE) {
@@ -881,7 +881,7 @@ var computeLayout = (function() {
                 child.nextChild = undefined;
               }
               
-              i++;
+              curIndex++;
               endOfLineIndex++;
             }
             
