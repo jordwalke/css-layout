@@ -257,6 +257,205 @@ function printLayout(test) {
   return res.join('\n');
 }
 
+
+// child.layout[pos[mainAxis]] += mainDim;
+// ------------------------------------------
+//
+// Must first be transformed into:
+// child.layout[pos[mainAxis]] =
+//   child.layout[pos[mainAxis]] + mainDim;
+//
+// Then:
+// setPosLayoutPositionForAxis child mainAxis (
+//   child.layout[pos[mainAxis]] + mainDim;
+// );
+//
+// Then:
+// setPosLayoutPositionForAxis child mainAxis (
+//   (layoutPosPositionForAxis child mainAxis) + mainDim
+// );
+//
+// For variables that are known to be mutable cells:
+// .replace(/\b(word)\b/, '$1.contents')
+// .replace(/let \b(word.contents)\b/, 'let word')
+//
+// We can also send a PR to name the mutable cells beginning with mut.
+function transpileAnnotatedJStoReason(jsCode) {
+  // Variables that are mutable reference cells.
+  var muts = [
+    "curIndex",
+    "shouldContinue",
+    "baseMainSize",
+    "betweenMainDim",
+    "boundMainSize",
+    "child",
+    "childFlexBasis",
+    "childHeight",
+    "childHeightMeasureMode",
+    "childWidth",
+    "childWidthMeasureMode",
+    "containerCrossAxis",
+    "crossDim",
+    "crossDimLead",
+    "currentAbsoluteChild",
+    "currentRelativeChild",
+    "deltaFreeSpace",
+    "endIndex",
+    "endOfLineIndex",
+    "firstAbsoluteChild",
+    "firstRelativeChild",
+    "flexGrowFactor",
+    "flexShrinkScaledFactor",
+    "isCrossSizeDefinite",
+    "leadingMainDim",
+    "lineHeight",
+    "maxLineMainDim",
+    "needsCrossTrailingPos",
+    "needsMainTrailingPos",
+    "remainingFreeSpace",
+    "startOfLineIndex",
+    "updatedMainSize",
+    "currentLead"
+  ];
+  jsCode =
+    /**
+     * First, normalize any uninitialized variables to be well typed,
+     * and remove type hints from even the initialized ones (which get in
+     * the way of regexes).
+     * -------------------------------------------------------------
+     */
+    jsCode.replace(/var\/\*css_node_t\*\*\/ ([A-Za-z_]*);/g, 'var $1 = theNullNode;')
+    .replace(/var\/\*css_node_t\*\*\/ ([A-Za-z_]*)\s*=\s*([^;]*);/g, 'var $1 = $2;')
+
+    .replace(/var\/\*int\*\/ ([A-Za-z_]*);/g, 'var $1 = 0;')
+    .replace(/var\/\*int\*\/ ([A-Za-z_]*)\s*=\s*([^;]*);/g, 'var $1 = $2;')
+
+    .replace(/var\/\*float\*\/ ([A-Za-z_]*);/g, 'var $1 = 0.0;')
+    .replace(/var\/\*float\*\/ ([A-Za-z_]*)\s*=\s*([^;]*);/g, 'var $1 = $2;')
+
+    .replace(/var\/\*css_measure_mode_t\*\/ ([A-Za-z_]*);/g, 'var $1 = CSS_MEASURE_MODE_UNDEFINED;')
+    .replace(/var\/\*css_measure_mode_t\*\/ ([A-Za-z_]*)\s*=\s*([^;]*);/g, 'var $1 = $2;')
+
+    // Also, bools (which are always initialized)
+    .replace(/var\/\*bool\*\/ ([A-Za-z_]*)\s*=\s*([^;]*);/g, 'var $1 = $2;');
+
+  muts.forEach(function(mut) {
+    /**
+     * Make mutable variables into refs.
+     * ---------------------------------
+     */
+    var initializedRegex = new RegExp("var " + mut + " =([^;]*);", "g");
+    var referenceRegex = new RegExp("\\b" + mut + "\\b", "g");
+    var tmpInitializationName = new RegExp(mut + "TMP_DECLARATION", "g");
+    jsCode =
+      // First rename the declaration site so that we don't append .contents to it.
+      jsCode.replace(initializedRegex, 'var ' + mut + 'TMP_DECLARATION = {contents: $1};')
+      .replace(referenceRegex, mut + '.contents')
+      .replace(tmpInitializationName, mut)
+  });
+  return jsCode
+    .replace(
+      /for \((\w+) = ([\w\.]+); (\w+) < ([\w\.]+); \+\+(\w+)\)/g,
+      'for $1 in $2 to ($4 -. 1)'
+    )
+    .replace(
+      /for \((\w+) = ([\w\.]+); (\w+) < ([\w\.]+); (\w+)\+\+\)/g,
+      'for $1 in $2 to ($4 -. 1)'
+    )
+    .replace(/CSS_UNDEFINED/g, 'cssUndefined')
+    /**
+     * TODO: The captured $2 below may not contain the ".", otherwise we don't
+     * insert .contents.
+     */
+    /**
+     * First thing to transform is the for loops, else we'd end up with:
+     * for (let i = 0; i < childCount; i.contents = i.contents+1) {
+     */
+    .replace(/((\S+)\+\+)/g, '$2 = $2+1')
+    .replace(/((\S+)--)/g, '$2 = $2-1')
+    .replace(/'abs-layout'/g, '"abs-layout"')
+    .replace(/'abs-measure'/g, '"abs-measure"')
+    .replace(/'flex'/g, '"flex"')
+    .replace(/'measure'/g, '"measure"')
+    .replace(/'stretch'/g, '"stretch"')
+    .replace('node.style.measure', 'node.measure')
+    .replace(/undefined/g, 'theNullNode')
+    .replace(/\.children\.length/g, '.childrenCount')
+    // The one below does not permit dots in the thing being incremented.
+    // First we normalize all x+=y to be x.contents += y, and then the next
+    // set of regexes will turn it into x.contents = x.contents + y
+    // Now turn all the x.y += foo into x.y = x.y + foo
+    .replace(/\s([\[\]A-Za-z_\.]*)\s+\+=([^;]*)/g, ' $1 = $1 +$2')
+    .replace(/\s([\[\]A-Za-z_\.]*)\s+\-=([^;]*)/g, ' $1 = $1 -$2')
+    .replace(
+      
+    )
+    .replace(
+      /getPosition\(([A-Za-z_\.]*), leading\[([A-Za-z_\.]*)\]\)/g,
+      '(styleLeadingPositionForAxisOrZero ($1) ($2))'
+    )
+
+    .replace(
+      /([A-Za-z_\.]*)\.layout\[pos\[([A-Za-z_\.]*)\]\]\s*=[^=]([^;]*)/g,
+      '(setPosLayoutPositionForAxis ($1) ($2) ($3))'
+    )
+
+    /**
+     * Layout measured dimensions.
+     */
+    .replace(
+      /([A-Za-z_\.]*)\.layout\[measuredDim\[([A-Za-z_\.]*)\]\]\s*=([^;]*);/g,
+      '(setLayoutMeasuredDimensionForAxis ($1) ($2) ($3))'
+    )
+    .replace(
+      /([A-Za-z_\.]*)\.layout\[measuredDim\[([A-Za-z_\.]*)\]\]/g,
+      '(layoutMeasuredDimensionForAxis ($1) ($2))'
+    )
+
+    /**
+     * Layout leading position.
+     */
+    .replace(
+      /([A-Za-z_\.]*)\.layout\[leading\[([A-Za-z_\.]*)\]\]\s*=([^;]*);/g,
+      '(setLayoutLeadingPositionForAxis ($1) ($2) ($3))'
+    )
+    .replace(
+      /([A-Za-z_\.]*)\.layout\[leading\[([A-Za-z_\.]*)\]\]/g,
+      '(layoutLeadingPositionForAxis ($1) ($2))'
+    )
+    .replace(/style\[dim/g, 'style.dimensions[dim')
+    .replace(/style\[CSS_LEFT\]/g, 'style.left')
+    .replace(/style\[CSS_TOP\]/g, 'style.top')
+    .replace(/style\[CSS_RIGHT\]/g, 'style.right')
+    .replace(/style\[CSS_BOTTOM\]/g, 'style.bottom')
+    .replace(/node.children\[i\]/g, 'node.getChild(node.context, i)')
+    .replace(/node.children\[j\]/g, 'node.getChild(node.context, j)')
+    .replace(/node.children\[curIndex\]/g, 'node.getChild(node.context, curIndex)')
+    .replace(/node.children\[curIndex\.contents\]/g, 'node.getChild(node.context, curIndex.contents)')
+    .replace(/currentAbsoluteChild\./g, 'currentAbsoluteChild.')
+    .replace(/currentRelativeChild\./g, 'currentRelativeChild.')
+    .replace(/getPositionType\((.+?)\)/g, '$1.style.positionType')
+    .replace(/getJustifyContent\((.+?)\)/g, '$1.style.justifyContent')
+    .replace(/getAlignContent\((.+?)\)/g, '$1.style.alignContent')
+    .replace(/assert\((.+?),\s*'(.+?)'\);/g, 'assert($1); /* $2 */')
+    .replace(/getOverflow\((.+?)\)/g, '$1.style.overflow')
+    // We do want to keep around the c-style passing of node.context
+    // before we go erase all the remaining c comment injections.
+    .replace(/\/\*\(c\)!node->context,\*\//g, 'node.context,')
+    .replace(/\/\*\(c\)!([^*]+)\*\//g, '')
+    .replace(/\/\*\(java\)!([^*]+)\*\//g, '')
+    .replace(/var\/\*([^\/]+)\*\//g, 'let')
+    .replace(/\/\*float\*\/0\b/g, '0.0')
+    .replace(/\bvar\b/g, 'let')
+    .replace(/\}$/gm, '};')
+    .replace(/ === /g, ' == ')
+    .replace(/ !== /g, ' != ')
+    .replace(/\n {2}/g, '\n')
+    .replace(/\/[*]!([^*]+)[*]\//g, '$1')
+    .replace(/\/\/(.*)$/gm, '/*$1*/')
+    .replace(/!([^=])/g, 'not <| $1')
+}
+
 function transpileAnnotatedJStoC(jsCode) {
   return jsCode
     .replace(/'abs-layout'/g, '"abs-layout"')
@@ -342,6 +541,7 @@ var allTestsInC = allTests.map(printLayout);
 generateFile(__dirname + '/__tests__/Layout-test.c', allTestsInC.join('\n\n'));
 generateFile(__dirname + '/Layout-test-utils.c', makeConstDefs());
 generateFile(__dirname + '/Layout.c', transpileAnnotatedJStoC(computeLayoutCode));
+generateFile(__dirname + '/re-layout/src/Layout.re', transpileAnnotatedJStoReason(computeLayoutCode));
 generateFile(__dirname + '/java/src/com/facebook/csslayout/LayoutEngine.java', JavaTranspiler.transpileLayoutEngine(computeLayoutCode));
 generateFile(__dirname + '/java/tests/com/facebook/csslayout/TestConstants.java', JavaTranspiler.transpileCConstDefs(makeConstDefs()));
 generateFile(__dirname + '/java/tests/com/facebook/csslayout/LayoutEngineTest.java', JavaTranspiler.transpileCTestsArray(allTestsInC));
