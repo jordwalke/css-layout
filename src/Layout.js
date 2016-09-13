@@ -606,6 +606,7 @@ var computeLayout = (function() {
   //    undefined then it must also pass a measure mode of CSS_MEASURE_MODE_UNDEFINED in that dimension.
   //
   function layoutNodeImpl(node, availableWidth, availableHeight, /*css_direction_t*/parentDirection, widthMeasureMode, heightMeasureMode, performLayout) {
+
     assert(isUndefined(availableWidth) ? widthMeasureMode === CSS_MEASURE_MODE_UNDEFINED : true, 'availableWidth is indefinite so widthMeasureMode must be CSS_MEASURE_MODE_UNDEFINED');
     assert(isUndefined(availableHeight) ? heightMeasureMode === CSS_MEASURE_MODE_UNDEFINED : true, 'availableHeight is indefinite so heightMeasureMode must be CSS_MEASURE_MODE_UNDEFINED');
     
@@ -729,7 +730,7 @@ var computeLayout = (function() {
           var/*float*/ childHeight;
           var/*css_measure_mode_t*/ childWidthMeasureMode;
           var/*css_measure_mode_t*/ childHeightMeasureMode;
-          for (i = 0; i < childCount; i++) {
+          for (let i = 0; i < childCount; i++) {
             child = node.children[i];
 
             if (performLayout) {
@@ -846,7 +847,8 @@ var computeLayout = (function() {
             var/*css_node_t**/ currentRelativeChild = undefined;
 
             // Add items to the current line until it's full or we run out of items.
-            while (curIndex < childCount) {
+            var shouldContinue = true;
+            while (curIndex < childCount && shouldContinue) {
               child = node.children[curIndex];
               child.lineIndex = lineCount;
 
@@ -856,33 +858,35 @@ var computeLayout = (function() {
                 // If this is a multi-line flow and this item pushes us over the available size, we've
                 // hit the end of the current line. Break out of the loop and lay out the current line.
                 if (sizeConsumedOnCurrentLine + outerFlexBasis > availableInnerMainDim && isNodeFlexWrap && itemsOnLine > 0) {
-                  break;
-                }
+                  shouldContinue = false;
+                } else {
+                  sizeConsumedOnCurrentLine += outerFlexBasis;
+                  itemsOnLine++;
 
-                sizeConsumedOnCurrentLine += outerFlexBasis;
-                itemsOnLine++;
+                  if (isFlex(child)) {
+                    totalFlexGrowFactors += getFlexGrowFactor(child);
+                    
+                    // Unlike the grow factor, the shrink factor is scaled relative to the child
+                    // dimension.
+                    totalFlexShrinkScaledFactors += getFlexShrinkFactor(child) * child.layout.flexBasis;
+                  }
 
-                if (isFlex(child)) {
-                  totalFlexGrowFactors += getFlexGrowFactor(child);
-                  
-                  // Unlike the grow factor, the shrink factor is scaled relative to the child
-                  // dimension.
-                  totalFlexShrinkScaledFactors += getFlexShrinkFactor(child) * child.layout.flexBasis;
+                  // Store a private linked list of children that need to be layed out.
+                  if (firstRelativeChild === undefined) {
+                    firstRelativeChild = child;
+                  }
+                  if (currentRelativeChild !== undefined) {
+                    currentRelativeChild.nextChild = child;
+                  }
+                  currentRelativeChild = child;
+                  child.nextChild = undefined;
+                  curIndex++;
+                  endOfLineIndex++;
                 }
-
-                // Store a private linked list of children that need to be layed out.
-                if (firstRelativeChild === undefined) {
-                  firstRelativeChild = child;
-                }
-                if (currentRelativeChild !== undefined) {
-                  currentRelativeChild.nextChild = child;
-                }
-                currentRelativeChild = child;
-                child.nextChild = undefined;
+              } else {
+                curIndex++;
+                endOfLineIndex++;
               }
-              
-              curIndex++;
-              endOfLineIndex++;
             }
             
             // If we don't need to measure the cross axis, we can skip the entire flex step.
