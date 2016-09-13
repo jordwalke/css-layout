@@ -672,7 +672,7 @@ var computeLayout = (function() {
 
         // If we're not being asked to perform a full layout, we can handle a number of common
         // cases here without incurring the cost of the remaining function.
-        var shouldContinue = true;
+        var/*bool*/ shouldContinue = true;
         if (!performLayout) {
           // If we're being asked to size the content with an at most constraint but there is no available width,
           // the measurement will always be zero.
@@ -730,7 +730,7 @@ var computeLayout = (function() {
           var/*float*/ childHeight;
           var/*css_measure_mode_t*/ childWidthMeasureMode;
           var/*css_measure_mode_t*/ childHeightMeasureMode;
-          for (let i = 0; i < childCount; i++) {
+          for (i = 0; i < childCount; i++) {
             child = node.children[i];
 
             if (performLayout) {
@@ -847,7 +847,7 @@ var computeLayout = (function() {
             var/*css_node_t**/ currentRelativeChild = undefined;
 
             // Add items to the current line until it's full or we run out of items.
-            var shouldContinue = true;
+            var/*bool*/ shouldContinue = true;
             while (curIndex < childCount && shouldContinue) {
               child = node.children[curIndex];
               child.lineIndex = lineCount;
@@ -1236,22 +1236,24 @@ var computeLayout = (function() {
             var/*int*/ endIndex = 0;
             for (i = 0; i < lineCount; ++i) {
               var/*int*/ startIndex = endIndex;
-              var/*int*/ j;
+              var/*int*/ j = startIndex;
 
               // compute the line's height and find the endIndex
               var/*float*/ lineHeight = /*float*/0;
-              for (j = startIndex; j < childCount; ++j) {
+              var/*bool*/ shouldContinue = false;
+              while (j < childCount && shouldContinue) {
                 child = node.children[j];
-                if (getPositionType(child) !== CSS_POSITION_RELATIVE) {
-                  continue;
+                if (getPositionType(child) === CSS_POSITION_RELATIVE) {
+                  if (child.lineIndex !== i) {
+                    shouldContinue = false;
+                  } else {
+                    if (isLayoutDimDefined(child, crossAxis)) {
+                      lineHeight = fmaxf(lineHeight,
+                        child.layout[measuredDim[crossAxis]] + getMarginAxis(child, crossAxis));
+                    }
+                  }
                 }
-                if (child.lineIndex !== i) {
-                  break;
-                }
-                if (isLayoutDimDefined(child, crossAxis)) {
-                  lineHeight = fmaxf(lineHeight,
-                    child.layout[measuredDim[crossAxis]] + getMarginAxis(child, crossAxis));
-                }
+                j++;
               }
               endIndex = j;
               lineHeight += crossDimLead;
@@ -1259,22 +1261,20 @@ var computeLayout = (function() {
               if (performLayout) {
                 for (j = startIndex; j < endIndex; ++j) {
                   child = node.children[j];
-                  if (getPositionType(child) !== CSS_POSITION_RELATIVE) {
-                    continue;
-                  }
-
-                  var/*css_align_t*/ alignContentAlignItem = getAlignItem(node, child);
-                  if (alignContentAlignItem === CSS_ALIGN_FLEX_START) {
-                    child.layout[pos[crossAxis]] = currentLead + getLeadingMargin(child, crossAxis);
-                  } else if (alignContentAlignItem === CSS_ALIGN_FLEX_END) {
-                    child.layout[pos[crossAxis]] = currentLead + lineHeight - getTrailingMargin(child, crossAxis) - child.layout[measuredDim[crossAxis]];
-                  } else if (alignContentAlignItem === CSS_ALIGN_CENTER) {
-                    childHeight = child.layout[measuredDim[crossAxis]];
-                    child.layout[pos[crossAxis]] = currentLead + (lineHeight - childHeight) / 2;
-                  } else if (alignContentAlignItem === CSS_ALIGN_STRETCH) {
-                    child.layout[pos[crossAxis]] = currentLead + getLeadingMargin(child, crossAxis);
-                    // TODO(prenaux): Correctly set the height of items with indefinite
-                    //                (auto) crossAxis dimension.
+                  if (getPositionType(child) === CSS_POSITION_RELATIVE) {
+                    var/*css_align_t*/ alignContentAlignItem = getAlignItem(node, child);
+                    if (alignContentAlignItem === CSS_ALIGN_FLEX_START) {
+                      child.layout[pos[crossAxis]] = currentLead + getLeadingMargin(child, crossAxis);
+                    } else if (alignContentAlignItem === CSS_ALIGN_FLEX_END) {
+                      child.layout[pos[crossAxis]] = currentLead + lineHeight - getTrailingMargin(child, crossAxis) - child.layout[measuredDim[crossAxis]];
+                    } else if (alignContentAlignItem === CSS_ALIGN_CENTER) {
+                      childHeight = child.layout[measuredDim[crossAxis]];
+                      child.layout[pos[crossAxis]] = currentLead + (lineHeight - childHeight) / 2;
+                    } else if (alignContentAlignItem === CSS_ALIGN_STRETCH) {
+                      child.layout[pos[crossAxis]] = currentLead + getLeadingMargin(child, crossAxis);
+                      // TODO(prenaux): Correctly set the height of items with indefinite
+                      //                (auto) crossAxis dimension.
+                    }
                   }
                 }
               }
