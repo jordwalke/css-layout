@@ -282,6 +282,7 @@ function printLayout(test) {
 // We can also send a PR to name the mutable cells beginning with mut.
 function transpileAnnotatedJStoReason(jsCode) {
   // Variables that are mutable reference cells.
+  // Could just comment the code too!
   var muts = [
     "curIndex",
     "shouldContinue",
@@ -315,7 +316,13 @@ function transpileAnnotatedJStoReason(jsCode) {
     "remainingFreeSpace",
     "startOfLineIndex",
     "updatedMainSize",
-    "currentLead"
+    "currentLead",
+    "sizeConsumedOnCurrentLine",
+    "itemsOnLine",
+    "totalFlexGrowFactors",
+    "totalFlexShrinkScaledFactors",
+    "deltaFlexShrinkScaledFactors",
+    "deltaFlexGrowFactors"
   ];
   jsCode =
     /**
@@ -353,15 +360,15 @@ function transpileAnnotatedJStoReason(jsCode) {
       .replace(referenceRegex, mut + '.contents')
       .replace(tmpInitializationName, mut)
   });
-  return jsCode
-    .replace(
-      /for \((\w+) = ([\w\.]+); (\w+) < ([\w\.]+); \+\+(\w+)\)/g,
-      'for $1 in $2 to ($4 -. 1)'
-    )
-    .replace(
-      /for \((\w+) = ([\w\.]+); (\w+) < ([\w\.]+); (\w+)\+\+\)/g,
-      'for $1 in $2 to ($4 -. 1)'
-    )
+  let preprocessed = jsCode
+    // .replace(
+    //   /for \((\w+) = ([\w\.]+); (\w+) < ([\w\.]+); \+\+(\w+)\)/g,
+    //   'for $1 in $2 to ($4 -. 1)'
+    // )
+    // .replace(
+    //   /for \((\w+) = ([\w\.]+); (\w+) < ([\w\.]+); (\w+)\+\+\)/g,
+    //   'for $1 in $2 to ($4 -. 1)'
+    // )
     .replace(/CSS_UNDEFINED/g, 'cssUndefined')
     /**
      * TODO: The captured $2 below may not contain the ".", otherwise we don't
@@ -371,8 +378,8 @@ function transpileAnnotatedJStoReason(jsCode) {
      * First thing to transform is the for loops, else we'd end up with:
      * for (let i = 0; i < childCount; i.contents = i.contents+1) {
      */
-    .replace(/((\S+)\+\+)/g, '$2 = $2+1')
-    .replace(/((\S+)--)/g, '$2 = $2-1')
+    // .replace(/((\S+)\+\+)/g, '$2 = $2 + 1')
+    // .replace(/((\S+)--)/g, '$2 = $2 - 1')
     .replace(/'abs-layout'/g, '"abs-layout"')
     .replace(/'abs-measure'/g, '"abs-measure"')
     .replace(/'flex'/g, '"flex"')
@@ -385,11 +392,9 @@ function transpileAnnotatedJStoReason(jsCode) {
     // First we normalize all x+=y to be x.contents += y, and then the next
     // set of regexes will turn it into x.contents = x.contents + y
     // Now turn all the x.y += foo into x.y = x.y + foo
-    .replace(/\s([\[\]A-Za-z_\.]*)\s+\+=([^;]*)/g, ' $1 = $1 +$2')
-    .replace(/\s([\[\]A-Za-z_\.]*)\s+\-=([^;]*)/g, ' $1 = $1 -$2')
-    .replace(
-      
-    )
+    // .replace(/\s=\s*\-([\[\]A-Za-z_\.]*)/g, '= -.$1')
+    // .replace(/\s([\[\]A-Za-z_\.]*)\s+\+=([^;]*)/g, ' $1 = $1 +$2')
+    // .replace(/\s([\[\]A-Za-z_\.]*)\s+\-=([^;]*)/g, ' $1 = $1 -$2')
     .replace(
       /getPosition\(([A-Za-z_\.]*), leading\[([A-Za-z_\.]*)\]\)/g,
       '(styleLeadingPositionForAxisOrZero ($1) ($2))'
@@ -437,7 +442,7 @@ function transpileAnnotatedJStoReason(jsCode) {
     .replace(/getPositionType\((.+?)\)/g, '$1.style.positionType')
     .replace(/getJustifyContent\((.+?)\)/g, '$1.style.justifyContent')
     .replace(/getAlignContent\((.+?)\)/g, '$1.style.alignContent')
-    .replace(/assert\((.+?),\s*'(.+?)'\);/g, 'assert($1); /* $2 */')
+    .replace(/assert\(/g, 're_assert(')
     .replace(/getOverflow\((.+?)\)/g, '$1.style.overflow')
     // We do want to keep around the c-style passing of node.context
     // before we go erase all the remaining c comment injections.
@@ -446,14 +451,20 @@ function transpileAnnotatedJStoReason(jsCode) {
     .replace(/\/\*\(java\)!([^*]+)\*\//g, '')
     .replace(/var\/\*([^\/]+)\*\//g, 'let')
     .replace(/\/\*float\*\/0\b/g, '0.0')
-    .replace(/\bvar\b/g, 'let')
-    .replace(/\}$/gm, '};')
-    .replace(/ === /g, ' == ')
-    .replace(/ !== /g, ' != ')
-    .replace(/\n {2}/g, '\n')
-    .replace(/\/[*]!([^*]+)[*]\//g, '$1')
-    .replace(/\/\/(.*)$/gm, '/*$1*/')
-    .replace(/!([^=])/g, 'not <| $1')
+    // .replace(/\bvar\b/g, 'let')
+    // .replace(/\}$/gm, '};')
+    // .replace(/ === /g, ' == ')
+    // .replace(/ !== /g, ' != ')
+    // .replace(/\n {2}/g, '\n')
+    // .replace(/\/[*]!([^*]+)[*]\//g, '$1')
+    // .replace(/\/\/(.*)$/gm, '/*$1*/');
+    // .replace(/!([^=])/g, 'not <| $1')
+
+  let ret =
+    require('child_process').execSync('~/Desktop/Reason/refmt_impl.native -parse json -print re -use-stdin true -is-interface-pp false -assume-explicit-arity true', {
+      input: require('child_process').execSync('~/Desktop/rejs/js-give-me-a-reason.js', {input: preprocessed.toString()})
+    });
+  return ret.toString();
 }
 
 function transpileAnnotatedJStoC(jsCode) {
