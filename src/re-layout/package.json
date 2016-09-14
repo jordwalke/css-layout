@@ -1,0 +1,38 @@
+{
+  "name": "re-layout",
+  "version": "1.1.1",
+  "description": "Implementation CSS layout using pure Reason - powered by css-layout project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jordwalke/re-layout.git"
+  },
+  "keywords": [
+    "css",
+    "flexbox",
+    "layout",
+    "reason"
+  ],
+  "author": "",
+  "license": "BSD",
+  "homepage": "https://github.com/jordwalke/re-layout",
+  "dependencies": {
+    "dependency-env": "https://github.com/npm-ml/dependency-env.git",
+    "merlin": "https://github.com/npm-opam/merlin",
+    "nopam": "https://github.com/yunxing/nopam.git",
+    "reason": "https://github.com/facebook/reason#JsonSupport",
+    "rejs": "https://github.com/jaredly/rejs.git"
+  },
+  "scripts": {
+    "postinstall": "npm run reasonBuild",
+    "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -pkg str -I src ./src/Layout.native  2>&1 | refmterr",
+    "reasonbuild": "npm run reasonBuild",
+    "regenerateReasonSource": "eval $(dependencyEnv) && nopam && cd ../../ && grunt transpile",
+    "start": "eval $(dependencyEnv) && nopam && ./_build/src/Layout.native",
+    "help": "eval $(dependencyEnv) && nopam && rebuild -help",
+    "clean": "eval $(dependencyEnv) && nopam && rebuild -clean",
+    "top": "eval $(dependencyEnv) && nopam && rtop",
+    "env": "eval $(dependencyEnv) && nopam && env",
+    "editor": "eval $(dependencyEnv) && nopam && eval $EDITOR",
+    "whereisocamlmerlin": "eval $(dependencyEnv) && which ocamlmerlin-reason"
+  }
+}
