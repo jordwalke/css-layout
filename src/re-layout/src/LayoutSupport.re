@@ -29,11 +29,11 @@
  * Since we've defined our own css undefined, use it.
  * :%s/\<CSS_UNDEFINED\>/CSS_UNDEFINED/g
  */
+
 /**
  * So we can replace:
  * `!blah(x,y)` with `not <| blah(x,y)` with the same precedence.
  */
-
 open LayoutTypes;
 
 let cssUndefined = nan;
@@ -48,9 +48,9 @@ let css_undefined = nan;
 
 let isUndefined value => classify_float nan === FP_nan;
 
-let dummyMeasure (context, width, widthMeasureMode, height, heightMeasureMode) => {width: 0.0, height: 0.0};
+let dummyMeasure context width widthMeasureMode height heightMeasureMode => {width: 0.0, height: 0.0};
 
-let dummyGetChild (context, i) => assert false;
+let dummyGetChild context i => assert false;
 
 let dummyIsDirty context => false;
 
@@ -310,6 +310,11 @@ let styleTrailingPositionForAxis node axis =>
   | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.left
   };
 
+let styleTrailingPositionForAxisOrZero node axis => {
+  let leadingPos = styleTrailingPositionForAxis node axis;
+  not (isUndefined leadingPos) ? leadingPos : 0.0
+};
+
 let styleTrailingPaddingForAxis node axis =>
   switch axis {
   | CSS_FLEX_DIRECTION_COLUMN => node.style.paddingBottom
@@ -390,7 +395,7 @@ let setLayoutTrailingPositionForAxis node axis value =>
   | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.left = value
   };
 
-let resolveDirection (node, parentDirection) => {
+let resolveDirection node parentDirection => {
   let direction = node.style.direction;
   if (direction === CSS_DIRECTION_INHERIT) {
     parentDirection === CSS_DIRECTION_INHERIT ? CSS_DIRECTION_LTR : parentDirection
@@ -399,7 +404,7 @@ let resolveDirection (node, parentDirection) => {
   }
 };
 
-let resolveAxis (axis, direction) =>
+let resolveAxis axis direction =>
   if (direction === CSS_DIRECTION_RTL) {
     if (axis === CSS_FLEX_DIRECTION_ROW) {
       CSS_FLEX_DIRECTION_ROW_REVERSE
@@ -426,12 +431,9 @@ let isRowDirection flexDirection =>
 let isColumnDirection flexDirection =>
   flexDirection === CSS_FLEX_DIRECTION_COLUMN || flexDirection === CSS_FLEX_DIRECTION_COLUMN_REVERSE;
 
-let getCrossFlexDirection (flexDirection, direction) =>
-  if (isColumnDirection flexDirection) {
-    resolveAxis (CSS_FLEX_DIRECTION_ROW, direction)
-  } else {
-    CSS_FLEX_DIRECTION_COLUMN
-  };
+let getCrossFlexDirection flex_direction direction =>
+  isColumnDirection flex_direction ?
+    resolveAxis CSS_FLEX_DIRECTION_ROW direction : CSS_FLEX_DIRECTION_COLUMN;
 
 let isFlex node => node.style.positionType === CSS_POSITION_RELATIVE && node.style.flex > 0.0;
 
@@ -442,7 +444,7 @@ let isFlexBasisAuto =
     /* All flex values are auto. */
     fun node => true :
     /* A flex value > 0 implies a basis of zero. */
-    fun node => node.style.flex <= 0.0;
+    (fun node => node.style.flex <= 0.0);
 
 /* Flex grow is implied by positive values for flex. */
 let getFlexGrowFactor node => node.style.flex > 0.0 ? node.style.flex : 0.0;
@@ -450,25 +452,25 @@ let getFlexGrowFactor node => node.style.flex > 0.0 ? node.style.flex : 0.0;
 let getFlexShrinkFactor =
   /* A flex shrink factor of 1 is implied by non-zero values for flex. */
   positive_flex_is_auto ?
-    fun node => (node.style.flex != 0.0 ? 1.0 : 0.0) :
+    fun node => node.style.flex != 0.0 ? 1.0 : 0.0 :
     /* A flex shrink factor of 1 is implied by negative values for flex. */
-    fun node => node.style.flex < 0.0 ? 1.0 : 0.0;
+    (fun node => node.style.flex < 0.0 ? 1.0 : 0.0);
 
-let getLeadingMargin (node, axis) =>
+let getLeadingMargin node axis =>
   if (isRowDirection axis && not (isUndefined node.style.marginStart)) {
     node.style.marginStart
   } else {
     styleLeadingMarginForAxis node axis
   };
 
-let getTrailingMargin (node, axis) =>
+let getTrailingMargin node axis =>
   if (isRowDirection axis && not (isUndefined node.style.marginEnd)) {
     node.style.marginEnd
   } else {
     styleTrailingMarginForAxis node axis
   };
 
-let getLeadingPadding (node, axis) =>
+let getLeadingPadding node axis =>
   if (isRowDirection axis && not (isUndefined node.style.paddingStart) && node.style.paddingStart >= 0.0) {
     node.style.paddingStart
   } else {
@@ -480,7 +482,7 @@ let getLeadingPadding (node, axis) =>
     }
   };
 
-let getTrailingPadding (node, axis) =>
+let getTrailingPadding node axis =>
   if (isRowDirection axis && not (isUndefined node.style.paddingEnd) && node.style.paddingEnd >= 0.0) {
     node.style.paddingEnd
   } else {
@@ -488,7 +490,7 @@ let getTrailingPadding (node, axis) =>
     trailingPadding >= 0.0 ? trailingPadding : 0.0
   };
 
-let getLeadingBorder (node, axis) =>
+let getLeadingBorder node axis =>
   if (isRowDirection axis && not (isUndefined node.style.borderStart) && node.style.borderStart >= 0.0) {
     node.style.borderStart
   } else {
@@ -496,7 +498,7 @@ let getLeadingBorder (node, axis) =>
     leadingBorder >= 0.0 ? leadingBorder : 0.0
   };
 
-let getTrailingBorder (node, axis) =>
+let getTrailingBorder node axis =>
   if (isRowDirection axis && not (isUndefined node.style.borderEnd) && node.style.borderEnd >= 0.0) {
     node.style.borderEnd
   } else {
@@ -504,23 +506,21 @@ let getTrailingBorder (node, axis) =>
     trailingBorder >= 0.0 ? trailingBorder : 0.0
   };
 
-let getLeadingPaddingAndBorder (node, axis) =>
-  getLeadingPadding (node, axis) +. getLeadingBorder (node, axis);
+let getLeadingPaddingAndBorder node axis => getLeadingPadding node axis +. getLeadingBorder node axis;
 
-let getTrailingPaddingAndBorder (node, axis) =>
-  getTrailingPadding (node, axis) +. getTrailingBorder (node, axis);
+let getTrailingPaddingAndBorder node axis => getTrailingPadding node axis +. getTrailingBorder node axis;
 
-let getMarginAxis (node, axis) => getLeadingMargin (node, axis) +. getTrailingMargin (node, axis);
+let getMarginAxis node axis => getLeadingMargin node axis +. getTrailingMargin node axis;
 
-let getPaddingAndBorderAxis (node, axis) =>
-  getLeadingPaddingAndBorder (node, axis) +. getTrailingPaddingAndBorder (node, axis);
+let getPaddingAndBorderAxis node axis =>
+  getLeadingPaddingAndBorder node axis +. getTrailingPaddingAndBorder node axis;
 
-let getAlignItem (node, child) =>
+let getAlignItem node child =>
   child.style.alignSelf !== CSS_ALIGN_AUTO ? child.style.alignSelf : node.style.alignItems;
 
 let getFlexDirection node => node.style.flexDirection;
 
-let resolveAxis (flex_direction, direction) =>
+let resolveAxis flex_direction direction =>
   if (direction === CSS_DIRECTION_RTL) {
     if (flex_direction === CSS_FLEX_DIRECTION_ROW) {
       CSS_FLEX_DIRECTION_ROW_REVERSE
@@ -535,39 +535,35 @@ let resolveAxis (flex_direction, direction) =>
     flex_direction
   };
 
-let getCrossFlexDirection (flex_direction, direction) =>
-  isColumnDirection flex_direction ?
-    resolveAxis (CSS_FLEX_DIRECTION_ROW, direction) : CSS_FLEX_DIRECTION_COLUMN;
-
 let getFlex node => node.style.flex;
 
 let isFlex node => node.style.positionType === CSS_POSITION_RELATIVE && getFlex node != 0.0;
 
-let getDimWithMargin (node, axis) =>
-  layoutMeasuredDimensionForAxis node axis +. getLeadingMargin (node, axis) +. getTrailingMargin (node, axis);
+let getDimWithMargin node axis =>
+  layoutMeasuredDimensionForAxis node axis +. getLeadingMargin node axis +. getTrailingMargin node axis;
 
-let isStyleDimDefined (node, axis) => {
+let isStyleDimDefined node axis => {
   let value = styleDimensionForAxis node axis;
   not (isUndefined value) && value >= 0.0
 };
 
-let isLayoutDimDefined (node, axis) => {
+let isLayoutDimDefined node axis => {
   let value = layoutMeasuredDimensionForAxis node axis;
   not (isUndefined value) && value >= 0.0
 };
 
-let isPosDefined (node, position) => not (isUndefined (styleForPosition node position));
+let isPosDefined node position => not (isUndefined (styleForPosition node position));
 
 let isMeasureDefined node => node.measure !== dummyMeasure;
 
 let normalizePosition position => not (isUndefined position) ? position : 0.0;
 
-let getPosition (node, position) => {
+let getPosition node position => {
   let pos = styleForPosition node position;
   not (isUndefined pos) ? pos : 0.0
 };
 
-let boundAxisWithinMinAndMax (node, axis, value) => {
+let boundAxisWithinMinAndMax node axis value => {
   let (min, max) =
     if (isColumnDirection axis) {
       (node.style.minHeight, node.style.maxHeight)
@@ -592,14 +588,14 @@ let boundAxisWithinMinAndMax (node, axis, value) => {
   nextNextBoundValue
 };
 
-let fmaxf (a, b) => a > b ? a : b;
+let fminf a b => a < b ? a : b;
+
+let fmaxf a b => a > b ? a : b;
 
 /* Like boundAxisWithinMinAndMax but also ensures that the value doesn't go below the
  * padding and border amount. */
-let boundAxis (node, axis, value) => fmaxf (
-  boundAxisWithinMinAndMax (node, axis, value),
-  getPaddingAndBorderAxis (node, axis)
-);
+let boundAxis node axis value =>
+  fmaxf (boundAxisWithinMinAndMax node axis value) (getPaddingAndBorderAxis node axis);
 
 /* /* When the user specifically sets a value for width or height */ */
 /* let setDimensionFromStyle (node, axis) => */
@@ -616,10 +612,11 @@ let boundAxis (node, axis, value) => fmaxf (
 /*       fmaxf (boundAxis (node, axis, node.style [dim [axis]])) (getPaddingAndBorderAxis (node, axis)); */
 /*     setDimLayoutDimensionForAxis node dimValue */
 /*   }; */
+
 /**
  * Sets trailing position for a child node for a given axis.
  */
-let setTrailingPosition (node, child, axis) => {
+let setTrailingPosition node child axis => {
   let measuredChildDimensionForAxis =
     child.style.positionType === CSS_POSITION_ABSOLUTE ? 0.0 : layoutMeasuredDimensionForAxis child axis;
   let childLayoutPosValueForAxis = layoutPosPositionForAxis child axis;
@@ -630,12 +627,12 @@ let setTrailingPosition (node, child, axis) => {
 
 /* If both left and right are defined, then use left. Otherwise return */
 /* +left or -right depending on which is defined. */
-let getRelativePosition (node, axis) => {
+let getRelativePosition node axis => {
   let lead = styleLeadingPositionForAxis node axis;
   if (not (isUndefined lead)) {
     lead
   } else {
-    -. (normalizePosition (styleTrailingPositionForAxis node axis))
+    -. normalizePosition (styleTrailingPositionForAxis node axis)
   }
 };
 
@@ -643,21 +640,21 @@ let getRelativePosition (node, axis) => {
 /**
  * TODO: A more functional version of this.
  */
-let setPosition (node, direction) => {
-  let mainAxis = resolveAxis (getFlexDirection node, direction);
-  let crossAxis = getCrossFlexDirection (mainAxis, direction);
+let setPosition node direction => {
+  let mainAxis = resolveAxis (getFlexDirection node) direction;
+  let crossAxis = getCrossFlexDirection mainAxis direction;
   setLayoutLeadingPositionForAxis
-    node mainAxis (getLeadingMargin (node, mainAxis) +. getRelativePosition (node, mainAxis));
+    node mainAxis (getLeadingMargin node mainAxis +. getRelativePosition node mainAxis);
   /* node.layout.position[trailing[mainAxis]] = getTrailingMargin(node, mainAxis) +. */
   /*   getRelativePosition(node, mainAxis); */
   setLayoutTrailingPositionForAxis
-    node mainAxis (getTrailingMargin (node, mainAxis) +. getRelativePosition (node, mainAxis));
+    node mainAxis (getTrailingMargin node mainAxis +. getRelativePosition node mainAxis);
   /* node.layout.position[leading[crossAxis]] = getLeadingMargin(node, crossAxis) +. */
   /*   getRelativePosition(node, crossAxis); */
   setLayoutLeadingPositionForAxis
-    node crossAxis (getLeadingMargin (node, crossAxis) +. getRelativePosition (node, crossAxis));
+    node crossAxis (getLeadingMargin node crossAxis +. getRelativePosition node crossAxis);
   /* node.layout.position[trailing[crossAxis]] = getTrailingMargin(node, crossAxis) +. */
   /*   getRelativePosition(node, crossAxis); */
   setLayoutTrailingPositionForAxis
-    node crossAxis (getTrailingMargin (node, crossAxis) +. getRelativePosition (node, crossAxis))
+    node crossAxis (getTrailingMargin node crossAxis +. getRelativePosition node crossAxis)
 };

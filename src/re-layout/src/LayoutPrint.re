@@ -143,7 +143,7 @@ let rec printCssNodeRec (node, options, level) => {
   if (options.printChildren && node.childrenCount > 0) {
     Printf.printf "children: [\n";
     for i in 0 to (node.childrenCount - 1) {
-      printCssNodeRec (node.getChild(node.context, i), options, level + 1)
+      printCssNodeRec (node.getChild node.context i, options, level + 1)
     };
     indent level;
     Printf.printf "]},\n"

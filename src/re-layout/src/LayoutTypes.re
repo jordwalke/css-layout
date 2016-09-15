@@ -40,7 +40,11 @@ type measureMode =
   | CSS_MEASURE_MODE_EXACTLY /* 'exactly' */
   | CSS_MEASURE_MODE_AT_MOST /* 'at-most' */;
 
-type position = | CSS_LEFT | CSS_RIGHT | CSS_TOP | CSS_BOTTOM;
+type position =
+  | CSS_LEFT
+  | CSS_RIGHT
+  | CSS_TOP
+  | CSS_BOTTOM;
 
 let css_max_cached_result_count = 6;
 
@@ -57,13 +61,21 @@ type cachedMeasurement = {
   mutable computedHeight: float
 };
 
-type overflow = | CSS_OVERFLOW_VISIBLE | CSS_OVERFLOW_HIDDEN;
+type overflow =
+  | CSS_OVERFLOW_VISIBLE
+  | CSS_OVERFLOW_HIDDEN;
 
-type wrapType = | CSS_NOWRAP | CSS_WRAP;
+type wrapType =
+  | CSS_NOWRAP
+  | CSS_WRAP;
 
 type dimensions = {width: float, height: float};
 
-type specificDirection = | Left | Right | Top | Bottom;
+type specificDirection =
+  | Left
+  | Right
+  | Top
+  | Bottom;
 
 type coordinates = {left: float, top: float};
 
@@ -166,14 +178,13 @@ type node 'context = {
   layout: cssLayout,
   childrenCount: int,
   mutable lineIndex: int,
-  mutable nextChild: (node 'context),
-  measure: ('context, float, measureMode, float, measureMode) => dimensions,
+  mutable nextChild: node 'context,
+  measure: 'context => float => measureMode => float => measureMode => dimensions,
   print: option ('context => unit),
-  getChild: ('context, int) => node 'context,
+  getChild: 'context => int => node 'context,
   isDirty: 'context => bool,
   context: 'context
 };
-
 /* static css_position_t leading[4] = { */
 /*   /* CSS_FLEX_DIRECTION_COLUMN = */ CSS_TOP, */
 /*   /* CSS_FLEX_DIRECTION_COLUMN_REVERSE = */ CSS_BOTTOM, */
