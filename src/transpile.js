@@ -393,16 +393,35 @@ function transpileAnnotatedJStoReason(jsCode) {
     // set of regexes will turn it into x.contents = x.contents + y
     // Now turn all the x.y += foo into x.y = x.y + foo
     // .replace(/\s=\s*\-([\[\]A-Za-z_\.]*)/g, '= -.$1')
-    // .replace(/\s([\[\]A-Za-z_\.]*)\s+\+=([^;]*)/g, ' $1 = $1 +$2')
-    // .replace(/\s([\[\]A-Za-z_\.]*)\s+\-=([^;]*)/g, ' $1 = $1 -$2')
+    .replace(/\s([\[\]A-Za-z_\.]*)\s+\+=([^;]*)/g, ' $1 = $1 +$2')
+    .replace(/\s([\[\]A-Za-z_\.]*)\s+\-=([^;]*)/g, ' $1 = $1 -$2')
     .replace(
       /getPosition\(([A-Za-z_\.]*), leading\[([A-Za-z_\.]*)\]\)/g,
-      '(styleLeadingPositionForAxisOrZero ($1) ($2))'
+      '(styleLeadingPositionForAxisOrZero ($1, $2))'
+    )
+    .replace(
+      /getPosition\(([A-Za-z_\.]*), trailing\[([A-Za-z_\.]*)\]\)/g,
+      '(styleTrailingPositionForAxisOrZero ($1, $2))'
+    )
+    .replace(
+      /isPosDefined\(([A-Za-z_\.]*), leading\[([A-Za-z_\.]*)\]\)/g,
+      '!(isUndefined (styleLeadingPositionForAxis ($1, $2)))'
+    )
+    .replace(
+      /isPosDefined\(([A-Za-z_\.]*), trailing\[([A-Za-z_\.]*)\]\)/g,
+      '!(isUndefined (styleTrailingPositionForAxis ($1, $2)))'
     )
 
+    /**
+     * Set and get posLayoutPositionForAxis.
+     */
     .replace(
       /([A-Za-z_\.]*)\.layout\[pos\[([A-Za-z_\.]*)\]\]\s*=[^=]([^;]*)/g,
-      '(setPosLayoutPositionForAxis ($1) ($2) ($3))'
+      '(setPosLayoutPositionForAxis ($1, $2, $3))'
+    )
+    .replace(
+      /([A-Za-z_\.]*)\.layout\[pos\[([A-Za-z_\.]*)\]\]/g,
+      '(layoutPosPositionForAxis ($1, $2))'
     )
 
     /**
@@ -410,11 +429,11 @@ function transpileAnnotatedJStoReason(jsCode) {
      */
     .replace(
       /([A-Za-z_\.]*)\.layout\[measuredDim\[([A-Za-z_\.]*)\]\]\s*=([^;]*);/g,
-      '(setLayoutMeasuredDimensionForAxis ($1) ($2) ($3))'
+      '(setLayoutMeasuredDimensionForAxis ($1, $2, $3))'
     )
     .replace(
       /([A-Za-z_\.]*)\.layout\[measuredDim\[([A-Za-z_\.]*)\]\]/g,
-      '(layoutMeasuredDimensionForAxis ($1) ($2))'
+      '(layoutMeasuredDimensionForAxis ($1, $2))'
     )
 
     /**
@@ -422,11 +441,11 @@ function transpileAnnotatedJStoReason(jsCode) {
      */
     .replace(
       /([A-Za-z_\.]*)\.layout\[leading\[([A-Za-z_\.]*)\]\]\s*=([^;]*);/g,
-      '(setLayoutLeadingPositionForAxis ($1) ($2) ($3))'
+      '(setLayoutLeadingPositionForAxis ($1, $2, $3))'
     )
     .replace(
       /([A-Za-z_\.]*)\.layout\[leading\[([A-Za-z_\.]*)\]\]/g,
-      '(layoutLeadingPositionForAxis ($1) ($2))'
+      '(layoutLeadingPositionForAxis ($1, $2))'
     )
     .replace(/style\[dim/g, 'style.dimensions[dim')
     .replace(/style\[CSS_LEFT\]/g, 'style.left')
