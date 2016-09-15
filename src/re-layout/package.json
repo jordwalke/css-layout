@@ -19,7 +19,7 @@
     "dependency-env": "https://github.com/npm-ml/dependency-env.git",
     "merlin": "https://github.com/npm-opam/merlin",
     "nopam": "https://github.com/yunxing/nopam.git",
-    "reason": "https://github.com/facebook/reason#JsonSupport",
+    "reason": "https://github.com/facebook/reason.git",
     "rejs": "https://github.com/jaredly/rejs.git"
   },
   "scripts": {
