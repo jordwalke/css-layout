@@ -1,3 +1,14 @@
+
+# ReSS: Reason CSS Flexbox implementation.
+
+This is a fork of the `css-layout` project, which has been ported to `Reason`.
+
+At this point, only the source transformation has been done (from JS to Reason
+using a series of tools including hacks and
+[ReJs](https://github.com/jaredly/rejs). Don't look at this `README`, and
+instead read the one in `src/re-layout`.
+
+
 css-layout [![Build Status](https://travis-ci.org/facebook/css-layout.svg?branch=master)](https://travis-ci.org/facebook/css-layout)
 ==========
 
