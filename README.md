@@ -4,9 +4,32 @@
 This is a fork of the `css-layout` project, which has been ported to `Reason`.
 
 At this point, only the source transformation has been done (from JS to Reason
-using a series of tools including hacks and
-[ReJs](https://github.com/jaredly/rejs). Don't look at this `README`, and
-instead read the one in `src/re-layout`.
+using a series of tools such as [ReJs](https://github.com/jaredly/rejs).
+
+## Building and Installing
+```sh
+git clone git+ssh://git@github.com/jordwalke/css-layout.git
+cd css-layout/src/re-layout
+npm install
+```
+
+## Rebuilding
+```sh
+npm run reasonbuild
+```
+## Generating the source files
+
+The instructions above merely build the source files, some of which were
+auto-generated.  Auto-generating involves running `grunt transpile` in
+`../../`, but you must have the special branch of `Reason` and `rejs` build in
+directories on your `~/Desktop` (yes, your desktop) for now. Then you will
+have to manually fix a bunch of type errors. Hopefully we won't need to
+regenerate the files ever again and can manually begin taking over the
+`Layout.re` file by hand.
+
+
+
+Below is the original README:
 
 
 css-layout [![Build Status](https://travis-ci.org/facebook/css-layout.svg?branch=master)](https://travis-ci.org/facebook/css-layout)
