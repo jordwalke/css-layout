@@ -312,7 +312,6 @@ function transpileAnnotatedJStoReason(jsCode) {
     "leadingCrossDim",
     "totalLineCrossDim",
     "lineCount",
-    "j",
     "leadingMainDim",
     "lineHeight",
     "maxLineMainDim",
