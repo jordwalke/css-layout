@@ -17,6 +17,24 @@ npm install
 ```sh
 npm run reasonbuild
 ```
+
+
+## Fixing Things:
+
+[Here](https://github.com/jordwalke/css-layout/blob/master/src/Layout.js) is
+the JS version of the layout algorithm this was ported from. Something may have
+broken in the port/translation and that file can be consulted.
+
+It's also based on an older pull request before the css-layout library was
+rewritten in C, and there might be a good handful of fixes we should manually
+recreate here in the `Reason` port.
+
+If there's any discrepancy [this pull
+request](https://github.com/facebook/css-layout/pull/185) (and the subsequent
+commits after it was accepted) should be considered the authority, not the
+`Layout.js` file included in this fork.
+
+
 ## Generating the source files
 
 The instructions above merely build the source files, some of which were
