@@ -150,18 +150,19 @@ var layoutTestUtils = (function() {
       var decimal = number - floored;
       if (decimal === 0) {
         return number;
-      }
-      var minDifference = Infinity;
-      var minDecimal = Infinity;
-      for (var i = 1; i < 64; ++i) {
-        var roundedDecimal = i / 64;
-        var difference = Math.abs(roundedDecimal - decimal);
-        if (difference < minDifference) {
-          minDifference = difference;
-          minDecimal = roundedDecimal;
+      } else {
+        var minDifference = Infinity;
+        var minDecimal = Infinity;
+        for (var i = 1; i < 64; ++i) {
+          var roundedDecimal = i / 64;
+          var difference = Math.abs(roundedDecimal - decimal);
+          if (difference < minDifference) {
+            minDifference = difference;
+            minDecimal = roundedDecimal;
+          }
         }
+        return floored + minDecimal;
       }
-      return floored + minDecimal;
     }
 
     function rec(layout) {
@@ -294,18 +295,18 @@ var layoutTestUtils = (function() {
     if (!testMeasurePrecision) {
       // undefined/0, disables rounding
       return;
-    }
+    } else {
+      for (var key in obj) {
+        if (!obj.hasOwnProperty(key)) {
+          continue;
+        }
 
-    for (var key in obj) {
-      if (!obj.hasOwnProperty(key)) {
-        continue;
-      }
-
-      var val = obj[key];
-      if (typeof val === 'number') {
-        obj[key] = Math.floor((val * testMeasurePrecision) + 0.5) / testMeasurePrecision;
-      } else if (typeof val === 'object') {
-        inplaceRoundNumbersInObject(val);
+        var val = obj[key];
+        if (typeof val === 'number') {
+          obj[key] = Math.floor((val * testMeasurePrecision) + 0.5) / testMeasurePrecision;
+        } else if (typeof val === 'object') {
+          inplaceRoundNumbersInObject(val);
+        }
       }
     }
   }
