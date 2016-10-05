@@ -22,17 +22,24 @@
     "reason": "https://github.com/facebook/reason.git",
     "rejs": "https://github.com/jaredly/rejs.git"
   },
+  "exportedEnvVars": {
+    "OCAMLRUNPARAM": {
+      "global": true,
+      "globalCollisionBehavior": "fail",
+      "val": "b"
+    }
+  },
   "scripts": {
     "postinstall": "npm run reasonBuild",
-    "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -pkg str -I src ./src/Layout.native  2>&1 | refmterr",
+    "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -pkg str -I src ./src/LayoutTest.native -cflags -w,-40 2>&1 | refmterr",
     "reasonbuild": "npm run reasonBuild",
-    "regenerateReasonSource": "eval $(dependencyEnv) && nopam && cd ../../ && grunt transpile",
-    "start": "eval $(dependencyEnv) && nopam && ./_build/src/Layout.native",
-    "help": "eval $(dependencyEnv) && nopam && rebuild -help",
+    "regenerateReasonSource": "eval $(dependencyEnv) && cd ../../ && grunt transpile",
+    "start": "eval $(dependencyEnv) && time ./_build/src/LayoutTest.native",
+    "help": "eval $(dependencyEnv) && rebuild -help",
     "clean": "eval $(dependencyEnv) && nopam && rebuild -clean",
-    "top": "eval $(dependencyEnv) && nopam && rtop",
-    "env": "eval $(dependencyEnv) && nopam && env",
-    "editor": "eval $(dependencyEnv) && nopam && eval $EDITOR",
+    "top": "eval $(dependencyEnv) && rtop",
+    "env": "eval $(dependencyEnv) && env",
+    "editor": "eval $(dependencyEnv) && eval $EDITOR",
     "whereisocamlmerlin": "eval $(dependencyEnv) && which ocamlmerlin-reason"
   }
 }
