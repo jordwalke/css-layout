@@ -35,6 +35,7 @@ type positionType =
 type measureMode =
   /* there are some places in the reference implementation that set
    * the measure mode to negative one.*/
+  /* https://github.com/facebook/css-layout/pull/185#r64995699 */
   | CSS_MEASURE_MODE_NEGATIVE_ONE_WHATEVER_THAT_MEANS
   | CSS_MEASURE_MODE_UNDEFINED /* 'undefined' */
   | CSS_MEASURE_MODE_EXACTLY /* 'exactly' */
