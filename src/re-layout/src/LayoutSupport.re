@@ -46,9 +46,20 @@ let (<|) a b => a b;
 
 let css_undefined = nan;
 
-let isUndefined value => classify_float nan === FP_nan;
+let isUndefined value => classify_float value === FP_nan;
 
-let dummyMeasure context width widthMeasureMode height heightMeasureMode => {width: 0.0, height: 0.0};
+let failOnDummyMeasure = true;
+
+let dummyMeasure context width widthMeasureMode height heightMeasureMode =>
+  if failOnDummyMeasure {
+    raise (
+      Invalid_argument (
+        "A node does not have its measure function " ^ " implemented, yet requires measurement"
+      )
+    )
+  } else {
+    {width: 0.0, height: 0.0}
+  };
 
 let dummyGetChild context i => assert false;
 
@@ -117,22 +128,22 @@ let rec theNullNode = {
     /**
      * Properties that start out as undefined.
      */
-    left: cssUndefined,
-    top: cssUndefined,
-    right: cssUndefined,
-    bottom: cssUndefined,
+    width: cssUndefined,
+    height: cssUndefined,
     minWidth: cssUndefined,
     minHeight: cssUndefined,
     maxWidth: cssUndefined,
     maxHeight: cssUndefined,
+    left: cssUndefined,
+    top: cssUndefined,
+    right: cssUndefined,
+    bottom: cssUndefined,
     marginStart: cssUndefined,
     marginEnd: cssUndefined,
     paddingStart: cssUndefined,
     paddingEnd: cssUndefined,
     borderStart: cssUndefined,
-    borderEnd: cssUndefined,
-    width: cssUndefined,
-    height: cssUndefined
+    borderEnd: cssUndefined
   },
   layout: {
     direction: CSS_DIRECTION_INHERIT,
@@ -181,7 +192,7 @@ let rec theNullNode = {
   lineIndex: 0,
   /**
    * As a clever trick, to encode "NULL" node, we can create a recursive
-   * binding and point nextChild to itsself, and interpreting that as NULL.
+   * binding and point nextChild to itself, and interpreting that as NULL.
    */
   nextChild: theNullNode,
   measure: dummyMeasure,
@@ -189,6 +200,18 @@ let rec theNullNode = {
   getChild: dummyGetChild,
   isDirty: dummyIsDirty,
   context: ()
+};
+
+
+/**
+ * It is critical that this actually be a different reference
+ * than theNullNode.
+ */
+let rec createEmptyNode context => {
+  ...theNullNode,
+  style: {...theNullNode.style, overflow: CSS_OVERFLOW_VISIBLE},
+  layout: {...theNullNode.layout, direction: CSS_DIRECTION_INHERIT},
+  context
 };
 
 
