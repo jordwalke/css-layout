@@ -23,11 +23,11 @@ let gCurrentGenerationCount = ref 0;
 
 let gDepth = ref 0;
 
-let gPrintTree = false;
+let gPrintTree = {contents: false};
 
-let gPrintChanges = false;
+let gPrintChanges = {contents: false};
 
-let gPrintSkips = false;
+let gPrintSkips = {contents: false};
 
 let spacer = "                                                            ";
 
@@ -89,13 +89,13 @@ let canUseCachedMeasurement
 
 let cachedMeasurementAt layout i =>
   switch i {
+  | 0 => layout.cachedMeasurement1
   | 1 => layout.cachedMeasurement1
   | 2 => layout.cachedMeasurement2
   | 3 => layout.cachedMeasurement3
   | 4 => layout.cachedMeasurement4
   | 5 => layout.cachedMeasurement5
-  | 6 => layout.cachedMeasurement6
-  | _ => raise (Invalid_argument "Not possible")
+  | _ => raise (Invalid_argument ("No cached measurement at " ^ string_of_int i))
   };
 
 
@@ -210,7 +210,7 @@ let rec layoutNodeInternal
       };
     layout.measuredWidth = cachedResults_.computedWidth;
     layout.measuredHeight = cachedResults_.computedHeight;
-    if (gPrintChanges && gPrintSkips) {
+    if (gPrintChanges.contents && gPrintSkips.contents) {
       Printf.printf "%s%d.{[skipped] " (getSpacer gDepth.contents) gDepth.contents;
       switch node.print {
       | None => ()
@@ -227,7 +227,7 @@ let rec layoutNodeInternal
         reason
     }
   } else {
-    if gPrintChanges {
+    if gPrintChanges.contents {
       Printf.printf "%s%d.{%s" (getSpacer gDepth.contents) gDepth.contents (needToVisitNode ? "*" : "");
       switch node.print {
       | None => ()
@@ -250,7 +250,7 @@ let rec layoutNodeInternal
       heightMeasureMode,
       performLayout
     );
-    if gPrintChanges {
+    if gPrintChanges.contents {
       Printf.printf "%s%d.}%s" (getSpacer gDepth.contents) gDepth.contents (needToVisitNode ? "*" : "");
       switch node.print {
       | None => ()
@@ -267,7 +267,7 @@ let rec layoutNodeInternal
     layout.lastParentDirection = parentDirection;
     if (cachedResults.contents === None) {
       if (layout.nextCachedMeasurementsIndex == css_max_cached_result_count) {
-        if gPrintChanges {
+        if gPrintChanges.contents {
           Printf.printf "Out of cache entries!\n"
         };
         layout.nextCachedMeasurementsIndex = 0
@@ -1220,7 +1220,7 @@ let layoutNode (node, availableWidth, availableHeight, parentDirection) => {
       node availableWidth availableHeight parentDirection widthMeasureMode heightMeasureMode true "initial"
   ) {
     setPosition node node.layout.direction;
-    if gPrintTree {
+    if gPrintTree.contents {
       LayoutPrint.printCssNode (node, {printLayout: true, printChildren: true, printStyle: true})
     }
   }
