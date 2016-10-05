@@ -7,13 +7,20 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-/**
- * cd src
-
-   ocamlc -pp refmt -impl ./LayoutTypes.re 2>&1 | refmterr
-   ocamlc -pp refmt -impl ./LayoutSupport.re 2>&1 | refmterr
-   ocamlc -pp refmt -impl ./Layout.re 2>&1 | refmterr
-
+/*
+ * From css-layout comments:
+ * The spec describes four different layout modes: "fill available", "max
+ * content", "min content", and "fit content". Of these, we don't use
+ * "min content" because we don't support default minimum main sizes (see
+ * above for details). Each of our measure modes maps to a layout mode
+ * from the spec (https://www.w3.org/TR/css3-sizing/#terms):
+ *
+ *   - CSS_MEASURE_MODE_UNDEFINED: `max-content`
+ *   - CSS_MEASURE_MODE_EXACTLY: `fill-available`
+ *   - CSS_MEASURE_MODE_AT_MOST: `fit-content`
+ *      If infinite space available in that axis, then `max-content.`
+ *      Else, `min(max-content size, max(min-content size, fill-available size))`
+ *      (Although, we don't support min-content)
  */
 open LayoutTypes;
 
