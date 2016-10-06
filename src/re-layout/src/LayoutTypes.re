@@ -177,12 +177,11 @@ type cssLayout = {
 type node 'context = {
   style: cssStyle,
   layout: cssLayout,
-  childrenCount: int,
   mutable lineIndex: int,
   mutable nextChild: node 'context,
   measure: 'context => float => measureMode => float => measureMode => dimensions,
   print: option ('context => unit),
-  getChild: 'context => int => node 'context,
+  mutable children: array (node 'context),
   isDirty: 'context => bool,
   context: 'context
 };

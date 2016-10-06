@@ -382,7 +382,7 @@ and layoutNodeImpl
           )
     }
   } else {
-    let childCount = node.childrenCount;
+    let childCount = Array.length node.children;
     if (childCount === 0) {
       node.layout.measuredWidth =
         boundAxis
@@ -468,7 +468,7 @@ and layoutNodeImpl
         let childWidthMeasureMode = {contents: CSS_MEASURE_MODE_UNDEFINED};
         let childHeightMeasureMode = {contents: CSS_MEASURE_MODE_UNDEFINED};
         for i in 0 to (childCount -. 1) {
-          child.contents = node.getChild node.context i;
+          child.contents = Array.get node.children i;
           if performLayout {
             let childDirection = resolveDirection child.contents direction;
             setPosition child.contents childDirection
@@ -555,7 +555,7 @@ and layoutNodeImpl
           let currentRelativeChild = {contents: theNullNode};
           let shouldContinue = {contents: true};
           while (curIndex.contents < childCount && shouldContinue.contents) {
-            child.contents = node.getChild node.context curIndex.contents;
+            child.contents = Array.get node.children curIndex.contents;
             child.contents.lineIndex = lineCount.contents;
             if (child.contents.style.positionType !== CSS_POSITION_ABSOLUTE) {
               let outerFlexBasis = child.contents.layout.flexBasis + getMarginAxis child.contents mainAxis;
@@ -770,7 +770,7 @@ and layoutNodeImpl
           let mainDim = {contents: leadingPaddingAndBorderMain + leadingMainDim.contents};
           let crossDim = {contents: 0.0};
           for i in startOfLineIndex.contents to (endOfLineIndex.contents -. 1) {
-            child.contents = node.getChild node.context i;
+            child.contents = Array.get node.children i;
             if (
               child.contents.style.positionType === CSS_POSITION_ABSOLUTE &&
               !(isUndefined (styleLeadingPositionForAxis child.contents mainAxis))
@@ -824,7 +824,7 @@ and layoutNodeImpl
             boundAxis node crossAxis (crossDim.contents + paddingAndBorderAxisCross) - paddingAndBorderAxisCross;
           if performLayout {
             for i in startOfLineIndex.contents to (endOfLineIndex.contents -. 1) {
-              child.contents = node.getChild node.context i;
+              child.contents = Array.get node.children i;
               if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
                 if !(isUndefined (styleLeadingPositionForAxis child.contents crossAxis)) {
                   setPosLayoutPositionForAxis
@@ -931,7 +931,7 @@ and layoutNodeImpl
             let lineHeight = {contents: 0.0};
             let shouldContinue = {contents: false};
             while (j.contents < childCount && shouldContinue.contents) {
-              child.contents = node.getChild node.context j.contents;
+              child.contents = Array.get node.children j.contents;
               if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
                 if (child.contents.lineIndex !== i) {
                   shouldContinue.contents = false
@@ -953,7 +953,7 @@ and layoutNodeImpl
             lineHeight.contents = lineHeight.contents + crossDimLead.contents;
             if performLayout {
               for j in startIndex to (endIndex.contents -. 1) {
-                child.contents = node.getChild node.context j;
+                child.contents = Array.get node.children j;
                 if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
                   let alignContentAlignItem = getAlignItem node child.contents;
                   if (alignContentAlignItem === CSS_ALIGN_FLEX_START) {
@@ -1052,7 +1052,7 @@ and layoutNodeImpl
           };
           if (needsMainTrailingPos.contents || needsCrossTrailingPos.contents) {
             for i in 0 to (childCount -. 1) {
-              child.contents = node.getChild node.context i;
+              child.contents = Array.get node.children i;
               if needsMainTrailingPos.contents {
                 setTrailingPosition node child.contents mainAxis
               };

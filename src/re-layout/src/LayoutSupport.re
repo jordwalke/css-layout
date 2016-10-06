@@ -1,3 +1,6 @@
+external reraise : exn => _ = "%reraise";
+
+
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -46,7 +49,7 @@ let (<|) a b => a b;
 
 let css_undefined = nan;
 
-let isUndefined value => classify_float value === FP_nan;
+let isUndefined value => classify_float value == FP_nan;
 
 let failOnDummyMeasure = true;
 
@@ -60,8 +63,6 @@ let dummyMeasure context width widthMeasureMode height heightMeasureMode =>
   } else {
     {width: 0.0, height: 0.0}
   };
-
-let dummyGetChild context i => assert false;
 
 let dummyIsDirty context => false;
 
@@ -99,6 +100,7 @@ let dummyCachedMeasurement = {
 };
 
 let rec theNullNode = {
+  children: [||],
   style: {
     direction: CSS_DIRECTION_INHERIT,
     flexDirection: CSS_FLEX_DIRECTION_COLUMN,
@@ -188,7 +190,6 @@ let rec theNullNode = {
     measuredWidth: cssUndefined,
     measuredHeight: cssUndefined
   },
-  childrenCount: 0,
   lineIndex: 0,
   /**
    * As a clever trick, to encode "NULL" node, we can create a recursive
@@ -197,7 +198,6 @@ let rec theNullNode = {
   nextChild: theNullNode,
   measure: dummyMeasure,
   print: None,
-  getChild: dummyGetChild,
   isDirty: dummyIsDirty,
   context: ()
 };
@@ -207,11 +207,32 @@ let rec theNullNode = {
  * It is critical that this actually be a different reference
  * than theNullNode.
  */
-let rec createEmptyNode context => {
-  ...theNullNode,
-  style: {...theNullNode.style, overflow: CSS_OVERFLOW_VISIBLE},
-  layout: {...theNullNode.layout, direction: CSS_DIRECTION_INHERIT},
-  context
+let rec createNode context => {
+  let rec retNode = {
+    ...theNullNode,
+    children: [||],
+    /**
+     * This is just a bad idea. It's very difficult to ensure that the getter
+     * is updated every time you update a node functionally using {...node..}.
+     */
+    style: {...theNullNode.style, overflow: CSS_OVERFLOW_VISIBLE},
+    layout: {...theNullNode.layout, direction: CSS_DIRECTION_INHERIT},
+    context
+  };
+  retNode
+};
+
+let insertChild node child index => {
+  let ret = {contents: [||]};
+  for i in 0 to (index - 1) {
+    ret.contents = Array.append ret.contents [|node.children.(i)|]
+  };
+  ret.contents = Array.append ret.contents [|child|];
+  for i in index to (Array.length node.children - 1) {
+    ret.contents = Array.append ret.contents [|node.children.(i)|]
+  };
+  let oldLen = Array.length node.children;
+  node.children = ret.contents;
 };
 
 

@@ -21,6 +21,13 @@ let print_number_nan (indentNum, str, number) =>
     Printf.printf "%s: %g,\n" str number
   };
 
+let layoutStr layout =>
+  "{left:" ^
+  string_of_float layout.left ^
+  ", top:" ^
+  string_of_float layout.top ^
+  ", width:" ^ string_of_float layout.width ^ ", height:" ^ string_of_float layout.height ^ "}";
+
 let rec printCssNodeRec (node, options, level) => {
   indent level;
   Printf.printf "{\n";
@@ -141,7 +148,6 @@ let rec printCssNodeRec (node, options, level) => {
       indent (level + 2);
       Printf.printf "overflow: 'visible',\n"
     };
-
     print_number_0 (level + 2, "marginLeft", node.style.marginLeft);
     print_number_0 (level + 2, "marginRight", node.style.marginRight);
     print_number_0 (level + 2, "marginTop", node.style.marginTop);
@@ -154,7 +160,6 @@ let rec printCssNodeRec (node, options, level) => {
     print_number_0 (level + 2, "borderRightWidth", node.style.borderRight);
     print_number_0 (level + 2, "borderTopWidth", node.style.borderTop);
     print_number_0 (level + 2, "borderBottomWidth", node.style.borderBottom);
-
     print_number_nan (level + 2, "borderStartWidth", node.style.borderStart);
     print_number_nan (level + 2, "borderEndWidth", node.style.borderEnd);
     print_number_nan (level + 2, "paddingStart", node.style.paddingStart);
@@ -167,7 +172,6 @@ let rec printCssNodeRec (node, options, level) => {
     print_number_nan (level + 2, "maxHeight", node.style.maxHeight);
     print_number_nan (level + 2, "minWidth", node.style.minWidth);
     print_number_nan (level + 2, "minHeight", node.style.minHeight);
-
     if (node.style.positionType == CSS_POSITION_ABSOLUTE) {
       indent (level + 2);
       Printf.printf "position: 'absolute', "
@@ -179,16 +183,16 @@ let rec printCssNodeRec (node, options, level) => {
     indent (level + 1);
     Printf.printf "},\n"
   };
-  if (options.printChildren && node.childrenCount > 0) {
+  if (options.printChildren && Array.length node.children > 0) {
     indent (level + 1);
     Printf.printf "children: [\n";
-    for i in 0 to (node.childrenCount - 1) {
-      printCssNodeRec (node.getChild node.context i, options, level + 2)
+    for i in 0 to (Array.length node.children - 1) {
+      printCssNodeRec (node.children.(i), options, level + 2)
     };
     indent (level + 1);
     Printf.printf "]},\n"
   } else {
-    indent (level);
+    indent level;
     Printf.printf "},\n"
   }
 };
