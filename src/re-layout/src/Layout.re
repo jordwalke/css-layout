@@ -619,14 +619,14 @@ and layoutNodeImpl
               if (remainingFreeSpace.contents < 0.0) {
                 flexShrinkScaledFactor.contents =
                   getFlexShrinkFactor currentRelativeChild.contents * childFlexBasis.contents;
-                if (flexShrinkScaledFactor.contents !== 0.0) {
+                if (flexShrinkScaledFactor.contents != 0.0) {
                   baseMainSize.contents =
                     childFlexBasis.contents +
                     remainingFreeSpace.contents / totalFlexShrinkScaledFactors.contents *
                     flexShrinkScaledFactor.contents;
                   boundMainSize.contents =
                     boundAxis currentRelativeChild.contents mainAxis baseMainSize.contents;
-                  if (baseMainSize.contents !== boundMainSize.contents) {
+                  if (baseMainSize.contents != boundMainSize.contents) {
                     deltaFreeSpace.contents =
                       deltaFreeSpace.contents - boundMainSize.contents - childFlexBasis.contents;
                     deltaFlexShrinkScaledFactors.contents =
@@ -637,13 +637,13 @@ and layoutNodeImpl
                 remainingFreeSpace.contents > 0.0
               ) {
                 flexGrowFactor.contents = getFlexGrowFactor currentRelativeChild.contents;
-                if (flexGrowFactor.contents !== 0.0) {
+                if (flexGrowFactor.contents != 0.0) {
                   baseMainSize.contents =
                     childFlexBasis.contents +
                     remainingFreeSpace.contents / totalFlexGrowFactors.contents * flexGrowFactor.contents;
                   boundMainSize.contents =
                     boundAxis currentRelativeChild.contents mainAxis baseMainSize.contents;
-                  if (baseMainSize.contents !== boundMainSize.contents) {
+                  if (baseMainSize.contents != boundMainSize.contents) {
                     deltaFreeSpace.contents =
                       deltaFreeSpace.contents - boundMainSize.contents - childFlexBasis.contents;
                     deltaFlexGrowFactors.contents = deltaFlexGrowFactors.contents - flexGrowFactor.contents
@@ -664,7 +664,7 @@ and layoutNodeImpl
               if (remainingFreeSpace.contents < 0.0) {
                 flexShrinkScaledFactor.contents =
                   getFlexShrinkFactor currentRelativeChild.contents * childFlexBasis.contents;
-                if (flexShrinkScaledFactor.contents !== 0.0) {
+                if (flexShrinkScaledFactor.contents != 0.0) {
                   updatedMainSize.contents =
                     boundAxis
                       currentRelativeChild.contents
@@ -679,7 +679,7 @@ and layoutNodeImpl
                 remainingFreeSpace.contents > 0.0
               ) {
                 flexGrowFactor.contents = getFlexGrowFactor currentRelativeChild.contents;
-                if (flexGrowFactor.contents !== 0.0) {
+                if (flexGrowFactor.contents != 0.0) {
                   updatedMainSize.contents =
                     boundAxis
                       currentRelativeChild.contents
@@ -994,9 +994,12 @@ and layoutNodeImpl
             currentLead.contents = currentLead.contents + lineHeight.contents
           }
         };
+        /* STEP 9: COMPUTING FINAL DIMENSIONS */
         node.layout.measuredWidth = boundAxis node CSS_FLEX_DIRECTION_ROW (availableWidth - marginAxisRow);
         node.layout.measuredHeight =
           boundAxis node CSS_FLEX_DIRECTION_COLUMN (availableHeight - marginAxisColumn);
+        /* If the user didn't specify a width or height for the node, set the
+         * dimensions based on the children. */
         if (measureModeMainDim === CSS_MEASURE_MODE_UNDEFINED) {
           setLayoutMeasuredDimensionForAxis node mainAxis (boundAxis node mainAxis maxLineMainDim.contents)
         } else if (
