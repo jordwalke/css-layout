@@ -1261,21 +1261,35 @@ let layoutNode (node, availableWidth, availableHeight, parentDirection) => {
   gCurrentGenerationCount.contents = gCurrentGenerationCount.contents + 1;
   /* If the caller didn't specify a height/width, use the dimensions*/
   /* specified in the style.*/
-  let availableWidth =
-    if (isUndefined availableWidth && isStyleDimDefined node CSS_FLEX_DIRECTION_ROW) {
-      node.style.width +. getMarginAxis node CSS_FLEX_DIRECTION_ROW
+  open ReJsPrelude;
+  let (availableWidth, widthMeasureMode) =
+    if !(isUndefined availableWidth) {
+      (availableWidth, CSS_MEASURE_MODE_EXACTLY)
+    } else if (
+      isStyleDimDefined node CSS_FLEX_DIRECTION_ROW
+    ) {
+      (node.style.width +. getMarginAxis node CSS_FLEX_DIRECTION_ROW, CSS_MEASURE_MODE_EXACTLY)
+    } else if (
+      node.style.maxWidth >= 0.0
+    ) {
+      (node.style.maxWidth, CSS_MEASURE_MODE_AT_MOST)
     } else {
-      availableWidth
+      (availableWidth, CSS_MEASURE_MODE_UNDEFINED)
     };
-  let availableHeight =
-    if (isUndefined availableHeight && isStyleDimDefined node CSS_FLEX_DIRECTION_COLUMN) {
-      node.style.height +. getMarginAxis node CSS_FLEX_DIRECTION_COLUMN
+  let (availableHeight, heightMeasureMode) =
+    if !(isUndefined availableHeight) {
+      (availableHeight, CSS_MEASURE_MODE_EXACTLY)
+    } else if (
+      isStyleDimDefined node CSS_FLEX_DIRECTION_COLUMN
+    ) {
+      (node.style.height +. getMarginAxis node CSS_FLEX_DIRECTION_COLUMN, CSS_MEASURE_MODE_EXACTLY)
+    } else if (
+      node.style.maxHeight >= 0.0
+    ) {
+      (node.style.maxHeight, CSS_MEASURE_MODE_AT_MOST)
     } else {
-      availableHeight
+      (availableHeight, CSS_MEASURE_MODE_UNDEFINED)
     };
-  let widthMeasureMode = isUndefined availableWidth ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
-  let heightMeasureMode =
-    isUndefined availableHeight ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
   if (
     layoutNodeInternal
       node availableWidth availableHeight parentDirection widthMeasureMode heightMeasureMode true "initial"
