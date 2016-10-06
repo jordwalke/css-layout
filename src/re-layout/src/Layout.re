@@ -6,7 +6,6 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  */
-
 /*
  * From css-layout comments:
  * The spec describes four different layout modes: "fill available", "max
@@ -468,7 +467,7 @@ and layoutNodeImpl
         let childWidthMeasureMode = {contents: CSS_MEASURE_MODE_UNDEFINED};
         let childHeightMeasureMode = {contents: CSS_MEASURE_MODE_UNDEFINED};
         for i in 0 to (childCount -. 1) {
-          child.contents = Array.get node.children i;
+          child.contents = node.children.(i);
           if performLayout {
             let childDirection = resolveDirection child.contents direction;
             setPosition child.contents childDirection
@@ -555,7 +554,7 @@ and layoutNodeImpl
           let currentRelativeChild = {contents: theNullNode};
           let shouldContinue = {contents: true};
           while (curIndex.contents < childCount && shouldContinue.contents) {
-            child.contents = Array.get node.children curIndex.contents;
+            child.contents = node.children.(curIndex.contents);
             child.contents.lineIndex = lineCount.contents;
             if (child.contents.style.positionType !== CSS_POSITION_ABSOLUTE) {
               let outerFlexBasis = child.contents.layout.flexBasis + getMarginAxis child.contents mainAxis;
@@ -770,7 +769,7 @@ and layoutNodeImpl
           let mainDim = {contents: leadingPaddingAndBorderMain + leadingMainDim.contents};
           let crossDim = {contents: 0.0};
           for i in startOfLineIndex.contents to (endOfLineIndex.contents -. 1) {
-            child.contents = Array.get node.children i;
+            child.contents = node.children.(i);
             if (
               child.contents.style.positionType === CSS_POSITION_ABSOLUTE &&
               !(isUndefined (styleLeadingPositionForAxis child.contents mainAxis))
@@ -824,7 +823,7 @@ and layoutNodeImpl
             boundAxis node crossAxis (crossDim.contents + paddingAndBorderAxisCross) - paddingAndBorderAxisCross;
           if performLayout {
             for i in startOfLineIndex.contents to (endOfLineIndex.contents -. 1) {
-              child.contents = Array.get node.children i;
+              child.contents = node.children.(i);
               if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
                 if !(isUndefined (styleLeadingPositionForAxis child.contents crossAxis)) {
                   setPosLayoutPositionForAxis
@@ -931,7 +930,7 @@ and layoutNodeImpl
             let lineHeight = {contents: 0.0};
             let shouldContinue = {contents: false};
             while (j.contents < childCount && shouldContinue.contents) {
-              child.contents = Array.get node.children j.contents;
+              child.contents = node.children.(j.contents);
               if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
                 if (child.contents.lineIndex !== i) {
                   shouldContinue.contents = false
@@ -953,7 +952,7 @@ and layoutNodeImpl
             lineHeight.contents = lineHeight.contents + crossDimLead.contents;
             if performLayout {
               for j in startIndex to (endIndex.contents -. 1) {
-                child.contents = Array.get node.children j;
+                child.contents = node.children.(j);
                 if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
                   let alignContentAlignItem = getAlignItem node child.contents;
                   if (alignContentAlignItem === CSS_ALIGN_FLEX_START) {
@@ -1055,7 +1054,7 @@ and layoutNodeImpl
           };
           if (needsMainTrailingPos.contents || needsCrossTrailingPos.contents) {
             for i in 0 to (childCount -. 1) {
-              child.contents = Array.get node.children i;
+              child.contents = node.children.(i);
               if needsMainTrailingPos.contents {
                 setTrailingPosition node child.contents mainAxis
               };
@@ -1111,10 +1110,20 @@ and layoutNodeImpl
                 isUndefined childWidth.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
               childHeightMeasureMode.contents =
                 isUndefined childHeight.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
+              /*
+               * According to the spec, if the main size is not definite and the
+               * child's inline axis is parallel to the main axis (i.e. it's
+               * horizontal), the child should be sized using "UNDEFINED" in
+               * the main size. Otherwise use "AT_MOST" in the cross axis.
+               */
               if ((!isMainAxisRow && isUndefined childWidth.contents) && !(isUndefined availableInnerWidth)) {
                 childWidth.contents = availableInnerWidth;
                 childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
               };
+              /*
+               * The W3C spec doesn't say anything about the 'overflow' property,
+               * but all major browsers appear to implement the following logic.
+               */
               if (node.style.overflow === CSS_OVERFLOW_HIDDEN) {
                 if (
                   (isMainAxisRow && isUndefined childHeight.contents) && !(isUndefined availableInnerHeight)
