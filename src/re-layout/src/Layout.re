@@ -696,7 +696,16 @@ and layoutNodeImpl
                   updatedMainSize.contents +
                   getMarginAxis currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW;
                 childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY;
-                if !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN) {
+                if (
+                  !(isUndefined availableInnerCrossDim) &&
+                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN) &&
+                  heightMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
+                  getAlignItem node currentRelativeChild.contents === CSS_ALIGN_STRETCH
+                ) {
+                  childHeight.contents = availableInnerCrossDim;
+                  childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                } else if
+                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN) {
                   childHeight.contents = availableInnerCrossDim;
                   childHeightMeasureMode.contents =
                     isUndefined childHeight.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_AT_MOST
@@ -711,7 +720,16 @@ and layoutNodeImpl
                   updatedMainSize.contents +
                   getMarginAxis currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN;
                 childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY;
-                if !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW) {
+                if (
+                  !(isUndefined availableInnerCrossDim) &&
+                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW) &&
+                  widthMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
+                  getAlignItem node currentRelativeChild.contents === CSS_ALIGN_STRETCH
+                ) {
+                  childWidth.contents = availableInnerCrossDim;
+                  childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                } else if
+                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW) {
                   childWidth.contents = availableInnerCrossDim;
                   childWidthMeasureMode.contents =
                     isUndefined childWidth.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_AT_MOST
@@ -1131,6 +1149,30 @@ and layoutNodeImpl
                   childHeight.contents = availableInnerHeight;
                   childHeightMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
                 }
+              };
+              /*
+                * If child has no defined size in the cross axis and is set to stretch, set the cross
+               * axis to be measured exactly with the available inner width
+               */
+              if (
+                !isMainAxisRow &&
+                !(isUndefined availableInnerWidth) &&
+                !(isStyleDimDefined child.contents CSS_FLEX_DIRECTION_ROW) &&
+                widthMeasureMode == CSS_MEASURE_MODE_EXACTLY &&
+                getAlignItem node child.contents === CSS_ALIGN_STRETCH
+              ) {
+                childWidth.contents = availableInnerWidth;
+                childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+              };
+              if (
+                isMainAxisRow &&
+                !(isUndefined availableInnerHeight) &&
+                !(isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN) &&
+                heightMeasureMode == CSS_MEASURE_MODE_EXACTLY &&
+                getAlignItem node child.contents === CSS_ALIGN_STRETCH
+              ) {
+                childHeight.contents = availableInnerHeight;
+                childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
               };
               let _ =
                 layoutNodeInternal
