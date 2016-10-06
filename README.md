@@ -18,6 +18,38 @@ npm install
 npm run reasonbuild
 ```
 
+### Testing
+For any changes you make you should ensure that all the tests are passing. In case you make any fixes or additions to the library please also add at least one test to ensure we don't break anything in the future. Tests are located in `tests/CSSLayoutTest.cpp`. Run the tests by executing `buck test //:CSSLayout`.
+
+Instead of manually writing a test which ensures parity with web
+implementations of flexbox you can run `gentest/gentest.sh` to generated a test
+for you. After running `gentest/gentest.sh` a editor window should pop open
+(make sure you have `$EDITOR` env variable exported). Here you can write html
+which you want to verify in CSSLayout, such as the following.
+
+
+```
+cd src/re-layout/
+./gentest/gentest.sh
+```
+
+Then put something like this in the editor that pops up:
+
+```html
+<div style="width: 100px; height: 100px; align-items: center;">
+  <div style="width: 50px; height: 50px;"></div>
+</div>
+```
+
+Once saving and exiting the editor window the script will open a browser
+window. From here open the developer console and you should see that the web
+page has output a test file. Copy this into a file and save it in the
+`LayoutTest.re` file.  From within `re-layout`, `npm run postinstall` will
+recompile the tests and `npm run start` will run them.
+
+The ASCII output paints a pseudo-accurate picture of the broken layout.
+
+
 
 ## Fixing Things:
 
@@ -33,6 +65,12 @@ If there's any discrepancy [this pull
 request](https://github.com/facebook/css-layout/pull/185) (and the subsequent
 commits after it was accepted) should be considered the authority, not the
 `Layout.js` file included in this fork.
+
+At the time of writing, 35 of the 104 test cases are failing. This is because
+this `Reason` port was created from an older JS based snapshot of `css-layout`,
+but the test cases are based on the `master` branch which added a bunch of more
+features. The failing test cases likely represent features that we need to add
+here in order to play "catch up" with `master` `css-layout`.
 
 
 ## Generating the source files
