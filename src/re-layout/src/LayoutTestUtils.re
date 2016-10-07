@@ -157,7 +157,6 @@ let mismatchText (expectedContainerLayout, observedContainerLayout) childExpecte
 };
 
 let assertLayouts testNum (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved => {
-  ();
   assertionCount.contents = assertionCount.contents + 1;
   if (hasMismatchedLayout [(expectedContainerLayout, observedContainerLayout), ...childExpectedAndObserved]) {
     let text = mismatchText (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved;
