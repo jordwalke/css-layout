@@ -8,6 +8,13 @@ let testCount = {contents: 0};
 
 let assertionCount = {contents: 0};
 
+
+/**
+ * Number of times to execute tests, and measure time taken.  None implies we
+ * are not measuring total time, and therefore should print the failures.
+ */
+let benchmarkTimes = None;
+
 let currentTestName = {contents: ""};
 
 let it desc test => {
@@ -158,18 +165,22 @@ let mismatchText (expectedContainerLayout, observedContainerLayout) childExpecte
 
 let assertLayouts testNum (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved => {
   assertionCount.contents = assertionCount.contents + 1;
-  if (hasMismatchedLayout [(expectedContainerLayout, observedContainerLayout), ...childExpectedAndObserved]) {
-    let text = mismatchText (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved;
-    let expectedDiagram =
-      renderDiagram expectedContainerLayout (List.map fst childExpectedAndObserved) 'E' 'e';
-    let observedDiagram =
-      renderDiagram observedContainerLayout (List.map snd childExpectedAndObserved) 'O' 'o';
-    let title = "Test " ^ string_of_int testNum ^ ":\n";
-    let expected = "\nEXPECTED\n========\n" ^ expectedDiagram;
-    let observed = "\nOBSERVED\n========\n" ^ observedDiagram;
-    failures.contents = [
-      (currentTestName.contents, title ^ text ^ expected ^ observed),
-      ...failures.contents
-    ]
+  if (benchmarkTimes === None) {
+    if (
+      hasMismatchedLayout [(expectedContainerLayout, observedContainerLayout), ...childExpectedAndObserved]
+    ) {
+      let text = mismatchText (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved;
+      let expectedDiagram =
+        renderDiagram expectedContainerLayout (List.map fst childExpectedAndObserved) 'E' 'e';
+      let observedDiagram =
+        renderDiagram observedContainerLayout (List.map snd childExpectedAndObserved) 'O' 'o';
+      let title = "Test " ^ string_of_int testNum ^ ":\n";
+      let expected = "\nEXPECTED\n========\n" ^ expectedDiagram;
+      let observed = "\nOBSERVED\n========\n" ^ observedDiagram;
+      failures.contents = [
+        (currentTestName.contents, title ^ text ^ expected ^ observed),
+        ...failures.contents
+      ]
+    }
   }
 };

@@ -55,7 +55,10 @@ function printTest(LTRContainer, RTLContainer, genericContainer) {
   lines.push('');
 
   lines.push([
+    'let startTime = Sys.time ();',
     'open LayoutTestUtils;',
+    'let times = switch LayoutTestUtils.benchmarkTimes { | None => 0 | Some n => n};',
+    'for ii in 0 to times {',
     '',
   ].reduce(function(curr, prev) {
     return curr + '\n' + prev;
@@ -98,7 +101,15 @@ function printTest(LTRContainer, RTLContainer, genericContainer) {
   }
 
 
-  lines.push('LayoutTestUtils.displayOutcomes ();');
+  lines.push('};');
+  lines.push('let endTime = Sys.time();');
+  lines.push('if (times > 0) {\n');
+  lines.push('  print_string "TOTAL TIME:\n";');
+  lines.push('  print_float (endTime -. startTime);');
+  lines.push('  print_newline ();');
+  lines.push('} else {');
+  lines.push('  LayoutTestUtils.displayOutcomes ();');
+  lines.push('};');
   printLines(lines);
   if (errors.length !== 0) {
     throw new Error(errors.join('\n'));
