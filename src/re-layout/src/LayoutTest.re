@@ -1,3 +1,106 @@
+let align_items_stretch = "align_items_stretch";
+
+let align_items_center = "align_items_center";
+
+let align_items_flex_start = "align_items_flex_start";
+
+let align_items_flex_end = "align_items_flex_end";
+
+let align_self_center = "align_self_center";
+
+let align_self_flex_end = "align_self_flex_end";
+
+let align_self_flex_start = "align_self_flex_start";
+
+let align_self_flex_end_override_flex_start = "align_self_flex_end_override_flex_start";
+
+let border_no_size = "border_no_size";
+
+let border_container_match_child = "border_container_match_child";
+
+let border_stretch_child = "border_stretch_child";
+
+let border_center_child = "border_center_child";
+
+let max_width = "max_width";
+
+let max_height = "max_height";
+
+let padding_no_size = "padding_no_size";
+
+let padding_container_match_child = "padding_container_match_child";
+
+let padding_stretch_child = "padding_stretch_child";
+
+let padding_center_child = "padding_center_child";
+
+let absolute_layout_width_height_start_top = "absolute_layout_width_height_start_top";
+
+let absolute_layout_width_height_end_bottom = "absolute_layout_width_height_end_bottom";
+
+let absolute_layout_start_top_end_bottom = "absolute_layout_start_top_end_bottom";
+
+let absolute_layout_width_height_start_top_end_bottom = "absolute_layout_width_height_start_top_end_bottom";
+
+let do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent = "do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent";
+
+let flex_direction_column_no_height = "flex_direction_column_no_height";
+
+let flex_direction_row_no_width = "flex_direction_row_no_width";
+
+let flex_direction_column = "flex_direction_column";
+
+let flex_direction_row = "flex_direction_row";
+
+let flex_direction_column_reverse = "flex_direction_column_reverse";
+
+let flex_direction_row_reverse = "flex_direction_row_reverse";
+
+let wrap_column = "wrap_column";
+
+let wrap_row = "wrap_row";
+
+let wrap_row_align_items_flex_end = "wrap_row_align_items_flex_end";
+
+let wrap_row_align_items_center = "wrap_row_align_items_center";
+
+let margin_start = "margin_start";
+
+let margin_top = "margin_top";
+
+let margin_end = "margin_end";
+
+let margin_bottom = "margin_bottom";
+
+let align_content_flex_start = "align_content_flex_start";
+
+let align_content_flex_end = "align_content_flex_end";
+
+let align_content_center = "align_content_center";
+
+let align_content_stretch = "align_content_stretch";
+
+let justify_content_row_flex_start = "justify_content_row_flex_start";
+
+let justify_content_row_flex_end = "justify_content_row_flex_end";
+
+let justify_content_row_center = "justify_content_row_center";
+
+let justify_content_row_space_between = "justify_content_row_space_between";
+
+let justify_content_row_space_around = "justify_content_row_space_around";
+
+let justify_content_column_flex_start = "justify_content_column_flex_start";
+
+let justify_content_column_flex_end = "justify_content_column_flex_end";
+
+let justify_content_column_center = "justify_content_column_center";
+
+let justify_content_column_space_between = "justify_content_column_space_between";
+
+let justify_content_column_space_around = "justify_content_column_space_around";
+
+
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  * All rights reserved.
@@ -287,7 +390,7 @@ let times =
 
 for ii in 0 to times {
   it
-    "align_items_stretch"
+    align_items_stretch
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -308,7 +411,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_items_center"
+    align_items_center
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -332,7 +435,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_items_flex_start"
+    align_items_flex_start
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -356,7 +459,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_items_flex_end"
+    align_items_flex_end
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -380,7 +483,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_self_center"
+    align_self_center
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -404,7 +507,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_self_flex_end"
+    align_self_flex_end
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -428,7 +531,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_self_flex_start"
+    align_self_flex_start
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -452,7 +555,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_self_flex_end_override_flex_start"
+    align_self_flex_end_override_flex_start
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -479,7 +582,7 @@ for ii in 0 to times {
       }
     );
   it
-    "border_no_size"
+    border_no_size
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -494,7 +597,7 @@ for ii in 0 to times {
       }
     );
   it
-    "border_container_match_child"
+    border_container_match_child
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -518,7 +621,7 @@ for ii in 0 to times {
       }
     );
   it
-    "border_stretch_child"
+    border_stretch_child
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -550,7 +653,7 @@ for ii in 0 to times {
       }
     );
   it
-    "border_center_child"
+    border_center_child
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -583,7 +686,7 @@ for ii in 0 to times {
       }
     );
   it
-    "max_width"
+    max_width
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -604,7 +707,7 @@ for ii in 0 to times {
       }
     );
   it
-    "max_height"
+    max_height
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -628,7 +731,7 @@ for ii in 0 to times {
       }
     );
   it
-    "padding_no_size"
+    padding_no_size
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -649,7 +752,7 @@ for ii in 0 to times {
       }
     );
   it
-    "padding_container_match_child"
+    padding_container_match_child
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -679,7 +782,7 @@ for ii in 0 to times {
       }
     );
   it
-    "padding_stretch_child"
+    padding_stretch_child
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -711,7 +814,7 @@ for ii in 0 to times {
       }
     );
   it
-    "padding_center_child"
+    padding_center_child
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -744,7 +847,7 @@ for ii in 0 to times {
       }
     );
   it
-    "absolute_layout_width_height_start_top"
+    absolute_layout_width_height_start_top
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -775,7 +878,7 @@ for ii in 0 to times {
       }
     );
   it
-    "absolute_layout_width_height_end_bottom"
+    absolute_layout_width_height_end_bottom
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -806,7 +909,7 @@ for ii in 0 to times {
       }
     );
   it
-    "absolute_layout_start_top_end_bottom"
+    absolute_layout_start_top_end_bottom
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -837,7 +940,7 @@ for ii in 0 to times {
       }
     );
   it
-    "absolute_layout_width_height_start_top_end_bottom"
+    absolute_layout_width_height_start_top_end_bottom
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -870,7 +973,7 @@ for ii in 0 to times {
       }
     );
   it
-    "do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent"
+    do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -932,7 +1035,7 @@ for ii in 0 to times {
       }
     );
   it
-    "flex_direction_column_no_height"
+    flex_direction_column_no_height
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -967,7 +1070,7 @@ for ii in 0 to times {
       }
     );
   it
-    "flex_direction_row_no_width"
+    flex_direction_row_no_width
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1002,7 +1105,7 @@ for ii in 0 to times {
       }
     );
   it
-    "flex_direction_column"
+    flex_direction_column
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1037,7 +1140,7 @@ for ii in 0 to times {
       }
     );
   it
-    "flex_direction_row"
+    flex_direction_row
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1075,7 +1178,7 @@ for ii in 0 to times {
       }
     );
   it
-    "flex_direction_column_reverse"
+    flex_direction_column_reverse
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1118,7 +1221,7 @@ for ii in 0 to times {
       }
     );
   it
-    "flex_direction_row_reverse"
+    flex_direction_row_reverse
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1156,7 +1259,7 @@ for ii in 0 to times {
       }
     );
   it
-    "wrap_column"
+    wrap_column
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1196,7 +1299,7 @@ for ii in 0 to times {
       }
     );
   it
-    "wrap_row"
+    wrap_row
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1239,7 +1342,7 @@ for ii in 0 to times {
       }
     );
   it
-    "wrap_row_align_items_flex_end"
+    wrap_row_align_items_flex_end
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1288,7 +1391,7 @@ for ii in 0 to times {
       }
     );
   it
-    "wrap_row_align_items_center"
+    wrap_row_align_items_center
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1337,7 +1440,7 @@ for ii in 0 to times {
       }
     );
   it
-    "margin_start"
+    margin_start
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1361,7 +1464,7 @@ for ii in 0 to times {
       }
     );
   it
-    "margin_top"
+    margin_top
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1382,7 +1485,7 @@ for ii in 0 to times {
       }
     );
   it
-    "margin_end"
+    margin_end
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1412,7 +1515,7 @@ for ii in 0 to times {
       }
     );
   it
-    "margin_bottom"
+    margin_bottom
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1436,7 +1539,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_content_flex_start"
+    align_content_flex_start
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1490,7 +1593,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_content_flex_end"
+    align_content_flex_end
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1544,7 +1647,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_content_center"
+    align_content_center
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1598,7 +1701,7 @@ for ii in 0 to times {
       }
     );
   it
-    "align_content_stretch"
+    align_content_stretch
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1652,7 +1755,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_row_flex_start"
+    justify_content_row_flex_start
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1690,7 +1793,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_row_flex_end"
+    justify_content_row_flex_end
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1734,7 +1837,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_row_center"
+    justify_content_row_center
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1778,7 +1881,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_row_space_between"
+    justify_content_row_space_between
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1822,7 +1925,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_row_space_around"
+    justify_content_row_space_around
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1866,7 +1969,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_column_flex_start"
+    justify_content_column_flex_start
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1900,7 +2003,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_column_flex_end"
+    justify_content_column_flex_end
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1938,7 +2041,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_column_center"
+    justify_content_column_center
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1976,7 +2079,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_column_space_between"
+    justify_content_column_space_between
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -2014,7 +2117,7 @@ for ii in 0 to times {
       }
     );
   it
-    "justify_content_column_space_around"
+    justify_content_column_space_around
     (
       fun () => {
         let root = LayoutSupport.createNode ();

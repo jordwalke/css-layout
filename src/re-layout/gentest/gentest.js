@@ -68,8 +68,10 @@ function printTest(LTRContainer, RTLContainer, genericContainer) {
   var RTLLayoutTree = calculateTree(RTLContainer);
   var genericLayoutTree = calculateTree(genericContainer);
 
+  let testStringLines = [];
   for (var i = 0; i < genericLayoutTree.length; i++) {
-    lines.push('it "' + genericLayoutTree[i].name + '" (fun () => {');
+    testStringLines.push('let ' + genericLayoutTree[i].name + ' = "'+ genericLayoutTree[i].name + '";');
+    lines.push('it ' + genericLayoutTree[i].name + ' (fun () => {');
 
     lines.push('  ' + setupTestTree(
         genericLayoutTree[i].name,
@@ -110,7 +112,7 @@ function printTest(LTRContainer, RTLContainer, genericContainer) {
   lines.push('} else {');
   lines.push('  LayoutTestUtils.displayOutcomes ();');
   lines.push('};');
-  printLines(lines);
+  printLines(testStringLines.concat(lines));
   if (errors.length !== 0) {
     throw new Error(errors.join('\n'));
   }
