@@ -219,21 +219,12 @@ function setupTestTree(testName, parent, node, genericNode, nodeName, parentName
           styleLines.push('overflow: ' + overflowValue(node.style[style]));
           break;
         case 'flex-grow':
-          if (node.style['flex-basis'] !== node.style['flex-grow'] || node.style['flex-shrink'] !== node.style['flex-grow']) {
-            errors.push(testName + " : error - do not yet support flex-basis, flex-shrink. Only flex, which is shorthand for all three.");
-          }
-          styleLines.push('flex: ' + node.style[style]);
+          styleLines.push('flexGrow: ' + ensureFloat(node.style[style]));
           break;
         case 'flex-shrink':
-          if (node.style['flex-basis'] !== node.style['flex-grow'] || node.style['flex-shrink'] !== node.style['flex-grow']) {
-            errors.push(testName + " : error - do not yet support flex-basis, flex-shrink. Only flex, which is shorthand for all three.");
-          }
-          styleLines.push('flexShrink: ' +  node.style[style]);
+          styleLines.push('flexShrink: ' +  ensureFloat(node.style[style]));
           break;
         case 'flex-basis':
-          if (node.style['flex-basis'] !== node.style['flex-grow'] || node.style['flex-shrink'] !== node.style['flex-grow']) {
-            errors.push(testName + " : error - do not yet support flex-basis, flex-shrink. Only flex, which is shorthand for all three.");
-          }
           styleLines.push('flexBasis: ' +  pixelValue(node.style[style]));
           break;
         case 'left':
@@ -757,12 +748,6 @@ function getCSSLayoutStyle(node) {
    <div style="height: 10px;"></div>
  </div>
    
-
-*/
-
-
-
-/* Not yet supported
  <div id="border_flex_child" style="width: 100px; height: 100px; border-width: 10px;">
    <div style="width: 10px; flex-grow:1"></div>
  </div>

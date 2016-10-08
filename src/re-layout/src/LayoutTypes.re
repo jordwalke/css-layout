@@ -90,7 +90,9 @@ type cssStyle = {
   positionType: positionType,
   flexWrap: wrapType,
   overflow: overflow,
-  flex: float,
+  flexGrow: float,
+  flexShrink: float,
+  flexBasis: float,
   marginLeft: float,
   marginTop: float,
   marginRight: float,
@@ -166,7 +168,7 @@ type cssLayout = {
   mutable lastTop: float,
   mutable lastLeft: float,
   mutable lastDirection: direction,
-  mutable flexBasis: float,
+  mutable computedFlexBasis: float,
   mutable nextCachedMeasurementsIndex: int,
   /**
    * Hardcoded to 6 previous measurements.

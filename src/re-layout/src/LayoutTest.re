@@ -100,6 +100,34 @@ let justify_content_column_space_between = "justify_content_column_space_between
 
 let justify_content_column_space_around = "justify_content_column_space_around";
 
+let border_flex_child = "border_flex_child";
+
+let min_height = "min_height";
+
+let min_width = "min_width";
+
+let padding_flex_child = "padding_flex_child";
+
+let margin_and_flex_row = "margin_and_flex_row";
+
+let margin_and_flex_column = "margin_and_flex_column";
+
+let margin_and_stretch_row = "margin_and_stretch_row";
+
+let margin_and_stretch_column = "margin_and_stretch_column";
+
+let margin_with_sibling_row = "margin_with_sibling_row";
+
+let margin_with_sibling_column = "margin_with_sibling_column";
+
+let flex_basis_flex_grow_column = "flex_basis_flex_grow_column";
+
+let flex_basis_flex_grow_row = "flex_basis_flex_grow_row";
+
+let flex_basis_flex_shrink_column = "flex_basis_flex_shrink_column";
+
+let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
+
 
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -375,6 +403,70 @@ let justify_content_column_space_around = "justify_content_column_space_around";
    <div style="height: 10px;"></div>
    <div style="height: 10px;"></div>
    <div style="height: 10px;"></div>
+ </div>
+
+ <div id="border_flex_child" style="width: 100px; height: 100px; border-width: 10px;">
+   <div style="width: 10px; flex-grow:1"></div>
+ </div>
+
+ <div id="min_height" style="width: 100px; height: 100px;">
+   <div style="flex-grow: 1; min-height: 60px;"></div>
+   <div style="flex-grow: 1;"></div>
+ </div>
+
+ <div id="min_width" style="width: 100px; height: 100px; flex-direction: row">
+   <div style="flex-grow: 1; min-width: 60px;"></div>
+   <div style="flex-grow: 1;"></div>
+ </div>
+
+ <div id="padding_flex_child" style="width: 100px; height: 100px; padding: 10px;">
+   <div style="width: 10px; flex-grow:1"></div>
+ </div>
+
+ <div id="margin_and_flex_row" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="margin-start: 10px; margin-end; 10px; flex-grow: 1;"></div>
+ </div>
+
+ <div id="margin_and_flex_column" style="width: 100px; height: 100px;">
+   <div style="margin-top: 10px; margin-bottom; 10px; flex-grow: 1;"></div>
+ </div>
+
+ <div id="margin_and_stretch_row" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="margin-top: 10px; margin-bottom; 10px; flex-grow: 1;"></div>
+ </div>
+
+ <div id="margin_and_stretch_column" style="width: 100px; height: 100px;">
+   <div style="margin-start: 10px; margin-end; 10px; flex-grow: 1;"></div>
+ </div>
+
+ <div id="margin_with_sibling_row" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="margin-end; 10px; flex-grow: 1;"></div>
+   <div style="flex-grow: 1;"></div>
+ </div>
+
+ <div id="margin_with_sibling_column" style="width: 100px; height: 100px;">
+   <div style="margin-bottom; 10px; flex-grow: 1;"></div>
+   <div style="flex-grow: 1;"></div>
+ </div>
+
+ <div id="flex_basis_flex_grow_column" style="width: 100px; height: 100px;">
+   <div style="flex-basis: 50px; flex-grow: 1;"></div>
+   <div style="flex-grow: 1;"></div>
+ </div>
+
+ <div id="flex_basis_flex_grow_row" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="flex-basis: 50px; flex-grow: 1;"></div>
+   <div style="flex-grow: 1;"></div>
+ </div>
+
+ <div id="flex_basis_flex_shrink_column" style="width: 100px; height: 100px;">
+   <div style="flex-basis: 100px; flex-shrink: 1;"></div>
+   <div style="flex-basis: 50px;"></div>
+ </div>
+
+ <div id="flex_basis_flex_shrink_row" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="flex-basis: 100px; flex-shrink: 1;"></div>
+   <div style="flex-basis: 50px;"></div>
  </div>
   *
   */
@@ -2151,6 +2243,412 @@ for ii in 0 to times {
             ({...root_child0.layout, top: 12.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
             ({...root_child1.layout, top: 46.0, left: 0.0, width: 102.0, height: 10.0}, root_child1.layout),
             ({...root_child2.layout, top: 80.0, left: 0.0, width: 102.0, height: 10.0}, root_child2.layout)
+          ]
+      }
+    );
+  it
+    border_flex_child
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {
+            ...root.style,
+            borderLeft: 10.0,
+            borderTop: 10.0,
+            borderRight: 10.0,
+            borderBottom: 10.0,
+            width: 100.0,
+            height: 100.0
+          }
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, width: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          104
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 80.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          105
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 80.0, width: 10.0, height: 80.0}, root_child0.layout)]
+      }
+    );
+  it
+    min_height
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, minHeight: 60.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          106
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout),
+            ({...root_child1.layout, top: 80.0, left: 0.0, width: 100.0, height: 20.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          107
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout),
+            ({...root_child1.layout, top: 80.0, left: 0.0, width: 100.0, height: 20.0}, root_child1.layout)
+          ]
+      }
+    );
+  it
+    min_width
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, minWidth: 60.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          108
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 80.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 80.0, width: 20.0, height: 100.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          109
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 20.0, width: 80.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 0.0, width: 20.0, height: 100.0}, root_child1.layout)
+          ]
+      }
+    );
+  it
+    padding_flex_child
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {
+            ...root.style,
+            paddingLeft: 10.0,
+            paddingTop: 10.0,
+            paddingRight: 10.0,
+            paddingBottom: 10.0,
+            width: 100.0,
+            height: 100.0
+          }
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, width: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          110
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 80.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          111
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 80.0, width: 10.0, height: 80.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_and_flex_row
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginLeft: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          112
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 10.0, width: 90.0, height: 100.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          113
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 90.0, height: 100.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_and_flex_column
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginTop: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          114
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          115
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_and_stretch_row
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginTop: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          116
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          117
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_and_stretch_column
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginLeft: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          118
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 10.0, width: 90.0, height: 100.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          119
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 90.0, height: 100.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_with_sibling_row
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          120
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          121
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 0.0, width: 50.0, height: 100.0}, root_child1.layout)
+          ]
+      }
+    );
+  it
+    margin_with_sibling_column
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          122
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
+            ({...root_child1.layout, top: 50.0, left: 0.0, width: 100.0, height: 50.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          123
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
+            ({...root_child1.layout, top: 50.0, left: 0.0, width: 100.0, height: 50.0}, root_child1.layout)
+          ]
+      }
+    );
+  it
+    flex_basis_flex_grow_column
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, flexBasis: 50.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          124
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 75.0}, root_child0.layout),
+            ({...root_child1.layout, top: 75.0, left: 0.0, width: 100.0, height: 25.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          125
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 75.0}, root_child0.layout),
+            ({...root_child1.layout, top: 75.0, left: 0.0, width: 100.0, height: 25.0}, root_child1.layout)
+          ]
+      }
+    );
+  it
+    flex_basis_flex_grow_row
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, flexBasis: 50.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexGrow: 1.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          126
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 75.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 75.0, width: 25.0, height: 100.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          127
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 25.0, width: 75.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 0.0, width: 25.0, height: 100.0}, root_child1.layout)
+          ]
+      }
+    );
+  it
+    flex_basis_flex_shrink_column
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexShrink: 1.0, flexBasis: 100.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexBasis: 50.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          128
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
+            ({...root_child1.layout, top: 50.0, left: 0.0, width: 100.0, height: 50.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          129
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
+            ({...root_child1.layout, top: 50.0, left: 0.0, width: 100.0, height: 50.0}, root_child1.layout)
+          ]
+      }
+    );
+  it
+    flex_basis_flex_shrink_row
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexShrink: 1.0, flexBasis: 100.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, flexBasis: 50.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          130
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child1.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          131
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child0.layout),
+            ({...root_child1.layout, top: 0.0, left: 0.0, width: 50.0, height: 100.0}, root_child1.layout)
           ]
       }
     )

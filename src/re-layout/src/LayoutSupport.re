@@ -114,7 +114,9 @@ let rec theNullNode = {
     /**
      * Properties that start out as zero.
      */
-    flex: 0.0,
+    flexGrow: 0.0,
+    flexShrink: 0.0,
+    flexBasis: cssUndefined,
     marginLeft: 0.0,
     marginTop: 0.0,
     marginRight: 0.0,
@@ -179,7 +181,7 @@ let rec theNullNode = {
     lastHeight: 0.0,
     lastTop: 0.0,
     lastLeft: 0.0,
-    flexBasis: 0.0,
+    computedFlexBasis: 0.0,
     left: 0.0,
     top: 0.0,
     right: 0.0,
@@ -480,26 +482,12 @@ let getCrossFlexDirection flex_direction direction =>
   isColumnDirection flex_direction ?
     resolveAxis CSS_FLEX_DIRECTION_ROW direction : CSS_FLEX_DIRECTION_COLUMN;
 
-let isFlex node => node.style.positionType === CSS_POSITION_RELATIVE && node.style.flex > 0.0;
+let isFlex node =>
+  node.style.positionType === CSS_POSITION_RELATIVE && (
+    node.style.flexGrow != 0.0 || node.style.flexShrink != 0.0
+  );
 
 let isFlexWrap node => node.style.flexWrap === CSS_WRAP;
-
-let isFlexBasisAuto =
-  positive_flex_is_auto ?
-    /* All flex values are auto. */
-    fun node => true :
-    /* A flex value > 0 implies a basis of zero. */
-    (fun node => node.style.flex <= 0.0);
-
-/* Flex grow is implied by positive values for flex. */
-let getFlexGrowFactor node => node.style.flex > 0.0 ? node.style.flex : 0.0;
-
-let getFlexShrinkFactor =
-  /* A flex shrink factor of 1 is implied by non-zero values for flex. */
-  positive_flex_is_auto ?
-    fun node => node.style.flex != 0.0 ? 1.0 : 0.0 :
-    /* A flex shrink factor of 1 is implied by negative values for flex. */
-    (fun node => node.style.flex < 0.0 ? 1.0 : 0.0);
 
 let getLeadingMargin node axis =>
   if (isRowDirection axis && not (isUndefined node.style.marginStart)) {
@@ -579,10 +567,6 @@ let resolveAxis flex_direction direction =>
   } else {
     flex_direction
   };
-
-let getFlex node => node.style.flex;
-
-let isFlex node => node.style.positionType === CSS_POSITION_RELATIVE && getFlex node != 0.0;
 
 let getDimWithMargin node axis =>
   layoutMeasuredDimensionForAxis node axis +. getLeadingMargin node axis +. getTrailingMargin node axis;
@@ -730,3 +714,23 @@ let setPosition node direction => {
   setLayoutTrailingPositionForAxis
     node crossAxis (getTrailingMargin node crossAxis +. getRelativePosition node crossAxis)
 };
+
+let cssNodeStyleSetFlex node flex =>
+  if (isUndefined flex || flex == 0.0) {
+    {...node, flexGrow: 0.0, flexShrink: 0.0, flexBasis: cssUndefined}
+  } else if (
+    flex > 0.0
+  ) {
+    {...node, flexGrow: flex, flexShrink: 0.0, flexBasis: 0.0}
+  } else {
+    {...node, flexGrow: 0.0, flexShrink: -. flex, flexBasis: cssUndefined}
+  };
+
+let cssNodeStyleGetFlex node =>
+  if (node.style.flexGrow > 0.0) {
+    node.style.flexGrow
+  } else if (node.style.flexShrink > 0.0) {
+    -. node.style.flexShrink
+  } else {
+    0.0
+  };

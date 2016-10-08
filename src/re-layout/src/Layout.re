@@ -484,20 +484,21 @@ and layoutNodeImpl
           } else if (
             isMainAxisRow && isStyleDimDefined child.contents CSS_FLEX_DIRECTION_ROW
           ) {
-            child.contents.layout.flexBasis =
+            child.contents.layout.computedFlexBasis =
               fmaxf
                 child.contents.style.width (getPaddingAndBorderAxis child.contents CSS_FLEX_DIRECTION_ROW)
           } else if (
             !isMainAxisRow && isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN
           ) {
-            child.contents.layout.flexBasis =
+            child.contents.layout.computedFlexBasis =
               fmaxf
                 child.contents.style.height
                 (getPaddingAndBorderAxis child.contents CSS_FLEX_DIRECTION_COLUMN)
           } else if (
-            !(isFlexBasisAuto child.contents) && !(isUndefined availableInnerMainDim)
+            !(isUndefined child.contents.style.flexBasis) && !(isUndefined availableInnerMainDim)
           ) {
-            child.contents.layout.flexBasis = fmaxf 0.0 (getPaddingAndBorderAxis child.contents mainAxis)
+            child.contents.layout.computedFlexBasis =
+              fmaxf child.contents.style.flexBasis (getPaddingAndBorderAxis child.contents mainAxis)
           } else {
             childWidth.contents = cssUndefined;
             childHeight.contents = cssUndefined;
@@ -533,7 +534,7 @@ and layoutNodeImpl
                 childHeightMeasureMode.contents
                 false
                 "measure";
-            child.contents.layout.flexBasis =
+            child.contents.layout.computedFlexBasis =
               fmaxf
                 (isMainAxisRow ? child.contents.layout.measuredWidth : child.contents.layout.measuredHeight)
                 (getPaddingAndBorderAxis child.contents mainAxis)
@@ -557,7 +558,8 @@ and layoutNodeImpl
             child.contents = node.children.(curIndex.contents);
             child.contents.lineIndex = lineCount.contents;
             if (child.contents.style.positionType !== CSS_POSITION_ABSOLUTE) {
-              let outerFlexBasis = child.contents.layout.flexBasis + getMarginAxis child.contents mainAxis;
+              let outerFlexBasis =
+                child.contents.layout.computedFlexBasis + getMarginAxis child.contents mainAxis;
               if (
                 (
                   sizeConsumedOnCurrentLine.contents + outerFlexBasis > availableInnerMainDim && isNodeFlexWrap
@@ -570,10 +572,10 @@ and layoutNodeImpl
                 itemsOnLine.contents = itemsOnLine.contents +. 1;
                 if (isFlex child.contents) {
                   totalFlexGrowFactors.contents =
-                    totalFlexGrowFactors.contents + getFlexGrowFactor child.contents;
+                    totalFlexGrowFactors.contents + child.contents.style.flexGrow;
                   totalFlexShrinkScaledFactors.contents =
                     totalFlexShrinkScaledFactors.contents +
-                    getFlexShrinkFactor child.contents * child.contents.layout.flexBasis
+                    - child.contents.style.flexShrink * child.contents.layout.computedFlexBasis
                 };
                 if (firstRelativeChild.contents === theNullNode) {
                   firstRelativeChild.contents = child.contents
@@ -614,10 +616,10 @@ and layoutNodeImpl
             let deltaFlexGrowFactors = {contents: 0.0};
             currentRelativeChild.contents = firstRelativeChild.contents;
             while (currentRelativeChild.contents !== theNullNode) {
-              childFlexBasis.contents = currentRelativeChild.contents.layout.flexBasis;
+              childFlexBasis.contents = currentRelativeChild.contents.layout.computedFlexBasis;
               if (remainingFreeSpace.contents < 0.0) {
                 flexShrinkScaledFactor.contents =
-                  getFlexShrinkFactor currentRelativeChild.contents * childFlexBasis.contents;
+                  - currentRelativeChild.contents.style.flexShrink * childFlexBasis.contents;
                 if (flexShrinkScaledFactor.contents != 0.0) {
                   baseMainSize.contents =
                     childFlexBasis.contents +
@@ -635,7 +637,7 @@ and layoutNodeImpl
               } else if (
                 remainingFreeSpace.contents > 0.0
               ) {
-                flexGrowFactor.contents = getFlexGrowFactor currentRelativeChild.contents;
+                flexGrowFactor.contents = currentRelativeChild.contents.style.flexGrow;
                 if (flexGrowFactor.contents != 0.0) {
                   baseMainSize.contents =
                     childFlexBasis.contents +
@@ -658,11 +660,11 @@ and layoutNodeImpl
             deltaFreeSpace.contents = 0.0;
             currentRelativeChild.contents = firstRelativeChild.contents;
             while (currentRelativeChild.contents !== theNullNode) {
-              childFlexBasis.contents = currentRelativeChild.contents.layout.flexBasis;
+              childFlexBasis.contents = currentRelativeChild.contents.layout.computedFlexBasis;
               let updatedMainSize = {contents: childFlexBasis.contents};
               if (remainingFreeSpace.contents < 0.0) {
                 flexShrinkScaledFactor.contents =
-                  getFlexShrinkFactor currentRelativeChild.contents * childFlexBasis.contents;
+                  - currentRelativeChild.contents.style.flexShrink * childFlexBasis.contents;
                 if (flexShrinkScaledFactor.contents != 0.0) {
                   updatedMainSize.contents =
                     boundAxis
@@ -677,7 +679,7 @@ and layoutNodeImpl
               } else if (
                 remainingFreeSpace.contents > 0.0
               ) {
-                flexGrowFactor.contents = getFlexGrowFactor currentRelativeChild.contents;
+                flexGrowFactor.contents = currentRelativeChild.contents.style.flexGrow;
                 if (flexGrowFactor.contents != 0.0) {
                   updatedMainSize.contents =
                     boundAxis
@@ -812,7 +814,7 @@ and layoutNodeImpl
                 if canSkipFlex {
                   mainDim.contents =
                     mainDim.contents + betweenMainDim.contents + getMarginAxis child.contents mainAxis +
-                    child.contents.layout.flexBasis;
+                    child.contents.layout.computedFlexBasis;
                   crossDim.contents = availableInnerCrossDim
                 } else {
                   mainDim.contents =
