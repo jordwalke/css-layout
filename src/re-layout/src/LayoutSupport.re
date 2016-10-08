@@ -701,14 +701,12 @@ let setTrailingPosition node child axis => {
 
 /* If both left and right are defined, then use left. Otherwise return */
 /* +left or -right depending on which is defined. */
-let getRelativePosition node axis => {
-  let lead = getLeadingPositionWithFallback node axis;
-  if (not (isUndefined lead)) {
-    lead
+let getRelativePosition node axis =>
+  if (isLeadingPosDefinedWithFallback node axis) {
+    getLeadingPositionWithFallback node axis
   } else {
     -. getTrailingPositionWithFallback node axis
-  }
-};
+  };
 
 
 /**
