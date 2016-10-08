@@ -299,7 +299,7 @@ let rec layoutNodeInternal
   if performLayout {
     node.layout.width = node.layout.measuredWidth;
     node.layout.height = node.layout.measuredHeight;
-    layout.shouldUpdate = true
+    layout.hasNewLayout = true
   };
   gDepth.contents = gDepth.contents - 1;
   layout.generationCount = gCurrentGenerationCount.contents;

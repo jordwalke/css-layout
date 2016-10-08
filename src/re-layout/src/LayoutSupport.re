@@ -153,7 +153,7 @@ let rec theNullNode = {
     direction: CSS_DIRECTION_INHERIT,
     /* Instead of recomputing the entire layout every single time, we
      * cache some information to break early when nothing changed */
-    shouldUpdate: true,
+    hasNewLayout: true,
     generationCount: 0,
     lastParentDirection: CSS_DIRECTION_NEGATIVE_ONE_WHATEVER_THAT_MEANS,
     lastDirection: CSS_DIRECTION_INHERIT,

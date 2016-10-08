@@ -154,7 +154,7 @@ type cssLayout = {
   mutable direction: direction,
   /* Instead of recomputing the entire layout every single time, we
    * cache some information to break early when nothing changed */
-  mutable shouldUpdate: bool,
+  mutable hasNewLayout: bool,
   mutable generationCount: int,
   mutable lastRequestedWidth: float,
   mutable lastRequestedHeight: float,
