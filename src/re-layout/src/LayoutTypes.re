@@ -108,6 +108,14 @@ type cssStyle = {
   right: float,
   bottom: float,
   /**
+   * Start position.
+   */
+  start: float,
+  /**
+   * End position.
+   */
+  endd: float,
+  /**
    * You should skip all the rules that contain negative values for the
    * following attributes. For example:
    *   {padding: 10, paddingLeft: -5}

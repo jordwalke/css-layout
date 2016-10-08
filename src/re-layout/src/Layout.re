@@ -790,14 +790,14 @@ and layoutNodeImpl
             child.contents = node.children.(i);
             if (
               child.contents.style.positionType === CSS_POSITION_ABSOLUTE &&
-              !(isUndefined (styleLeadingPositionForAxis child.contents mainAxis))
+              isLeadingPosDefinedWithFallback child.contents mainAxis
             ) {
               if performLayout {
                 setPosLayoutPositionForAxis
                   child.contents
                   mainAxis
                   (
-                    styleLeadingPositionForAxisOrZero child.contents mainAxis + getLeadingBorder node mainAxis +
+                    getLeadingPositionWithFallback child.contents mainAxis + getLeadingBorder node mainAxis +
                     getLeadingMargin child.contents mainAxis
                   )
               }
@@ -839,16 +839,20 @@ and layoutNodeImpl
           };
           crossDim.contents =
             boundAxis node crossAxis (crossDim.contents + paddingAndBorderAxisCross) - paddingAndBorderAxisCross;
+          /*
+           * STEP 7: CROSS-AXIS ALIGNMENT We can skip child alignment if we're
+           * just measuring the container.
+           */
           if performLayout {
             for i in startOfLineIndex.contents to (endOfLineIndex.contents -. 1) {
               child.contents = node.children.(i);
               if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
-                if !(isUndefined (styleLeadingPositionForAxis child.contents crossAxis)) {
+                if (isLeadingPosDefinedWithFallback child.contents crossAxis) {
                   setPosLayoutPositionForAxis
                     child.contents
                     crossAxis
                     (
-                      styleLeadingPositionForAxisOrZero child.contents crossAxis +
+                      getLeadingPositionWithFallback child.contents crossAxis +
                       getLeadingBorder node crossAxis +
                       getLeadingMargin child.contents crossAxis
                     )
@@ -1059,29 +1063,6 @@ and layoutNodeImpl
                 paddingAndBorderAxisCross
             )
         };
-        if performLayout {
-          let needsMainTrailingPos = {contents: false};
-          let needsCrossTrailingPos = {contents: false};
-          if (mainAxis === CSS_FLEX_DIRECTION_ROW_REVERSE || mainAxis === CSS_FLEX_DIRECTION_COLUMN_REVERSE) {
-            needsMainTrailingPos.contents = true
-          };
-          if (
-            crossAxis === CSS_FLEX_DIRECTION_ROW_REVERSE || crossAxis === CSS_FLEX_DIRECTION_COLUMN_REVERSE
-          ) {
-            needsCrossTrailingPos.contents = true
-          };
-          if (needsMainTrailingPos.contents || needsCrossTrailingPos.contents) {
-            for i in 0 to (childCount -. 1) {
-              child.contents = node.children.(i);
-              if needsMainTrailingPos.contents {
-                setTrailingPosition node child.contents mainAxis
-              };
-              if needsCrossTrailingPos.contents {
-                setTrailingPosition node child.contents crossAxis
-              }
-            }
-          }
-        };
         currentAbsoluteChild.contents = firstAbsoluteChild.contents;
         while (currentAbsoluteChild.contents !== theNullNode) {
           if performLayout {
@@ -1092,15 +1073,16 @@ and layoutNodeImpl
                 currentAbsoluteChild.contents.style.width +
                 getMarginAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
             } else if (
-              isPosDefined currentAbsoluteChild.contents CSS_LEFT &&
-              isPosDefined currentAbsoluteChild.contents CSS_RIGHT
+              isLeadingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW &&
+              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
             ) {
               childWidth.contents =
                 node.layout.measuredWidth - (
                   getLeadingBorder node CSS_FLEX_DIRECTION_ROW +
                   getTrailingBorder node CSS_FLEX_DIRECTION_ROW
                 ) - (
-                  currentAbsoluteChild.contents.style.left + currentAbsoluteChild.contents.style.right
+                  getLeadingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW +
+                  getTrailingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
                 );
               childWidth.contents =
                 boundAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW childWidth.contents
@@ -1110,15 +1092,17 @@ and layoutNodeImpl
                 currentAbsoluteChild.contents.style.height +
                 getMarginAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
             } else if (
-              isPosDefined currentAbsoluteChild.contents CSS_TOP &&
-              isPosDefined currentAbsoluteChild.contents CSS_BOTTOM
+              /* If the child doesn't have a specified height, compute the height based on the top/bottom offsets if they're defined. */
+              isLeadingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN &&
+              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
             ) {
               childHeight.contents =
                 node.layout.measuredHeight - (
                   getLeadingBorder node CSS_FLEX_DIRECTION_COLUMN +
                   getTrailingBorder node CSS_FLEX_DIRECTION_COLUMN
                 ) - (
-                  currentAbsoluteChild.contents.style.top + currentAbsoluteChild.contents.style.bottom
+                  getLeadingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN +
+                  getTrailingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
                 );
               childHeight.contents =
                 boundAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN childHeight.contents
@@ -1202,51 +1186,52 @@ and layoutNodeImpl
                 true
                 "abs-layout";
             if (
-              !(
-                isUndefined (
-                  styleTrailingPositionForAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
-                )
-              ) &&
-              !
-                !(
-                  isUndefined (
-                    styleLeadingPositionForAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
-                  )
-                )
+              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents mainAxis &&
+              !(isLeadingPosDefinedWithFallback currentAbsoluteChild.contents mainAxis)
             ) {
               setLayoutLeadingPositionForAxis
                 currentAbsoluteChild.contents
-                CSS_FLEX_DIRECTION_ROW
+                mainAxis
                 (
-                  layoutMeasuredDimensionForAxis node CSS_FLEX_DIRECTION_ROW -
-                  layoutMeasuredDimensionForAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW -
-                  styleTrailingPositionForAxisOrZero currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
+                  layoutMeasuredDimensionForAxis node mainAxis -
+                  layoutMeasuredDimensionForAxis currentAbsoluteChild.contents mainAxis -
+                  getTrailingPositionWithFallback currentAbsoluteChild.contents mainAxis
                 )
             };
             if (
-              !(
-                isUndefined (
-                  styleTrailingPositionForAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
-                )
-              ) &&
-              !
-                !(
-                  isUndefined (
-                    styleLeadingPositionForAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
-                  )
-                )
+              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents crossAxis &&
+              !(isLeadingPosDefinedWithFallback currentAbsoluteChild.contents crossAxis)
             ) {
               setLayoutLeadingPositionForAxis
                 currentAbsoluteChild.contents
-                CSS_FLEX_DIRECTION_COLUMN
+                crossAxis
                 (
-                  layoutMeasuredDimensionForAxis node CSS_FLEX_DIRECTION_COLUMN -
-                  layoutMeasuredDimensionForAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN -
-                  styleTrailingPositionForAxisOrZero currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
+                  layoutMeasuredDimensionForAxis node crossAxis -
+                  layoutMeasuredDimensionForAxis currentAbsoluteChild.contents crossAxis -
+                  getTrailingPositionWithFallback currentAbsoluteChild.contents crossAxis
                 )
             }
           };
           currentAbsoluteChild.contents = currentAbsoluteChild.contents.nextChild
+        };
+        /* STEP 11: SETTING TRAILING POSITIONS FOR CHILDREN */
+        if performLayout {
+          let needsMainTrailingPos =
+            mainAxis == CSS_FLEX_DIRECTION_ROW_REVERSE || mainAxis == CSS_FLEX_DIRECTION_COLUMN_REVERSE;
+          let needsCrossTrailingPos =
+            crossAxis == CSS_FLEX_DIRECTION_ROW_REVERSE || crossAxis == CSS_FLEX_DIRECTION_COLUMN_REVERSE;
+          /* Set trailing position if necessary. */
+          if (needsMainTrailingPos || needsCrossTrailingPos) {
+            for i in 0 to (childCount -. 1) {
+              let child = node.children.(i);
+              if needsMainTrailingPos {
+                setTrailingPosition node child mainAxis
+              };
+              if needsCrossTrailingPos {
+                setTrailingPosition node child crossAxis
+              }
+            }
+          }
         }
       }
     }

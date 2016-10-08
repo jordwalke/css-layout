@@ -140,6 +140,8 @@ let rec theNullNode = {
     top: cssUndefined,
     right: cssUndefined,
     bottom: cssUndefined,
+    start: cssUndefined,
+    endd: cssUndefined,
     marginStart: cssUndefined,
     marginEnd: cssUndefined,
     paddingStart: cssUndefined,
@@ -231,8 +233,7 @@ let insertChild node child index => {
   for i in index to (Array.length node.children - 1) {
     ret.contents = Array.append ret.contents [|node.children.(i)|]
   };
-  let oldLen = Array.length node.children;
-  node.children = ret.contents;
+  node.children = ret.contents
 };
 
 
@@ -598,14 +599,44 @@ let isLayoutDimDefined node axis => {
 
 let isPosDefined node position => not (isUndefined (styleForPosition node position));
 
+let isLeadingPosDefinedWithFallback node axis =>
+  isRowDirection axis && not (isUndefined node.style.start) ||
+  not (isUndefined (styleLeadingPositionForAxis node axis));
+
+let isTrailingPosDefinedWithFallback node axis =>
+  isRowDirection axis && not (isUndefined node.style.endd) ||
+  not (isUndefined (styleTrailingPositionForAxis node axis));
+
 let isMeasureDefined node => node.measure !== dummyMeasure;
 
-let normalizePosition position => not (isUndefined position) ? position : 0.0;
+
+/**
+ * The C implementation calls this `getLeadingPosition`.
+ */
+let getLeadingPositionWithFallback node axis =>
+  if (isRowDirection axis && not (isUndefined node.style.start)) {
+    node.style.start
+  } else {
+    styleLeadingPositionForAxisOrZero node axis
+  };
+
+
+/**
+ * The C implementation calls this `getTrailingPosition`.
+ */
+let getTrailingPositionWithFallback node axis =>
+  if (isRowDirection axis && not (isUndefined node.style.endd)) {
+    node.style.endd
+  } else {
+    styleTrailingPositionForAxisOrZero node axis
+  };
 
 let getPosition node position => {
   let pos = styleForPosition node position;
   not (isUndefined pos) ? pos : 0.0
 };
+
+let normalizePosition position => not (isUndefined position) ? position : 0.0;
 
 let boundAxisWithinMinAndMax node axis value => {
   let (min, max) =
@@ -661,8 +692,7 @@ let boundAxis node axis value =>
  * Sets trailing position for a child node for a given axis.
  */
 let setTrailingPosition node child axis => {
-  let measuredChildDimensionForAxis =
-    child.style.positionType === CSS_POSITION_ABSOLUTE ? 0.0 : layoutMeasuredDimensionForAxis child axis;
+  let measuredChildDimensionForAxis = layoutMeasuredDimensionForAxis child axis;
   let childLayoutPosValueForAxis = layoutPosPositionForAxis child axis;
   let nextValue =
     layoutMeasuredDimensionForAxis node axis -. measuredChildDimensionForAxis -. childLayoutPosValueForAxis;
@@ -672,11 +702,11 @@ let setTrailingPosition node child axis => {
 /* If both left and right are defined, then use left. Otherwise return */
 /* +left or -right depending on which is defined. */
 let getRelativePosition node axis => {
-  let lead = styleLeadingPositionForAxis node axis;
+  let lead = getLeadingPositionWithFallback node axis;
   if (not (isUndefined lead)) {
     lead
   } else {
-    -. normalizePosition (styleTrailingPositionForAxis node axis)
+    -. getTrailingPositionWithFallback node axis
   }
 };
 
