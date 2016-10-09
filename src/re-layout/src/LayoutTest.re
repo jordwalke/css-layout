@@ -66,9 +66,13 @@ let wrap_row_align_items_center = "wrap_row_align_items_center";
 
 let margin_start = "margin_start";
 
+let margin_end = "margin_end";
+
+let margin_left = "margin_left";
+
 let margin_top = "margin_top";
 
-let margin_end = "margin_end";
+let margin_right = "margin_right";
 
 let margin_bottom = "margin_bottom";
 
@@ -301,12 +305,20 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="width: 10px; margin-start: 10px;"></div>
  </div>
 
+ <div id="margin_end" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
+   <div style="width: 10px; margin-end: 10px;"></div>
+ </div>
+
+ <div id="margin_left" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="width: 10px; margin-left: 10px;"></div>
+ </div>
+
  <div id="margin_top" style="width: 100px; height: 100px;">
    <div style="height: 10px; margin-top: 10px;"></div>
  </div>
 
- <div id="margin_end" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
-   <div style="width: 10px; margin-end: 10px;"></div>
+ <div id="margin_right" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
+   <div style="width: 10px; margin-right: 10px;"></div>
  </div>
 
  <div id="margin_bottom" style="width: 100px; height: 100px; justify-content: flex-end;">
@@ -1556,27 +1568,6 @@ for ii in 0 to times {
       }
     );
   it
-    margin_top
-    (
-      fun () => {
-        let root = LayoutSupport.createNode ();
-        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
-        let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, marginTop: 10.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child0 0;
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
-        assertLayouts
-          70
-          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)];
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
-        assertLayouts
-          71
-          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)]
-      }
-    );
-  it
     margin_end
     (
       fun () => {
@@ -1596,14 +1587,89 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          72
+          70
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 0.0, left: 80.0, width: 10.0, height: 100.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          73
+          71
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 0.0, left: 10.0, width: 10.0, height: 100.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_left
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, marginLeft: 10.0, width: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          72
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 10.0, width: 10.0, height: 100.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          73
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 90.0, width: 10.0, height: 100.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_top
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, marginTop: 10.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          74
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          75
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)]
+      }
+    );
+  it
+    margin_right
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {
+            ...root.style,
+            flexDirection: CSS_FLEX_DIRECTION_ROW,
+            justifyContent: CSS_JUSTIFY_FLEX_END,
+            width: 100.0,
+            height: 100.0
+          }
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, marginRight: 10.0, width: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          76
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 80.0, width: 10.0, height: 100.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          77
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 100.0}, root_child0.layout)]
       }
     );
   it
@@ -1620,12 +1686,12 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          74
+          78
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 80.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          75
+          79
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 80.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)]
       }
@@ -1640,114 +1706,6 @@ for ii in 0 to times {
           style: {
             ...root.style,
             alignContent: CSS_ALIGN_FLEX_START,
-            flexWrap: CSS_WRAP,
-            width: 100.0,
-            height: 100.0
-          }
-        };
-        let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child0 0;
-        let root_child1 = LayoutSupport.createNode ();
-        let root_child1 = {...root_child1, style: {...root_child1.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child1 1;
-        let root_child2 = LayoutSupport.createNode ();
-        let root_child2 = {...root_child2, style: {...root_child2.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child2 2;
-        let root_child3 = LayoutSupport.createNode ();
-        let root_child3 = {...root_child3, style: {...root_child3.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child3 3;
-        let root_child4 = LayoutSupport.createNode ();
-        let root_child4 = {...root_child4, style: {...root_child4.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child4 4;
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
-        assertLayouts
-          76
-          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [
-            ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 10.0}, root_child0.layout),
-            ({...root_child1.layout, top: 10.0, left: 0.0, width: 50.0, height: 10.0}, root_child1.layout),
-            ({...root_child2.layout, top: 20.0, left: 0.0, width: 50.0, height: 10.0}, root_child2.layout),
-            ({...root_child3.layout, top: 30.0, left: 0.0, width: 50.0, height: 10.0}, root_child3.layout),
-            ({...root_child4.layout, top: 40.0, left: 0.0, width: 50.0, height: 10.0}, root_child4.layout)
-          ];
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
-        assertLayouts
-          77
-          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [
-            ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 10.0}, root_child0.layout),
-            ({...root_child1.layout, top: 10.0, left: 50.0, width: 50.0, height: 10.0}, root_child1.layout),
-            ({...root_child2.layout, top: 20.0, left: 50.0, width: 50.0, height: 10.0}, root_child2.layout),
-            ({...root_child3.layout, top: 30.0, left: 50.0, width: 50.0, height: 10.0}, root_child3.layout),
-            ({...root_child4.layout, top: 40.0, left: 50.0, width: 50.0, height: 10.0}, root_child4.layout)
-          ]
-      }
-    );
-  it
-    align_content_flex_end
-    (
-      fun () => {
-        let root = LayoutSupport.createNode ();
-        let root = {
-          ...root,
-          style: {
-            ...root.style,
-            alignContent: CSS_ALIGN_FLEX_END,
-            flexWrap: CSS_WRAP,
-            width: 100.0,
-            height: 100.0
-          }
-        };
-        let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child0 0;
-        let root_child1 = LayoutSupport.createNode ();
-        let root_child1 = {...root_child1, style: {...root_child1.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child1 1;
-        let root_child2 = LayoutSupport.createNode ();
-        let root_child2 = {...root_child2, style: {...root_child2.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child2 2;
-        let root_child3 = LayoutSupport.createNode ();
-        let root_child3 = {...root_child3, style: {...root_child3.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child3 3;
-        let root_child4 = LayoutSupport.createNode ();
-        let root_child4 = {...root_child4, style: {...root_child4.style, width: 50.0, height: 10.0}};
-        LayoutSupport.insertChild root root_child4 4;
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
-        assertLayouts
-          78
-          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [
-            ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 10.0}, root_child0.layout),
-            ({...root_child1.layout, top: 10.0, left: 0.0, width: 50.0, height: 10.0}, root_child1.layout),
-            ({...root_child2.layout, top: 20.0, left: 0.0, width: 50.0, height: 10.0}, root_child2.layout),
-            ({...root_child3.layout, top: 30.0, left: 0.0, width: 50.0, height: 10.0}, root_child3.layout),
-            ({...root_child4.layout, top: 40.0, left: 0.0, width: 50.0, height: 10.0}, root_child4.layout)
-          ];
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
-        assertLayouts
-          79
-          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [
-            ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 10.0}, root_child0.layout),
-            ({...root_child1.layout, top: 10.0, left: 50.0, width: 50.0, height: 10.0}, root_child1.layout),
-            ({...root_child2.layout, top: 20.0, left: 50.0, width: 50.0, height: 10.0}, root_child2.layout),
-            ({...root_child3.layout, top: 30.0, left: 50.0, width: 50.0, height: 10.0}, root_child3.layout),
-            ({...root_child4.layout, top: 40.0, left: 50.0, width: 50.0, height: 10.0}, root_child4.layout)
-          ]
-      }
-    );
-  it
-    align_content_center
-    (
-      fun () => {
-        let root = LayoutSupport.createNode ();
-        let root = {
-          ...root,
-          style: {
-            ...root.style,
-            alignContent: CSS_ALIGN_CENTER,
             flexWrap: CSS_WRAP,
             width: 100.0,
             height: 100.0
@@ -1793,6 +1751,114 @@ for ii in 0 to times {
       }
     );
   it
+    align_content_flex_end
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {
+            ...root.style,
+            alignContent: CSS_ALIGN_FLEX_END,
+            flexWrap: CSS_WRAP,
+            width: 100.0,
+            height: 100.0
+          }
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        let root_child2 = LayoutSupport.createNode ();
+        let root_child2 = {...root_child2, style: {...root_child2.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child2 2;
+        let root_child3 = LayoutSupport.createNode ();
+        let root_child3 = {...root_child3, style: {...root_child3.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child3 3;
+        let root_child4 = LayoutSupport.createNode ();
+        let root_child4 = {...root_child4, style: {...root_child4.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child4 4;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          82
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 10.0}, root_child0.layout),
+            ({...root_child1.layout, top: 10.0, left: 0.0, width: 50.0, height: 10.0}, root_child1.layout),
+            ({...root_child2.layout, top: 20.0, left: 0.0, width: 50.0, height: 10.0}, root_child2.layout),
+            ({...root_child3.layout, top: 30.0, left: 0.0, width: 50.0, height: 10.0}, root_child3.layout),
+            ({...root_child4.layout, top: 40.0, left: 0.0, width: 50.0, height: 10.0}, root_child4.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          83
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 10.0}, root_child0.layout),
+            ({...root_child1.layout, top: 10.0, left: 50.0, width: 50.0, height: 10.0}, root_child1.layout),
+            ({...root_child2.layout, top: 20.0, left: 50.0, width: 50.0, height: 10.0}, root_child2.layout),
+            ({...root_child3.layout, top: 30.0, left: 50.0, width: 50.0, height: 10.0}, root_child3.layout),
+            ({...root_child4.layout, top: 40.0, left: 50.0, width: 50.0, height: 10.0}, root_child4.layout)
+          ]
+      }
+    );
+  it
+    align_content_center
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {
+            ...root.style,
+            alignContent: CSS_ALIGN_CENTER,
+            flexWrap: CSS_WRAP,
+            width: 100.0,
+            height: 100.0
+          }
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {...root_child0, style: {...root_child0.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child0 0;
+        let root_child1 = LayoutSupport.createNode ();
+        let root_child1 = {...root_child1, style: {...root_child1.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child1 1;
+        let root_child2 = LayoutSupport.createNode ();
+        let root_child2 = {...root_child2, style: {...root_child2.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child2 2;
+        let root_child3 = LayoutSupport.createNode ();
+        let root_child3 = {...root_child3, style: {...root_child3.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child3 3;
+        let root_child4 = LayoutSupport.createNode ();
+        let root_child4 = {...root_child4, style: {...root_child4.style, width: 50.0, height: 10.0}};
+        LayoutSupport.insertChild root root_child4 4;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          84
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 10.0}, root_child0.layout),
+            ({...root_child1.layout, top: 10.0, left: 0.0, width: 50.0, height: 10.0}, root_child1.layout),
+            ({...root_child2.layout, top: 20.0, left: 0.0, width: 50.0, height: 10.0}, root_child2.layout),
+            ({...root_child3.layout, top: 30.0, left: 0.0, width: 50.0, height: 10.0}, root_child3.layout),
+            ({...root_child4.layout, top: 40.0, left: 0.0, width: 50.0, height: 10.0}, root_child4.layout)
+          ];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          85
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [
+            ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 10.0}, root_child0.layout),
+            ({...root_child1.layout, top: 10.0, left: 50.0, width: 50.0, height: 10.0}, root_child1.layout),
+            ({...root_child2.layout, top: 20.0, left: 50.0, width: 50.0, height: 10.0}, root_child2.layout),
+            ({...root_child3.layout, top: 30.0, left: 50.0, width: 50.0, height: 10.0}, root_child3.layout),
+            ({...root_child4.layout, top: 40.0, left: 50.0, width: 50.0, height: 10.0}, root_child4.layout)
+          ]
+      }
+    );
+  it
     align_content_stretch
     (
       fun () => {
@@ -1824,7 +1890,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child4 4;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          82
+          86
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 0.0}, root_child0.layout),
@@ -1835,7 +1901,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          83
+          87
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 0.0}, root_child0.layout),
@@ -1866,7 +1932,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          84
+          88
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -1875,7 +1941,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          85
+          89
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 92.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -1910,7 +1976,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          86
+          90
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 72.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -1919,7 +1985,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          87
+          91
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 20.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -1954,7 +2020,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          88
+          92
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 36.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -1963,7 +2029,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          89
+          93
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 56.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -1998,7 +2064,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          90
+          94
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -2007,7 +2073,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          91
+          95
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 92.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -2042,7 +2108,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          92
+          96
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 12.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -2051,7 +2117,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          93
+          97
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 80.0, width: 10.0, height: 102.0}, root_child0.layout),
@@ -2076,7 +2142,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          94
+          98
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2085,7 +2151,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          95
+          99
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2114,7 +2180,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          96
+          100
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 72.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2123,7 +2189,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          97
+          101
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 72.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2152,7 +2218,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          98
+          102
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 36.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2161,7 +2227,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          99
+          103
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 36.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2190,7 +2256,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          100
+          104
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2199,7 +2265,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          101
+          105
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2228,7 +2294,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child2 2;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          102
+          106
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 12.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2237,7 +2303,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          103
+          107
           ({...root.layout, top: 0.0, left: 0.0, width: 102.0, height: 102.0}, root.layout)
           [
             ({...root_child0.layout, top: 12.0, left: 0.0, width: 102.0, height: 10.0}, root_child0.layout),
@@ -2268,12 +2334,12 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          104
+          108
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 80.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          105
+          109
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 80.0, width: 10.0, height: 80.0}, root_child0.layout)]
       }
@@ -2292,7 +2358,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          106
+          110
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout),
@@ -2300,7 +2366,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          107
+          111
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout),
@@ -2325,7 +2391,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          108
+          112
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 80.0, height: 100.0}, root_child0.layout),
@@ -2333,7 +2399,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          109
+          113
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 20.0, width: 80.0, height: 100.0}, root_child0.layout),
@@ -2363,12 +2429,12 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          110
+          114
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 80.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          111
+          115
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 80.0, width: 10.0, height: 80.0}, root_child0.layout)]
       }
@@ -2387,12 +2453,12 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          112
+          116
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 0.0, left: 10.0, width: 90.0, height: 100.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          113
+          117
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 0.0, left: 0.0, width: 90.0, height: 100.0}, root_child0.layout)]
       }
@@ -2408,12 +2474,12 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          114
+          118
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          115
+          119
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)]
       }
@@ -2432,12 +2498,12 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          116
+          120
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          117
+          121
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)]
       }
@@ -2453,12 +2519,12 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          118
+          122
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 0.0, left: 10.0, width: 90.0, height: 100.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          119
+          123
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [({...root_child0.layout, top: 0.0, left: 0.0, width: 90.0, height: 100.0}, root_child0.layout)]
       }
@@ -2480,7 +2546,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          120
+          124
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 100.0}, root_child0.layout),
@@ -2488,7 +2554,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          121
+          125
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child0.layout),
@@ -2510,7 +2576,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          122
+          126
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
@@ -2518,7 +2584,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          123
+          127
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
@@ -2540,7 +2606,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          124
+          128
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 75.0}, root_child0.layout),
@@ -2548,7 +2614,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          125
+          129
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 75.0}, root_child0.layout),
@@ -2573,7 +2639,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          126
+          130
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 75.0, height: 100.0}, root_child0.layout),
@@ -2581,7 +2647,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          127
+          131
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 25.0, width: 75.0, height: 100.0}, root_child0.layout),
@@ -2603,7 +2669,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          128
+          132
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
@@ -2611,7 +2677,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          129
+          133
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
@@ -2636,7 +2702,7 @@ for ii in 0 to times {
         LayoutSupport.insertChild root root_child1 1;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
-          130
+          134
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 100.0}, root_child0.layout),
@@ -2644,7 +2710,7 @@ for ii in 0 to times {
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
-          131
+          135
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child0.layout),

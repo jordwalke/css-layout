@@ -644,12 +644,20 @@ function getCSSLayoutStyle(node) {
    <div style="width: 10px; margin-start: 10px;"></div>
  </div>
 
+ <div id="margin_end" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
+   <div style="width: 10px; margin-end: 10px;"></div>
+ </div>
+
+ <div id="margin_left" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="width: 10px; margin-left: 10px;"></div>
+ </div>
+
  <div id="margin_top" style="width: 100px; height: 100px;">
    <div style="height: 10px; margin-top: 10px;"></div>
  </div>
 
- <div id="margin_end" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
-   <div style="width: 10px; margin-end: 10px;"></div>
+ <div id="margin_right" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
+   <div style="width: 10px; margin-right: 10px;"></div>
  </div>
 
  <div id="margin_bottom" style="width: 100px; height: 100px; justify-content: flex-end;">
