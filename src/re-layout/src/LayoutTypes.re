@@ -64,8 +64,7 @@ type cachedMeasurement = {
 
 type overflow =
   | CSS_OVERFLOW_VISIBLE
-  | CSS_OVERFLOW_HIDDEN
-  | CSS_OVERFLOW_SCROLL;
+  | CSS_OVERFLOW_HIDDEN;
 
 type wrapType =
   | CSS_NOWRAP

@@ -1114,26 +1114,14 @@ and layoutNodeImpl
               childHeightMeasureMode.contents =
                 isUndefined childHeight.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
               /*
-               * The W3C spec doesn't say anything about the 'overflow' property,
-               * but all major browsers appear to implement the following logic.
+               * According to the spec, if the main size is not definite and the
+               * child's inline axis is parallel to the main axis (i.e. it's
+               * horizontal), the child should be sized using "UNDEFINED" in
+               * the main size. Otherwise use "AT_MOST" in the cross axis.
                */
-              if (
-                !isMainAxisRow && node.style.overflow === CSS_OVERFLOW_SCROLL ||
-                node.style.overflow !== CSS_OVERFLOW_SCROLL
-              ) {
-                if (isUndefined childWidth.contents && !(isUndefined availableInnerWidth)) {
-                  childWidth.contents = availableInnerWidth;
-                  childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
-                }
-              };
-              if (
-                isMainAxisRow && node.style.overflow === CSS_OVERFLOW_SCROLL ||
-                node.style.overflow !== CSS_OVERFLOW_SCROLL
-              ) {
-                if (isUndefined childHeight.contents && !(isUndefined availableInnerHeight)) {
-                  childHeight.contents = availableInnerHeight;
-                  childHeightMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
-                }
+              if ((!isMainAxisRow && isUndefined childWidth.contents) && !(isUndefined availableInnerWidth)) {
+                childWidth.contents = availableInnerWidth;
+                childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
               };
               /*
                 * If child has no defined size in the cross axis and is set to stretch, set the cross
