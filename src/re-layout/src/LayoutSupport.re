@@ -181,7 +181,7 @@ let rec theNullNode = {
     lastHeight: 0.0,
     lastTop: 0.0,
     lastLeft: 0.0,
-    computedFlexBasis: 0.0,
+    computedFlexBasis: cssUndefined,
     left: 0.0,
     top: 0.0,
     right: 0.0,
@@ -215,10 +215,6 @@ let rec createNode context => {
   let rec retNode = {
     ...theNullNode,
     children: [||],
-    /**
-     * This is just a bad idea. It's very difficult to ensure that the getter
-     * is updated every time you update a node functionally using {...node..}.
-     */
     style: {...theNullNode.style, overflow: CSS_OVERFLOW_VISIBLE},
     layout: {...theNullNode.layout, direction: CSS_DIRECTION_INHERIT},
     context
@@ -580,6 +576,7 @@ let isLeadingPosDefinedWithFallback node axis =>
 let isTrailingPosDefinedWithFallback node axis =>
   isRowDirection axis && not (isUndefined node.style.endd) ||
   not (isUndefined (styleTrailingPositionForAxis node axis));
+
 
 /**
  * The C implementation calls this `getLeadingPosition`.

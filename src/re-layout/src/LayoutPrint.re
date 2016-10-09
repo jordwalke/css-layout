@@ -147,6 +147,9 @@ let rec printCssNodeRec (node, options, level) => {
     ) {
       indent (level + 2);
       Printf.printf "overflow: 'visible',\n"
+    } else {
+      indent (level + 2);
+      Printf.printf "overflow: 'scroll',\n"
     };
     print_number_0 (level + 2, "marginLeft", node.style.marginLeft);
     print_number_0 (level + 2, "marginRight", node.style.marginRight);

@@ -497,8 +497,10 @@ and layoutNodeImpl
           } else if (
             !(isUndefined child.contents.style.flexBasis) && !(isUndefined availableInnerMainDim)
           ) {
-            child.contents.layout.computedFlexBasis =
-              fmaxf child.contents.style.flexBasis (getPaddingAndBorderAxis child.contents mainAxis)
+            if (isUndefined child.contents.layout.computedFlexBasis) {
+              child.contents.layout.computedFlexBasis =
+                fmaxf child.contents.style.flexBasis (getPaddingAndBorderAxis child.contents mainAxis)
+            }
           } else {
             childWidth.contents = cssUndefined;
             childHeight.contents = cssUndefined;
@@ -514,12 +516,20 @@ and layoutNodeImpl
                 child.contents.style.height + getMarginAxis child.contents CSS_FLEX_DIRECTION_COLUMN;
               childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
             };
-            if ((!isMainAxisRow && isUndefined childWidth.contents) && !(isUndefined availableInnerWidth)) {
-              childWidth.contents = availableInnerWidth;
-              childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
+            if (
+              !isMainAxisRow && node.style.overflow === CSS_OVERFLOW_SCROLL ||
+              node.style.overflow !== CSS_OVERFLOW_SCROLL
+            ) {
+              if (isUndefined childWidth.contents && !(isUndefined availableInnerWidth)) {
+                childWidth.contents = availableInnerWidth;
+                childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
+              }
             };
-            if (node.style.overflow === CSS_OVERFLOW_HIDDEN) {
-              if ((isMainAxisRow && isUndefined childHeight.contents) && !(isUndefined availableInnerHeight)) {
+            if (
+              isMainAxisRow && node.style.overflow === CSS_OVERFLOW_SCROLL ||
+              node.style.overflow !== CSS_OVERFLOW_SCROLL
+            ) {
+              if (isUndefined childHeight.contents && !(isUndefined availableInnerHeight)) {
                 childHeight.contents = availableInnerHeight;
                 childHeightMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
               }
