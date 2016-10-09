@@ -494,9 +494,8 @@ and layoutNodeImpl
               fmaxf
                 child.contents.style.height
                 (getPaddingAndBorderAxis child.contents CSS_FLEX_DIRECTION_COLUMN)
-          } else if (
-            !(isUndefined child.contents.style.flexBasis) && !(isUndefined availableInnerMainDim)
-          ) {
+          } else if
+            !(isUndefined child.contents.style.flexBasis) {
             child.contents.layout.computedFlexBasis =
               fmaxf child.contents.style.flexBasis (getPaddingAndBorderAxis child.contents mainAxis)
           } else {
