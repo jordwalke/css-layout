@@ -945,7 +945,7 @@ and layoutNodeImpl
             let shouldContinue = {contents: false};
             while (j.contents < childCount && shouldContinue.contents) {
               child.contents = node.children.(j.contents);
-              if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
+              if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
                 if (child.contents.lineIndex !== i) {
                   shouldContinue.contents = false
                 } else if (
@@ -967,16 +967,14 @@ and layoutNodeImpl
             if performLayout {
               for j in startIndex to (endIndex.contents -. 1) {
                 child.contents = node.children.(j);
-                if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
-                  let alignContentAlignItem = getAlignItem node child.contents;
-                  if (alignContentAlignItem === CSS_ALIGN_FLEX_START) {
+                if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
+                  switch (getAlignItem node child.contents) {
+                  | CSS_ALIGN_FLEX_START =>
                     setPosLayoutPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + getLeadingMargin child.contents crossAxis)
-                  } else if (
-                    alignContentAlignItem === CSS_ALIGN_FLEX_END
-                  ) {
+                  | CSS_ALIGN_FLEX_END =>
                     setPosLayoutPositionForAxis
                       child.contents
                       crossAxis
@@ -985,21 +983,18 @@ and layoutNodeImpl
                         getTrailingMargin child.contents crossAxis -
                         layoutMeasuredDimensionForAxis child.contents crossAxis
                       )
-                  } else if (
-                    alignContentAlignItem === CSS_ALIGN_CENTER
-                  ) {
+                  | CSS_ALIGN_CENTER =>
                     childHeight.contents = layoutMeasuredDimensionForAxis child.contents crossAxis;
                     setPosLayoutPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + (lineHeight.contents - childHeight.contents) / 2.0)
-                  } else if (
-                    alignContentAlignItem === CSS_ALIGN_STRETCH
-                  ) {
+                  | CSS_ALIGN_STRETCH =>
                     setPosLayoutPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + getLeadingMargin child.contents crossAxis)
+                  | CSS_ALIGN_AUTO => ()
                   }
                 }
               }
