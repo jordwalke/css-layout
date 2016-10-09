@@ -141,7 +141,7 @@ let rec layoutNodeInternal
   /* may be required to resolve all of the flex dimensions.*/
   /* We handle nodes with measure functions specially here because they are the most*/
   /* expensive to measure, so it's worth avoiding redundant measurements if at all possible.*/
-  if (isMeasureDefined node) {
+  if (node.measure !== dummyMeasure) {
     let marginAxisRow = getMarginAxis node CSS_FLEX_DIRECTION_ROW;
     let marginAxisColumn = getMarginAxis node CSS_FLEX_DIRECTION_COLUMN;
     /* First, try to use the layout cache.*/
@@ -349,7 +349,7 @@ and layoutNodeImpl
   let marginAxisColumn = getMarginAxis node CSS_FLEX_DIRECTION_COLUMN;
   let direction = resolveDirection node parentDirection;
   node.layout.direction = direction;
-  if (isMeasureDefined node) {
+  if (node.measure !== dummyMeasure) {
     let innerWidth = availableWidth - marginAxisRow - paddingAndBorderAxisRow;
     let innerHeight = availableHeight - marginAxisColumn - paddingAndBorderAxisColumn;
     if (widthMeasureMode === CSS_MEASURE_MODE_EXACTLY && heightMeasureMode === CSS_MEASURE_MODE_EXACTLY) {
@@ -442,11 +442,11 @@ and layoutNodeImpl
         }
       };
       if shouldContinue.contents {
-        let mainAxis = resolveAxis (getFlexDirection node) direction;
+        let mainAxis = resolveAxis node.style.flexDirection direction;
         let crossAxis = getCrossFlexDirection mainAxis direction;
         let isMainAxisRow = isRowDirection mainAxis;
         let justifyContent = node.style.justifyContent;
-        let isNodeFlexWrap = isFlexWrap node;
+        let isNodeFlexWrap = node.style.flexWrap === CSS_WRAP;
         let firstAbsoluteChild = {contents: theNullNode};
         let currentAbsoluteChild = {contents: theNullNode};
         let leadingPaddingAndBorderMain = getLeadingPaddingAndBorder node mainAxis;

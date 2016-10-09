@@ -466,12 +466,6 @@ let resolveAxis axis direction =>
     axis
   };
 
-
-/**
- * Make sure to default to CSS_FLEX_DIRECTION_COLUMN.
- */
-let getFlexDirection node => node.style.flexDirection;
-
 let isRowDirection flexDirection =>
   flexDirection === CSS_FLEX_DIRECTION_ROW || flexDirection === CSS_FLEX_DIRECTION_ROW_REVERSE;
 
@@ -486,8 +480,6 @@ let isFlex node =>
   node.style.positionType === CSS_POSITION_RELATIVE && (
     node.style.flexGrow != 0.0 || node.style.flexShrink != 0.0
   );
-
-let isFlexWrap node => node.style.flexWrap === CSS_WRAP;
 
 let getLeadingMargin node axis =>
   if (isRowDirection axis && not (isUndefined node.style.marginStart)) {
@@ -551,8 +543,6 @@ let getPaddingAndBorderAxis node axis =>
 let getAlignItem node child =>
   child.style.alignSelf !== CSS_ALIGN_AUTO ? child.style.alignSelf : node.style.alignItems;
 
-let getFlexDirection node => node.style.flexDirection;
-
 let resolveAxis flex_direction direction =>
   if (direction === CSS_DIRECTION_RTL) {
     if (flex_direction === CSS_FLEX_DIRECTION_ROW) {
@@ -590,9 +580,6 @@ let isLeadingPosDefinedWithFallback node axis =>
 let isTrailingPosDefinedWithFallback node axis =>
   isRowDirection axis && not (isUndefined node.style.endd) ||
   not (isUndefined (styleTrailingPositionForAxis node axis));
-
-let isMeasureDefined node => node.measure !== dummyMeasure;
-
 
 /**
  * The C implementation calls this `getLeadingPosition`.
@@ -697,7 +684,7 @@ let getRelativePosition node axis =>
  * TODO: A more functional version of this.
  */
 let setPosition node direction => {
-  let mainAxis = resolveAxis (getFlexDirection node) direction;
+  let mainAxis = resolveAxis node.style.flexDirection direction;
   let crossAxis = getCrossFlexDirection mainAxis direction;
   setLayoutLeadingPositionForAxis
     node mainAxis (getLeadingMargin node mainAxis +. getRelativePosition node mainAxis);
