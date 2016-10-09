@@ -956,7 +956,7 @@ and layoutNodeImpl
             let shouldContinue = {contents: false};
             while (j.contents < childCount && shouldContinue.contents) {
               child.contents = node.children.(j.contents);
-              if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
+              if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
                 if (child.contents.lineIndex !== i) {
                   shouldContinue.contents = false
                 } else if (
@@ -978,7 +978,7 @@ and layoutNodeImpl
             if performLayout {
               for j in startIndex to (endIndex.contents -. 1) {
                 child.contents = node.children.(j);
-                if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
+                if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
                   switch (getAlignItem node child.contents) {
                   | CSS_ALIGN_FLEX_START =>
                     setPosLayoutPositionForAxis
