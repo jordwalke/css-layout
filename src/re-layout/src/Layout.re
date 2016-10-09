@@ -1124,18 +1124,6 @@ and layoutNodeImpl
                 childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
               };
               /*
-               * The W3C spec doesn't say anything about the 'overflow' property,
-               * but all major browsers appear to implement the following logic.
-               */
-              if (node.style.overflow === CSS_OVERFLOW_HIDDEN) {
-                if (
-                  (isMainAxisRow && isUndefined childHeight.contents) && !(isUndefined availableInnerHeight)
-                ) {
-                  childHeight.contents = availableInnerHeight;
-                  childHeightMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
-                }
-              };
-              /*
                 * If child has no defined size in the cross axis and is set to stretch, set the cross
                * axis to be measured exactly with the available inner width
                */
