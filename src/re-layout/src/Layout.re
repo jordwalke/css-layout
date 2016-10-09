@@ -761,29 +761,20 @@ and layoutNodeImpl
           if (measureModeMainDim === CSS_MEASURE_MODE_AT_MOST) {
             remainingFreeSpace.contents = 0.0
           };
-          if (justifyContent !== CSS_JUSTIFY_FLEX_START) {
-            if (justifyContent === CSS_JUSTIFY_CENTER) {
-              leadingMainDim.contents = remainingFreeSpace.contents / 2.0
-            } else if (
-              justifyContent === CSS_JUSTIFY_FLEX_END
-            ) {
-              leadingMainDim.contents = remainingFreeSpace.contents
-            } else if (
-              justifyContent === CSS_JUSTIFY_SPACE_BETWEEN
-            ) {
-              remainingFreeSpace.contents = fmaxf remainingFreeSpace.contents 0.0;
-              if (itemsOnLine.contents > 1) {
-                betweenMainDim.contents =
-                  remainingFreeSpace.contents / float_of_int (itemsOnLine.contents -. 1)
-              } else {
-                betweenMainDim.contents = 0.0
-              }
-            } else if (
-              justifyContent === CSS_JUSTIFY_SPACE_AROUND
-            ) {
-              betweenMainDim.contents = remainingFreeSpace.contents / float_of_int itemsOnLine.contents;
-              leadingMainDim.contents = betweenMainDim.contents / 2.0
+          switch justifyContent {
+          | CSS_JUSTIFY_CENTER => leadingMainDim.contents = remainingFreeSpace.contents / 2.0
+          | CSS_JUSTIFY_FLEX_END => leadingMainDim.contents = remainingFreeSpace.contents
+          | CSS_JUSTIFY_SPACE_BETWEEN =>
+            if (itemsOnLine.contents > 1) {
+              betweenMainDim.contents =
+                fmaxf remainingFreeSpace.contents 0.0 / float_of_int (itemsOnLine.contents -. 1)
+            } else {
+              betweenMainDim.contents = 0.0
             }
+          | CSS_JUSTIFY_SPACE_AROUND =>
+            betweenMainDim.contents = remainingFreeSpace.contents / float_of_int itemsOnLine.contents;
+            leadingMainDim.contents = betweenMainDim.contents / 2.0
+          | CSS_JUSTIFY_FLEX_START => ()
           };
           let mainDim = {contents: leadingPaddingAndBorderMain + leadingMainDim.contents};
           let crossDim = {contents: 0.0};
