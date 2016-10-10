@@ -534,6 +534,31 @@ and layoutNodeImpl
                 childHeightMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
               }
             };
+            /*
+             * If child has no defined size in the cross axis and is set to
+             * stretch, set the cross axis to be measured exactly with the
+             * available inner width.
+             */
+            if (
+              !isMainAxisRow &&
+              !(isUndefined availableInnerWidth) &&
+              !(isStyleDimDefined child.contents CSS_FLEX_DIRECTION_ROW) &&
+              widthMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
+              getAlignItem node child.contents === CSS_ALIGN_STRETCH
+            ) {
+              childWidth.contents = availableInnerWidth;
+              childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+            };
+            if (
+              isMainAxisRow &&
+              !(isUndefined availableInnerHeight) &&
+              !(isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN) &&
+              heightMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
+              getAlignItem node child.contents === CSS_ALIGN_STRETCH
+            ) {
+              childHeight.contents = availableInnerHeight;
+              childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+            };
             let _ =
               layoutNodeInternal
                 child.contents
@@ -1005,7 +1030,7 @@ and layoutNodeImpl
                       child.contents
                       crossAxis
                       (currentLead.contents + getLeadingMargin child.contents crossAxis)
-                  | CSS_ALIGN_AUTO => ()
+                  | CSS_ALIGN_AUTO => raise (Invalid_argument "getAlignItem should never return auto")
                   }
                 }
               }
