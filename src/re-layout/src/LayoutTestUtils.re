@@ -8,6 +8,12 @@ let testCount = {contents: 0};
 
 let assertionCount = {contents: 0};
 
+let testFilter = {contents: None};
+
+if (Array.length Sys.argv > 1) {
+  testFilter.contents = Some Sys.argv.(1)
+};
+
 
 /**
  * Number of times to execute tests, and measure time taken.  None implies we
@@ -17,13 +23,22 @@ let benchmarkTimes = None;
 
 let currentTestName = {contents: ""};
 
-let it desc test => {
+let doTest desc test => {
   currentTestName.contents = desc;
   testCount.contents = testCount.contents + 1;
   try (test ()) {
   | e => exceptions.contents = [(desc, e), ...exceptions.contents]
   }
 };
+
+let it desc test =>
+  switch testFilter.contents {
+  | None => doTest desc test
+  | Some s =>
+    if (String.compare desc s === 0) {
+      doTest desc test
+    }
+  };
 
 let displayOutcomes () => {
   let forEachException (desc: string, exc) => {
