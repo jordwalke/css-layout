@@ -821,7 +821,7 @@ and layoutNodeImpl
               isLeadingPosDefinedWithFallback child.contents mainAxis
             ) {
               if performLayout {
-                setPosLayoutPositionForAxis
+                setLayoutLeadingPositionForAxis
                   child.contents
                   mainAxis
                   (
@@ -831,7 +831,7 @@ and layoutNodeImpl
               }
             } else {
               if performLayout {
-                setPosLayoutPositionForAxis
+                setLayoutLeadingPositionForAxis
                   child.contents
                   mainAxis
                   (layoutPosPositionForAxis child.contents mainAxis + mainDim.contents)
@@ -876,7 +876,7 @@ and layoutNodeImpl
               child.contents = node.children.(i);
               if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
                 if (isLeadingPosDefinedWithFallback child.contents crossAxis) {
-                  setPosLayoutPositionForAxis
+                  setLayoutLeadingPositionForAxis
                     child.contents
                     crossAxis
                     (
@@ -885,7 +885,7 @@ and layoutNodeImpl
                       getLeadingMargin child.contents crossAxis
                     )
                 } else {
-                  setPosLayoutPositionForAxis
+                  setLayoutLeadingPositionForAxis
                     child.contents
                     crossAxis
                     (leadingPaddingAndBorderCross + getLeadingMargin child.contents crossAxis)
@@ -939,7 +939,7 @@ and layoutNodeImpl
                     leadingCrossDim.contents = leadingCrossDim.contents + remainingCrossDim
                   }
                 };
-                setPosLayoutPositionForAxis
+                setLayoutLeadingPositionForAxis
                   child.contents
                   crossAxis
                   (
@@ -1006,12 +1006,12 @@ and layoutNodeImpl
                 if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
                   switch (getAlignItem node child.contents) {
                   | CSS_ALIGN_FLEX_START =>
-                    setPosLayoutPositionForAxis
+                    setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + getLeadingMargin child.contents crossAxis)
                   | CSS_ALIGN_FLEX_END =>
-                    setPosLayoutPositionForAxis
+                    setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
                       (
@@ -1021,12 +1021,12 @@ and layoutNodeImpl
                       )
                   | CSS_ALIGN_CENTER =>
                     childHeight.contents = layoutMeasuredDimensionForAxis child.contents crossAxis;
-                    setPosLayoutPositionForAxis
+                    setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + (lineHeight.contents - childHeight.contents) / 2.0)
                   | CSS_ALIGN_STRETCH =>
-                    setPosLayoutPositionForAxis
+                    setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + getLeadingMargin child.contents crossAxis)

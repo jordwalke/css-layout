@@ -394,18 +394,6 @@ let setDimLayoutDimensionForAxis node axis value =>
   | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.width = value
   };
 
-
-/**
- * Pos[] based layout dimension setter.
- */
-let setPosLayoutPositionForAxis node axis value =>
-  switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.top = value
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.bottom = value
-  | CSS_FLEX_DIRECTION_ROW => node.layout.left = value
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.right = value
-  };
-
 let setLayoutMeasuredDimensionForAxis node axis value =>
   switch axis {
   | CSS_FLEX_DIRECTION_COLUMN => node.layout.measuredHeight = value
@@ -447,19 +435,19 @@ let resolveDirection node parentDirection => {
   }
 };
 
-let resolveAxis axis direction =>
+let resolveAxis flex_direction direction =>
   if (direction === CSS_DIRECTION_RTL) {
-    if (axis === CSS_FLEX_DIRECTION_ROW) {
+    if (flex_direction === CSS_FLEX_DIRECTION_ROW) {
       CSS_FLEX_DIRECTION_ROW_REVERSE
     } else if (
-      axis === CSS_FLEX_DIRECTION_ROW_REVERSE
+      flex_direction === CSS_FLEX_DIRECTION_ROW_REVERSE
     ) {
       CSS_FLEX_DIRECTION_ROW
     } else {
-      axis
+      flex_direction
     }
   } else {
-    axis
+    flex_direction
   };
 
 let isRowDirection flexDirection =>
@@ -538,21 +526,6 @@ let getPaddingAndBorderAxis node axis =>
 
 let getAlignItem node child =>
   child.style.alignSelf !== CSS_ALIGN_AUTO ? child.style.alignSelf : node.style.alignItems;
-
-let resolveAxis flex_direction direction =>
-  if (direction === CSS_DIRECTION_RTL) {
-    if (flex_direction === CSS_FLEX_DIRECTION_ROW) {
-      CSS_FLEX_DIRECTION_ROW_REVERSE
-    } else if (
-      flex_direction === CSS_FLEX_DIRECTION_ROW_REVERSE
-    ) {
-      CSS_FLEX_DIRECTION_ROW
-    } else {
-      flex_direction
-    }
-  } else {
-    flex_direction
-  };
 
 let getDimWithMargin node axis =>
   layoutMeasuredDimensionForAxis node axis +. getLeadingMargin node axis +. getTrailingMargin node axis;
@@ -685,16 +658,10 @@ let setPosition node direction => {
   let crossAxis = getCrossFlexDirection mainAxis direction;
   setLayoutLeadingPositionForAxis
     node mainAxis (getLeadingMargin node mainAxis +. getRelativePosition node mainAxis);
-  /* node.layout.position[trailing[mainAxis]] = getTrailingMargin(node, mainAxis) +. */
-  /*   getRelativePosition(node, mainAxis); */
   setLayoutTrailingPositionForAxis
     node mainAxis (getTrailingMargin node mainAxis +. getRelativePosition node mainAxis);
-  /* node.layout.position[leading[crossAxis]] = getLeadingMargin(node, crossAxis) +. */
-  /*   getRelativePosition(node, crossAxis); */
   setLayoutLeadingPositionForAxis
     node crossAxis (getLeadingMargin node crossAxis +. getRelativePosition node crossAxis);
-  /* node.layout.position[trailing[crossAxis]] = getTrailingMargin(node, crossAxis) +. */
-  /*   getRelativePosition(node, crossAxis); */
   setLayoutTrailingPositionForAxis
     node crossAxis (getTrailingMargin node crossAxis +. getRelativePosition node crossAxis)
 };
