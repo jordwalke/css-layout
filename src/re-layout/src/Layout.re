@@ -511,6 +511,10 @@ and layoutNodeImpl
                 child.contents.style.width + getMarginAxis child.contents CSS_FLEX_DIRECTION_ROW;
               childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
             };
+
+            /**
+             * Why can't this just be inlined to .height !== cssUndefined.
+             */
             if (isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN) {
               childHeight.contents =
                 child.contents.style.height + getMarginAxis child.contents CSS_FLEX_DIRECTION_COLUMN;
@@ -664,7 +668,7 @@ and layoutNodeImpl
                     boundAxis currentRelativeChild.contents mainAxis baseMainSize.contents;
                   if (baseMainSize.contents != boundMainSize.contents) {
                     deltaFreeSpace.contents =
-                      deltaFreeSpace.contents - boundMainSize.contents - childFlexBasis.contents;
+                      deltaFreeSpace.contents - (boundMainSize.contents - childFlexBasis.contents);
                     deltaFlexShrinkScaledFactors.contents =
                       deltaFlexShrinkScaledFactors.contents - flexShrinkScaledFactor.contents
                   }
@@ -681,7 +685,7 @@ and layoutNodeImpl
                     boundAxis currentRelativeChild.contents mainAxis baseMainSize.contents;
                   if (baseMainSize.contents != boundMainSize.contents) {
                     deltaFreeSpace.contents =
-                      deltaFreeSpace.contents - boundMainSize.contents - childFlexBasis.contents;
+                      deltaFreeSpace.contents - (boundMainSize.contents - childFlexBasis.contents);
                     deltaFlexGrowFactors.contents = deltaFlexGrowFactors.contents - flexGrowFactor.contents
                   }
                 }
@@ -727,7 +731,7 @@ and layoutNodeImpl
                 }
               };
               deltaFreeSpace.contents =
-                deltaFreeSpace.contents - updatedMainSize.contents - childFlexBasis.contents;
+                deltaFreeSpace.contents - (updatedMainSize.contents - childFlexBasis.contents);
               if isMainAxisRow {
                 childWidth.contents =
                   updatedMainSize.contents +
