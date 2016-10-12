@@ -2,17 +2,17 @@ let align_items_stretch = "align_items_stretch";
 
 let align_items_center = "align_items_center";
 
-let align_items_flex_start = "align_items_flex_start";
+let align_items_flex_left = "align_items_flex_left";
 
-let align_items_flex_end = "align_items_flex_end";
+let align_items_flex_right = "align_items_flex_right";
 
 let align_self_center = "align_self_center";
 
-let align_self_flex_end = "align_self_flex_end";
+let align_self_flex_right = "align_self_flex_right";
 
-let align_self_flex_start = "align_self_flex_start";
+let align_self_flex_left = "align_self_flex_left";
 
-let align_self_flex_end_override_flex_start = "align_self_flex_end_override_flex_start";
+let align_self_flex_right_override_flex_left = "align_self_flex_right_override_flex_left";
 
 let border_no_size = "border_no_size";
 
@@ -34,13 +34,13 @@ let padding_stretch_child = "padding_stretch_child";
 
 let padding_center_child = "padding_center_child";
 
-let absolute_layout_width_height_start_top = "absolute_layout_width_height_start_top";
+let absolute_layout_width_height_left_top = "absolute_layout_width_height_left_top";
 
-let absolute_layout_width_height_end_bottom = "absolute_layout_width_height_end_bottom";
+let absolute_layout_width_height_right_bottom = "absolute_layout_width_height_right_bottom";
 
-let absolute_layout_start_top_end_bottom = "absolute_layout_start_top_end_bottom";
+let absolute_layout_left_top_right_bottom = "absolute_layout_left_top_right_bottom";
 
-let absolute_layout_width_height_start_top_end_bottom = "absolute_layout_width_height_start_top_end_bottom";
+let absolute_layout_width_height_left_top_right_bottom = "absolute_layout_width_height_left_top_right_bottom";
 
 let do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent = "do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent";
 
@@ -60,13 +60,13 @@ let wrap_column = "wrap_column";
 
 let wrap_row = "wrap_row";
 
-let wrap_row_align_items_flex_end = "wrap_row_align_items_flex_end";
+let wrap_row_align_items_flex_right = "wrap_row_align_items_flex_right";
 
 let wrap_row_align_items_center = "wrap_row_align_items_center";
 
-let margin_start = "margin_start";
+let margin_left = "margin_left";
 
-let margin_end = "margin_end";
+let margin_right = "margin_right";
 
 let margin_left = "margin_left";
 
@@ -76,17 +76,17 @@ let margin_right = "margin_right";
 
 let margin_bottom = "margin_bottom";
 
-let align_content_flex_start = "align_content_flex_start";
+let align_content_flex_left = "align_content_flex_left";
 
-let align_content_flex_end = "align_content_flex_end";
+let align_content_flex_right = "align_content_flex_right";
 
 let align_content_center = "align_content_center";
 
 let align_content_stretch = "align_content_stretch";
 
-let justify_content_row_flex_start = "justify_content_row_flex_start";
+let justify_content_row_flex_left = "justify_content_row_flex_left";
 
-let justify_content_row_flex_end = "justify_content_row_flex_end";
+let justify_content_row_flex_right = "justify_content_row_flex_right";
 
 let justify_content_row_center = "justify_content_row_center";
 
@@ -94,9 +94,9 @@ let justify_content_row_space_between = "justify_content_row_space_between";
 
 let justify_content_row_space_around = "justify_content_row_space_around";
 
-let justify_content_column_flex_start = "justify_content_column_flex_start";
+let justify_content_column_flex_left = "justify_content_column_flex_left";
 
-let justify_content_column_flex_end = "justify_content_column_flex_end";
+let justify_content_column_flex_right = "justify_content_column_flex_right";
 
 let justify_content_column_center = "justify_content_column_center";
 
@@ -153,11 +153,11 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
- <div id="align_items_flex_start" style="width: 100px; height: 100px; align-items: flex-start;">
+ <div id="align_items_flex_left" style="width: 100px; height: 100px; align-items: flex-start;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
- <div id="align_items_flex_end" style="width: 100px; height: 100px; align-items: flex-end;">
+ <div id="align_items_flex_right" style="width: 100px; height: 100px; align-items: flex-end;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
@@ -165,15 +165,15 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="height: 10px; width: 10px; align-self: center;"></div>
  </div>
 
- <div id="align_self_flex_end" style="width:100px; height: 100px;">
+ <div id="align_self_flex_right" style="width:100px; height: 100px;">
    <div style="height: 10px; width: 10px; align-self: flex-end;"></div>
  </div>
 
- <div id="align_self_flex_start" style="width:100px; height: 100px;">
+ <div id="align_self_flex_left" style="width:100px; height: 100px;">
    <div style="height: 10px; width: 10px; align-self: flex-start;"></div>
  </div>
 
- <div id="align_self_flex_end_override_flex_start" style="width:100px; height: 100px; align-items: flex-start;">
+ <div id="align_self_flex_right_override_flex_left" style="width:100px; height: 100px; align-items: flex-start;">
    <div style="height: 10px; width: 10px; align-self: flex-end;"></div>
  </div>
 
@@ -188,7 +188,7 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="height: 10px;"></div>
  </div>
 
- <div id="border_center_child" style="width: 100px; height: 100px; border-start-width: 10px; border-top-width: 10; border-end-width: 20px; border-bottom-width: 20px; align-items: center; justify-content: center;">
+ <div id="border_center_child" style="width: 100px; height: 100px; -webkit-border-left-width: 10px; border-top-width: 10px; -webkit-border-right-width: 20px; border-bottom-width: 20px; align-items: center; justify-content: center;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
@@ -211,28 +211,28 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="height: 10px;"></div>
  </div>
 
- <div id="padding_center_child" style="width: 100px; height: 100px; padding-start: 10px; padding-top: 10; padding-end: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
+ <div id="padding_center_child" style="width: 100px; height: 100px; -webkit-padding-left: 10px; padding-top: 10px; -webkit-padding-right: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
- <div id="absolute_layout_width_height_start_top" style="width: 100px; height: 100px;">
-   <div style="width:10px; height: 10px; position: absolute; start: 10px; top: 10px;"></div>
+ <div id="absolute_layout_width_height_left_top" style="width: 100px; height: 100px;">
+   <div style="width:10px; height: 10px; position: absolute; left: 10px; top: 10px;"></div>
  </div>
 
- <div id="absolute_layout_width_height_end_bottom" style="width: 100px; height: 100px;">
-   <div style="width:10px; height: 10px; position: absolute; end: 10px; bottom: 10px;"></div>
+ <div id="absolute_layout_width_height_right_bottom" style="width: 100px; height: 100px;">
+   <div style="width:10px; height: 10px; position: absolute; right: 10px; bottom: 10px;"></div>
  </div>
 
- <div id="absolute_layout_start_top_end_bottom" style="width: 100px; height: 100px;">
-   <div style="position: absolute; start: 10px; top: 10px; end: 10px; bottom: 10px;"></div>
+ <div id="absolute_layout_left_top_right_bottom" style="width: 100px; height: 100px;">
+   <div style="position: absolute; left: 10px; top: 10px; right: 10px; bottom: 10px;"></div>
  </div>
 
- <div id="absolute_layout_width_height_start_top_end_bottom" style="width: 100px; height: 100px;">
-   <div style="width:10px; height: 10px; position: absolute; start: 10px; top: 10px; end: 10px; bottom: 10px;"></div>
+ <div id="absolute_layout_width_height_left_top_right_bottom" style="width: 100px; height: 100px;">
+   <div style="width:10px; height: 10px; position: absolute; left: 10px; top: 10px; right: 10px; bottom: 10px;"></div>
  </div>
 
  <div id="do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent" style="height: 50px; width: 50px; overflow: hidden; flex-direction: row;">
-   <div style="position: absolute; start: 0; top: 0;">
+   <div style="position: absolute; left: 0; top: 0;">
      <div style="width: 100px; height: 100px;"></div>
    </div>
  </div>
@@ -287,7 +287,7 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="height: 30px; width: 30px;"></div>
  </div>
 
- <div id="wrap_row_align_items_flex_end" style="width: 100px; flex-direction: row; flex-wrap: wrap; align-items: flex-end;">
+ <div id="wrap_row_align_items_flex_right" style="width: 100px; flex-direction: row; flex-wrap: wrap; align-items: flex-end;">
    <div style="height: 10px; width: 30px;"></div>
    <div style="height: 20px; width: 30px;"></div>
    <div style="height: 30px; width: 30px;"></div>
@@ -301,12 +301,12 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="height: 30px; width: 30px;"></div>
  </div>
 
- <div id="margin_start" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="width: 10px; margin-start: 10px;"></div>
+ <div id="margin_left" style="width: 100px; height: 100px; flex-direction: row;">
+   <div style="width: 10px; -webkit-margin-left: 10px;"></div>
  </div>
 
- <div id="margin_end" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
-   <div style="width: 10px; margin-end: 10px;"></div>
+ <div id="margin_right" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
+   <div style="width: 10px; -webkit-margin-right: 10px;"></div>
  </div>
 
  <div id="margin_left" style="width: 100px; height: 100px; flex-direction: row;">
@@ -325,7 +325,7 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="height: 10px; margin-bottom: 10px;"></div>
  </div>
 
- <div id="align_content_flex_start" style="width: 100px; height: 100px; flex-wrap: wrap; flex-direction: column; align-content: flex-start;">
+ <div id="align_content_flex_left" style="width: 100px; height: 100px; flex-wrap: wrap; flex-direction: column; align-content: flex-start;">
    <div style="width: 50px; height: 10px;"></div>
    <div style="width: 50px; height: 10px;"></div>
    <div style="width: 50px; height: 10px;"></div>
@@ -333,7 +333,7 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="width: 50px; height: 10px;"></div>
  </div>
 
- <div id="align_content_flex_end" style="width: 100px; height: 100px; flex-wrap: wrap; flex-direction: column; align-content: flex-end;">
+ <div id="align_content_flex_right" style="width: 100px; height: 100px; flex-wrap: wrap; flex-direction: column; align-content: flex-end;">
    <div style="width: 50px; height: 10px;"></div>
    <div style="width: 50px; height: 10px;"></div>
    <div style="width: 50px; height: 10px;"></div>
@@ -357,13 +357,13 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="width: 50px;"></div>
  </div>
 
- <div id="justify_content_row_flex_start" style="width: 102px; height: 102px; flex-direction: row; justify-content: flex-start;">
+ <div id="justify_content_row_flex_left" style="width: 102px; height: 102px; flex-direction: row; justify-content: flex-start;">
    <div style="width: 10px;"></div>
    <div style="width: 10px;"></div>
    <div style="width: 10px;"></div>
  </div>
 
- <div id="justify_content_row_flex_end" style="width: 102px; height: 102px; flex-direction: row; justify-content: flex-end;">
+ <div id="justify_content_row_flex_right" style="width: 102px; height: 102px; flex-direction: row; justify-content: flex-end;">
    <div style="width: 10px;"></div>
    <div style="width: 10px;"></div>
    <div style="width: 10px;"></div>
@@ -387,13 +387,13 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="width: 10px;"></div>
  </div>
 
- <div id="justify_content_column_flex_start" style="width: 102px; height: 102px; justify-content: flex-start;">
+ <div id="justify_content_column_flex_left" style="width: 102px; height: 102px; justify-content: flex-start;">
    <div style="height: 10px;"></div>
    <div style="heigth: 10px;"></div>
    <div style="height: 10px;"></div>
  </div>
 
- <div id="justify_content_column_flex_end" style="width: 102px; height: 102px; justify-content: flex-end;">
+ <div id="justify_content_column_flex_right" style="width: 102px; height: 102px; justify-content: flex-end;">
    <div style="height: 10px;"></div>
    <div style="height: 10px;"></div>
    <div style="height: 10px;"></div>
@@ -436,28 +436,28 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
  </div>
 
  <div id="margin_and_flex_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="margin-start: 10px; margin-end; 10px; flex-grow: 1;"></div>
+   <div style="-webkit-margin-left: 10px; -webkit-margin-right: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_and_flex_column" style="width: 100px; height: 100px;">
-   <div style="margin-top: 10px; margin-bottom; 10px; flex-grow: 1;"></div>
+   <div style="margin-top: 10px; margin-bottom: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_and_stretch_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="margin-top: 10px; margin-bottom; 10px; flex-grow: 1;"></div>
+   <div style="margin-top: 10px; margin-bottom: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_and_stretch_column" style="width: 100px; height: 100px;">
-   <div style="margin-start: 10px; margin-end; 10px; flex-grow: 1;"></div>
+   <div style="-webkit-margin-left: 10px; -webkit-margin-right: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_with_sibling_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="margin-end; 10px; flex-grow: 1;"></div>
+   <div style="-webkit-margin-right: 10px; flex-grow: 1;"></div>
    <div style="flex-grow: 1;"></div>
  </div>
 
  <div id="margin_with_sibling_column" style="width: 100px; height: 100px;">
-   <div style="margin-bottom; 10px; flex-grow: 1;"></div>
+   <div style="margin-bottom: 10px; flex-grow: 1;"></div>
    <div style="flex-grow: 1;"></div>
  </div>
 
@@ -539,7 +539,7 @@ for ii in 0 to times {
       }
     );
   it
-    align_items_flex_start
+    align_items_flex_left
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -563,7 +563,7 @@ for ii in 0 to times {
       }
     );
   it
-    align_items_flex_end
+    align_items_flex_right
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -611,7 +611,7 @@ for ii in 0 to times {
       }
     );
   it
-    align_self_flex_end
+    align_self_flex_right
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -635,7 +635,7 @@ for ii in 0 to times {
       }
     );
   it
-    align_self_flex_start
+    align_self_flex_left
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -659,7 +659,7 @@ for ii in 0 to times {
       }
     );
   it
-    align_self_flex_end_override_flex_start
+    align_self_flex_right_override_flex_left
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -692,7 +692,7 @@ for ii in 0 to times {
         let root = LayoutSupport.createNode ();
         let root = {
           ...root,
-          style: {...root.style, borderLeft: 10.0, borderTop: 10.0, borderRight: 10.0, borderBottom: 10.0}
+          style: {...root.style, borderTop: 10.0, borderBottom: 10.0, borderLeft: 10.0, borderRight: 10.0}
         };
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts 16 ({...root.layout, top: 0.0, left: 0.0, width: 20.0, height: 20.0}, root.layout) [];
@@ -707,7 +707,7 @@ for ii in 0 to times {
         let root = LayoutSupport.createNode ();
         let root = {
           ...root,
-          style: {...root.style, borderLeft: 10.0, borderTop: 10.0, borderRight: 10.0, borderBottom: 10.0}
+          style: {...root.style, borderTop: 10.0, borderBottom: 10.0, borderLeft: 10.0, borderRight: 10.0}
         };
         let root_child0 = LayoutSupport.createNode ();
         let root_child0 = {...root_child0, style: {...root_child0.style, width: 10.0, height: 10.0}};
@@ -733,12 +733,12 @@ for ii in 0 to times {
           ...root,
           style: {
             ...root.style,
-            borderLeft: 10.0,
             borderTop: 10.0,
-            borderRight: 10.0,
             borderBottom: 10.0,
             width: 100.0,
-            height: 100.0
+            height: 100.0,
+            borderLeft: 10.0,
+            borderRight: 10.0
           }
         };
         let root_child0 = LayoutSupport.createNode ();
@@ -767,8 +767,7 @@ for ii in 0 to times {
             ...root.style,
             justifyContent: CSS_JUSTIFY_CENTER,
             alignItems: CSS_ALIGN_CENTER,
-            borderLeft: 10.0,
-            borderRight: 20.0,
+            borderTop: 10.0,
             borderBottom: 20.0,
             width: 100.0,
             height: 100.0
@@ -781,12 +780,12 @@ for ii in 0 to times {
         assertLayouts
           22
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 35.0, left: 40.0, width: 10.0, height: 10.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 40.0, left: 45.0, width: 10.0, height: 10.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           23
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 35.0, left: 50.0, width: 10.0, height: 10.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 40.0, left: 45.0, width: 10.0, height: 10.0}, root_child0.layout)]
       }
     );
   it
@@ -843,10 +842,10 @@ for ii in 0 to times {
           ...root,
           style: {
             ...root.style,
-            paddingLeft: 10.0,
             paddingTop: 10.0,
-            paddingRight: 10.0,
-            paddingBottom: 10.0
+            paddingBottom: 10.0,
+            paddingLeft: 10.0,
+            paddingRight: 10.0
           }
         };
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
@@ -864,10 +863,10 @@ for ii in 0 to times {
           ...root,
           style: {
             ...root.style,
-            paddingLeft: 10.0,
             paddingTop: 10.0,
-            paddingRight: 10.0,
-            paddingBottom: 10.0
+            paddingBottom: 10.0,
+            paddingLeft: 10.0,
+            paddingRight: 10.0
           }
         };
         let root_child0 = LayoutSupport.createNode ();
@@ -894,12 +893,12 @@ for ii in 0 to times {
           ...root,
           style: {
             ...root.style,
-            paddingLeft: 10.0,
             paddingTop: 10.0,
-            paddingRight: 10.0,
             paddingBottom: 10.0,
             width: 100.0,
-            height: 100.0
+            height: 100.0,
+            paddingLeft: 10.0,
+            paddingRight: 10.0
           }
         };
         let root_child0 = LayoutSupport.createNode ();
@@ -928,8 +927,7 @@ for ii in 0 to times {
             ...root.style,
             justifyContent: CSS_JUSTIFY_CENTER,
             alignItems: CSS_ALIGN_CENTER,
-            paddingLeft: 10.0,
-            paddingRight: 20.0,
+            paddingTop: 10.0,
             paddingBottom: 20.0,
             width: 100.0,
             height: 100.0
@@ -942,16 +940,16 @@ for ii in 0 to times {
         assertLayouts
           34
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 35.0, left: 40.0, width: 10.0, height: 10.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 40.0, left: 45.0, width: 10.0, height: 10.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           35
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 35.0, left: 50.0, width: 10.0, height: 10.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 40.0, left: 45.0, width: 10.0, height: 10.0}, root_child0.layout)]
       }
     );
   it
-    absolute_layout_width_height_start_top
+    absolute_layout_width_height_left_top
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -962,8 +960,8 @@ for ii in 0 to times {
           style: {
             ...root_child0.style,
             positionType: CSS_POSITION_ABSOLUTE,
-            left: 10.0,
             top: 10.0,
+            left: 10.0,
             width: 10.0,
             height: 10.0
           }
@@ -982,7 +980,7 @@ for ii in 0 to times {
       }
     );
   it
-    absolute_layout_width_height_end_bottom
+    absolute_layout_width_height_right_bottom
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -993,8 +991,8 @@ for ii in 0 to times {
           style: {
             ...root_child0.style,
             positionType: CSS_POSITION_ABSOLUTE,
-            right: 10.0,
             bottom: 10.0,
+            right: 10.0,
             width: 10.0,
             height: 10.0
           }
@@ -1013,7 +1011,7 @@ for ii in 0 to times {
       }
     );
   it
-    absolute_layout_start_top_end_bottom
+    absolute_layout_left_top_right_bottom
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1024,10 +1022,10 @@ for ii in 0 to times {
           style: {
             ...root_child0.style,
             positionType: CSS_POSITION_ABSOLUTE,
-            left: 10.0,
             top: 10.0,
-            right: 10.0,
-            bottom: 10.0
+            bottom: 10.0,
+            left: 10.0,
+            right: 10.0
           }
         };
         LayoutSupport.insertChild root root_child0 0;
@@ -1044,7 +1042,7 @@ for ii in 0 to times {
       }
     );
   it
-    absolute_layout_width_height_start_top_end_bottom
+    absolute_layout_width_height_left_top_right_bottom
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1055,10 +1053,10 @@ for ii in 0 to times {
           style: {
             ...root_child0.style,
             positionType: CSS_POSITION_ABSOLUTE,
-            left: 10.0,
             top: 10.0,
-            right: 10.0,
             bottom: 10.0,
+            left: 10.0,
+            right: 10.0,
             width: 10.0,
             height: 10.0
           }
@@ -1446,7 +1444,7 @@ for ii in 0 to times {
       }
     );
   it
-    wrap_row_align_items_flex_end
+    wrap_row_align_items_flex_right
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1544,7 +1542,7 @@ for ii in 0 to times {
       }
     );
   it
-    margin_start
+    margin_left
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1553,22 +1551,22 @@ for ii in 0 to times {
           style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
         };
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, marginLeft: 10.0, width: 10.0}};
+        let root_child0 = {...root_child0, style: {...root_child0.style, width: 10.0}};
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
           68
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 10.0, width: 10.0, height: 100.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 100.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           69
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 80.0, width: 10.0, height: 100.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 0.0, left: 90.0, width: 10.0, height: 100.0}, root_child0.layout)]
       }
     );
   it
-    margin_end
+    margin_right
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1583,18 +1581,18 @@ for ii in 0 to times {
           }
         };
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, marginRight: 10.0, width: 10.0}};
+        let root_child0 = {...root_child0, style: {...root_child0.style, width: 10.0}};
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
           70
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 80.0, width: 10.0, height: 100.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 0.0, left: 90.0, width: 10.0, height: 100.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           71
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 10.0, width: 10.0, height: 100.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 100.0}, root_child0.layout)]
       }
     );
   it
@@ -1607,7 +1605,7 @@ for ii in 0 to times {
           style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
         };
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, marginLeft: 10.0, width: 10.0}};
+        let root_child0 = {...root_child0, style: {...root_child0.style, width: 10.0, marginLeft: 10.0}};
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
@@ -1658,7 +1656,7 @@ for ii in 0 to times {
           }
         };
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, marginRight: 10.0, width: 10.0}};
+        let root_child0 = {...root_child0, style: {...root_child0.style, width: 10.0, marginRight: 10.0}};
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
@@ -1697,7 +1695,7 @@ for ii in 0 to times {
       }
     );
   it
-    align_content_flex_start
+    align_content_flex_left
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1751,7 +1749,7 @@ for ii in 0 to times {
       }
     );
   it
-    align_content_flex_end
+    align_content_flex_right
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1913,7 +1911,7 @@ for ii in 0 to times {
       }
     );
   it
-    justify_content_row_flex_start
+    justify_content_row_flex_left
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -1951,7 +1949,7 @@ for ii in 0 to times {
       }
     );
   it
-    justify_content_row_flex_end
+    justify_content_row_flex_right
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -2127,7 +2125,7 @@ for ii in 0 to times {
       }
     );
   it
-    justify_content_column_flex_start
+    justify_content_column_flex_left
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -2161,7 +2159,7 @@ for ii in 0 to times {
       }
     );
   it
-    justify_content_column_flex_end
+    justify_content_column_flex_right
     (
       fun () => {
         let root = LayoutSupport.createNode ();
@@ -2321,12 +2319,12 @@ for ii in 0 to times {
           ...root,
           style: {
             ...root.style,
-            borderLeft: 10.0,
             borderTop: 10.0,
-            borderRight: 10.0,
             borderBottom: 10.0,
             width: 100.0,
-            height: 100.0
+            height: 100.0,
+            borderLeft: 10.0,
+            borderRight: 10.0
           }
         };
         let root_child0 = LayoutSupport.createNode ();
@@ -2416,12 +2414,12 @@ for ii in 0 to times {
           ...root,
           style: {
             ...root.style,
-            paddingLeft: 10.0,
             paddingTop: 10.0,
-            paddingRight: 10.0,
             paddingBottom: 10.0,
             width: 100.0,
-            height: 100.0
+            height: 100.0,
+            paddingLeft: 10.0,
+            paddingRight: 10.0
           }
         };
         let root_child0 = LayoutSupport.createNode ();
@@ -2449,18 +2447,18 @@ for ii in 0 to times {
           style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
         };
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginLeft: 10.0}};
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0}};
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
           116
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 10.0, width: 90.0, height: 100.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           117
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 0.0, width: 90.0, height: 100.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root_child0.layout)]
       }
     );
   it
@@ -2470,18 +2468,21 @@ for ii in 0 to times {
         let root = LayoutSupport.createNode ();
         let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginTop: 10.0}};
+        let root_child0 = {
+          ...root_child0,
+          style: {...root_child0.style, flexGrow: 1.0, marginTop: 10.0, marginBottom: 10.0}
+        };
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
           118
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           119
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout)]
       }
     );
   it
@@ -2494,18 +2495,21 @@ for ii in 0 to times {
           style: {...root.style, flexDirection: CSS_FLEX_DIRECTION_ROW, width: 100.0, height: 100.0}
         };
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginTop: 10.0}};
+        let root_child0 = {
+          ...root_child0,
+          style: {...root_child0.style, flexGrow: 1.0, marginTop: 10.0, marginBottom: 10.0}
+        };
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
           120
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           121
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 90.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout)]
       }
     );
   it
@@ -2515,18 +2519,18 @@ for ii in 0 to times {
         let root = LayoutSupport.createNode ();
         let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginLeft: 10.0}};
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0}};
         LayoutSupport.insertChild root root_child0 0;
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
           122
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 10.0, width: 90.0, height: 100.0}, root_child0.layout)];
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root_child0.layout)];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           123
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
-          [({...root_child0.layout, top: 0.0, left: 0.0, width: 90.0, height: 100.0}, root_child0.layout)]
+          [({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root_child0.layout)]
       }
     );
   it
@@ -2569,7 +2573,7 @@ for ii in 0 to times {
         let root = LayoutSupport.createNode ();
         let root = {...root, style: {...root.style, width: 100.0, height: 100.0}};
         let root_child0 = LayoutSupport.createNode ();
-        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0}};
+        let root_child0 = {...root_child0, style: {...root_child0.style, flexGrow: 1.0, marginBottom: 10.0}};
         LayoutSupport.insertChild root root_child0 0;
         let root_child1 = LayoutSupport.createNode ();
         let root_child1 = {...root_child1, style: {...root_child1.style, flexGrow: 1.0}};
@@ -2579,16 +2583,16 @@ for ii in 0 to times {
           126
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
-            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
-            ({...root_child1.layout, top: 50.0, left: 0.0, width: 100.0, height: 50.0}, root_child1.layout)
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 45.0}, root_child0.layout),
+            ({...root_child1.layout, top: 55.0, left: 0.0, width: 100.0, height: 45.0}, root_child1.layout)
           ];
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           127
           ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
           [
-            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 50.0}, root_child0.layout),
-            ({...root_child1.layout, top: 50.0, left: 0.0, width: 100.0, height: 50.0}, root_child1.layout)
+            ({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 45.0}, root_child0.layout),
+            ({...root_child1.layout, top: 55.0, left: 0.0, width: 100.0, height: 45.0}, root_child1.layout)
           ]
       }
     );

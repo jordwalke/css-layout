@@ -291,42 +291,78 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
    * `-webkit-margin-end/start`.
    */
   if (node.computedStyleForKebabs['-webkit-margin-end'] && node.rawStyle.indexOf('-webkit-margin-end') !== -1) {
-    styleLines.push('marginEnd: ' + pixelValue(node.computedStyleForKebabs['-webkit-margin-end']));
+    let val = node.computedStyleForKebabs['-webkit-margin-end'];
+    if (val !== '0px') {
+      styleLines.push('marginEnd: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['-webkit-margin-start'] && node.rawStyle.indexOf('-webkit-margin-start') !== -1) {
-    styleLines.push('marginStart: ' + pixelValue(node.computedStyleForKebabs['-webkit-margin-start']));
+    let val = node.computedStyleForKebabs['-webkit-margin-start'];
+    if (val !== '0px') {
+      styleLines.push('marginStart: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['margin-left'] && node.rawStyle.indexOf('-webkit-margin') === -1) {
-    styleLines.push('marginLeft: ' + pixelValue(node.computedStyleForKebabs['margin-left']));
+    let val = node.computedStyleForKebabs['margin-left'];
+    if (val !== '0px') {
+      styleLines.push('marginLeft: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['margin-right'] && node.rawStyle.indexOf('-webkit-margin') === -1) {
-    styleLines.push('marginRight: ' + pixelValue(node.computedStyleForKebabs['margin-right']));
+    let val = node.computedStyleForKebabs['margin-right'];
+    if (val !== '0px') {
+      styleLines.push('marginRight: ' + pixelValue(val));
+    }
   }
 
   if (node.computedStyleForKebabs['-webkit-padding-end'] && node.rawStyle.indexOf('-webkit-padding-end') !== -1) {
-    styleLines.push('paddingEnd: ' + pixelValue(node.computedStyleForKebabs['-webkit-padding-end']));
+    let val = node.computedStyleForKebabs['-webkit-padding-end'];
+    if (val !== '0px') {
+      styleLines.push('paddingEnd: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['-webkit-padding-start'] && node.rawStyle.indexOf('-webkit-padding-start') !== -1) {
-    styleLines.push('paddingStart: ' + pixelValue(node.computedStyleForKebabs['-webkit-padding-start']));
+    let val = node.computedStyleForKebabs['-webkit-padding-start'];
+    if (val !== '0px') {
+      styleLines.push('paddingStart: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['padding-left'] && node.rawStyle.indexOf('-webkit-padding') === -1) {
-    styleLines.push('paddingLeft: ' + pixelValue(node.computedStyleForKebabs['padding-left']));
+    let val = node.computedStyleForKebabs['padding-left'];
+    if (val !== '0px') {
+      styleLines.push('paddingLeft: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['padding-right'] && node.rawStyle.indexOf('-webkit-padding') === -1) {
-    styleLines.push('paddingRight: ' + pixelValue(node.computedStyleForKebabs['padding-right']));
+    let val = node.computedStyleForKebabs['padding-right'];
+    if (val !== '0px') {
+      styleLines.push('paddingRight: ' + pixelValue(val));
+    }
   }
 
   if (node.computedStyleForKebabs['-webkit-border-end-width'] && node.rawStyle.indexOf('-webkit-border-end-width') !== -1) {
-    styleLines.push('borderEnd: ' + pixelValue(node.computedStyleForKebabs['-webkit-border-end-width']));
+    let val = node.computedStyleForKebabs['-webkit-border-end-width'];
+    if (val !== '0px') {
+      styleLines.push('borderEnd: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['-webkit-border-start-width'] && node.rawStyle.indexOf('-webkit-border-start-width') !== -1) {
-    styleLines.push('borderStart: ' + pixelValue(node.computedStyleForKebabs['-webkit-border-start-width']));
+    let val = node.computedStyleForKebabs['-webkit-border-start-width'];
+    if (val !== '0px') {
+      styleLines.push('borderStart: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['border-left-width'] && node.rawStyle.indexOf('-webkit-border') === -1) {
-    styleLines.push('borderLeft: ' + pixelValue(node.computedStyleForKebabs['border-left-width']));
+    let val = node.computedStyleForKebabs['border-left-width'];
+    if (val !== '0px') {
+      styleLines.push('borderLeft: ' + pixelValue(val));
+    }
   }
   if (node.computedStyleForKebabs['border-right-width'] && node.rawStyle.indexOf('-webkit-border') === -1) {
-    styleLines.push('borderRight: ' + pixelValue(node.computedStyleForKebabs['border-right-width']));
+    let val = node.computedStyleForKebabs['border-right-width'];
+    if (val !== '0px') {
+      styleLines.push('borderRight: ' + pixelValue(val));
+    }
   }
 
   if (styleLines.length !== 0) {
