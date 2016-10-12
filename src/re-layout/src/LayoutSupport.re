@@ -604,9 +604,9 @@ let boundAxisWithinMinAndMax node axis value => {
   nextNextBoundValue
 };
 
-let fminf a b => a < b ? a : b;
+let fminf a b => classify_float b == FP_nan || a < b ? a : b;
 
-let fmaxf a b => a > b ? a : b;
+let fmaxf a b => classify_float b == FP_nan || a > b ? a : b;
 
 /* Like boundAxisWithinMinAndMax but also ensures that the value doesn't go below the
  * padding and border amount. */
