@@ -594,7 +594,7 @@ function getComputedStyleInKebabForm(node) {
    <div style="height: 10px;"></div>
  </div>
 
- <div id="padding_center_child" style="width: 100px; height: 100px; -webkit-padding-start: 10px; padding-top: 10px; padding-end: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
+ <div id="padding_center_child" style="width: 100px; height: 100px; -webkit-padding-start: 10px; padding-top: 10px; -webkit-padding-end: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
