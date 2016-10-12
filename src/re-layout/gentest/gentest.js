@@ -8,10 +8,10 @@
  */
 
 window.onload = function() {
- printTest(document.body.children[0], document.body.children[1], document.body.children[2]);
+ printTest(document.body.children[0], document.body.children[1]);
 }
 
-function printTest(LTRContainer, RTLContainer, genericContainer) {
+function printTest(LTRContainer, RTLContainer) {
   var lines = [
     '/**',
     ' * Copyright (c) 2014-present, Facebook, Inc.',
@@ -29,7 +29,7 @@ function printTest(LTRContainer, RTLContainer, genericContainer) {
   lines.push(' *');
 
   var indentation = 0;
-  lines.push(genericContainer.innerHTML.split('\n').map(function(line) {
+  lines.push(LTRContainer.innerHTML.split('\n').map(function(line) {
     return line.trim();
   }).filter(function(line) {
     return line.length > 0 && line !== '<div id="default"></div>';
@@ -66,18 +66,22 @@ function printTest(LTRContainer, RTLContainer, genericContainer) {
 
   var LTRLayoutTree = calculateTree(LTRContainer);
   var RTLLayoutTree = calculateTree(RTLContainer);
-  var genericLayoutTree = calculateTree(genericContainer);
+  /**
+   * Could use either LTR or RTL for this since they're the same html.
+   * We're only finding the *computed* style (style that was described in the
+   * style= property, not the actual layout).
+   */
+  var treeWithComputedStyle = LTRLayoutTree;
 
   let testStringLines = [];
-  for (var i = 0; i < genericLayoutTree.length; i++) {
-    testStringLines.push('let ' + genericLayoutTree[i].name + ' = "'+ genericLayoutTree[i].name + '";');
-    lines.push('it ' + genericLayoutTree[i].name + ' (fun () => {');
+  for (var i = 0; i < treeWithComputedStyle.length; i++) {
+    testStringLines.push('let ' + treeWithComputedStyle[i].name + ' = "'+ treeWithComputedStyle[i].name + '";');
+    lines.push('it ' + treeWithComputedStyle[i].name + ' (fun () => {');
 
     lines.push('  ' + setupTestTree(
-        genericLayoutTree[i].name,
+        treeWithComputedStyle[i].name,
         undefined,
-        LTRLayoutTree[i],
-        genericLayoutTree[i],
+        treeWithComputedStyle[i],
         'root',
         null).reduce(function(curr, prev) {
       return curr + '\n  ' + prev;
@@ -168,133 +172,161 @@ function assertTestTree(node, nodeName, parentNode) {
   }
 }
 
-function setupTestTree(testName, parent, node, genericNode, nodeName, parentName, index) {
+function setupTestTree(testName, parent, node, nodeName, parentName, index) {
   var lines = [
     'let ' + nodeName + ' = LayoutSupport.createNode ();',
   ];
 
   var styleLines = [];
-  for (var style in node.style) {
+  for (var style in node.computedStyleForKebabs) {
 
     // Skip position info for root as it messes up tests
     if (node.declaredStyle[style] === "" &&
         (style == 'position' ||
          style == 'left' ||
+         style == 'start' ||
          style == 'top' ||
          style == 'right' ||
+         style == 'end' ||
          style == 'bottom' ||
          style == 'width' ||
          style == 'height')) {
       continue;
     }
-    if (node.style[style] !== getDefaultStyleValue(style)) {
+    if (node.computedStyleForKebabs[style] !== getDefaultStyleValue(style)) {
       switch (style) {
         case 'direction':
-          styleLines.push('direction:' + directionValue(node.style[style]));
+          styleLines.push('direction:' + directionValue(node.computedStyleForKebabs[style]));
           break;
         case 'flex-direction':
-          styleLines.push('flexDirection:'+ flexDirectionValue(node.style[style]));
+          styleLines.push('flexDirection:'+ flexDirectionValue(node.computedStyleForKebabs[style]));
           break;
         case 'justify-content':
-          styleLines.push('justifyContent: ' + justifyValue(node.style[style]));
+          styleLines.push('justifyContent: ' + justifyValue(node.computedStyleForKebabs[style]));
           break;
         case 'align-content':
-          styleLines.push('alignContent: ' + alignValue(node.style[style]));
+          styleLines.push('alignContent: ' + alignValue(node.computedStyleForKebabs[style]));
           break;
         case 'align-items':
-          styleLines.push('alignItems: ' + alignValue(node.style[style]));
+          styleLines.push('alignItems: ' + alignValue(node.computedStyleForKebabs[style]));
           break;
         case 'align-self':
-          if (!parent || node.style[style] !== parent.style['align-items']) {
-            styleLines.push('alignSelf: ' +  alignValue(node.style[style]));
+          if (!parent || node.computedStyleForKebabs[style] !== parent.computedStyleForKebabs['align-items']) {
+            styleLines.push('alignSelf: ' +  alignValue(node.computedStyleForKebabs[style]));
           }
           break;
         case 'position':
-          styleLines.push('positionType: ' + positionValue(node.style[style]));
+          styleLines.push('positionType: ' + positionValue(node.computedStyleForKebabs[style]));
           break;
         case 'flex-wrap':
-          styleLines.push('flexWrap: ' + wrapValue(node.style[style]));
+          styleLines.push('flexWrap: ' + wrapValue(node.computedStyleForKebabs[style]));
           break;
         case 'overflow':
-          styleLines.push('overflow: ' + overflowValue(node.style[style]));
+          styleLines.push('overflow: ' + overflowValue(node.computedStyleForKebabs[style]));
           break;
         case 'flex-grow':
-          styleLines.push('flexGrow: ' + ensureFloat(node.style[style]));
+          styleLines.push('flexGrow: ' + ensureFloat(node.computedStyleForKebabs[style]));
           break;
         case 'flex-shrink':
-          styleLines.push('flexShrink: ' +  ensureFloat(node.style[style]));
+          styleLines.push('flexShrink: ' +  ensureFloat(node.computedStyleForKebabs[style]));
           break;
         case 'flex-basis':
-          styleLines.push('flexBasis: ' +  pixelValue(node.style[style]));
+          styleLines.push('flexBasis: ' +  pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'left':
-          styleLines.push('left: ' + pixelValue(node.style[style]));
+          styleLines.push('left: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'top':
-          styleLines.push('top: ' + pixelValue(node.style[style]));
+          styleLines.push('top: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'right':
-          styleLines.push('right: ' + pixelValue(node.style[style]));
+          styleLines.push('right: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'bottom':
-          styleLines.push('bottom: ' + pixelValue(node.style[style]));
-          break;
-        case 'margin-left':
-          styleLines.push('marginLeft: ' +  pixelValue(node.style[style]));
+          styleLines.push('bottom: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'margin-top':
-          styleLines.push('marginTop: ' + pixelValue(node.style[style]));
-          break;
-        case 'margin-right':
-          styleLines.push('marginRight: ' + pixelValue(node.style[style]));
+          styleLines.push('marginTop: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'margin-bottom':
-          styleLines.push('marginBottom: ' + pixelValue(node.style[style]));
-          break;
-        case 'padding-left':
-          styleLines.push('paddingLeft: ' + pixelValue(node.style[style]));
+          styleLines.push('marginBottom: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'padding-top':
-          styleLines.push('paddingTop: ' + pixelValue(node.style[style]));
-          break;
-        case 'padding-right':
-          styleLines.push('paddingRight: ' + pixelValue(node.style[style]));
+          styleLines.push('paddingTop: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'padding-bottom':
-          styleLines.push('paddingBottom: ' + pixelValue(node.style[style]));
-          break;
-        case 'border-left-width':
-          styleLines.push('borderLeft: ' + pixelValue(node.style[style]));
+          styleLines.push('paddingBottom: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'border-top-width':
-          styleLines.push('borderTop: ' + pixelValue(node.style[style]));
-          break;
-        case 'border-right-width':
-          styleLines.push('borderRight: ' + pixelValue(node.style[style]));
+          styleLines.push('borderTop: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'border-bottom-width':
-          styleLines.push('borderBottom: ' + pixelValue(node.style[style]));
+          styleLines.push('borderBottom: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'width':
-          styleLines.push('width: ' + pixelValue(node.style[style]));
+          styleLines.push('width: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'min-width':
-          styleLines.push('minWidth: ' + pixelValue(node.style[style]));
+          styleLines.push('minWidth: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'max-width':
-          styleLines.push('maxWidth: ' + pixelValue(node.style[style]));
+          styleLines.push('maxWidth: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'height':
-          styleLines.push('height: ' + pixelValue(node.style[style]));
+          styleLines.push('height: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'min-height':
-          styleLines.push('minHeight: ' + pixelValue(node.style[style]));
+          styleLines.push('minHeight: ' + pixelValue(node.computedStyleForKebabs[style]));
           break;
         case 'max-height':
-          styleLines.push('maxHeight: ' +  pixelValue(node.style[style]));
+          styleLines.push('maxHeight: ' +  pixelValue(node.computedStyleForKebabs[style]));
           break;
       }
     }
+  }
+
+  /**
+   * This is tricky because when you set margin-right, it shows up as
+   * `-webkit-margin-end` and when you set `margin-right/left` it shows up as
+   * `-webkit-margin-end/start`.
+   */
+  if (node.computedStyleForKebabs['-webkit-margin-end'] && node.rawStyle.indexOf('-webkit-margin-end') !== -1) {
+    styleLines.push('marginEnd: ' + pixelValue(node.computedStyleForKebabs['-webkit-margin-end']));
+  }
+  if (node.computedStyleForKebabs['-webkit-margin-start'] && node.rawStyle.indexOf('-webkit-margin-start') !== -1) {
+    styleLines.push('marginStart: ' + pixelValue(node.computedStyleForKebabs['-webkit-margin-start']));
+  }
+  if (node.computedStyleForKebabs['margin-left'] && node.rawStyle.indexOf('-webkit-margin') === -1) {
+    styleLines.push('marginLeft: ' + pixelValue(node.computedStyleForKebabs['margin-left']));
+  }
+  if (node.computedStyleForKebabs['margin-right'] && node.rawStyle.indexOf('-webkit-margin') === -1) {
+    styleLines.push('marginRight: ' + pixelValue(node.computedStyleForKebabs['margin-right']));
+  }
+
+  if (node.computedStyleForKebabs['-webkit-padding-end'] && node.rawStyle.indexOf('-webkit-padding-end') !== -1) {
+    styleLines.push('paddingEnd: ' + pixelValue(node.computedStyleForKebabs['-webkit-padding-end']));
+  }
+  if (node.computedStyleForKebabs['-webkit-padding-start'] && node.rawStyle.indexOf('-webkit-padding-start') !== -1) {
+    styleLines.push('paddingStart: ' + pixelValue(node.computedStyleForKebabs['-webkit-padding-start']));
+  }
+  if (node.computedStyleForKebabs['padding-left'] && node.rawStyle.indexOf('-webkit-padding') === -1) {
+    styleLines.push('paddingLeft: ' + pixelValue(node.computedStyleForKebabs['padding-left']));
+  }
+  if (node.computedStyleForKebabs['padding-right'] && node.rawStyle.indexOf('-webkit-padding') === -1) {
+    styleLines.push('paddingRight: ' + pixelValue(node.computedStyleForKebabs['padding-right']));
+  }
+
+  if (node.computedStyleForKebabs['-webkit-border-end-width'] && node.rawStyle.indexOf('-webkit-border-end-width') !== -1) {
+    styleLines.push('borderEnd: ' + pixelValue(node.computedStyleForKebabs['-webkit-border-end-width']));
+  }
+  if (node.computedStyleForKebabs['-webkit-border-start-width'] && node.rawStyle.indexOf('-webkit-border-start-width') !== -1) {
+    styleLines.push('borderStart: ' + pixelValue(node.computedStyleForKebabs['-webkit-border-start-width']));
+  }
+  if (node.computedStyleForKebabs['border-left-width'] && node.rawStyle.indexOf('-webkit-border') === -1) {
+    styleLines.push('borderLeft: ' + pixelValue(node.computedStyleForKebabs['border-left-width']));
+  }
+  if (node.computedStyleForKebabs['border-right-width'] && node.rawStyle.indexOf('-webkit-border') === -1) {
+    styleLines.push('borderRight: ' + pixelValue(node.computedStyleForKebabs['border-right-width']));
   }
 
   if (styleLines.length !== 0) {
@@ -321,7 +353,6 @@ function setupTestTree(testName, parent, node, genericNode, nodeName, parentName
             testName + ' (child)',
             node,
             node.children[i],
-            genericNode.children[i],
             childName,
             nodeName,
             i));
@@ -416,28 +447,31 @@ function printLines(lines) {
   }, ''));
 }
 
-function calculateTree(root) {
+function calculateTree(rootDOMNode) {
   var rootLayout = [];
 
-  for (var i = 0; i < root.children.length; i++) {
-    var child = root.children[i];
+  for (var i = 0; i < rootDOMNode.children.length; i++) {
+    var childDOMNode = rootDOMNode.children[i];
+    if (childDOMNode.id === 'default') {
+      continue;
+    }
     rootLayout.push({
-      name: child.id !== '' ? child.id : 'INSERT_NAME_HERE',
-      left: child.offsetLeft + child.parentNode.clientLeft,
-      top: child.offsetTop + child.parentNode.clientTop,
-      width: child.offsetWidth,
-      height: child.offsetHeight,
-      children: calculateTree(child),
-      style: getCSSLayoutStyle(child),
-      declaredStyle: child.style,
-      rawStyle: child.getAttribute('style'),
+      name: childDOMNode.id !== '' ? childDOMNode.id : 'INSERT_NAME_HERE',
+      left: childDOMNode.offsetLeft + childDOMNode.parentNode.clientLeft,
+      top: childDOMNode.offsetTop + childDOMNode.parentNode.clientTop,
+      width: childDOMNode.offsetWidth,
+      height: childDOMNode.offsetHeight,
+      children: calculateTree(childDOMNode),
+      computedStyleForKebabs: getComputedStyleInKebabForm(childDOMNode),
+      declaredStyle: childDOMNode.style,
+      rawStyle: childDOMNode.getAttribute('style') || "",
     });
   }
 
   return rootLayout;
 }
 
-function getCSSLayoutStyle(node) {
+function getComputedStyleInKebabForm(node) {
   return [
     'direction',
     'flex-direction',
@@ -451,21 +485,15 @@ function getCSSLayoutStyle(node) {
     'flex-grow',
     'flex-shrink',
     'flex-basis',
-    'left',
     'top',
-    'right',
     'bottom',
-    'margin-left',
+    'left',
+    'right',
     'margin-top',
-    'margin-right',
     'margin-bottom',
-    'padding-left',
     'padding-top',
-    'padding-right',
     'padding-bottom',
-    'border-left-width',
     'border-top-width',
-    'border-right-width',
     'border-bottom-width',
     'width',
     'min-width',
@@ -473,6 +501,22 @@ function getCSSLayoutStyle(node) {
     'height',
     'min-height',
     'max-height',
+
+    /**
+     * We don't need to *read*.
+     */
+    '-webkit-margin-start',
+    '-webkit-margin-end',
+    '-webkit-padding-start',
+    '-webkit-padding-end',
+    '-webkit-border-start-width',
+    '-webkit-border-end-width',
+    'margin-left',
+    'margin-right',
+    'padding-left',
+    'padding-right',
+    'border-left-width',
+    'border-right-width',
   ].reduce(function(map, key) {
     map[key] = getComputedStyle(node, null).getPropertyValue(key);
     return map;
@@ -525,7 +569,7 @@ function getCSSLayoutStyle(node) {
    <div style="height: 10px;"></div>
  </div>
 
- <div id="border_center_child" style="width: 100px; height: 100px; border-start-width: 10px; border-top-width: 10; border-end-width: 20px; border-bottom-width: 20px; align-items: center; justify-content: center;">
+ <div id="border_center_child" style="width: 100px; height: 100px; -webkit-border-start-width: 10px; border-top-width: 10px; -webkit-border-end-width: 20px; border-bottom-width: 20px; align-items: center; justify-content: center;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
@@ -550,7 +594,7 @@ function getCSSLayoutStyle(node) {
    <div style="height: 10px;"></div>
  </div>
 
- <div id="padding_center_child" style="width: 100px; height: 100px; padding-start: 10px; padding-top: 10; padding-end: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
+ <div id="padding_center_child" style="width: 100px; height: 100px; -webkit-padding-start: 10px; padding-top: 10px; padding-end: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
@@ -641,11 +685,11 @@ function getCSSLayoutStyle(node) {
  </div>
 
  <div id="margin_start" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="width: 10px; margin-start: 10px;"></div>
+   <div style="width: 10px; -webkit-margin-start: 10px;"></div>
  </div>
 
  <div id="margin_end" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
-   <div style="width: 10px; margin-end: 10px;"></div>
+   <div style="width: 10px; -webkit-margin-end: 10px;"></div>
  </div>
 
  <div id="margin_left" style="width: 100px; height: 100px; flex-direction: row;">
@@ -773,28 +817,28 @@ function getCSSLayoutStyle(node) {
    <div style="width: 10px; flex-grow:1"></div>
  </div>
  <div id="margin_and_flex_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="margin-start: 10px; margin-end; 10px; flex-grow: 1;"></div>
+   <div style="-webkit-margin-start: 10px; -webkit-margin-end: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_and_flex_column" style="width: 100px; height: 100px;">
-   <div style="margin-top: 10px; margin-bottom; 10px; flex-grow: 1;"></div>
+   <div style="margin-top: 10px; margin-bottom: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_and_stretch_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="margin-top: 10px; margin-bottom; 10px; flex-grow: 1;"></div>
+   <div style="margin-top: 10px; margin-bottom: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_and_stretch_column" style="width: 100px; height: 100px;">
-   <div style="margin-start: 10px; margin-end; 10px; flex-grow: 1;"></div>
+   <div style="-webkit-margin-start: 10px; -webkit-margin-end: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_with_sibling_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="margin-end; 10px; flex-grow: 1;"></div>
+   <div style="-webkit-margin-end: 10px; flex-grow: 1;"></div>
    <div style="flex-grow: 1;"></div>
  </div>
 
  <div id="margin_with_sibling_column" style="width: 100px; height: 100px;">
-   <div style="margin-bottom; 10px; flex-grow: 1;"></div>
+   <div style="margin-bottom: 10px; flex-grow: 1;"></div>
    <div style="flex-grow: 1;"></div>
  </div>
  <div id="flex_basis_flex_grow_column" style="width: 100px; height: 100px;">
