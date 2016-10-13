@@ -956,10 +956,9 @@ and layoutNodeImpl
           totalLineCrossDim.contents = totalLineCrossDim.contents + crossDim.contents;
           maxLineMainDim.contents = fmaxf maxLineMainDim.contents mainDim.contents;
           lineCount.contents = lineCount.contents +. 1;
-          startOfLineIndex.contents = endOfLineIndex.contents;
-          endOfLineIndex.contents = startOfLineIndex.contents
+          startOfLineIndex.contents = endOfLineIndex.contents
         };
-        if ((lineCount.contents > 1 && performLayout) && !(isUndefined availableInnerCrossDim)) {
+        if (lineCount.contents > 1 && performLayout && !(isUndefined availableInnerCrossDim)) {
           let remainingAlignContentDim = availableInnerCrossDim - totalLineCrossDim.contents;
           let crossDimLead = {contents: 0.0};
           let currentLead = {contents: leadingPaddingAndBorderCross};
