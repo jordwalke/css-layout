@@ -14,9 +14,9 @@
  * above for details). Each of our measure modes maps to a layout mode
  * from the spec (https://www.w3.org/TR/css3-sizing/#terms):
  *
- *   - CSS_MEASURE_MODE_UNDEFINED: `max-content`
- *   - CSS_MEASURE_MODE_EXACTLY: `fill-available`
- *   - CSS_MEASURE_MODE_AT_MOST: `fit-content`
+ *   - CssMeasureModeUndefined: `max-content`
+ *   - CssMeasureModeExactly: `fill-available`
+ *   - CssMeasureModeAtMost: `fit-content`
  *      If infinite space available in that axis, then `max-content.`
  *      Else, `min(max-content size, max(min-content size, fill-available size))`
  *      (Although, we don't support min-content)
@@ -49,9 +49,9 @@ let getModeName (mode, isLayoutInsteadOfMeasure) =>
     isLayoutInsteadOfMeasure ?
       "CSS_MEASURE_MODE_NEGATIVE_ONE_WHATEVER_THAT_MEANS" :
       "CSS_MEASURE_MODE_NEGATIVE_ONE_WHATEVER_THAT_MEANS"
-  | CSS_MEASURE_MODE_UNDEFINED => isLayoutInsteadOfMeasure ? "LAY_UNDEFINED" : "UNDEFINED"
-  | CSS_MEASURE_MODE_EXACTLY => isLayoutInsteadOfMeasure ? "LAY_EXACTLY" : "EXACTLY"
-  | CSS_MEASURE_MODE_AT_MOST => isLayoutInsteadOfMeasure ? "LAY_AT_MOST" : "AT_MOST"
+  | CssMeasureModeUndefined => isLayoutInsteadOfMeasure ? "LAY_UNDEFINED" : "UNDEFINED"
+  | CssMeasureModeExactly => isLayoutInsteadOfMeasure ? "LAY_EXACTLY" : "EXACTLY"
+  | CssMeasureModeAtMost => isLayoutInsteadOfMeasure ? "LAY_AT_MOST" : "AT_MOST"
   };
 
 let canUseCachedMeasurement
@@ -76,7 +76,7 @@ let canUseCachedMeasurement
     (
       cachedLayout.widthMeasureMode == widthMeasureMode &&
       cachedLayout.availableWidth == availableWidth &&
-      heightMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
+      heightMeasureMode === CssMeasureModeExactly &&
       availableHeight -. marginColumn == cachedLayout.computedHeight
     ) {
     true
@@ -85,7 +85,7 @@ let canUseCachedMeasurement
     (
       cachedLayout.heightMeasureMode == heightMeasureMode &&
       cachedLayout.availableHeight == availableHeight &&
-      widthMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
+      widthMeasureMode === CssMeasureModeExactly &&
       availableWidth -. marginRow == cachedLayout.computedWidth
     ) {
     true
@@ -142,8 +142,8 @@ let rec layoutNodeInternal
   /* We handle nodes with measure functions specially here because they are the most*/
   /* expensive to measure, so it's worth avoiding redundant measurements if at all possible.*/
   if (node.measure !== dummyMeasure) {
-    let marginAxisRow = getMarginAxis node CSS_FLEX_DIRECTION_ROW;
-    let marginAxisColumn = getMarginAxis node CSS_FLEX_DIRECTION_COLUMN;
+    let marginAxisRow = getMarginAxis node CssFlexDirectionRow;
+    let marginAxisColumn = getMarginAxis node CssFlexDirectionColumn;
     /* First, try to use the layout cache.*/
     if (
       canUseCachedMeasurement (
@@ -338,45 +338,45 @@ and layoutNodeImpl
   /** START_GENERATED **/
   open ReJsPrelude;
   re_assert
-    (isUndefined availableWidth ? widthMeasureMode === CSS_MEASURE_MODE_UNDEFINED : true)
-    "availableWidth is indefinite so widthMeasureMode must be CSS_MEASURE_MODE_UNDEFINED";
+    (isUndefined availableWidth ? widthMeasureMode === CssMeasureModeUndefined : true)
+    "availableWidth is indefinite so widthMeasureMode must be CssMeasureModeUndefined";
   re_assert
-    (isUndefined availableHeight ? heightMeasureMode === CSS_MEASURE_MODE_UNDEFINED : true)
-    "availableHeight is indefinite so heightMeasureMode must be CSS_MEASURE_MODE_UNDEFINED";
-  let paddingAndBorderAxisRow = getPaddingAndBorderAxis node CSS_FLEX_DIRECTION_ROW;
-  let paddingAndBorderAxisColumn = getPaddingAndBorderAxis node CSS_FLEX_DIRECTION_COLUMN;
-  let marginAxisRow = getMarginAxis node CSS_FLEX_DIRECTION_ROW;
-  let marginAxisColumn = getMarginAxis node CSS_FLEX_DIRECTION_COLUMN;
+    (isUndefined availableHeight ? heightMeasureMode === CssMeasureModeUndefined : true)
+    "availableHeight is indefinite so heightMeasureMode must be CssMeasureModeUndefined";
+  let paddingAndBorderAxisRow = getPaddingAndBorderAxis node CssFlexDirectionRow;
+  let paddingAndBorderAxisColumn = getPaddingAndBorderAxis node CssFlexDirectionColumn;
+  let marginAxisRow = getMarginAxis node CssFlexDirectionRow;
+  let marginAxisColumn = getMarginAxis node CssFlexDirectionColumn;
   let direction = resolveDirection node parentDirection;
   node.layout.direction = direction;
   if (node.measure !== dummyMeasure) {
     let innerWidth = availableWidth - marginAxisRow - paddingAndBorderAxisRow;
     let innerHeight = availableHeight - marginAxisColumn - paddingAndBorderAxisColumn;
-    if (widthMeasureMode === CSS_MEASURE_MODE_EXACTLY && heightMeasureMode === CSS_MEASURE_MODE_EXACTLY) {
-      node.layout.measuredWidth = boundAxis node CSS_FLEX_DIRECTION_ROW (availableWidth - marginAxisRow);
+    if (widthMeasureMode === CssMeasureModeExactly && heightMeasureMode === CssMeasureModeExactly) {
+      node.layout.measuredWidth = boundAxis node CssFlexDirectionRow (availableWidth - marginAxisRow);
       node.layout.measuredHeight =
-        boundAxis node CSS_FLEX_DIRECTION_COLUMN (availableHeight - marginAxisColumn)
+        boundAxis node CssFlexDirectionColumn (availableHeight - marginAxisColumn)
     } else if (
       innerWidth <= 0.0 || innerHeight <= 0.0
     ) {
-      node.layout.measuredWidth = boundAxis node CSS_FLEX_DIRECTION_ROW 0.0;
-      node.layout.measuredHeight = boundAxis node CSS_FLEX_DIRECTION_COLUMN 0.0
+      node.layout.measuredWidth = boundAxis node CssFlexDirectionRow 0.0;
+      node.layout.measuredHeight = boundAxis node CssFlexDirectionColumn 0.0
     } else {
       let measureDim = node.measure node.context innerWidth widthMeasureMode innerHeight heightMeasureMode;
       node.layout.measuredWidth =
         boundAxis
           node
-          CSS_FLEX_DIRECTION_ROW
+          CssFlexDirectionRow
           (
-            widthMeasureMode === CSS_MEASURE_MODE_UNDEFINED || widthMeasureMode === CSS_MEASURE_MODE_AT_MOST ?
+            widthMeasureMode === CssMeasureModeUndefined || widthMeasureMode === CssMeasureModeAtMost ?
               measureDim.width + paddingAndBorderAxisRow : availableWidth - marginAxisRow
           );
       node.layout.measuredHeight =
         boundAxis
           node
-          CSS_FLEX_DIRECTION_COLUMN
+          CssFlexDirectionColumn
           (
-            heightMeasureMode === CSS_MEASURE_MODE_UNDEFINED || heightMeasureMode === CSS_MEASURE_MODE_AT_MOST ?
+            heightMeasureMode === CssMeasureModeUndefined || heightMeasureMode === CssMeasureModeAtMost ?
               measureDim.height + paddingAndBorderAxisColumn : availableHeight - marginAxisColumn
           )
     }
@@ -386,17 +386,17 @@ and layoutNodeImpl
       node.layout.measuredWidth =
         boundAxis
           node
-          CSS_FLEX_DIRECTION_ROW
+          CssFlexDirectionRow
           (
-            widthMeasureMode === CSS_MEASURE_MODE_UNDEFINED || widthMeasureMode === CSS_MEASURE_MODE_AT_MOST ?
+            widthMeasureMode === CssMeasureModeUndefined || widthMeasureMode === CssMeasureModeAtMost ?
               paddingAndBorderAxisRow : availableWidth - marginAxisRow
           );
       node.layout.measuredHeight =
         boundAxis
           node
-          CSS_FLEX_DIRECTION_COLUMN
+          CssFlexDirectionColumn
           (
-            heightMeasureMode === CSS_MEASURE_MODE_UNDEFINED || heightMeasureMode === CSS_MEASURE_MODE_AT_MOST ?
+            heightMeasureMode === CssMeasureModeUndefined || heightMeasureMode === CssMeasureModeAtMost ?
               paddingAndBorderAxisColumn : availableHeight - marginAxisColumn
           )
     } else {
@@ -404,40 +404,40 @@ and layoutNodeImpl
       if !performLayout {
         if (
           (
-            (widthMeasureMode === CSS_MEASURE_MODE_AT_MOST && availableWidth <= 0.0) &&
-            heightMeasureMode === CSS_MEASURE_MODE_AT_MOST
+            (widthMeasureMode === CssMeasureModeAtMost && availableWidth <= 0.0) &&
+            heightMeasureMode === CssMeasureModeAtMost
           ) &&
           availableHeight <= 0.0
         ) {
-          node.layout.measuredWidth = boundAxis node CSS_FLEX_DIRECTION_ROW 0.0;
-          node.layout.measuredHeight = boundAxis node CSS_FLEX_DIRECTION_COLUMN 0.0;
+          node.layout.measuredWidth = boundAxis node CssFlexDirectionRow 0.0;
+          node.layout.measuredHeight = boundAxis node CssFlexDirectionColumn 0.0;
           shouldContinue.contents = false
         } else if (
-          widthMeasureMode === CSS_MEASURE_MODE_AT_MOST && availableWidth <= 0.0
+          widthMeasureMode === CssMeasureModeAtMost && availableWidth <= 0.0
         ) {
-          node.layout.measuredWidth = boundAxis node CSS_FLEX_DIRECTION_ROW 0.0;
+          node.layout.measuredWidth = boundAxis node CssFlexDirectionRow 0.0;
           node.layout.measuredHeight =
             boundAxis
               node
-              CSS_FLEX_DIRECTION_COLUMN
+              CssFlexDirectionColumn
               (isUndefined availableHeight ? 0.0 : availableHeight - marginAxisColumn);
           shouldContinue.contents = false
         } else if (
-          heightMeasureMode === CSS_MEASURE_MODE_AT_MOST && availableHeight <= 0.0
+          heightMeasureMode === CssMeasureModeAtMost && availableHeight <= 0.0
         ) {
           node.layout.measuredWidth =
             boundAxis
               node
-              CSS_FLEX_DIRECTION_ROW
+              CssFlexDirectionRow
               (isUndefined availableWidth ? 0.0 : availableWidth - marginAxisRow);
-          node.layout.measuredHeight = boundAxis node CSS_FLEX_DIRECTION_COLUMN 0.0;
+          node.layout.measuredHeight = boundAxis node CssFlexDirectionColumn 0.0;
           shouldContinue.contents = false
         } else if (
-          widthMeasureMode === CSS_MEASURE_MODE_EXACTLY && heightMeasureMode === CSS_MEASURE_MODE_EXACTLY
+          widthMeasureMode === CssMeasureModeExactly && heightMeasureMode === CssMeasureModeExactly
         ) {
-          node.layout.measuredWidth = boundAxis node CSS_FLEX_DIRECTION_ROW (availableWidth - marginAxisRow);
+          node.layout.measuredWidth = boundAxis node CssFlexDirectionRow (availableWidth - marginAxisRow);
           node.layout.measuredHeight =
-            boundAxis node CSS_FLEX_DIRECTION_COLUMN (availableHeight - marginAxisColumn);
+            boundAxis node CssFlexDirectionColumn (availableHeight - marginAxisColumn);
           shouldContinue.contents = false
         }
       };
@@ -446,7 +446,7 @@ and layoutNodeImpl
         let crossAxis = getCrossFlexDirection mainAxis direction;
         let isMainAxisRow = isRowDirection mainAxis;
         let justifyContent = node.style.justifyContent;
-        let isNodeFlexWrap = node.style.flexWrap === CSS_WRAP;
+        let isNodeFlexWrap = node.style.flexWrap === CssWrap;
         let firstAbsoluteChild = {contents: theNullNode};
         let currentAbsoluteChild = {contents: theNullNode};
         let leadingPaddingAndBorderMain = getLeadingPaddingAndBorder node mainAxis;
@@ -464,15 +464,15 @@ and layoutNodeImpl
         /* let i = 0; */
         let childWidth = {contents: 0.0};
         let childHeight = {contents: 0.0};
-        let childWidthMeasureMode = {contents: CSS_MEASURE_MODE_UNDEFINED};
-        let childHeightMeasureMode = {contents: CSS_MEASURE_MODE_UNDEFINED};
+        let childWidthMeasureMode = {contents: CssMeasureModeUndefined};
+        let childHeightMeasureMode = {contents: CssMeasureModeUndefined};
         for i in 0 to (childCount -. 1) {
           child.contents = node.children.(i);
           if performLayout {
             let childDirection = resolveDirection child.contents direction;
             setPosition child.contents childDirection
           };
-          if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
+          if (child.contents.style.positionType === CssPositionAbsolute) {
             if (firstAbsoluteChild.contents === theNullNode) {
               firstAbsoluteChild.contents = child.contents
             };
@@ -482,18 +482,18 @@ and layoutNodeImpl
             currentAbsoluteChild.contents = child.contents;
             child.contents.nextChild = theNullNode
           } else if (
-            isMainAxisRow && isStyleDimDefined child.contents CSS_FLEX_DIRECTION_ROW
+            isMainAxisRow && isStyleDimDefined child.contents CssFlexDirectionRow
           ) {
             child.contents.layout.computedFlexBasis =
               fmaxf
-                child.contents.style.width (getPaddingAndBorderAxis child.contents CSS_FLEX_DIRECTION_ROW)
+                child.contents.style.width (getPaddingAndBorderAxis child.contents CssFlexDirectionRow)
           } else if (
-            !isMainAxisRow && isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN
+            !isMainAxisRow && isStyleDimDefined child.contents CssFlexDirectionColumn
           ) {
             child.contents.layout.computedFlexBasis =
               fmaxf
                 child.contents.style.height
-                (getPaddingAndBorderAxis child.contents CSS_FLEX_DIRECTION_COLUMN)
+                (getPaddingAndBorderAxis child.contents CssFlexDirectionColumn)
           } else if (
             !(isUndefined child.contents.style.flexBasis) && !(isUndefined availableInnerMainDim)
           ) {
@@ -504,38 +504,38 @@ and layoutNodeImpl
           } else {
             childWidth.contents = cssUndefined;
             childHeight.contents = cssUndefined;
-            childWidthMeasureMode.contents = CSS_MEASURE_MODE_UNDEFINED;
-            childHeightMeasureMode.contents = CSS_MEASURE_MODE_UNDEFINED;
-            if (isStyleDimDefined child.contents CSS_FLEX_DIRECTION_ROW) {
+            childWidthMeasureMode.contents = CssMeasureModeUndefined;
+            childHeightMeasureMode.contents = CssMeasureModeUndefined;
+            if (isStyleDimDefined child.contents CssFlexDirectionRow) {
               childWidth.contents =
-                child.contents.style.width + getMarginAxis child.contents CSS_FLEX_DIRECTION_ROW;
-              childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                child.contents.style.width + getMarginAxis child.contents CssFlexDirectionRow;
+              childWidthMeasureMode.contents = CssMeasureModeExactly
             };
 
             /**
              * Why can't this just be inlined to .height !== cssUndefined.
              */
-            if (isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN) {
+            if (isStyleDimDefined child.contents CssFlexDirectionColumn) {
               childHeight.contents =
-                child.contents.style.height + getMarginAxis child.contents CSS_FLEX_DIRECTION_COLUMN;
-              childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                child.contents.style.height + getMarginAxis child.contents CssFlexDirectionColumn;
+              childHeightMeasureMode.contents = CssMeasureModeExactly
             };
             if (
-              !isMainAxisRow && node.style.overflow === CSS_OVERFLOW_SCROLL ||
-              node.style.overflow !== CSS_OVERFLOW_SCROLL
+              !isMainAxisRow && node.style.overflow === Scroll ||
+              node.style.overflow !== Scroll
             ) {
               if (isUndefined childWidth.contents && !(isUndefined availableInnerWidth)) {
                 childWidth.contents = availableInnerWidth;
-                childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
+                childWidthMeasureMode.contents = CssMeasureModeAtMost
               }
             };
             if (
-              isMainAxisRow && node.style.overflow === CSS_OVERFLOW_SCROLL ||
-              node.style.overflow !== CSS_OVERFLOW_SCROLL
+              isMainAxisRow && node.style.overflow === Scroll ||
+              node.style.overflow !== Scroll
             ) {
               if (isUndefined childHeight.contents && !(isUndefined availableInnerHeight)) {
                 childHeight.contents = availableInnerHeight;
-                childHeightMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
+                childHeightMeasureMode.contents = CssMeasureModeAtMost
               }
             };
             /*
@@ -546,22 +546,22 @@ and layoutNodeImpl
             if (
               !isMainAxisRow &&
               !(isUndefined availableInnerWidth) &&
-              !(isStyleDimDefined child.contents CSS_FLEX_DIRECTION_ROW) &&
-              widthMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
-              getAlignItem node child.contents === CSS_ALIGN_STRETCH
+              !(isStyleDimDefined child.contents CssFlexDirectionRow) &&
+              widthMeasureMode === CssMeasureModeExactly &&
+              getAlignItem node child.contents === CssAlignStretch
             ) {
               childWidth.contents = availableInnerWidth;
-              childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+              childWidthMeasureMode.contents = CssMeasureModeExactly
             };
             if (
               isMainAxisRow &&
               !(isUndefined availableInnerHeight) &&
-              !(isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN) &&
-              heightMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
-              getAlignItem node child.contents === CSS_ALIGN_STRETCH
+              !(isStyleDimDefined child.contents CssFlexDirectionColumn) &&
+              heightMeasureMode === CssMeasureModeExactly &&
+              getAlignItem node child.contents === CssAlignStretch
             ) {
               childHeight.contents = availableInnerHeight;
-              childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+              childHeightMeasureMode.contents = CssMeasureModeExactly
             };
             let _ =
               layoutNodeInternal
@@ -596,7 +596,7 @@ and layoutNodeImpl
           while (curIndex.contents < childCount && shouldContinue.contents) {
             child.contents = node.children.(curIndex.contents);
             child.contents.lineIndex = lineCount.contents;
-            if (child.contents.style.positionType !== CSS_POSITION_ABSOLUTE) {
+            if (child.contents.style.positionType !== CssPositionAbsolute) {
               let outerFlexBasis =
                 child.contents.layout.computedFlexBasis + getMarginAxis child.contents mainAxis;
               if (
@@ -632,7 +632,7 @@ and layoutNodeImpl
               endOfLineIndex.contents = endOfLineIndex.contents +. 1
             }
           };
-          let canSkipFlex = !performLayout && measureModeCrossDim === CSS_MEASURE_MODE_EXACTLY;
+          let canSkipFlex = !performLayout && measureModeCrossDim === CssMeasureModeExactly;
           let leadingMainDim = {contents: 0.0};
           let betweenMainDim = {contents: 0.0};
           let remainingFreeSpace = {contents: 0.0};
@@ -735,55 +735,55 @@ and layoutNodeImpl
               if isMainAxisRow {
                 childWidth.contents =
                   updatedMainSize.contents +
-                  getMarginAxis currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW;
-                childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY;
+                  getMarginAxis currentRelativeChild.contents CssFlexDirectionRow;
+                childWidthMeasureMode.contents = CssMeasureModeExactly;
                 if (
                   !(isUndefined availableInnerCrossDim) &&
-                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN) &&
-                  heightMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
-                  getAlignItem node currentRelativeChild.contents === CSS_ALIGN_STRETCH
+                  !(isStyleDimDefined currentRelativeChild.contents CssFlexDirectionColumn) &&
+                  heightMeasureMode === CssMeasureModeExactly &&
+                  getAlignItem node currentRelativeChild.contents === CssAlignStretch
                 ) {
                   childHeight.contents = availableInnerCrossDim;
-                  childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                  childHeightMeasureMode.contents = CssMeasureModeExactly
                 } else if
-                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN) {
+                  !(isStyleDimDefined currentRelativeChild.contents CssFlexDirectionColumn) {
                   childHeight.contents = availableInnerCrossDim;
                   childHeightMeasureMode.contents =
-                    isUndefined childHeight.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_AT_MOST
+                    isUndefined childHeight.contents ? CssMeasureModeUndefined : CssMeasureModeAtMost
                 } else {
                   childHeight.contents =
                     currentRelativeChild.contents.style.height +
-                    getMarginAxis currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN;
-                  childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                    getMarginAxis currentRelativeChild.contents CssFlexDirectionColumn;
+                  childHeightMeasureMode.contents = CssMeasureModeExactly
                 }
               } else {
                 childHeight.contents =
                   updatedMainSize.contents +
-                  getMarginAxis currentRelativeChild.contents CSS_FLEX_DIRECTION_COLUMN;
-                childHeightMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY;
+                  getMarginAxis currentRelativeChild.contents CssFlexDirectionColumn;
+                childHeightMeasureMode.contents = CssMeasureModeExactly;
                 if (
                   !(isUndefined availableInnerCrossDim) &&
-                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW) &&
-                  widthMeasureMode === CSS_MEASURE_MODE_EXACTLY &&
-                  getAlignItem node currentRelativeChild.contents === CSS_ALIGN_STRETCH
+                  !(isStyleDimDefined currentRelativeChild.contents CssFlexDirectionRow) &&
+                  widthMeasureMode === CssMeasureModeExactly &&
+                  getAlignItem node currentRelativeChild.contents === CssAlignStretch
                 ) {
                   childWidth.contents = availableInnerCrossDim;
-                  childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                  childWidthMeasureMode.contents = CssMeasureModeExactly
                 } else if
-                  !(isStyleDimDefined currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW) {
+                  !(isStyleDimDefined currentRelativeChild.contents CssFlexDirectionRow) {
                   childWidth.contents = availableInnerCrossDim;
                   childWidthMeasureMode.contents =
-                    isUndefined childWidth.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_AT_MOST
+                    isUndefined childWidth.contents ? CssMeasureModeUndefined : CssMeasureModeAtMost
                 } else {
                   childWidth.contents =
                     currentRelativeChild.contents.style.width +
-                    getMarginAxis currentRelativeChild.contents CSS_FLEX_DIRECTION_ROW;
-                  childWidthMeasureMode.contents = CSS_MEASURE_MODE_EXACTLY
+                    getMarginAxis currentRelativeChild.contents CssFlexDirectionRow;
+                  childWidthMeasureMode.contents = CssMeasureModeExactly
                 }
               };
               let requiresStretchLayout =
                 !(isStyleDimDefined currentRelativeChild.contents crossAxis) &&
-                getAlignItem node currentRelativeChild.contents === CSS_ALIGN_STRETCH;
+                getAlignItem node currentRelativeChild.contents === CssAlignStretch;
               let _ =
                 layoutNodeInternal
                   currentRelativeChild.contents
@@ -798,30 +798,30 @@ and layoutNodeImpl
             }
           };
           remainingFreeSpace.contents = originalRemainingFreeSpace + deltaFreeSpace.contents;
-          if (measureModeMainDim === CSS_MEASURE_MODE_AT_MOST) {
+          if (measureModeMainDim === CssMeasureModeAtMost) {
             remainingFreeSpace.contents = 0.0
           };
           switch justifyContent {
-          | CSS_JUSTIFY_CENTER => leadingMainDim.contents = remainingFreeSpace.contents / 2.0
-          | CSS_JUSTIFY_FLEX_END => leadingMainDim.contents = remainingFreeSpace.contents
-          | CSS_JUSTIFY_SPACE_BETWEEN =>
+          | CssJustifyCenter => leadingMainDim.contents = remainingFreeSpace.contents / 2.0
+          | CssJustifyFlexEnd => leadingMainDim.contents = remainingFreeSpace.contents
+          | CssJustifySpaceBetween =>
             if (itemsOnLine.contents > 1) {
               betweenMainDim.contents =
                 fmaxf remainingFreeSpace.contents 0.0 / float_of_int (itemsOnLine.contents -. 1)
             } else {
               betweenMainDim.contents = 0.0
             }
-          | CSS_JUSTIFY_SPACE_AROUND =>
+          | CssJustifySpaceAround =>
             betweenMainDim.contents = remainingFreeSpace.contents / float_of_int itemsOnLine.contents;
             leadingMainDim.contents = betweenMainDim.contents / 2.0
-          | CSS_JUSTIFY_FLEX_START => ()
+          | CssJustifyFlexStart => ()
           };
           let mainDim = {contents: leadingPaddingAndBorderMain + leadingMainDim.contents};
           let crossDim = {contents: 0.0};
           for i in startOfLineIndex.contents to (endOfLineIndex.contents -. 1) {
             child.contents = node.children.(i);
             if (
-              child.contents.style.positionType === CSS_POSITION_ABSOLUTE &&
+              child.contents.style.positionType === CssPositionAbsolute &&
               isLeadingPosDefinedWithFallback child.contents mainAxis
             ) {
               if performLayout {
@@ -840,7 +840,7 @@ and layoutNodeImpl
                   mainAxis
                   (layoutPosPositionForAxis child.contents mainAxis + mainDim.contents)
               };
-              if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
+              if (child.contents.style.positionType === CssPositionRelative) {
                 if canSkipFlex {
                   mainDim.contents =
                     mainDim.contents + betweenMainDim.contents + getMarginAxis child.contents mainAxis +
@@ -857,16 +857,16 @@ and layoutNodeImpl
           mainDim.contents = mainDim.contents + trailingPaddingAndBorderMain;
           let containerCrossAxis = {contents: availableInnerCrossDim};
           if (
-            measureModeCrossDim === CSS_MEASURE_MODE_UNDEFINED ||
-            measureModeCrossDim === CSS_MEASURE_MODE_AT_MOST
+            measureModeCrossDim === CssMeasureModeUndefined ||
+            measureModeCrossDim === CssMeasureModeAtMost
           ) {
             containerCrossAxis.contents =
               boundAxis node crossAxis (crossDim.contents + paddingAndBorderAxisCross) - paddingAndBorderAxisCross;
-            if (measureModeCrossDim === CSS_MEASURE_MODE_AT_MOST) {
+            if (measureModeCrossDim === CssMeasureModeAtMost) {
               containerCrossAxis.contents = fminf containerCrossAxis.contents availableInnerCrossDim
             }
           };
-          if (!isNodeFlexWrap && measureModeCrossDim === CSS_MEASURE_MODE_EXACTLY) {
+          if (!isNodeFlexWrap && measureModeCrossDim === CssMeasureModeExactly) {
             crossDim.contents = availableInnerCrossDim
           };
           crossDim.contents =
@@ -878,7 +878,7 @@ and layoutNodeImpl
           if performLayout {
             for i in startOfLineIndex.contents to (endOfLineIndex.contents -. 1) {
               child.contents = node.children.(i);
-              if (child.contents.style.positionType === CSS_POSITION_ABSOLUTE) {
+              if (child.contents.style.positionType === CssPositionAbsolute) {
                 if (isLeadingPosDefinedWithFallback child.contents crossAxis) {
                   setLayoutLeadingPositionForAxis
                     child.contents
@@ -897,29 +897,29 @@ and layoutNodeImpl
               } else {
                 let leadingCrossDim = {contents: leadingPaddingAndBorderCross};
                 let alignItem = getAlignItem node child.contents;
-                if (alignItem === CSS_ALIGN_STRETCH) {
+                if (alignItem === CssAlignStretch) {
                   childWidth.contents =
                     child.contents.layout.measuredWidth +
-                    getMarginAxis child.contents CSS_FLEX_DIRECTION_ROW;
+                    getMarginAxis child.contents CssFlexDirectionRow;
                   childHeight.contents =
                     child.contents.layout.measuredHeight +
-                    getMarginAxis child.contents CSS_FLEX_DIRECTION_COLUMN;
+                    getMarginAxis child.contents CssFlexDirectionColumn;
                   let isCrossSizeDefinite = {contents: false};
                   if isMainAxisRow {
                     isCrossSizeDefinite.contents =
-                      isStyleDimDefined child.contents CSS_FLEX_DIRECTION_COLUMN;
+                      isStyleDimDefined child.contents CssFlexDirectionColumn;
                     childHeight.contents = crossDim.contents
                   } else {
-                    isCrossSizeDefinite.contents = isStyleDimDefined child.contents CSS_FLEX_DIRECTION_ROW;
+                    isCrossSizeDefinite.contents = isStyleDimDefined child.contents CssFlexDirectionRow;
                     childWidth.contents = crossDim.contents
                   };
                   if !isCrossSizeDefinite.contents {
                     childWidthMeasureMode.contents =
                       isUndefined childWidth.contents ?
-                        CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
+                        CssMeasureModeUndefined : CssMeasureModeExactly;
                     childHeightMeasureMode.contents =
                       isUndefined childHeight.contents ?
-                        CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
+                        CssMeasureModeUndefined : CssMeasureModeExactly;
                     let _ =
                       layoutNodeInternal
                         child.contents
@@ -933,11 +933,11 @@ and layoutNodeImpl
                     ()
                   }
                 } else if (
-                  alignItem !== CSS_ALIGN_FLEX_START
+                  alignItem !== CssAlignFlexStart
                 ) {
                   let remainingCrossDim =
                     containerCrossAxis.contents - getDimWithMargin child.contents crossAxis;
-                  if (alignItem === CSS_ALIGN_CENTER) {
+                  if (alignItem === CssAlignCenter) {
                     leadingCrossDim.contents = leadingCrossDim.contents + remainingCrossDim / 2.0
                   } else {
                     leadingCrossDim.contents = leadingCrossDim.contents + remainingCrossDim
@@ -963,14 +963,14 @@ and layoutNodeImpl
           let crossDimLead = {contents: 0.0};
           let currentLead = {contents: leadingPaddingAndBorderCross};
           let alignContent = node.style.alignContent;
-          if (alignContent === CSS_ALIGN_FLEX_END) {
+          if (alignContent === CssAlignFlexEnd) {
             currentLead.contents = currentLead.contents + remainingAlignContentDim
           } else if (
-            alignContent === CSS_ALIGN_CENTER
+            alignContent === CssAlignCenter
           ) {
             currentLead.contents = currentLead.contents + remainingAlignContentDim / 2.0
           } else if (
-            alignContent === CSS_ALIGN_STRETCH
+            alignContent === CssAlignStretch
           ) {
             if (availableInnerCrossDim > totalLineCrossDim.contents) {
               crossDimLead.contents = remainingAlignContentDim / float_of_int lineCount.contents
@@ -984,7 +984,7 @@ and layoutNodeImpl
             let shouldContinue = {contents: false};
             while (j.contents < childCount && shouldContinue.contents) {
               child.contents = node.children.(j.contents);
-              if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
+              if (child.contents.style.positionType === CssPositionRelative) {
                 if (child.contents.lineIndex !== i) {
                   shouldContinue.contents = false
                 } else if (
@@ -1006,14 +1006,14 @@ and layoutNodeImpl
             if performLayout {
               for j in startIndex to (endIndex.contents -. 1) {
                 child.contents = node.children.(j);
-                if (child.contents.style.positionType === CSS_POSITION_RELATIVE) {
+                if (child.contents.style.positionType === CssPositionRelative) {
                   switch (getAlignItem node child.contents) {
-                  | CSS_ALIGN_FLEX_START =>
+                  | CssAlignFlexStart =>
                     setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + getLeadingMargin child.contents crossAxis)
-                  | CSS_ALIGN_FLEX_END =>
+                  | CssAlignFlexEnd =>
                     setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
@@ -1022,18 +1022,18 @@ and layoutNodeImpl
                         getTrailingMargin child.contents crossAxis -
                         layoutMeasuredDimensionForAxis child.contents crossAxis
                       )
-                  | CSS_ALIGN_CENTER =>
+                  | CssAlignCenter =>
                     childHeight.contents = layoutMeasuredDimensionForAxis child.contents crossAxis;
                     setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + (lineHeight.contents - childHeight.contents) / 2.0)
-                  | CSS_ALIGN_STRETCH =>
+                  | CssAlignStretch =>
                     setLayoutLeadingPositionForAxis
                       child.contents
                       crossAxis
                       (currentLead.contents + getLeadingMargin child.contents crossAxis)
-                  | CSS_ALIGN_AUTO => raise (Invalid_argument "getAlignItem should never return auto")
+                  | CssAlignAuto => raise (Invalid_argument "getAlignItem should never return auto")
                   }
                 }
               }
@@ -1042,15 +1042,15 @@ and layoutNodeImpl
           }
         };
         /* STEP 9: COMPUTING FINAL DIMENSIONS */
-        node.layout.measuredWidth = boundAxis node CSS_FLEX_DIRECTION_ROW (availableWidth - marginAxisRow);
+        node.layout.measuredWidth = boundAxis node CssFlexDirectionRow (availableWidth - marginAxisRow);
         node.layout.measuredHeight =
-          boundAxis node CSS_FLEX_DIRECTION_COLUMN (availableHeight - marginAxisColumn);
+          boundAxis node CssFlexDirectionColumn (availableHeight - marginAxisColumn);
         /* If the user didn't specify a width or height for the node, set the
          * dimensions based on the children. */
-        if (measureModeMainDim === CSS_MEASURE_MODE_UNDEFINED) {
+        if (measureModeMainDim === CssMeasureModeUndefined) {
           setLayoutMeasuredDimensionForAxis node mainAxis (boundAxis node mainAxis maxLineMainDim.contents)
         } else if (
-          measureModeMainDim === CSS_MEASURE_MODE_AT_MOST
+          measureModeMainDim === CssMeasureModeAtMost
         ) {
           setLayoutMeasuredDimensionForAxis
             node
@@ -1065,13 +1065,13 @@ and layoutNodeImpl
                 paddingAndBorderAxisMain
             )
         };
-        if (measureModeCrossDim === CSS_MEASURE_MODE_UNDEFINED) {
+        if (measureModeCrossDim === CssMeasureModeUndefined) {
           setLayoutMeasuredDimensionForAxis
             node
             crossAxis
             (boundAxis node crossAxis (totalLineCrossDim.contents + paddingAndBorderAxisCross))
         } else if (
-          measureModeCrossDim === CSS_MEASURE_MODE_AT_MOST
+          measureModeCrossDim === CssMeasureModeAtMost
         ) {
           setLayoutMeasuredDimensionForAxis
             node
@@ -1094,50 +1094,50 @@ and layoutNodeImpl
           if performLayout {
             childWidth.contents = cssUndefined;
             childHeight.contents = cssUndefined;
-            if (isStyleDimDefined currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW) {
+            if (isStyleDimDefined currentAbsoluteChild.contents CssFlexDirectionRow) {
               childWidth.contents =
                 currentAbsoluteChild.contents.style.width +
-                getMarginAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
+                getMarginAxis currentAbsoluteChild.contents CssFlexDirectionRow
             } else if (
-              isLeadingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW &&
-              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
+              isLeadingPosDefinedWithFallback currentAbsoluteChild.contents CssFlexDirectionRow &&
+              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents CssFlexDirectionRow
             ) {
               childWidth.contents =
                 node.layout.measuredWidth - (
-                  getLeadingBorder node CSS_FLEX_DIRECTION_ROW +
-                  getTrailingBorder node CSS_FLEX_DIRECTION_ROW
+                  getLeadingBorder node CssFlexDirectionRow +
+                  getTrailingBorder node CssFlexDirectionRow
                 ) - (
-                  getLeadingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW +
-                  getTrailingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW
+                  getLeadingPositionWithFallback currentAbsoluteChild.contents CssFlexDirectionRow +
+                  getTrailingPositionWithFallback currentAbsoluteChild.contents CssFlexDirectionRow
                 );
               childWidth.contents =
-                boundAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW childWidth.contents
+                boundAxis currentAbsoluteChild.contents CssFlexDirectionRow childWidth.contents
             };
-            if (isStyleDimDefined currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN) {
+            if (isStyleDimDefined currentAbsoluteChild.contents CssFlexDirectionColumn) {
               childHeight.contents =
                 currentAbsoluteChild.contents.style.height +
-                getMarginAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
+                getMarginAxis currentAbsoluteChild.contents CssFlexDirectionColumn
             } else if (
               /* If the child doesn't have a specified height, compute the height based on the top/bottom offsets if they're defined. */
-              isLeadingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN &&
-              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
+              isLeadingPosDefinedWithFallback currentAbsoluteChild.contents CssFlexDirectionColumn &&
+              isTrailingPosDefinedWithFallback currentAbsoluteChild.contents CssFlexDirectionColumn
             ) {
               childHeight.contents =
                 node.layout.measuredHeight - (
-                  getLeadingBorder node CSS_FLEX_DIRECTION_COLUMN +
-                  getTrailingBorder node CSS_FLEX_DIRECTION_COLUMN
+                  getLeadingBorder node CssFlexDirectionColumn +
+                  getTrailingBorder node CssFlexDirectionColumn
                 ) - (
-                  getLeadingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN +
-                  getTrailingPositionWithFallback currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
+                  getLeadingPositionWithFallback currentAbsoluteChild.contents CssFlexDirectionColumn +
+                  getTrailingPositionWithFallback currentAbsoluteChild.contents CssFlexDirectionColumn
                 );
               childHeight.contents =
-                boundAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN childHeight.contents
+                boundAxis currentAbsoluteChild.contents CssFlexDirectionColumn childHeight.contents
             };
             if (isUndefined childWidth.contents || isUndefined childHeight.contents) {
               childWidthMeasureMode.contents =
-                isUndefined childWidth.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
+                isUndefined childWidth.contents ? CssMeasureModeUndefined : CssMeasureModeExactly;
               childHeightMeasureMode.contents =
-                isUndefined childHeight.contents ? CSS_MEASURE_MODE_UNDEFINED : CSS_MEASURE_MODE_EXACTLY;
+                isUndefined childHeight.contents ? CssMeasureModeUndefined : CssMeasureModeExactly;
               /*
                * According to the spec, if the main size is not definite and the
                * child's inline axis is parallel to the main axis (i.e. it's
@@ -1146,7 +1146,7 @@ and layoutNodeImpl
                */
               if ((!isMainAxisRow && isUndefined childWidth.contents) && !(isUndefined availableInnerWidth)) {
                 childWidth.contents = availableInnerWidth;
-                childWidthMeasureMode.contents = CSS_MEASURE_MODE_AT_MOST
+                childWidthMeasureMode.contents = CssMeasureModeAtMost
               };
               /*
                * If child has no defined size in the cross axis and is set to stretch, set the cross
@@ -1164,10 +1164,10 @@ and layoutNodeImpl
                   "abs-measure";
               childWidth.contents =
                 currentAbsoluteChild.contents.layout.measuredWidth +
-                getMarginAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_ROW;
+                getMarginAxis currentAbsoluteChild.contents CssFlexDirectionRow;
               childHeight.contents =
                 currentAbsoluteChild.contents.layout.measuredHeight +
-                getMarginAxis currentAbsoluteChild.contents CSS_FLEX_DIRECTION_COLUMN
+                getMarginAxis currentAbsoluteChild.contents CssFlexDirectionColumn
             };
             let _ =
               layoutNodeInternal
@@ -1175,8 +1175,8 @@ and layoutNodeImpl
                 childWidth.contents
                 childHeight.contents
                 direction
-                CSS_MEASURE_MODE_EXACTLY
-                CSS_MEASURE_MODE_EXACTLY
+                CssMeasureModeExactly
+                CssMeasureModeExactly
                 true
                 "abs-layout";
             if (
@@ -1211,9 +1211,9 @@ and layoutNodeImpl
         /* STEP 11: SETTING TRAILING POSITIONS FOR CHILDREN */
         if performLayout {
           let needsMainTrailingPos =
-            mainAxis == CSS_FLEX_DIRECTION_ROW_REVERSE || mainAxis == CSS_FLEX_DIRECTION_COLUMN_REVERSE;
+            mainAxis == CssFlexDirectionRowReverse || mainAxis == CssFlexDirectionColumnReverse;
           let needsCrossTrailingPos =
-            crossAxis == CSS_FLEX_DIRECTION_ROW_REVERSE || crossAxis == CSS_FLEX_DIRECTION_COLUMN_REVERSE;
+            crossAxis == CssFlexDirectionRowReverse || crossAxis == CssFlexDirectionColumnReverse;
           /* Set trailing position if necessary. */
           if (needsMainTrailingPos || needsCrossTrailingPos) {
             for i in 0 to (childCount -. 1) {
@@ -1243,31 +1243,31 @@ let layoutNode (node, availableWidth, availableHeight, parentDirection) => {
   open ReJsPrelude;
   let (availableWidth, widthMeasureMode) =
     if !(isUndefined availableWidth) {
-      (availableWidth, CSS_MEASURE_MODE_EXACTLY)
+      (availableWidth, CssMeasureModeExactly)
     } else if (
-      isStyleDimDefined node CSS_FLEX_DIRECTION_ROW
+      isStyleDimDefined node CssFlexDirectionRow
     ) {
-      (node.style.width +. getMarginAxis node CSS_FLEX_DIRECTION_ROW, CSS_MEASURE_MODE_EXACTLY)
+      (node.style.width +. getMarginAxis node CssFlexDirectionRow, CssMeasureModeExactly)
     } else if (
       node.style.maxWidth >= 0.0
     ) {
-      (node.style.maxWidth, CSS_MEASURE_MODE_AT_MOST)
+      (node.style.maxWidth, CssMeasureModeAtMost)
     } else {
-      (availableWidth, CSS_MEASURE_MODE_UNDEFINED)
+      (availableWidth, CssMeasureModeUndefined)
     };
   let (availableHeight, heightMeasureMode) =
     if !(isUndefined availableHeight) {
-      (availableHeight, CSS_MEASURE_MODE_EXACTLY)
+      (availableHeight, CssMeasureModeExactly)
     } else if (
-      isStyleDimDefined node CSS_FLEX_DIRECTION_COLUMN
+      isStyleDimDefined node CssFlexDirectionColumn
     ) {
-      (node.style.height +. getMarginAxis node CSS_FLEX_DIRECTION_COLUMN, CSS_MEASURE_MODE_EXACTLY)
+      (node.style.height +. getMarginAxis node CssFlexDirectionColumn, CssMeasureModeExactly)
     } else if (
       node.style.maxHeight >= 0.0
     ) {
-      (node.style.maxHeight, CSS_MEASURE_MODE_AT_MOST)
+      (node.style.maxHeight, CssMeasureModeAtMost)
     } else {
-      (availableHeight, CSS_MEASURE_MODE_UNDEFINED)
+      (availableHeight, CssMeasureModeUndefined)
     };
   if (
     layoutNodeInternal

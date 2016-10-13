@@ -2,44 +2,44 @@ type printOptions = {printLayout: bool, printStyle: bool, printChildren: bool};
 
 type direction =
   | CSS_DIRECTION_NEGATIVE_ONE_WHATEVER_THAT_MEANS /* 'inherit' */
-  | CSS_DIRECTION_INHERIT /* 'inherit' */
-  | CSS_DIRECTION_LTR /* 'ltr'     */
-  | CSS_DIRECTION_RTL /* 'rtl'     */;
+  | CssDirectionInherit /* 'inherit' */
+  | CssDirectionLtr /* 'ltr'     */
+  | CssDirectionRtl /* 'rtl'     */;
 
 type flexDirection =
-  | CSS_FLEX_DIRECTION_ROW /* 'row' */
-  | CSS_FLEX_DIRECTION_ROW_REVERSE
+  | CssFlexDirectionRow /* 'row' */
+  | CssFlexDirectionRowReverse
   /* 'row-reverse' */
-  | CSS_FLEX_DIRECTION_COLUMN /* 'column' */
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE;
+  | CssFlexDirectionColumn /* 'column' */
+  | CssFlexDirectionColumnReverse;
 
 /* 'column-reverse' */
 type justify =
-  | CSS_JUSTIFY_FLEX_START /* 'flex-start' */
-  | CSS_JUSTIFY_CENTER /* 'center' */
-  | CSS_JUSTIFY_FLEX_END /* 'flex-end' */
-  | CSS_JUSTIFY_SPACE_BETWEEN /* 'space-between' */
-  | CSS_JUSTIFY_SPACE_AROUND /* space-around' */;
+  | CssJustifyFlexStart /* 'flex-start' */
+  | CssJustifyCenter /* 'center' */
+  | CssJustifyFlexEnd /* 'flex-end' */
+  | CssJustifySpaceBetween /* 'space-between' */
+  | CssJustifySpaceAround /* space-around' */;
 
 type align =
-  | CSS_ALIGN_AUTO
-  | CSS_ALIGN_FLEX_START /* 'flex-start' */
-  | CSS_ALIGN_CENTER /* 'center' */
-  | CSS_ALIGN_FLEX_END /* 'flex-end' */
-  | CSS_ALIGN_STRETCH /* 'stretch' */;
+  | CssAlignAuto
+  | CssAlignFlexStart /* 'flex-start' */
+  | CssAlignCenter /* 'center' */
+  | CssAlignFlexEnd /* 'flex-end' */
+  | CssAlignStretch /* 'stretch' */;
 
 type positionType =
-  | CSS_POSITION_RELATIVE /* 'relative' */
-  | CSS_POSITION_ABSOLUTE /* 'absolute' */;
+  | CssPositionRelative /* 'relative' */
+  | CssPositionAbsolute /* 'absolute' */;
 
 type measureMode =
   /* there are some places in the reference implementation that set
    * the measure mode to negative one.*/
   /* https://github.com/facebook/css-layout/pull/185#r64995699 */
   | CSS_MEASURE_MODE_NEGATIVE_ONE_WHATEVER_THAT_MEANS
-  | CSS_MEASURE_MODE_UNDEFINED /* 'undefined' */
-  | CSS_MEASURE_MODE_EXACTLY /* 'exactly' */
-  | CSS_MEASURE_MODE_AT_MOST /* 'at-most' */;
+  | CssMeasureModeUndefined /* 'undefined' */
+  | CssMeasureModeExactly /* 'exactly' */
+  | CssMeasureModeAtMost /* 'at-most' */;
 
 type position =
   | CSS_LEFT
@@ -63,13 +63,13 @@ type cachedMeasurement = {
 };
 
 type overflow =
-  | CSS_OVERFLOW_VISIBLE
-  | CSS_OVERFLOW_SCROLL
-  | CSS_OVERFLOW_HIDDEN;
+  | Visible
+  | Scroll
+  | Hidden;
 
 type wrapType =
-  | CSS_NOWRAP
-  | CSS_WRAP;
+  | CssNoWrap
+  | CssWrap;
 
 type dimensions = {width: float, height: float};
 
@@ -197,26 +197,26 @@ type node 'context = {
   context: 'context
 };
 /* static css_position_t leading[4] = { */
-/*   /* CSS_FLEX_DIRECTION_COLUMN = */ CSS_TOP, */
-/*   /* CSS_FLEX_DIRECTION_COLUMN_REVERSE = */ CSS_BOTTOM, */
-/*   /* CSS_FLEX_DIRECTION_ROW = */ CSS_LEFT, */
-/*   /* CSS_FLEX_DIRECTION_ROW_REVERSE = */ CSS_RIGHT */
+/*   /* CssFlexDirectionColumn = */ CSS_TOP, */
+/*   /* CssFlexDirectionColumnReverse = */ CSS_BOTTOM, */
+/*   /* CssFlexDirectionRow = */ CSS_LEFT, */
+/*   /* CssFlexDirectionRowReverse = */ CSS_RIGHT */
 /* }; */
 /* static css_position_t trailing[4] = { */
-/*   /* CSS_FLEX_DIRECTION_COLUMN = */ CSS_BOTTOM, */
-/*   /* CSS_FLEX_DIRECTION_COLUMN_REVERSE = */ CSS_TOP, */
-/*   /* CSS_FLEX_DIRECTION_ROW = */ CSS_RIGHT, */
-/*   /* CSS_FLEX_DIRECTION_ROW_REVERSE = */ CSS_LEFT */
+/*   /* CssFlexDirectionColumn = */ CSS_BOTTOM, */
+/*   /* CssFlexDirectionColumnReverse = */ CSS_TOP, */
+/*   /* CssFlexDirectionRow = */ CSS_RIGHT, */
+/*   /* CssFlexDirectionRowReverse = */ CSS_LEFT */
 /* }; */
 /* static css_position_t pos[4] = { */
-/*   /* CSS_FLEX_DIRECTION_COLUMN = */ CSS_TOP, */
-/*   /* CSS_FLEX_DIRECTION_COLUMN_REVERSE = */ CSS_BOTTOM, */
-/*   /* CSS_FLEX_DIRECTION_ROW = */ CSS_LEFT, */
-/*   /* CSS_FLEX_DIRECTION_ROW_REVERSE = */ CSS_RIGHT */
+/*   /* CssFlexDirectionColumn = */ CSS_TOP, */
+/*   /* CssFlexDirectionColumnReverse = */ CSS_BOTTOM, */
+/*   /* CssFlexDirectionRow = */ CSS_LEFT, */
+/*   /* CssFlexDirectionRowReverse = */ CSS_RIGHT */
 /* }; */
 /* static css_dimension_t dim[4] = { */
-/*   /* CSS_FLEX_DIRECTION_COLUMN = */ CSS_HEIGHT, */
-/*   /* CSS_FLEX_DIRECTION_COLUMN_REVERSE = */ CSS_HEIGHT, */
-/*   /* CSS_FLEX_DIRECTION_ROW = */ CSS_WIDTH, */
-/*   /* CSS_FLEX_DIRECTION_ROW_REVERSE = */ CSS_WIDTH */
+/*   /* CssFlexDirectionColumn = */ CSS_HEIGHT, */
+/*   /* CssFlexDirectionColumnReverse = */ CSS_HEIGHT, */
+/*   /* CssFlexDirectionRow = */ CSS_WIDTH, */
+/*   /* CssFlexDirectionRowReverse = */ CSS_WIDTH */
 /* }; */

@@ -67,13 +67,13 @@ let dummyMeasure context width widthMeasureMode height heightMeasureMode =>
 let dummyIsDirty context => false;
 
 /*
-   node->style.align_items = CSS_ALIGN_STRETCH;
-   node->style.align_content = CSS_ALIGN_FLEX_START;
+   node->style.align_items = CssAlignStretch;
+   node->style.align_content = CssAlignFlexStart;
 
-   node->style.direction = CSS_DIRECTION_INHERIT;
-   node->style.flex_direction = CSS_FLEX_DIRECTION_COLUMN;
+   node->style.direction = CssDirectionInherit;
+   node->style.flex_direction = CssFlexDirectionColumn;
 
-   node->style.overflow = CSS_OVERFLOW_VISIBLE;
+   node->style.overflow = Visible;
 
 
    node->layout.dimensions[CSS_WIDTH] = CSS_UNDEFINED;
@@ -102,15 +102,15 @@ let dummyCachedMeasurement = {
 let rec theNullNode = {
   children: [||],
   style: {
-    direction: CSS_DIRECTION_INHERIT,
-    flexDirection: CSS_FLEX_DIRECTION_COLUMN,
-    justifyContent: CSS_JUSTIFY_FLEX_START,
-    alignContent: CSS_ALIGN_FLEX_START,
-    alignItems: CSS_ALIGN_STRETCH,
-    alignSelf: CSS_ALIGN_AUTO,
-    positionType: CSS_POSITION_RELATIVE,
-    flexWrap: CSS_NOWRAP,
-    overflow: CSS_OVERFLOW_VISIBLE,
+    direction: CssDirectionInherit,
+    flexDirection: CssFlexDirectionColumn,
+    justifyContent: CssJustifyFlexStart,
+    alignContent: CssAlignFlexStart,
+    alignItems: CssAlignStretch,
+    alignSelf: CssAlignAuto,
+    positionType: CssPositionRelative,
+    flexWrap: CssNoWrap,
+    overflow: Visible,
     /**
      * Properties that start out as zero.
      */
@@ -152,13 +152,13 @@ let rec theNullNode = {
     borderEnd: cssUndefined
   },
   layout: {
-    direction: CSS_DIRECTION_INHERIT,
+    direction: CssDirectionInherit,
     /* Instead of recomputing the entire layout every single time, we
      * cache some information to break early when nothing changed */
     hasNewLayout: true,
     generationCount: 0,
     lastParentDirection: CSS_DIRECTION_NEGATIVE_ONE_WHATEVER_THAT_MEANS,
-    lastDirection: CSS_DIRECTION_INHERIT,
+    lastDirection: CssDirectionInherit,
     nextCachedMeasurementsIndex: 0,
     /**
      * Hardcoded to 6 previous measurements.
@@ -215,8 +215,8 @@ let rec createNode context => {
   let rec retNode = {
     ...theNullNode,
     children: [||],
-    style: {...theNullNode.style, overflow: CSS_OVERFLOW_VISIBLE},
-    layout: {...theNullNode.layout, direction: CSS_DIRECTION_INHERIT},
+    style: {...theNullNode.style, overflow: Visible},
+    layout: {...theNullNode.layout, direction: CssDirectionInherit},
     context
   };
   retNode
@@ -240,10 +240,10 @@ let insertChild node child index => {
  */
 let layoutMeasuredDimensionForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.measuredHeight
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.measuredHeight
-  | CSS_FLEX_DIRECTION_ROW => node.layout.measuredWidth
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.measuredWidth
+  | CssFlexDirectionColumn => node.layout.measuredHeight
+  | CssFlexDirectionColumnReverse => node.layout.measuredHeight
+  | CssFlexDirectionRow => node.layout.measuredWidth
+  | CssFlexDirectionRowReverse => node.layout.measuredWidth
   };
 
 
@@ -252,10 +252,10 @@ let layoutMeasuredDimensionForAxis node axis =>
  */
 let layoutPosPositionForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.top
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.bottom
-  | CSS_FLEX_DIRECTION_ROW => node.layout.left
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.right
+  | CssFlexDirectionColumn => node.layout.top
+  | CssFlexDirectionColumnReverse => node.layout.bottom
+  | CssFlexDirectionRow => node.layout.left
+  | CssFlexDirectionRowReverse => node.layout.right
   };
 
 
@@ -270,10 +270,10 @@ let layoutLeadingPositionForAxis = layoutPosPositionForAxis;
  */
 let layoutTrailingPositionForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.bottom
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.top
-  | CSS_FLEX_DIRECTION_ROW => node.layout.right
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.left
+  | CssFlexDirectionColumn => node.layout.bottom
+  | CssFlexDirectionColumnReverse => node.layout.top
+  | CssFlexDirectionRow => node.layout.right
+  | CssFlexDirectionRowReverse => node.layout.left
   };
 
 
@@ -282,10 +282,10 @@ let layoutTrailingPositionForAxis node axis =>
  */
 let styleDimensionForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.height
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.height
-  | CSS_FLEX_DIRECTION_ROW => node.style.width
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.width
+  | CssFlexDirectionColumn => node.style.height
+  | CssFlexDirectionColumnReverse => node.style.height
+  | CssFlexDirectionRow => node.style.width
+  | CssFlexDirectionRowReverse => node.style.width
   };
 
 
@@ -306,10 +306,10 @@ let styleForPosition node pos =>
  */
 let styleLeadingPositionForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.top
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.bottom
-  | CSS_FLEX_DIRECTION_ROW => node.style.left
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.right
+  | CssFlexDirectionColumn => node.style.top
+  | CssFlexDirectionColumnReverse => node.style.bottom
+  | CssFlexDirectionRow => node.style.left
+  | CssFlexDirectionRowReverse => node.style.right
   };
 
 let styleLeadingPositionForAxisOrZero node axis => {
@@ -319,26 +319,26 @@ let styleLeadingPositionForAxisOrZero node axis => {
 
 let styleLeadingPaddingForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.paddingTop
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.paddingBottom
-  | CSS_FLEX_DIRECTION_ROW => node.style.paddingLeft
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.paddingRight
+  | CssFlexDirectionColumn => node.style.paddingTop
+  | CssFlexDirectionColumnReverse => node.style.paddingBottom
+  | CssFlexDirectionRow => node.style.paddingLeft
+  | CssFlexDirectionRowReverse => node.style.paddingRight
   };
 
 let styleLeadingMarginForAxis node leadingAxis =>
   switch leadingAxis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.marginTop
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.marginBottom
-  | CSS_FLEX_DIRECTION_ROW => node.style.marginLeft
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.marginRight
+  | CssFlexDirectionColumn => node.style.marginTop
+  | CssFlexDirectionColumnReverse => node.style.marginBottom
+  | CssFlexDirectionRow => node.style.marginLeft
+  | CssFlexDirectionRowReverse => node.style.marginRight
   };
 
 let styleLeadingBorderForAxis node leadingAxis =>
   switch leadingAxis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.borderTop
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.borderBottom
-  | CSS_FLEX_DIRECTION_ROW => node.style.borderLeft
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.borderRight
+  | CssFlexDirectionColumn => node.style.borderTop
+  | CssFlexDirectionColumnReverse => node.style.borderBottom
+  | CssFlexDirectionRow => node.style.borderLeft
+  | CssFlexDirectionRowReverse => node.style.borderRight
   };
 
 
@@ -347,10 +347,10 @@ let styleLeadingBorderForAxis node leadingAxis =>
  */
 let styleTrailingPositionForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.bottom
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.top
-  | CSS_FLEX_DIRECTION_ROW => node.style.right
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.left
+  | CssFlexDirectionColumn => node.style.bottom
+  | CssFlexDirectionColumnReverse => node.style.top
+  | CssFlexDirectionRow => node.style.right
+  | CssFlexDirectionRowReverse => node.style.left
   };
 
 let styleTrailingPositionForAxisOrZero node axis => {
@@ -360,26 +360,26 @@ let styleTrailingPositionForAxisOrZero node axis => {
 
 let styleTrailingPaddingForAxis node axis =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.paddingBottom
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.paddingTop
-  | CSS_FLEX_DIRECTION_ROW => node.style.paddingRight
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.paddingLeft
+  | CssFlexDirectionColumn => node.style.paddingBottom
+  | CssFlexDirectionColumnReverse => node.style.paddingTop
+  | CssFlexDirectionRow => node.style.paddingRight
+  | CssFlexDirectionRowReverse => node.style.paddingLeft
   };
 
 let styleTrailingMarginForAxis node trailingAxis =>
   switch trailingAxis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.marginBottom
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.marginTop
-  | CSS_FLEX_DIRECTION_ROW => node.style.marginRight
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.marginLeft
+  | CssFlexDirectionColumn => node.style.marginBottom
+  | CssFlexDirectionColumnReverse => node.style.marginTop
+  | CssFlexDirectionRow => node.style.marginRight
+  | CssFlexDirectionRowReverse => node.style.marginLeft
   };
 
 let styleTrailingBorderForAxis node trailingAxis =>
   switch trailingAxis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.style.borderBottom
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.style.borderTop
-  | CSS_FLEX_DIRECTION_ROW => node.style.borderRight
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.style.borderLeft
+  | CssFlexDirectionColumn => node.style.borderBottom
+  | CssFlexDirectionColumnReverse => node.style.borderTop
+  | CssFlexDirectionRow => node.style.borderRight
+  | CssFlexDirectionRowReverse => node.style.borderLeft
   };
 
 
@@ -388,18 +388,18 @@ let styleTrailingBorderForAxis node trailingAxis =>
  */
 let setDimLayoutDimensionForAxis node axis value =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.height = value
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.height = value
-  | CSS_FLEX_DIRECTION_ROW => node.layout.width = value
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.width = value
+  | CssFlexDirectionColumn => node.layout.height = value
+  | CssFlexDirectionColumnReverse => node.layout.height = value
+  | CssFlexDirectionRow => node.layout.width = value
+  | CssFlexDirectionRowReverse => node.layout.width = value
   };
 
 let setLayoutMeasuredDimensionForAxis node axis value =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.measuredHeight = value
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.measuredHeight = value
-  | CSS_FLEX_DIRECTION_ROW => node.layout.measuredWidth = value
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.measuredWidth = value
+  | CssFlexDirectionColumn => node.layout.measuredHeight = value
+  | CssFlexDirectionColumnReverse => node.layout.measuredHeight = value
+  | CssFlexDirectionRow => node.layout.measuredWidth = value
+  | CssFlexDirectionRowReverse => node.layout.measuredWidth = value
   };
 
 
@@ -408,10 +408,10 @@ let setLayoutMeasuredDimensionForAxis node axis value =>
  */
 let setLayoutLeadingPositionForAxis node axis value =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.top = value
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.bottom = value
-  | CSS_FLEX_DIRECTION_ROW => node.layout.left = value
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.right = value
+  | CssFlexDirectionColumn => node.layout.top = value
+  | CssFlexDirectionColumnReverse => node.layout.bottom = value
+  | CssFlexDirectionRow => node.layout.left = value
+  | CssFlexDirectionRowReverse => node.layout.right = value
   };
 
 
@@ -420,29 +420,29 @@ let setLayoutLeadingPositionForAxis node axis value =>
  */
 let setLayoutTrailingPositionForAxis node axis value =>
   switch axis {
-  | CSS_FLEX_DIRECTION_COLUMN => node.layout.bottom = value
-  | CSS_FLEX_DIRECTION_COLUMN_REVERSE => node.layout.top = value
-  | CSS_FLEX_DIRECTION_ROW => node.layout.right = value
-  | CSS_FLEX_DIRECTION_ROW_REVERSE => node.layout.left = value
+  | CssFlexDirectionColumn => node.layout.bottom = value
+  | CssFlexDirectionColumnReverse => node.layout.top = value
+  | CssFlexDirectionRow => node.layout.right = value
+  | CssFlexDirectionRowReverse => node.layout.left = value
   };
 
 let resolveDirection node parentDirection => {
   let direction = node.style.direction;
-  if (direction === CSS_DIRECTION_INHERIT) {
-    parentDirection === CSS_DIRECTION_INHERIT ? CSS_DIRECTION_LTR : parentDirection
+  if (direction === CssDirectionInherit) {
+    parentDirection === CssDirectionInherit ? CssDirectionLtr : parentDirection
   } else {
     direction
   }
 };
 
 let resolveAxis flex_direction direction =>
-  if (direction === CSS_DIRECTION_RTL) {
-    if (flex_direction === CSS_FLEX_DIRECTION_ROW) {
-      CSS_FLEX_DIRECTION_ROW_REVERSE
+  if (direction === CssDirectionRtl) {
+    if (flex_direction === CssFlexDirectionRow) {
+      CssFlexDirectionRowReverse
     } else if (
-      flex_direction === CSS_FLEX_DIRECTION_ROW_REVERSE
+      flex_direction === CssFlexDirectionRowReverse
     ) {
-      CSS_FLEX_DIRECTION_ROW
+      CssFlexDirectionRow
     } else {
       flex_direction
     }
@@ -451,17 +451,17 @@ let resolveAxis flex_direction direction =>
   };
 
 let isRowDirection flexDirection =>
-  flexDirection === CSS_FLEX_DIRECTION_ROW || flexDirection === CSS_FLEX_DIRECTION_ROW_REVERSE;
+  flexDirection === CssFlexDirectionRow || flexDirection === CssFlexDirectionRowReverse;
 
 let isColumnDirection flexDirection =>
-  flexDirection === CSS_FLEX_DIRECTION_COLUMN || flexDirection === CSS_FLEX_DIRECTION_COLUMN_REVERSE;
+  flexDirection === CssFlexDirectionColumn || flexDirection === CssFlexDirectionColumnReverse;
 
 let getCrossFlexDirection flex_direction direction =>
   isColumnDirection flex_direction ?
-    resolveAxis CSS_FLEX_DIRECTION_ROW direction : CSS_FLEX_DIRECTION_COLUMN;
+    resolveAxis CssFlexDirectionRow direction : CssFlexDirectionColumn;
 
 let isFlex node =>
-  node.style.positionType === CSS_POSITION_RELATIVE && (
+  node.style.positionType === CssPositionRelative && (
     node.style.flexGrow != 0.0 || node.style.flexShrink != 0.0
   );
 
@@ -525,7 +525,7 @@ let getPaddingAndBorderAxis node axis =>
   getLeadingPaddingAndBorder node axis +. getTrailingPaddingAndBorder node axis;
 
 let getAlignItem node child =>
-  child.style.alignSelf !== CSS_ALIGN_AUTO ? child.style.alignSelf : node.style.alignItems;
+  child.style.alignSelf !== CssAlignAuto ? child.style.alignSelf : node.style.alignItems;
 
 let getDimWithMargin node axis =>
   layoutMeasuredDimensionForAxis node axis +. getLeadingMargin node axis +. getTrailingMargin node axis;

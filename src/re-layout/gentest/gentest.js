@@ -87,7 +87,7 @@ function printTest(LTRContainer, RTLContainer) {
       return curr + '\n  ' + prev;
     }));
 
-    lines.push('  Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);');
+    lines.push('  Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);');
     lines.push('');
 
     lines.push('  ' + assertTestTree(LTRLayoutTree[i], 'root', null).reduce(function(curr, prev) {
@@ -95,7 +95,7 @@ function printTest(LTRContainer, RTLContainer) {
     }));
     lines.push('');
 
-    lines.push('  Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);');
+    lines.push('  Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);');
     lines.push('');
 
     lines.push('  ' + assertTestTree(RTLLayoutTree[i], 'root', null).reduce(function(curr, prev) {
@@ -386,59 +386,59 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
 
 function overflowValue(value) {
   switch (value) {
-    case 'visible': return 'CSS_OVERFLOW_VISIBLE';
-    case 'hidden': return 'CSS_OVERFLOW_HIDDEN';
+    case 'visible': return 'Visible';
+    case 'hidden': return 'Hidden';
   }
 }
 
 function wrapValue(value) {
   switch (value) {
-    case 'wrap': return 'CSS_WRAP';
-    case 'nowrap': return 'CSS_NOWRAP';
+    case 'wrap': return 'CssWrap';
+    case 'nowrap': return 'CssNoWrap';
   }
 }
 
 function flexDirectionValue(value) {
   switch (value) {
-    case 'row': return 'CSS_FLEX_DIRECTION_ROW';
-    case 'row-reverse': return 'CSS_FLEX_DIRECTION_ROW_REVERSE';
-    case 'column': return 'CSS_FLEX_DIRECTION_COLUMN';
-    case 'column-reverse': return 'CSS_FLEX_DIRECTION_COLUMN_REVERSE';
+    case 'row': return 'CssFlexDirectionRow';
+    case 'row-reverse': return 'CssFlexDirectionRowReverse';
+    case 'column': return 'CssFlexDirectionColumn';
+    case 'column-reverse': return 'CssFlexDirectionColumnReverse';
   }
 }
 
 function justifyValue(value) {
   switch (value) {
-    case 'center': return 'CSS_JUSTIFY_CENTER';
-    case 'space-around': return 'CSS_JUSTIFY_SPACE_AROUND';
-    case 'space-between': return 'CSS_JUSTIFY_SPACE_BETWEEN';
-    case 'flex-start': return 'CSS_JUSTIFY_FLEX_START';
-    case 'flex-end': return 'CSS_JUSTIFY_FLEX_END';
+    case 'center': return 'CssJustifyCenter';
+    case 'space-around': return 'CssJustifySpaceAround';
+    case 'space-between': return 'CssJustifySpaceBetween';
+    case 'flex-start': return 'CssJustifyFlexStart';
+    case 'flex-end': return 'CssJustifyFlexEnd';
   }
 }
 
 function positionValue(value) {
   switch (value) {
-    case 'absolute': return 'CSS_POSITION_ABSOLUTE';
-    default: return 'CSS_POSITION_RELATIVE'
+    case 'absolute': return 'CssPositionAbsolute';
+    default: return 'CssPositionRelative'
   }
 }
 
 function directionValue(value) {
   switch (value) {
-    case 'ltr': return 'CSS_DIRECTION_LTR';
-    case 'rtl': return 'CSS_DIRECTION_RTL';
-    case 'inherit': return 'CSS_DIRECTION_INHERIT';
+    case 'ltr': return 'CssDirectionLtr';
+    case 'rtl': return 'CssDirectionRtl';
+    case 'inherit': return 'CssDirectionInherit';
   }
 }
 
 function alignValue(value) {
   switch (value) {
-    case 'auto': return 'CSS_ALIGN_AUTO';
-    case 'center': return 'CSS_ALIGN_CENTER';
-    case 'stretch': return 'CSS_ALIGN_STRETCH';
-    case 'flex-start': return 'CSS_ALIGN_FLEX_START';
-    case 'flex-end': return 'CSS_ALIGN_FLEX_END';
+    case 'auto': return 'CssAlignAuto';
+    case 'center': return 'CssAlignCenter';
+    case 'stretch': return 'CssAlignStretch';
+    case 'flex-start': return 'CssAlignFlexStart';
+    case 'flex-end': return 'CssAlignFlexEnd';
   }
 }
 

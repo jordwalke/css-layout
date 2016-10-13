@@ -53,97 +53,97 @@ let rec printCssNodeRec (node, options, level) => {
   if options.printStyle {
     indent (level + 1);
     Printf.printf "style: {\n";
-    if (node.style.flexDirection == CSS_FLEX_DIRECTION_COLUMN) {
+    if (node.style.flexDirection == CssFlexDirectionColumn) {
       indent (level + 2);
       Printf.printf "flexDirection: 'column',\n"
     } else if (
-      node.style.flexDirection == CSS_FLEX_DIRECTION_COLUMN_REVERSE
+      node.style.flexDirection == CssFlexDirectionColumnReverse
     ) {
       indent (level + 2);
       Printf.printf "flexDirection: 'column-reverse',\n"
     } else if (
-      node.style.flexDirection == CSS_FLEX_DIRECTION_ROW
+      node.style.flexDirection == CssFlexDirectionRow
     ) {
       indent (level + 2);
       Printf.printf "flexDirection: 'row',\n"
     } else if (
-      node.style.flexDirection == CSS_FLEX_DIRECTION_ROW_REVERSE
+      node.style.flexDirection == CssFlexDirectionRowReverse
     ) {
       indent (level + 2);
       Printf.printf "flexDirection: 'row-reverse',\n"
     };
-    if (node.style.justifyContent == CSS_JUSTIFY_CENTER) {
+    if (node.style.justifyContent == CssJustifyCenter) {
       indent (level + 2);
       Printf.printf "justifyContent: 'center',\n"
     } else if (
-      node.style.justifyContent == CSS_JUSTIFY_FLEX_END
+      node.style.justifyContent == CssJustifyFlexEnd
     ) {
       indent (level + 2);
       Printf.printf "justifyContent: 'flex-end',\n"
     } else if (
-      node.style.justifyContent == CSS_JUSTIFY_SPACE_AROUND
+      node.style.justifyContent == CssJustifySpaceAround
     ) {
       indent (level + 2);
       Printf.printf "justifyContent: 'space-around',\n"
     } else if (
-      node.style.justifyContent == CSS_JUSTIFY_SPACE_BETWEEN
+      node.style.justifyContent == CssJustifySpaceBetween
     ) {
       indent (level + 2);
       Printf.printf "justifyContent: 'space-between',\n"
     };
-    if (node.style.alignItems == CSS_ALIGN_CENTER) {
+    if (node.style.alignItems == CssAlignCenter) {
       indent (level + 2);
       Printf.printf "alignItems: 'center',\n"
     } else if (
-      node.style.alignItems == CSS_ALIGN_FLEX_END
+      node.style.alignItems == CssAlignFlexEnd
     ) {
       indent (level + 2);
       Printf.printf "alignItems: 'flex-end',\n"
     } else if (
-      node.style.alignItems == CSS_ALIGN_STRETCH
+      node.style.alignItems == CssAlignStretch
     ) {
       indent (level + 2);
       Printf.printf "alignItems: 'stretch',\n"
     };
-    if (node.style.alignContent == CSS_ALIGN_CENTER) {
+    if (node.style.alignContent == CssAlignCenter) {
       indent (level + 2);
       Printf.printf "alignContent: 'center',\n"
     } else if (
-      node.style.alignContent == CSS_ALIGN_FLEX_END
+      node.style.alignContent == CssAlignFlexEnd
     ) {
       indent (level + 2);
       Printf.printf "alignContent: 'flex-end',\n"
     } else if (
-      node.style.alignContent == CSS_ALIGN_STRETCH
+      node.style.alignContent == CssAlignStretch
     ) {
       indent (level + 2);
       Printf.printf "alignContent: 'stretch',\n"
     };
-    if (node.style.alignSelf == CSS_ALIGN_FLEX_START) {
+    if (node.style.alignSelf == CssAlignFlexStart) {
       indent (level + 2);
       Printf.printf "alignSelf: 'flex-start',\n"
     } else if (
-      node.style.alignSelf == CSS_ALIGN_CENTER
+      node.style.alignSelf == CssAlignCenter
     ) {
       indent (level + 2);
       Printf.printf "alignSelf: 'center',\n"
     } else if (
-      node.style.alignSelf == CSS_ALIGN_FLEX_END
+      node.style.alignSelf == CssAlignFlexEnd
     ) {
       indent (level + 2);
       Printf.printf "alignSelf: 'flex-end',\n"
     } else if (
-      node.style.alignSelf == CSS_ALIGN_STRETCH
+      node.style.alignSelf == CssAlignStretch
     ) {
       indent (level + 2);
       Printf.printf "alignSelf: 'stretch',\n"
     };
     print_number_nan (level + 2, "flex", LayoutSupport.cssNodeStyleGetFlex node);
-    if (node.style.overflow == CSS_OVERFLOW_HIDDEN) {
+    if (node.style.overflow == Hidden) {
       indent (level + 2);
       Printf.printf "overflow: 'hidden',\n"
     } else if (
-      node.style.overflow == CSS_OVERFLOW_VISIBLE
+      node.style.overflow == Visible
     ) {
       indent (level + 2);
       Printf.printf "overflow: 'visible',\n"
@@ -175,7 +175,7 @@ let rec printCssNodeRec (node, options, level) => {
     print_number_nan (level + 2, "maxHeight", node.style.maxHeight);
     print_number_nan (level + 2, "minWidth", node.style.minWidth);
     print_number_nan (level + 2, "minHeight", node.style.minHeight);
-    if (node.style.positionType == CSS_POSITION_ABSOLUTE) {
+    if (node.style.positionType == CssPositionAbsolute) {
       indent (level + 2);
       Printf.printf "position: 'absolute', "
     };
