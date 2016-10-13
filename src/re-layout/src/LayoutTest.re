@@ -132,6 +132,10 @@ let flex_basis_flex_shrink_column = "flex_basis_flex_shrink_column";
 
 let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
 
+let jwalke_border_width_only_start = "jwalke_border_width_only_start";
+
+let jwalke_border_width_only_end = "jwalke_border_width_only_end";
+
 
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -273,7 +277,7 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
    <div style="width: 10px;"></div>
  </div>
 
- <div id="wrap_column" style="height: 100px; flex-wrap: wrap">
+ <div id="wrap_column" style="height: 100px; width: 60px; flex-wrap: wrap">
    <div style="height: 30px; width: 30px;"></div>
    <div style="height: 30px; width: 30px;"></div>
    <div style="height: 30px; width: 30px;"></div>
@@ -479,6 +483,14 @@ let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
  <div id="flex_basis_flex_shrink_row" style="width: 100px; height: 100px; flex-direction: row;">
    <div style="flex-basis: 100px; flex-shrink: 1;"></div>
    <div style="flex-basis: 50px;"></div>
+ </div>
+
+ <div id="jwalke_border_width_only_start" style="width: 100px; height: 100px; border-left-width-because-start: 1; border-left-width: 10px; border-top-width: 10px; border-bottom-width: 20px; align-items: center; justify-content: center;">
+   <div style="height: 10px; width: 10px;"></div>
+ </div>
+
+ <div id="jwalke_border_width_only_end" style="width: 100px; height: 100px; border-right-width-because-end: 1; border-right-width: 10px; border-top-width: 10px; border-bottom-width: 20px; align-items: center; justify-content: center;">
+   <div style="height: 10px; width: 10px;"></div>
  </div>
   *
   */
@@ -1383,7 +1395,7 @@ for ii in 0 to times {
     (
       fun () => {
         let root = LayoutSupport.createNode ();
-        let root = {...root, style: {...root.style, flexWrap: CSS_WRAP, height: 100.0}};
+        let root = {...root, style: {...root.style, flexWrap: CSS_WRAP, width: 60.0, height: 100.0}};
         let root_child0 = LayoutSupport.createNode ();
         let root_child0 = {...root_child0, style: {...root_child0.style, width: 30.0, height: 30.0}};
         LayoutSupport.insertChild root root_child0 0;
@@ -1399,7 +1411,7 @@ for ii in 0 to times {
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
         assertLayouts
           60
-          ({...root.layout, top: 0.0, left: 0.0, width: 30.0, height: 100.0}, root.layout)
+          ({...root.layout, top: 0.0, left: 0.0, width: 60.0, height: 100.0}, root.layout)
           [
             ({...root_child0.layout, top: 0.0, left: 0.0, width: 30.0, height: 30.0}, root_child0.layout),
             ({...root_child1.layout, top: 30.0, left: 0.0, width: 30.0, height: 30.0}, root_child1.layout),
@@ -1409,12 +1421,12 @@ for ii in 0 to times {
         Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
         assertLayouts
           61
-          ({...root.layout, top: 0.0, left: 0.0, width: 30.0, height: 100.0}, root.layout)
+          ({...root.layout, top: 0.0, left: 0.0, width: 60.0, height: 100.0}, root.layout)
           [
-            ({...root_child0.layout, top: 0.0, left: 0.0, width: 30.0, height: 30.0}, root_child0.layout),
-            ({...root_child1.layout, top: 30.0, left: 0.0, width: 30.0, height: 30.0}, root_child1.layout),
-            ({...root_child2.layout, top: 60.0, left: 0.0, width: 30.0, height: 30.0}, root_child2.layout),
-            ({...root_child3.layout, top: 0.0, left: (-30.0), width: 30.0, height: 30.0}, root_child3.layout)
+            ({...root_child0.layout, top: 0.0, left: 30.0, width: 30.0, height: 30.0}, root_child0.layout),
+            ({...root_child1.layout, top: 30.0, left: 30.0, width: 30.0, height: 30.0}, root_child1.layout),
+            ({...root_child2.layout, top: 60.0, left: 30.0, width: 30.0, height: 30.0}, root_child2.layout),
+            ({...root_child3.layout, top: 0.0, left: 0.0, width: 30.0, height: 30.0}, root_child3.layout)
           ]
       }
     );
@@ -2768,6 +2780,78 @@ for ii in 0 to times {
             ({...root_child0.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child0.layout),
             ({...root_child1.layout, top: 0.0, left: 0.0, width: 50.0, height: 100.0}, root_child1.layout)
           ]
+      }
+    );
+  it
+    jwalke_border_width_only_start
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {
+            ...root.style,
+            justifyContent: CSS_JUSTIFY_CENTER,
+            alignItems: CSS_ALIGN_CENTER,
+            borderTop: 10.0,
+            borderBottom: 20.0,
+            width: 100.0,
+            height: 100.0,
+            borderStart: 10.0
+          }
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {
+          ...root_child0,
+          style: {...root_child0.style, alignSelf: CSS_ALIGN_CENTER, width: 10.0, height: 10.0}
+        };
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          136
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 40.0, left: 50.0, width: 10.0, height: 10.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          137
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 40.0, left: 40.0, width: 10.0, height: 10.0}, root_child0.layout)]
+      }
+    );
+  it
+    jwalke_border_width_only_end
+    (
+      fun () => {
+        let root = LayoutSupport.createNode ();
+        let root = {
+          ...root,
+          style: {
+            ...root.style,
+            justifyContent: CSS_JUSTIFY_CENTER,
+            alignItems: CSS_ALIGN_CENTER,
+            borderTop: 10.0,
+            borderBottom: 20.0,
+            width: 100.0,
+            height: 100.0,
+            borderEnd: 10.0
+          }
+        };
+        let root_child0 = LayoutSupport.createNode ();
+        let root_child0 = {
+          ...root_child0,
+          style: {...root_child0.style, alignSelf: CSS_ALIGN_CENTER, width: 10.0, height: 10.0}
+        };
+        LayoutSupport.insertChild root root_child0 0;
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_LTR);
+        assertLayouts
+          138
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 40.0, left: 40.0, width: 10.0, height: 10.0}, root_child0.layout)];
+        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CSS_DIRECTION_RTL);
+        assertLayouts
+          139
+          ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
+          [({...root_child0.layout, top: 40.0, left: 50.0, width: 10.0, height: 10.0}, root_child0.layout)]
       }
     )
 };

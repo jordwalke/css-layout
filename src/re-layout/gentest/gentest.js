@@ -673,7 +673,7 @@ function getComputedStyleInKebabForm(node) {
    <div style="width: 10px;"></div>
  </div>
 
- <div id="wrap_column" style="height: 100px; flex-wrap: wrap">
+ <div id="wrap_column" style="height: 100px; width: 60px; flex-wrap: wrap">
    <div style="height: 30px; width: 30px;"></div>
    <div style="height: 30px; width: 30px;"></div>
    <div style="height: 30px; width: 30px;"></div>
@@ -877,4 +877,34 @@ function getComputedStyleInKebabForm(node) {
    <div style="flex-basis: 100px; flex-shrink: 1;"></div>
    <div style="flex-basis: 50px;"></div>
  </div>
+
+
+
+ <div id="jwalke_border_width_only_start" style="width: 100px; height: 100px; border-replaceWithActualStart-width-because-start: 1; border-replaceWithActualStart-width: 10px; border-top-width: 10px; border-bottom-width: 20px; align-items: center; justify-content: center;">
+   <div style="height: 10px; width: 10px;"></div>
+ </div>
+
+ <div id="jwalke_border_width_only_end" style="width: 100px; height: 100px; border-replaceWithActualEnd-width-because-end: 1; border-replaceWithActualEnd-width: 10px; border-top-width: 10px; border-bottom-width: 20px; align-items: center; justify-content: center;">
+   <div style="height: 10px; width: 10px;"></div>
+ </div>
+
+
 */
+
+
+
+
+
+/*
+
+This one doesn't work correctly in Chrome, so not sure what to do.
+
+ <div id="wrap_column" style="height: 100px; flex-wrap: wrap">
+   <div style="height: 30px; width: 30px;"></div>
+   <div style="height: 30px; width: 30px;"></div>
+   <div style="height: 30px; width: 30px;"></div>
+   <div style="height: 30px; width: 30px;"></div>
+ </div>
+
+*/
+
