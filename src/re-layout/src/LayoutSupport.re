@@ -290,18 +290,6 @@ let styleDimensionForAxis node axis =>
 
 
 /**
- * Position style getter.
- */
-let styleForPosition node pos =>
-  switch pos {
-  | CSS_LEFT => node.style.left
-  | CSS_RIGHT => node.style.right
-  | CSS_TOP => node.style.top
-  | CSS_BOTTOM => node.style.bottom
-  };
-
-
-/**
  * Leading style getters.
  */
 let styleLeadingPositionForAxis node axis =>
@@ -539,8 +527,6 @@ let isLayoutDimDefined node axis => {
   not (isUndefined value) && value >= 0.0
 };
 
-let isPosDefined node position => not (isUndefined (styleForPosition node position));
-
 let isLeadingPosDefinedWithFallback node axis =>
   isRowDirection axis && not (isUndefined node.style.start) ||
   not (isUndefined (styleLeadingPositionForAxis node axis));
@@ -570,11 +556,6 @@ let getTrailingPositionWithFallback node axis =>
   } else {
     styleTrailingPositionForAxisOrZero node axis
   };
-
-let getPosition node position => {
-  let pos = styleForPosition node position;
-  not (isUndefined pos) ? pos : 0.0
-};
 
 let normalizePosition position => not (isUndefined position) ? position : 0.0;
 

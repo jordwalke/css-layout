@@ -41,14 +41,7 @@ type measureMode =
   | CssMeasureModeExactly /* 'exactly' */
   | CssMeasureModeAtMost /* 'at-most' */;
 
-type position =
-  | CSS_LEFT
-  | CSS_RIGHT
-  | CSS_TOP
-  | CSS_BOTTOM;
-
 let css_max_cached_result_count = 6;
-
 
 /**
  * Intentionally, nothing is mutable inside each
