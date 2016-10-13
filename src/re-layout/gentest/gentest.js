@@ -193,175 +193,162 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
          style == 'height')) {
       continue;
     }
-    if (node.computedStyleForKebabs[style] !== getDefaultStyleValue(style)) {
+    let val = node.computedStyleForKebabs[style];
+    if (val !== getDefaultStyleValue(style)) {
       switch (style) {
+        case 'margin-left':
+          if (node.rawStyle.indexOf('margin-left-because-start') !== -1) {
+            styleLines.push('marginStart: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('margin-left-because-end') !== -1) {
+            styleLines.push('marginEnd: ' + pixelValue(val));
+          } else {
+            styleLines.push('marginLeft: ' + pixelValue(val));
+          }
+          break;
+        case 'margin-right':
+          if (node.rawStyle.indexOf('margin-right-because-start') !== -1) {
+            styleLines.push('marginStart: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('margin-right-because-end') !== -1) {
+            styleLines.push('marginEnd: ' + pixelValue(val));
+          } else {
+            styleLines.push('marginRight: ' + pixelValue(val));
+          }
+          break;
+        case 'padding-left':
+          if (node.rawStyle.indexOf('padding-left-because-start') !== -1) {
+            styleLines.push('paddingStart: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('padding-left-because-end') !== -1) {
+            styleLines.push('paddingEnd: ' + pixelValue(val));
+          } else {
+            styleLines.push('paddingLeft: ' + pixelValue(val));
+          }
+          break;
+        case 'padding-right':
+          if (node.rawStyle.indexOf('padding-right-because-start') !== -1) {
+            styleLines.push('paddingStart: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('padding-right-because-end') !== -1) {
+            styleLines.push('paddingEnd: ' + pixelValue(val));
+          } else {
+            styleLines.push('paddingRight: ' + pixelValue(val));
+          }
+          break;
+        case 'border-left-width':
+          if (node.rawStyle.indexOf('border-left-width-because-start') !== -1) {
+            styleLines.push('borderStart: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('border-left-width-because-end') !== -1) {
+            styleLines.push('borderEnd: ' + pixelValue(val));
+          } else {
+            styleLines.push('borderLeft: ' + pixelValue(val));
+          }
+          break;
+        case 'border-right-width':
+          if (node.rawStyle.indexOf('border-right-width-because-start') !== -1) {
+            styleLines.push('borderStart: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('border-right-width-because-end') !== -1) {
+            styleLines.push('borderEnd: ' + pixelValue(val));
+          } else {
+            styleLines.push('borderRight: ' + pixelValue(val));
+          }
+          break;
         case 'direction':
-          styleLines.push('direction:' + directionValue(node.computedStyleForKebabs[style]));
+          styleLines.push('direction:' + directionValue(val));
           break;
         case 'flex-direction':
-          styleLines.push('flexDirection:'+ flexDirectionValue(node.computedStyleForKebabs[style]));
+          styleLines.push('flexDirection:'+ flexDirectionValue(val));
           break;
         case 'justify-content':
-          styleLines.push('justifyContent: ' + justifyValue(node.computedStyleForKebabs[style]));
+          styleLines.push('justifyContent: ' + justifyValue(val));
           break;
         case 'align-content':
-          styleLines.push('alignContent: ' + alignValue(node.computedStyleForKebabs[style]));
+          styleLines.push('alignContent: ' + alignValue(val));
           break;
         case 'align-items':
-          styleLines.push('alignItems: ' + alignValue(node.computedStyleForKebabs[style]));
+          styleLines.push('alignItems: ' + alignValue(val));
           break;
         case 'align-self':
-          if (!parent || node.computedStyleForKebabs[style] !== parent.computedStyleForKebabs['align-items']) {
-            styleLines.push('alignSelf: ' +  alignValue(node.computedStyleForKebabs[style]));
+          if (val) {
+            styleLines.push('alignSelf: ' +  alignValue(val));
           }
           break;
         case 'position':
-          styleLines.push('positionType: ' + positionValue(node.computedStyleForKebabs[style]));
+          styleLines.push('positionType: ' + positionValue(val));
           break;
         case 'flex-wrap':
-          styleLines.push('flexWrap: ' + wrapValue(node.computedStyleForKebabs[style]));
+          styleLines.push('flexWrap: ' + wrapValue(val));
           break;
         case 'overflow':
-          styleLines.push('overflow: ' + overflowValue(node.computedStyleForKebabs[style]));
+          styleLines.push('overflow: ' + overflowValue(val));
           break;
         case 'flex-grow':
-          styleLines.push('flexGrow: ' + ensureFloat(node.computedStyleForKebabs[style]));
+          styleLines.push('flexGrow: ' + ensureFloat(val));
           break;
         case 'flex-shrink':
-          styleLines.push('flexShrink: ' +  ensureFloat(node.computedStyleForKebabs[style]));
+          styleLines.push('flexShrink: ' +  ensureFloat(val));
           break;
         case 'flex-basis':
-          styleLines.push('flexBasis: ' +  pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('flexBasis: ' +  pixelValue(val));
           break;
         case 'left':
-          styleLines.push('left: ' + pixelValue(node.computedStyleForKebabs[style]));
+          if (node.rawStyle.indexOf('left-because-start') !== -1) {
+            styleLines.push('start: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('left-because-end') !== -1) {
+            styleLines.push('endd: ' + pixelValue(val));
+          } else {
+            styleLines.push('left: ' + pixelValue(val));
+          }
           break;
         case 'top':
-          styleLines.push('top: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('top: ' + pixelValue(val));
           break;
         case 'right':
-          styleLines.push('right: ' + pixelValue(node.computedStyleForKebabs[style]));
+          if (node.rawStyle.indexOf('right-because-start') !== -1) {
+            styleLines.push('start: ' + pixelValue(val));
+          } else if (node.rawStyle.indexOf('right-because-end') !== -1) {
+            styleLines.push('endd: ' + pixelValue(val));
+          } else {
+            styleLines.push('right: ' + pixelValue(val));
+          }
           break;
         case 'bottom':
-          styleLines.push('bottom: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('bottom: ' + pixelValue(val));
           break;
         case 'margin-top':
-          styleLines.push('marginTop: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('marginTop: ' + pixelValue(val));
           break;
         case 'margin-bottom':
-          styleLines.push('marginBottom: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('marginBottom: ' + pixelValue(val));
           break;
         case 'padding-top':
-          styleLines.push('paddingTop: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('paddingTop: ' + pixelValue(val));
           break;
         case 'padding-bottom':
-          styleLines.push('paddingBottom: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('paddingBottom: ' + pixelValue(val));
           break;
         case 'border-top-width':
-          styleLines.push('borderTop: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('borderTop: ' + pixelValue(val));
           break;
         case 'border-bottom-width':
-          styleLines.push('borderBottom: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('borderBottom: ' + pixelValue(val));
           break;
         case 'width':
-          styleLines.push('width: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('width: ' + pixelValue(val));
           break;
         case 'min-width':
-          styleLines.push('minWidth: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('minWidth: ' + pixelValue(val));
           break;
         case 'max-width':
-          styleLines.push('maxWidth: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('maxWidth: ' + pixelValue(val));
           break;
         case 'height':
-          styleLines.push('height: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('height: ' + pixelValue(val));
           break;
         case 'min-height':
-          styleLines.push('minHeight: ' + pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('minHeight: ' + pixelValue(val));
           break;
         case 'max-height':
-          styleLines.push('maxHeight: ' +  pixelValue(node.computedStyleForKebabs[style]));
+          styleLines.push('maxHeight: ' +  pixelValue(val));
           break;
       }
-    }
-  }
-
-  /**
-   * This is tricky because when you set margin-right, it shows up as
-   * `-webkit-margin-end` and when you set `margin-right/left` it shows up as
-   * `-webkit-margin-end/start`.
-   */
-  if (node.computedStyleForKebabs['-webkit-margin-end'] && node.rawStyle.indexOf('-webkit-margin-end') !== -1) {
-    let val = node.computedStyleForKebabs['-webkit-margin-end'];
-    if (val !== '0px') {
-      styleLines.push('marginEnd: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['-webkit-margin-start'] && node.rawStyle.indexOf('-webkit-margin-start') !== -1) {
-    let val = node.computedStyleForKebabs['-webkit-margin-start'];
-    if (val !== '0px') {
-      styleLines.push('marginStart: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['margin-left'] && node.rawStyle.indexOf('-webkit-margin') === -1) {
-    let val = node.computedStyleForKebabs['margin-left'];
-    if (val !== '0px') {
-      styleLines.push('marginLeft: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['margin-right'] && node.rawStyle.indexOf('-webkit-margin') === -1) {
-    let val = node.computedStyleForKebabs['margin-right'];
-    if (val !== '0px') {
-      styleLines.push('marginRight: ' + pixelValue(val));
-    }
-  }
-
-  if (node.computedStyleForKebabs['-webkit-padding-end'] && node.rawStyle.indexOf('-webkit-padding-end') !== -1) {
-    let val = node.computedStyleForKebabs['-webkit-padding-end'];
-    if (val !== '0px') {
-      styleLines.push('paddingEnd: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['-webkit-padding-start'] && node.rawStyle.indexOf('-webkit-padding-start') !== -1) {
-    let val = node.computedStyleForKebabs['-webkit-padding-start'];
-    if (val !== '0px') {
-      styleLines.push('paddingStart: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['padding-left'] && node.rawStyle.indexOf('-webkit-padding') === -1) {
-    let val = node.computedStyleForKebabs['padding-left'];
-    if (val !== '0px') {
-      styleLines.push('paddingLeft: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['padding-right'] && node.rawStyle.indexOf('-webkit-padding') === -1) {
-    let val = node.computedStyleForKebabs['padding-right'];
-    if (val !== '0px') {
-      styleLines.push('paddingRight: ' + pixelValue(val));
-    }
-  }
-
-  if (node.computedStyleForKebabs['-webkit-border-end-width'] && node.rawStyle.indexOf('-webkit-border-end-width') !== -1) {
-    let val = node.computedStyleForKebabs['-webkit-border-end-width'];
-    if (val !== '0px') {
-      styleLines.push('borderEnd: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['-webkit-border-start-width'] && node.rawStyle.indexOf('-webkit-border-start-width') !== -1) {
-    let val = node.computedStyleForKebabs['-webkit-border-start-width'];
-    if (val !== '0px') {
-      styleLines.push('borderStart: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['border-left-width'] && node.rawStyle.indexOf('-webkit-border') === -1) {
-    let val = node.computedStyleForKebabs['border-left-width'];
-    if (val !== '0px') {
-      styleLines.push('borderLeft: ' + pixelValue(val));
-    }
-  }
-  if (node.computedStyleForKebabs['border-right-width'] && node.rawStyle.indexOf('-webkit-border') === -1) {
-    let val = node.computedStyleForKebabs['border-right-width'];
-    if (val !== '0px') {
-      styleLines.push('borderRight: ' + pixelValue(val));
     }
   }
 
@@ -541,12 +528,6 @@ function getComputedStyleInKebabForm(node) {
     /**
      * We don't need to *read*.
      */
-    '-webkit-margin-start',
-    '-webkit-margin-end',
-    '-webkit-padding-start',
-    '-webkit-padding-end',
-    '-webkit-border-start-width',
-    '-webkit-border-end-width',
     'margin-left',
     'margin-right',
     'padding-left',
@@ -605,7 +586,7 @@ function getComputedStyleInKebabForm(node) {
    <div style="height: 10px;"></div>
  </div>
 
- <div id="border_center_child" style="width: 100px; height: 100px; -webkit-border-start-width: 10px; border-top-width: 10px; -webkit-border-end-width: 20px; border-bottom-width: 20px; align-items: center; justify-content: center;">
+ <div id="border_center_child" style="width: 100px; height: 100px; border-replaceWithActualStart-width-because-start: 1; border-replaceWithActualStart-width: 10px; border-top-width: 10px; border-replaceWithActualEnd-width-because-end: 1; border-replaceWithActualEnd-width: 20px; border-bottom-width: 20px; align-items: center; justify-content: center;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
@@ -630,28 +611,28 @@ function getComputedStyleInKebabForm(node) {
    <div style="height: 10px;"></div>
  </div>
 
- <div id="padding_center_child" style="width: 100px; height: 100px; -webkit-padding-start: 10px; padding-top: 10px; -webkit-padding-end: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
+ <div id="padding_center_child" style="width: 100px; height: 100px; padding-replaceWithActualStart-because-start: 1; padding-replaceWithActualStart: 10px; padding-top: 10px; padding-replaceWithActualEnd-because-end: 1;  padding-replaceWithActualEnd: 20px; padding-bottom: 20px; align-items: center; justify-content: center;">
    <div style="height: 10px; width: 10px;"></div>
  </div>
 
  <div id="absolute_layout_width_height_start_top" style="width: 100px; height: 100px;">
-   <div style="width:10px; height: 10px; position: absolute; start: 10px; top: 10px;"></div>
+   <div style="width:10px; height: 10px; position: absolute; replaceWithActualStart-because-start: 1; replaceWithActualStart: 10px; top: 10px;"></div>
  </div>
 
  <div id="absolute_layout_width_height_end_bottom" style="width: 100px; height: 100px;">
-   <div style="width:10px; height: 10px; position: absolute; end: 10px; bottom: 10px;"></div>
+   <div style="width:10px; height: 10px; position: absolute; replaceWithActualEnd-because-end: 1; replaceWithActualEnd: 10px; bottom: 10px;"></div>
  </div>
 
  <div id="absolute_layout_start_top_end_bottom" style="width: 100px; height: 100px;">
-   <div style="position: absolute; start: 10px; top: 10px; end: 10px; bottom: 10px;"></div>
+   <div style="position: absolute; replaceWithActualStart-because-start: 1;  start: 10px; top: 10px; replaceWithActualEnd-because-end: 1; replaceWithActualEnd: 10px; bottom: 10px;"></div>
  </div>
 
  <div id="absolute_layout_width_height_start_top_end_bottom" style="width: 100px; height: 100px;">
-   <div style="width:10px; height: 10px; position: absolute; start: 10px; top: 10px; end: 10px; bottom: 10px;"></div>
+   <div style="width:10px; height: 10px; position: absolute; replaceWithActualStart-because-start: 1; replaceWithActualStart: 10px; top: 10px; replaceWithActualEnd-because-end: 1; replaceWithActualEnd: 10px; bottom: 10px;"></div>
  </div>
 
  <div id="do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent" style="height: 50px; width: 50px; overflow: hidden; flex-direction: row;">
-   <div style="position: absolute; start: 0; top: 0;">
+   <div style="position: absolute; replaceWithActualStart-because-start: 1; replaceWithActualStart: 0; top: 0;">
      <div style="width: 100px; height: 100px;"></div>
    </div>
  </div>
@@ -721,11 +702,11 @@ function getComputedStyleInKebabForm(node) {
  </div>
 
  <div id="margin_start" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="width: 10px; -webkit-margin-start: 10px;"></div>
+   <div style="width: 10px; margin-replaceWithActualStart-because-start: 1;  margin-replaceWithActualStart: 10px;"></div>
  </div>
 
  <div id="margin_end" style="width: 100px; height: 100px; flex-direction: row; justify-content: flex-end;">
-   <div style="width: 10px; -webkit-margin-end: 10px;"></div>
+   <div style="width: 10px; margin-replaceWithActualEnd-because-end: 1; margin-replaceWithActualEnd: 10px;"></div>
  </div>
 
  <div id="margin_left" style="width: 100px; height: 100px; flex-direction: row;">
@@ -853,7 +834,7 @@ function getComputedStyleInKebabForm(node) {
    <div style="width: 10px; flex-grow:1"></div>
  </div>
  <div id="margin_and_flex_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="-webkit-margin-start: 10px; -webkit-margin-end: 10px; flex-grow: 1;"></div>
+   <div style="margin-replaceWithActualStart-because-start: 1; margin-replaceWithActualStart: 10px; margin-replaceWithActualEnd-because-end: 1; margin-replaceWithActualEnd: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_and_flex_column" style="width: 100px; height: 100px;">
@@ -865,11 +846,11 @@ function getComputedStyleInKebabForm(node) {
  </div>
 
  <div id="margin_and_stretch_column" style="width: 100px; height: 100px;">
-   <div style="-webkit-margin-start: 10px; -webkit-margin-end: 10px; flex-grow: 1;"></div>
+   <div style="margin-replaceWithActualStart-because-start: 1; margin-replaceWithActualStart: 10px; margin-replaceWithActualEnd-because-end: 1; margin-replaceWithActualEnd: 10px; flex-grow: 1;"></div>
  </div>
 
  <div id="margin_with_sibling_row" style="width: 100px; height: 100px; flex-direction: row;">
-   <div style="-webkit-margin-end: 10px; flex-grow: 1;"></div>
+   <div style="margin-replaceWithActualEnd-because-end: 1; margin-replaceWithActualEnd: 10px; flex-grow: 1;"></div>
    <div style="flex-grow: 1;"></div>
  </div>
 
