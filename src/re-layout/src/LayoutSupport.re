@@ -457,8 +457,7 @@ let isColumnDirection flexDirection =>
   flexDirection === CssFlexDirectionColumn || flexDirection === CssFlexDirectionColumnReverse;
 
 let getCrossFlexDirection flex_direction direction =>
-  isColumnDirection flex_direction ?
-    resolveAxis CssFlexDirectionRow direction : CssFlexDirectionColumn;
+  isColumnDirection flex_direction ? resolveAxis CssFlexDirectionRow direction : CssFlexDirectionColumn;
 
 let isFlex node =>
   node.style.positionType === CssPositionRelative && (
