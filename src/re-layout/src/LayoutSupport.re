@@ -99,58 +99,60 @@ let dummyCachedMeasurement = {
   computedHeight: 0.0
 };
 
+let defaultStyle = {
+  direction: CssDirectionInherit,
+  flexDirection: CssFlexDirectionColumn,
+  justifyContent: CssJustifyFlexStart,
+  alignContent: CssAlignFlexStart,
+  alignItems: CssAlignStretch,
+  alignSelf: CssAlignAuto,
+  positionType: CssPositionRelative,
+  flexWrap: CssNoWrap,
+  overflow: Visible,
+  /**
+   * Properties that start out as zero.
+   */
+  flexGrow: 0.0,
+  flexShrink: 0.0,
+  flexBasis: cssUndefined,
+  marginLeft: 0.0,
+  marginTop: 0.0,
+  marginRight: 0.0,
+  marginBottom: 0.0,
+  paddingLeft: 0.0,
+  paddingTop: 0.0,
+  paddingRight: 0.0,
+  paddingBottom: 0.0,
+  borderLeft: 0.0,
+  borderTop: 0.0,
+  borderRight: 0.0,
+  borderBottom: 0.0,
+  /**
+   * Properties that start out as undefined.
+   */
+  width: cssUndefined,
+  height: cssUndefined,
+  minWidth: cssUndefined,
+  minHeight: cssUndefined,
+  maxWidth: cssUndefined,
+  maxHeight: cssUndefined,
+  left: cssUndefined,
+  top: cssUndefined,
+  right: cssUndefined,
+  bottom: cssUndefined,
+  start: cssUndefined,
+  endd: cssUndefined,
+  marginStart: cssUndefined,
+  marginEnd: cssUndefined,
+  paddingStart: cssUndefined,
+  paddingEnd: cssUndefined,
+  borderStart: cssUndefined,
+  borderEnd: cssUndefined
+};
+
 let rec theNullNode = {
   children: [||],
-  style: {
-    direction: CssDirectionInherit,
-    flexDirection: CssFlexDirectionColumn,
-    justifyContent: CssJustifyFlexStart,
-    alignContent: CssAlignFlexStart,
-    alignItems: CssAlignStretch,
-    alignSelf: CssAlignAuto,
-    positionType: CssPositionRelative,
-    flexWrap: CssNoWrap,
-    overflow: Visible,
-    /**
-     * Properties that start out as zero.
-     */
-    flexGrow: 0.0,
-    flexShrink: 0.0,
-    flexBasis: cssUndefined,
-    marginLeft: 0.0,
-    marginTop: 0.0,
-    marginRight: 0.0,
-    marginBottom: 0.0,
-    paddingLeft: 0.0,
-    paddingTop: 0.0,
-    paddingRight: 0.0,
-    paddingBottom: 0.0,
-    borderLeft: 0.0,
-    borderTop: 0.0,
-    borderRight: 0.0,
-    borderBottom: 0.0,
-    /**
-     * Properties that start out as undefined.
-     */
-    width: cssUndefined,
-    height: cssUndefined,
-    minWidth: cssUndefined,
-    minHeight: cssUndefined,
-    maxWidth: cssUndefined,
-    maxHeight: cssUndefined,
-    left: cssUndefined,
-    top: cssUndefined,
-    right: cssUndefined,
-    bottom: cssUndefined,
-    start: cssUndefined,
-    endd: cssUndefined,
-    marginStart: cssUndefined,
-    marginEnd: cssUndefined,
-    paddingStart: cssUndefined,
-    paddingEnd: cssUndefined,
-    borderStart: cssUndefined,
-    borderEnd: cssUndefined
-  },
+  style: defaultStyle,
   layout: {
     direction: CssDirectionInherit,
     /* Instead of recomputing the entire layout every single time, we
@@ -211,27 +213,25 @@ let rec theNullNode = {
  * It is critical that this actually be a different reference
  * than theNullNode.
  */
-let rec createNode context => {
-  let rec retNode = {
-    ...theNullNode,
-    children: [||],
-    style: {...theNullNode.style, overflow: Visible},
-    layout: {...theNullNode.layout, direction: CssDirectionInherit},
-    context
-  };
-  retNode
+let createNode context => {
+  ...theNullNode,
+  children: [||],
+  /**
+   * We can keep the original style because it's immutable, but layout is not.
+   */
+  layout: {...theNullNode.layout, direction: CssDirectionInherit},
+  context
 };
 
-let insertChild node child index => {
-  let ret = {contents: [||]};
-  for i in 0 to (index - 1) {
-    ret.contents = Array.append ret.contents [|node.children.(i)|]
-  };
-  ret.contents = Array.append ret.contents [|child|];
-  for i in index to (Array.length node.children - 1) {
-    ret.contents = Array.append ret.contents [|node.children.(i)|]
-  };
-  node.children = ret.contents
+let createNode withChildren::children andStyle::style=defaultStyle context => {
+  ...theNullNode,
+  children,
+  style,
+  /**
+   * We can keep the original style because it's immutable, but layout is not.
+   */
+  layout: {...theNullNode.layout, direction: CssDirectionInherit},
+  context
 };
 
 

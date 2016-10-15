@@ -135,17 +135,24 @@ let createLayoutExtensionNode = (nodeName, top, left, width, height) =>
     .replace('layoutWidth', ensureFloat(width))
     .replace('layoutHeight', ensureFloat(height));
 
+const createInequalityChecker = (node, nodeName) => {
+  return nodeName + '.layout.top != ' + ensureFloat(node.top) + ' || ' +
+    nodeName + '.layout.left != ' + ensureFloat(node.left) + ' || ' +
+    nodeName + '.layout.width != ' + ensureFloat(node.width) + ' || ' +
+    nodeName + '.layout.height != ' + ensureFloat(node.height);
+};
+
 /**
  * Should render container validation iff
  *   parentName is null || hasChildren (because it's nice to see the node
  *   validated again as a container this time).
  */
-function assertTestTree(node, nodeName, parentNode) {
+function assertTestTreePrint(node, nodeName, parentNode) {
   let shouldValidate =
     parentNode == null || node.children.length !== 0;
 
   if (!shouldValidate) {
-    return [];
+    return [].join('');
   } else {
     let childItems = node.children.map(
       (childNode, i) => {
@@ -154,28 +161,46 @@ function assertTestTree(node, nodeName, parentNode) {
       }
     );
     let childLines = ['['].concat(childItems).concat([']']);
-    let assertionLines =
+    let assertionPrintingLines =
       [
         'assertLayouts testNum (expectedContainerLayout, observedContainerLayout)'
           .replace('testNum', testNum++)
           .replace('expectedContainerLayout', createLayoutExtensionNode(nodeName, node.top, node.left, node.width, node.height))
           .replace('observedContainerLayout', nodeName + '.layout'),
-      ].concat(childLines).concat(';');
+      ].concat(childLines).concat([';']);
 
-    let recurseLines = [];
+    let recursePrettyPrintLines = [];
     for (var i = 0; i < node.children.length; i++) {
-      recurseLines.push('');
+      recursePrettyPrintLines.push('');
       var childName = nodeName + '_child' + i;
-      recurseLines = recurseLines.concat(assertTestTree(node.children[i], childName, node));
+      recursePrettyPrintLines = recursePrettyPrintLines.concat(assertTestTreePrint(node.children[i], childName, node));
     }
-    return assertionLines.concat(recurseLines);
+    let doThePrettyPrintingTestStr = assertionPrintingLines.concat(recursePrettyPrintLines);
+    return doThePrettyPrintingTestStr.join('\n');
   }
-}
+};
+
+function assertTestTreeFast(node, nodeName, parentNode) {
+  return [
+    createInequalityChecker(node, nodeName)
+  ].concat(node.children.map((childNode, i) => {
+    const childName = nodeName + '_child' + i;
+    return assertTestTreeFast(childNode, childName, node);
+  })).join(' ||\n');
+};
+
+function assertTestTree(node, nodeName, parentNode) {
+  let fastNumericCheckExprStr = assertTestTreeFast(node, nodeName, parentNode);
+  let testAndPrettyPrint = [
+    'if (' + fastNumericCheckExprStr + ') {',
+    '  ' + assertTestTreePrint(node, nodeName, parentNode),
+    '};'
+  ];
+  return testAndPrettyPrint;
+};
 
 function setupTestTree(testName, parent, node, nodeName, parentName, index) {
-  var lines = [
-    'let ' + nodeName + ' = LayoutSupport.createNode ();',
-  ];
+  var lines = [];
 
   var styleLines = [];
   for (var style in node.computedStyleForKebabs) {
@@ -352,22 +377,18 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
     }
   }
 
-  if (styleLines.length !== 0) {
+  if (styleLines.length > 0) {
     lines = lines.concat([
-      'let ' + nodeName + ' = {',
-      '  ...' + nodeName + ',',
-      '  style: {',
-      '    ...' + nodeName + '.style,'
+      'let ' + nodeName + '_style = {',
+      '  ...LayoutSupport.defaultStyle,'
     ]);
-    lines = lines.concat(styleLines.map((sl) => '    ' + sl + ','));
-    lines.push('  }');
+    lines = lines.concat(styleLines.map((sl) => '  ' + sl + ','));
     lines.push('};');
+  } else {
+    lines = lines.concat([ 'let ' + nodeName + '_style = LayoutSupport.defaultStyle;']);
   }
 
-  if (parentName) {
-    lines.push('LayoutSupport.insertChild ' + parentName + ' ' + nodeName + ' ' + index + ';');
-  }
-
+  let childrenArray = [];
   for (var i = 0; i < node.children.length; i++) {
     lines.push('');
     var childName = nodeName + '_child' + i;
@@ -379,8 +400,15 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
             childName,
             nodeName,
             i));
+
+    childrenArray.push(childName);
   }
 
+  lines.push(
+    'let ' + nodeName + ' = LayoutSupport.createNode ' +
+      'withChildren::[|' + childrenArray.join(',') + '|] ' +
+      'andStyle::' + nodeName + '_style ();'
+  );
   return lines;
 }
 
@@ -479,7 +507,7 @@ function calculateTree(rootDOMNode) {
       continue;
     }
     rootLayout.push({
-      name: childDOMNode.id !== '' ? childDOMNode.id : 'INSERT_NAME_HERE',
+      name: childDOMNode.id !== '' ? childDOMNode.id : 'iNSERT_NAME_HERE',
       left: childDOMNode.offsetLeft + childDOMNode.parentNode.clientLeft,
       top: childDOMNode.offsetTop + childDOMNode.parentNode.clientTop,
       width: childDOMNode.offsetWidth,
