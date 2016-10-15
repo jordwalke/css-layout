@@ -513,7 +513,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -528,7 +528,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -563,7 +563,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -578,7 +578,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 45.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -613,7 +613,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -628,7 +628,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -663,7 +663,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -678,7 +678,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 90.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -708,7 +708,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -723,7 +723,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 45.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -753,7 +753,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -768,7 +768,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 90.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -798,7 +798,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -813,7 +813,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -848,7 +848,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -863,7 +863,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 90.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -892,14 +892,14 @@ for ii in 0 to times {
           borderRight: 10.0
         };
         let root = LayoutSupport.createNode withChildren::[||] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 || root.layout.width != 20.0 || root.layout.height != 20.0
         ) {
           assertLayouts 16 ({...root.layout, top: 0.0, left: 0.0, width: 20.0, height: 20.0}, root.layout) []
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 || root.layout.width != 20.0 || root.layout.height != 20.0
@@ -922,7 +922,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -937,7 +937,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 30.0, height: 30.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -970,7 +970,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -985,7 +985,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 80.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1025,7 +1025,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1040,7 +1040,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 40.0, left: 40.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1065,7 +1065,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, maxWidth: 50.0, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1080,7 +1080,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 0.0, width: 50.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1110,7 +1110,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, maxHeight: 50.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1125,7 +1125,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 0.0, width: 10.0, height: 50.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1154,14 +1154,14 @@ for ii in 0 to times {
           paddingRight: 10.0
         };
         let root = LayoutSupport.createNode withChildren::[||] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 || root.layout.width != 20.0 || root.layout.height != 20.0
         ) {
           assertLayouts 28 ({...root.layout, top: 0.0, left: 0.0, width: 20.0, height: 20.0}, root.layout) []
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 || root.layout.width != 20.0 || root.layout.height != 20.0
@@ -1184,7 +1184,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1199,7 +1199,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 30.0, height: 30.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1232,7 +1232,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1247,7 +1247,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 80.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1287,7 +1287,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1302,7 +1302,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 40.0, left: 40.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1334,7 +1334,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1349,7 +1349,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1381,7 +1381,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1396,7 +1396,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 80.0, left: 80.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1427,7 +1427,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1442,7 +1442,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 90.0, width: 0.0, height: 80.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1476,7 +1476,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1491,7 +1491,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1526,7 +1526,7 @@ for ii in 0 to times {
         let root_child0 =
           LayoutSupport.createNode withChildren::[|root_child0_child0|] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1556,7 +1556,7 @@ for ii in 0 to times {
               )
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1608,7 +1608,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1638,7 +1638,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 20.0, left: 0.0, width: 100.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1684,7 +1684,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1714,7 +1714,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 20.0, width: 10.0, height: 100.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1760,7 +1760,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1790,7 +1790,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 20.0, left: 0.0, width: 100.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1841,7 +1841,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1871,7 +1871,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 20.0, width: 10.0, height: 100.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1922,7 +1922,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -1952,7 +1952,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 70.0, left: 0.0, width: 100.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2003,7 +2003,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2033,7 +2033,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 70.0, width: 10.0, height: 100.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2081,7 +2081,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2113,7 +2113,7 @@ for ii in 0 to times {
               ({...root_child3.layout, top: 0.0, left: 30.0, width: 30.0, height: 30.0}, root_child3.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2174,7 +2174,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2206,7 +2206,7 @@ for ii in 0 to times {
               ({...root_child3.layout, top: 30.0, left: 0.0, width: 30.0, height: 30.0}, root_child3.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2282,7 +2282,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2317,7 +2317,7 @@ for ii in 0 to times {
               ({...root_child3.layout, top: 30.0, left: 0.0, width: 30.0, height: 30.0}, root_child3.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2396,7 +2396,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2428,7 +2428,7 @@ for ii in 0 to times {
               ({...root_child3.layout, top: 30.0, left: 0.0, width: 30.0, height: 30.0}, root_child3.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2475,7 +2475,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginStart: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2490,7 +2490,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 10.0, width: 10.0, height: 100.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2521,7 +2521,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginEnd: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2536,7 +2536,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 80.0, width: 10.0, height: 100.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2566,7 +2566,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginLeft: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2581,7 +2581,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 10.0, width: 10.0, height: 100.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2606,7 +2606,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, marginTop: 10.0, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2621,7 +2621,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2652,7 +2652,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginRight: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2667,7 +2667,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 80.0, width: 10.0, height: 100.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2697,7 +2697,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, marginBottom: 10.0, height: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2712,7 +2712,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 80.0, left: 0.0, width: 100.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2755,7 +2755,7 @@ for ii in 0 to times {
             withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
             andStyle::root_style
             ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2792,7 +2792,7 @@ for ii in 0 to times {
               ({...root_child4.layout, top: 40.0, left: 0.0, width: 50.0, height: 10.0}, root_child4.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2866,7 +2866,7 @@ for ii in 0 to times {
             withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
             andStyle::root_style
             ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2903,7 +2903,7 @@ for ii in 0 to times {
               ({...root_child4.layout, top: 40.0, left: 0.0, width: 50.0, height: 10.0}, root_child4.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -2977,7 +2977,7 @@ for ii in 0 to times {
             withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
             andStyle::root_style
             ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3014,7 +3014,7 @@ for ii in 0 to times {
               ({...root_child4.layout, top: 40.0, left: 0.0, width: 50.0, height: 10.0}, root_child4.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3088,7 +3088,7 @@ for ii in 0 to times {
             withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
             andStyle::root_style
             ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3125,7 +3125,7 @@ for ii in 0 to times {
               ({...root_child4.layout, top: 0.0, left: 0.0, width: 50.0, height: 0.0}, root_child4.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3183,7 +3183,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3213,7 +3213,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 20.0, width: 10.0, height: 102.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3265,7 +3265,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3295,7 +3295,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 92.0, width: 10.0, height: 102.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3347,7 +3347,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3377,7 +3377,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 56.0, width: 10.0, height: 102.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3429,7 +3429,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3459,7 +3459,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 92.0, width: 10.0, height: 102.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3511,7 +3511,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3541,7 +3541,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 0.0, left: 80.0, width: 10.0, height: 102.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3587,7 +3587,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3614,7 +3614,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 10.0, left: 0.0, width: 102.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3662,7 +3662,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3692,7 +3692,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 92.0, left: 0.0, width: 102.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3743,7 +3743,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3773,7 +3773,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 56.0, left: 0.0, width: 102.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3824,7 +3824,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3854,7 +3854,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 92.0, left: 0.0, width: 102.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3905,7 +3905,7 @@ for ii in 0 to times {
         let root =
           LayoutSupport.createNode
             withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3935,7 +3935,7 @@ for ii in 0 to times {
               ({...root_child2.layout, top: 80.0, left: 0.0, width: 102.0, height: 10.0}, root_child2.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3983,7 +3983,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, width: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -3998,7 +3998,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 80.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4026,7 +4026,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4048,7 +4048,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 80.0, left: 0.0, width: 100.0, height: 20.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4088,7 +4088,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4110,7 +4110,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 0.0, left: 80.0, width: 20.0, height: 100.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4150,7 +4150,7 @@ for ii in 0 to times {
         let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, width: 10.0};
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4165,7 +4165,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 10.0, width: 10.0, height: 80.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4200,7 +4200,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4215,7 +4215,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 10.0, width: 80.0, height: 100.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4245,7 +4245,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4260,7 +4260,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4295,7 +4295,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4310,7 +4310,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 10.0, left: 0.0, width: 100.0, height: 80.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4340,7 +4340,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4355,7 +4355,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 0.0, left: 10.0, width: 80.0, height: 100.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4388,7 +4388,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4410,7 +4410,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 0.0, left: 55.0, width: 45.0, height: 100.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4445,7 +4445,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4467,7 +4467,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 55.0, left: 0.0, width: 100.0, height: 45.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4502,7 +4502,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4524,7 +4524,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 75.0, left: 0.0, width: 100.0, height: 25.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4564,7 +4564,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4586,7 +4586,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 0.0, left: 75.0, width: 25.0, height: 100.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4621,7 +4621,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4643,7 +4643,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 50.0, left: 0.0, width: 100.0, height: 50.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4683,7 +4683,7 @@ for ii in 0 to times {
         let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
         let root =
           LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4705,7 +4705,7 @@ for ii in 0 to times {
               ({...root_child1.layout, top: 0.0, left: 50.0, width: 50.0, height: 100.0}, root_child1.layout)
             ]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4751,7 +4751,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4766,7 +4766,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 40.0, left: 50.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4805,7 +4805,7 @@ for ii in 0 to times {
         };
         let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
         let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||
@@ -4820,7 +4820,7 @@ for ii in 0 to times {
             ({...root.layout, top: 0.0, left: 0.0, width: 100.0, height: 100.0}, root.layout)
             [({...root_child0.layout, top: 40.0, left: 40.0, width: 10.0, height: 10.0}, root_child0.layout)]
         };
-        Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);
+        Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
         if (
           root.layout.top != 0.0 ||
           root.layout.left != 0.0 ||

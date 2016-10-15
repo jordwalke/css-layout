@@ -87,7 +87,7 @@ function printTest(LTRContainer, RTLContainer) {
       return curr + '\n  ' + prev;
     }));
 
-    lines.push('  Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionLtr);');
+    lines.push('  Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;');
     lines.push('');
 
     lines.push('  ' + assertTestTree(LTRLayoutTree[i], 'root', null).reduce(function(curr, prev) {
@@ -95,7 +95,7 @@ function printTest(LTRContainer, RTLContainer) {
     }));
     lines.push('');
 
-    lines.push('  Layout.layoutNode (root, LayoutSupport.cssUndefined, LayoutSupport.cssUndefined, CssDirectionRtl);');
+    lines.push('  Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;');
     lines.push('');
 
     lines.push('  ' + assertTestTree(RTLLayoutTree[i], 'root', null).reduce(function(curr, prev) {

@@ -1214,7 +1214,7 @@ and layoutNodeImpl
   /** END_GENERATED **/
 };
 
-let layoutNode (node, availableWidth, availableHeight, parentDirection) => {
+let layoutNode node availableWidth availableHeight parentDirection => {
   /* Increment the generation count. This will force the recursive routine to visit*/
   /* all dirty nodes at least once. Subsequent visits will be skipped if the input*/
   /* parameters don't change.*/
