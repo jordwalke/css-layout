@@ -107,11 +107,11 @@ let canUseCachedMeasurement
 let cachedMeasurementAt layout i =>
   switch i {
   | 0 => layout.cachedMeasurement1
-  | 1 => layout.cachedMeasurement1
-  | 2 => layout.cachedMeasurement2
-  | 3 => layout.cachedMeasurement3
-  | 4 => layout.cachedMeasurement4
-  | 5 => layout.cachedMeasurement5
+  | 1 => layout.cachedMeasurement2
+  | 2 => layout.cachedMeasurement3
+  | 3 => layout.cachedMeasurement4
+  | 4 => layout.cachedMeasurement5
+  | 5 => layout.cachedMeasurement6
   | _ => raise (Invalid_argument ("No cached measurement at " ^ string_of_int i))
   };
 
