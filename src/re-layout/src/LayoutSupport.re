@@ -47,9 +47,9 @@ let gCurrentGenerationCount = 0;
 
 let (<|) a b => a b;
 
-let css_undefined = nan;
+let is_nan (x: float) => x != x;
 
-let isUndefined value => classify_float value == FP_nan;
+let isUndefined (x: float) => x != x;
 
 let failOnDummyMeasure = true;
 
@@ -584,9 +584,9 @@ let boundAxisWithinMinAndMax node axis value => {
   nextNextBoundValue
 };
 
-let fminf a b => classify_float b == FP_nan || a < b ? a : b;
+let fminf a b => isUndefined b || a < b ? a : b;
 
-let fmaxf a b => classify_float b == FP_nan || a > b ? a : b;
+let fmaxf a b => isUndefined b || a > b ? a : b;
 
 /* Like boundAxisWithinMinAndMax but also ensures that the value doesn't go below the
  * padding and border amount. */
