@@ -152,16 +152,7 @@ type cssLayout = {
    * cache some information to break early when nothing changed */
   mutable hasNewLayout: bool,
   mutable generationCount: int,
-  mutable lastRequestedWidth: float,
-  mutable lastRequestedHeight: float,
-  mutable lastParentMaxWidth: float,
-  mutable lastParentMaxHeight: float,
   mutable lastParentDirection: direction,
-  mutable lastWidth: float,
-  mutable lastHeight: float,
-  mutable lastTop: float,
-  mutable lastLeft: float,
-  mutable lastDirection: direction,
   mutable computedFlexBasis: float,
   mutable nextCachedMeasurementsIndex: int,
   /**

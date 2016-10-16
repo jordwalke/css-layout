@@ -160,7 +160,6 @@ let rec theNullNode = {
     hasNewLayout: true,
     generationCount: 0,
     lastParentDirection: CSS_DIRECTION_NEGATIVE_ONE_WHATEVER_THAT_MEANS,
-    lastDirection: CssDirectionInherit,
     nextCachedMeasurementsIndex: 0,
     /**
      * Hardcoded to 6 previous measurements.
@@ -175,14 +174,6 @@ let rec theNullNode = {
     /**
      * Start out as zero.
      */
-    lastRequestedWidth: 0.0,
-    lastRequestedHeight: 0.0,
-    lastParentMaxWidth: 0.0,
-    lastParentMaxHeight: 0.0,
-    lastWidth: 0.0,
-    lastHeight: 0.0,
-    lastTop: 0.0,
-    lastLeft: 0.0,
     computedFlexBasis: cssUndefined,
     left: 0.0,
     top: 0.0,
