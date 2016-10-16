@@ -33,7 +33,7 @@
   },
   "scripts": {
     "postinstall": "npm run reasonBuild",
-    "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -pkg str -I src ./src/LayoutTest.native -cflags -w,-40 2>&1 | refmterr",
+    "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -I src ./src/LayoutTest.native -cflags -w,-40 2>&1 | refmterr",
     "reasonbuild": "npm run reasonBuild",
     "thisFails": "eval $(dependencyEnv) && nopam && rebuild -pkg core_bench -pkg str -I src ./src/LayoutTest.native -cflags -w,-40 2>&1 | refmterr",
     "regenerateReasonSource": "eval $(dependencyEnv) && cd ../../ && grunt transpile",
@@ -50,16 +50,17 @@
   "notes": "The below is a temporary rebel config that only works with the hardcoded rebel used in the run scripts",
   "rebel": {
     "targets": ["LayoutTest"],
-    "backend": "jsoo",
+    "backend": "native",
     "ocamlcFlags": {
-      "compile": "-verbose",
+      "compile": "-g -verbose",
       "link": "-verbose"
     },
     "ocamloptFlags": {
-      "compile": "-verbose -inline 100",
-      "link": "-verbose"
+      "compile": "-thread -g -verbose -inline 100 -S",
+      "link": "-thread -g -verbose -S"
     },
-    "jsooFlags": "",
+    "ocamlfindDependencies": { "core_bench": "113.33.3" },
+    "jsooFlags": "--opt 3",
     "bscFlags": "-I ./node_modules/bs-platform/lib/ocaml" 
   }
 }

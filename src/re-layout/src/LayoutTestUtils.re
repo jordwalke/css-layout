@@ -8,18 +8,38 @@ let testCount = {contents: 0};
 
 let assertionCount = {contents: 0};
 
-let testFilter = {contents: None};
 
-if (Array.length Sys.argv > 1) {
-  testFilter.contents = Some Sys.argv.(1)
-};
+/**
+ * Pass an argument ---testNameFilter to only run tests matching
+ * ---testNameFilter You can pass multiple ---arg filters. The tripple ---
+ * makes sure the args are separated from core_bench args (which begin with a
+ * single -) and the runMode flag `--bench` which begins with two dashes, and
+ * is used to toggle between benchmark mode and test mode.
+ */
+let isFilterArg arg => String.length arg > 3 && String.sub arg 0 3 == "---";
+
+let getSearchStr arg => String.sub arg 3 (String.length arg - 3);
+
+let testNameFilter =
+  Array.length Sys.argv > 1 ?
+    List.find_all isFilterArg (Array.to_list Sys.argv) |> List.map getSearchStr : [];
+
+type runMode =
+  | Bench
+  | Test;
+
+let hasAnArgMatching tester =>
+  Array.length Sys.argv > 1 && List.length (List.find_all tester (Array.to_list Sys.argv)) > 0;
 
 
 /**
- * Number of times to execute tests, and measure time taken.  None implies we
- * are not measuring total time, and therefore should print the failures.
+ * Specifying `-quota` turns the application into a benchmarking suite instead
+ * of a test. Supplying `-v` will run the `-bench` in verbose mode, and will
+ * also cause the tests to be broken down by individual test case.
  */
-let benchmarkTimes = None;
+let runMode = hasAnArgMatching (fun arg => String.compare arg "-quota" === 0) ? Bench : Test;
+
+let shouldBenchmarkAllAsOne = not (hasAnArgMatching (fun arg => String.compare arg "-v" === 0));
 
 let currentTestName = {contents: ""};
 
@@ -31,13 +51,18 @@ let doTest desc test => {
   }
 };
 
-let it desc test =>
-  switch testFilter.contents {
-  | None => doTest desc test
-  | Some s =>
-    if (String.compare desc s === 0) {
-      doTest desc test
-    }
+let rec shouldRun withTestFilter::filter=testNameFilter name =>
+  switch filter {
+  /* No filter at all means run everything.  */
+  | [] => true
+  /* If there's only one item, it had better match. */
+  | [hd] => String.compare name hd === 0
+  | [hd, hdHd, ...tl] => String.compare name hd === 0 || shouldRun withTestFilter::[hdHd, ...tl] name
+  };
+
+let rec it withTestFilter::filter=testNameFilter desc test =>
+  if (shouldRun desc) {
+    doTest desc test
   };
 
 let displayOutcomes () => {
@@ -180,22 +205,18 @@ let mismatchText (expectedContainerLayout, observedContainerLayout) childExpecte
 
 let assertLayouts testNum (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved => {
   assertionCount.contents = assertionCount.contents + 1;
-  if (benchmarkTimes === None) {
-    if (
-      hasMismatchedLayout [(expectedContainerLayout, observedContainerLayout), ...childExpectedAndObserved]
-    ) {
-      let text = mismatchText (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved;
-      let expectedDiagram =
-        renderDiagram expectedContainerLayout (List.map fst childExpectedAndObserved) 'E' 'e';
-      let observedDiagram =
-        renderDiagram observedContainerLayout (List.map snd childExpectedAndObserved) 'O' 'o';
-      let title = "Test " ^ string_of_int testNum ^ ":\n";
-      let expected = "\nEXPECTED\n========\n" ^ expectedDiagram;
-      let observed = "\nOBSERVED\n========\n" ^ observedDiagram;
-      failures.contents = [
-        (currentTestName.contents, title ^ text ^ expected ^ observed),
-        ...failures.contents
-      ]
-    }
+  if (hasMismatchedLayout [(expectedContainerLayout, observedContainerLayout), ...childExpectedAndObserved]) {
+    let text = mismatchText (expectedContainerLayout, observedContainerLayout) childExpectedAndObserved;
+    let expectedDiagram =
+      renderDiagram expectedContainerLayout (List.map fst childExpectedAndObserved) 'E' 'e';
+    let observedDiagram =
+      renderDiagram observedContainerLayout (List.map snd childExpectedAndObserved) 'O' 'o';
+    let title = "Test " ^ string_of_int testNum ^ ":\n";
+    let expected = "\nEXPECTED\n========\n" ^ expectedDiagram;
+    let observed = "\nOBSERVED\n========\n" ^ observedDiagram;
+    failures.contents = [
+      (currentTestName.contents, title ^ text ^ expected ^ observed),
+      ...failures.contents
+    ]
   }
 };

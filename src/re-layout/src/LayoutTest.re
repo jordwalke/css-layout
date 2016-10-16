@@ -1,142 +1,3 @@
-let align_items_stretch = "align_items_stretch";
-
-let align_items_center = "align_items_center";
-
-let align_items_flex_start = "align_items_flex_start";
-
-let align_items_flex_end = "align_items_flex_end";
-
-let align_self_center = "align_self_center";
-
-let align_self_flex_end = "align_self_flex_end";
-
-let align_self_flex_start = "align_self_flex_start";
-
-let align_self_flex_end_override_flex_start = "align_self_flex_end_override_flex_start";
-
-let border_no_size = "border_no_size";
-
-let border_container_match_child = "border_container_match_child";
-
-let border_stretch_child = "border_stretch_child";
-
-let border_center_child = "border_center_child";
-
-let max_width = "max_width";
-
-let max_height = "max_height";
-
-let padding_no_size = "padding_no_size";
-
-let padding_container_match_child = "padding_container_match_child";
-
-let padding_stretch_child = "padding_stretch_child";
-
-let padding_center_child = "padding_center_child";
-
-let absolute_layout_width_height_start_top = "absolute_layout_width_height_start_top";
-
-let absolute_layout_width_height_end_bottom = "absolute_layout_width_height_end_bottom";
-
-let absolute_layout_start_top_end_bottom = "absolute_layout_start_top_end_bottom";
-
-let absolute_layout_width_height_start_top_end_bottom = "absolute_layout_width_height_start_top_end_bottom";
-
-let do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent = "do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent";
-
-let flex_direction_column_no_height = "flex_direction_column_no_height";
-
-let flex_direction_row_no_width = "flex_direction_row_no_width";
-
-let flex_direction_column = "flex_direction_column";
-
-let flex_direction_row = "flex_direction_row";
-
-let flex_direction_column_reverse = "flex_direction_column_reverse";
-
-let flex_direction_row_reverse = "flex_direction_row_reverse";
-
-let wrap_column = "wrap_column";
-
-let wrap_row = "wrap_row";
-
-let wrap_row_align_items_flex_end = "wrap_row_align_items_flex_end";
-
-let wrap_row_align_items_center = "wrap_row_align_items_center";
-
-let margin_start = "margin_start";
-
-let margin_end = "margin_end";
-
-let margin_left = "margin_left";
-
-let margin_top = "margin_top";
-
-let margin_right = "margin_right";
-
-let margin_bottom = "margin_bottom";
-
-let align_content_flex_start = "align_content_flex_start";
-
-let align_content_flex_end = "align_content_flex_end";
-
-let align_content_center = "align_content_center";
-
-let align_content_stretch = "align_content_stretch";
-
-let justify_content_row_flex_start = "justify_content_row_flex_start";
-
-let justify_content_row_flex_end = "justify_content_row_flex_end";
-
-let justify_content_row_center = "justify_content_row_center";
-
-let justify_content_row_space_between = "justify_content_row_space_between";
-
-let justify_content_row_space_around = "justify_content_row_space_around";
-
-let justify_content_column_flex_start = "justify_content_column_flex_start";
-
-let justify_content_column_flex_end = "justify_content_column_flex_end";
-
-let justify_content_column_center = "justify_content_column_center";
-
-let justify_content_column_space_between = "justify_content_column_space_between";
-
-let justify_content_column_space_around = "justify_content_column_space_around";
-
-let border_flex_child = "border_flex_child";
-
-let min_height = "min_height";
-
-let min_width = "min_width";
-
-let padding_flex_child = "padding_flex_child";
-
-let margin_and_flex_row = "margin_and_flex_row";
-
-let margin_and_flex_column = "margin_and_flex_column";
-
-let margin_and_stretch_row = "margin_and_stretch_row";
-
-let margin_and_stretch_column = "margin_and_stretch_column";
-
-let margin_with_sibling_row = "margin_with_sibling_row";
-
-let margin_with_sibling_column = "margin_with_sibling_column";
-
-let flex_basis_flex_grow_column = "flex_basis_flex_grow_column";
-
-let flex_basis_flex_grow_row = "flex_basis_flex_grow_row";
-
-let flex_basis_flex_shrink_column = "flex_basis_flex_shrink_column";
-
-let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
-
-let jwalke_border_width_only_start = "jwalke_border_width_only_start";
-
-let jwalke_border_width_only_end = "jwalke_border_width_only_end";
-
-
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  * All rights reserved.
@@ -494,17 +355,2757 @@ let jwalke_border_width_only_end = "jwalke_border_width_only_end";
  </div>
   *
   */
-let startTime = Sys.time ();
-
 open LayoutTestUtils;
 
-let times =
-  switch LayoutTestUtils.benchmarkTimes {
-  | None => 0
-  | Some n => n
-  };
+let align_items_stretch = "align_items_stretch";
 
-for ii in 0 to times {
+let align_items_center = "align_items_center";
+
+let align_items_flex_start = "align_items_flex_start";
+
+let align_items_flex_end = "align_items_flex_end";
+
+let align_self_center = "align_self_center";
+
+let align_self_flex_end = "align_self_flex_end";
+
+let align_self_flex_start = "align_self_flex_start";
+
+let align_self_flex_end_override_flex_start = "align_self_flex_end_override_flex_start";
+
+let border_no_size = "border_no_size";
+
+let border_container_match_child = "border_container_match_child";
+
+let border_stretch_child = "border_stretch_child";
+
+let border_center_child = "border_center_child";
+
+let max_width = "max_width";
+
+let max_height = "max_height";
+
+let padding_no_size = "padding_no_size";
+
+let padding_container_match_child = "padding_container_match_child";
+
+let padding_stretch_child = "padding_stretch_child";
+
+let padding_center_child = "padding_center_child";
+
+let absolute_layout_width_height_start_top = "absolute_layout_width_height_start_top";
+
+let absolute_layout_width_height_end_bottom = "absolute_layout_width_height_end_bottom";
+
+let absolute_layout_start_top_end_bottom = "absolute_layout_start_top_end_bottom";
+
+let absolute_layout_width_height_start_top_end_bottom = "absolute_layout_width_height_start_top_end_bottom";
+
+let do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent = "do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent";
+
+let flex_direction_column_no_height = "flex_direction_column_no_height";
+
+let flex_direction_row_no_width = "flex_direction_row_no_width";
+
+let flex_direction_column = "flex_direction_column";
+
+let flex_direction_row = "flex_direction_row";
+
+let flex_direction_column_reverse = "flex_direction_column_reverse";
+
+let flex_direction_row_reverse = "flex_direction_row_reverse";
+
+let wrap_column = "wrap_column";
+
+let wrap_row = "wrap_row";
+
+let wrap_row_align_items_flex_end = "wrap_row_align_items_flex_end";
+
+let wrap_row_align_items_center = "wrap_row_align_items_center";
+
+let margin_start = "margin_start";
+
+let margin_end = "margin_end";
+
+let margin_left = "margin_left";
+
+let margin_top = "margin_top";
+
+let margin_right = "margin_right";
+
+let margin_bottom = "margin_bottom";
+
+let align_content_flex_start = "align_content_flex_start";
+
+let align_content_flex_end = "align_content_flex_end";
+
+let align_content_center = "align_content_center";
+
+let align_content_stretch = "align_content_stretch";
+
+let justify_content_row_flex_start = "justify_content_row_flex_start";
+
+let justify_content_row_flex_end = "justify_content_row_flex_end";
+
+let justify_content_row_center = "justify_content_row_center";
+
+let justify_content_row_space_between = "justify_content_row_space_between";
+
+let justify_content_row_space_around = "justify_content_row_space_around";
+
+let justify_content_column_flex_start = "justify_content_column_flex_start";
+
+let justify_content_column_flex_end = "justify_content_column_flex_end";
+
+let justify_content_column_center = "justify_content_column_center";
+
+let justify_content_column_space_between = "justify_content_column_space_between";
+
+let justify_content_column_space_around = "justify_content_column_space_around";
+
+let border_flex_child = "border_flex_child";
+
+let min_height = "min_height";
+
+let min_width = "min_width";
+
+let padding_flex_child = "padding_flex_child";
+
+let margin_and_flex_row = "margin_and_flex_row";
+
+let margin_and_flex_column = "margin_and_flex_column";
+
+let margin_and_stretch_row = "margin_and_stretch_row";
+
+let margin_and_stretch_column = "margin_and_stretch_column";
+
+let margin_with_sibling_row = "margin_with_sibling_row";
+
+let margin_with_sibling_column = "margin_with_sibling_column";
+
+let flex_basis_flex_grow_column = "flex_basis_flex_grow_column";
+
+let flex_basis_flex_grow_row = "flex_basis_flex_grow_row";
+
+let flex_basis_flex_shrink_column = "flex_basis_flex_shrink_column";
+
+let flex_basis_flex_shrink_row = "flex_basis_flex_shrink_row";
+
+let jwalke_border_width_only_start = "jwalke_border_width_only_start";
+
+let jwalke_border_width_only_end = "jwalke_border_width_only_end";
+
+let origEqual = (===);
+
+open Core.Std;
+
+open Core_bench.Std;
+
+let (===) = origEqual;
+
+if (LayoutTestUtils.runMode === Bench) {
+  if LayoutTestUtils.shouldBenchmarkAllAsOne {
+    Command.run (
+      Bench.make_command [
+        Bench.Test.create
+          name::"all-benchmarks"
+          (
+            fun () => {
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignItems: CssAlignCenter,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignItems: CssAlignFlexStart,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexStart,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignItems: CssAlignFlexEnd,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexEnd,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexEnd,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexStart,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignItems: CssAlignFlexStart,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexEnd,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                borderTop: 10.0,
+                borderBottom: 10.0,
+                borderLeft: 10.0,
+                borderRight: 10.0
+              };
+              let root = LayoutSupport.createNode withChildren::[||] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                borderTop: 10.0,
+                borderBottom: 10.0,
+                borderLeft: 10.0,
+                borderRight: 10.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                borderTop: 10.0,
+                borderBottom: 10.0,
+                width: 100.0,
+                height: 100.0,
+                borderLeft: 10.0,
+                borderRight: 10.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifyCenter,
+                alignItems: CssAlignCenter,
+                borderTop: 10.0,
+                borderBottom: 20.0,
+                width: 100.0,
+                height: 100.0,
+                borderStart: 10.0,
+                borderEnd: 20.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, maxWidth: 50.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, maxHeight: 50.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                paddingTop: 10.0,
+                paddingBottom: 10.0,
+                paddingLeft: 10.0,
+                paddingRight: 10.0
+              };
+              let root = LayoutSupport.createNode withChildren::[||] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                paddingTop: 10.0,
+                paddingBottom: 10.0,
+                paddingLeft: 10.0,
+                paddingRight: 10.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                paddingTop: 10.0,
+                paddingBottom: 10.0,
+                width: 100.0,
+                height: 100.0,
+                paddingLeft: 10.0,
+                paddingRight: 10.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifyCenter,
+                alignItems: CssAlignCenter,
+                paddingTop: 10.0,
+                paddingBottom: 20.0,
+                width: 100.0,
+                height: 100.0,
+                paddingStart: 10.0,
+                paddingEnd: 20.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                positionType: CssPositionAbsolute,
+                top: 10.0,
+                start: 10.0,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                positionType: CssPositionAbsolute,
+                bottom: 10.0,
+                endd: 10.0,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                positionType: CssPositionAbsolute,
+                top: 10.0,
+                bottom: 10.0,
+                endd: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                positionType: CssPositionAbsolute,
+                top: 10.0,
+                bottom: 10.0,
+                start: 10.0,
+                endd: 10.0,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                overflow: Hidden,
+                width: 50.0,
+                height: 50.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, positionType: CssPositionAbsolute};
+              let root_child0_child0_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_child0 =
+                LayoutSupport.createNode withChildren::[||] andStyle::root_child0_child0_style ();
+              let root_child0 =
+                LayoutSupport.createNode withChildren::[|root_child0_child0|] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionColumnReverse,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRowReverse,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexWrap: CssWrap,
+                width: 60.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                flexWrap: CssWrap,
+                width: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                alignItems: CssAlignFlexEnd,
+                flexWrap: CssWrap,
+                width: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexEnd,
+                width: 30.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexEnd,
+                width: 30.0,
+                height: 20.0
+              };
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexEnd,
+                width: 30.0,
+                height: 30.0
+              };
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignFlexEnd,
+                width: 30.0,
+                height: 30.0
+              };
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                alignItems: CssAlignCenter,
+                flexWrap: CssWrap,
+                width: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 30.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 30.0,
+                height: 20.0
+              };
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 30.0,
+                height: 30.0
+              };
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 30.0,
+                height: 30.0
+              };
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginStart: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                justifyContent: CssJustifyFlexEnd,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginEnd: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginLeft: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, marginTop: 10.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                justifyContent: CssJustifyFlexEnd,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginRight: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifyFlexEnd,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, marginBottom: 10.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignContent: CssAlignFlexStart,
+                flexWrap: CssWrap,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignContent: CssAlignFlexEnd,
+                flexWrap: CssWrap,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignContent: CssAlignCenter,
+                flexWrap: CssWrap,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+              let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                alignContent: CssAlignStretch,
+                flexWrap: CssWrap,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0};
+              let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+              let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0};
+              let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+                  andStyle::root_style
+                  ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                justifyContent: CssJustifyFlexEnd,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                justifyContent: CssJustifyCenter,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                justifyContent: CssJustifySpaceBetween,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                justifyContent: CssJustifySpaceAround,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 102.0, height: 102.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = LayoutSupport.defaultStyle;
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifyFlexEnd,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifyCenter,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifySpaceBetween,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifySpaceAround,
+                width: 102.0,
+                height: 102.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+              let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+              let root =
+                LayoutSupport.createNode
+                  withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                borderTop: 10.0,
+                borderBottom: 10.0,
+                width: 100.0,
+                height: 100.0,
+                borderLeft: 10.0,
+                borderRight: 10.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, minHeight: 60.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, minWidth: 60.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                paddingTop: 10.0,
+                paddingBottom: 10.0,
+                width: 100.0,
+                height: 100.0,
+                paddingLeft: 10.0,
+                paddingRight: 10.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, width: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                flexGrow: 1.0,
+                marginStart: 10.0,
+                marginEnd: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                flexGrow: 1.0,
+                marginTop: 10.0,
+                marginBottom: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                flexGrow: 1.0,
+                marginTop: 10.0,
+                marginBottom: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                flexGrow: 1.0,
+                marginStart: 10.0,
+                marginEnd: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, marginEnd: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, marginBottom: 10.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, flexBasis: 50.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, flexBasis: 50.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexShrink: 1.0, flexBasis: 100.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexBasis: 50.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                flexDirection: CssFlexDirectionRow,
+                width: 100.0,
+                height: 100.0
+              };
+              let root_child0_style = {...LayoutSupport.defaultStyle, flexShrink: 1.0, flexBasis: 100.0};
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root_child1_style = {...LayoutSupport.defaultStyle, flexBasis: 50.0};
+              let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+              let root =
+                LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifyCenter,
+                alignItems: CssAlignCenter,
+                borderTop: 10.0,
+                borderBottom: 20.0,
+                width: 100.0,
+                height: 100.0,
+                borderStart: 10.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;
+              let root_style = {
+                ...LayoutSupport.defaultStyle,
+                justifyContent: CssJustifyCenter,
+                alignItems: CssAlignCenter,
+                borderTop: 10.0,
+                borderBottom: 20.0,
+                width: 100.0,
+                height: 100.0,
+                borderEnd: 10.0
+              };
+              let root_child0_style = {
+                ...LayoutSupport.defaultStyle,
+                alignSelf: CssAlignCenter,
+                width: 10.0,
+                height: 10.0
+              };
+              let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+              let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+              Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+            }
+          )
+      ]
+    )
+  } else {
+    let bench_align_items_stretch () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_items_center () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignItems: CssAlignCenter,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_items_flex_start () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignItems: CssAlignFlexStart,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexStart,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_items_flex_end () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignItems: CssAlignFlexEnd,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexEnd,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_self_center () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_self_flex_end () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexEnd,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_self_flex_start () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexStart,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_self_flex_end_override_flex_start () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignItems: CssAlignFlexStart,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexEnd,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_border_no_size () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        borderTop: 10.0,
+        borderBottom: 10.0,
+        borderLeft: 10.0,
+        borderRight: 10.0
+      };
+      let root = LayoutSupport.createNode withChildren::[||] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_border_container_match_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        borderTop: 10.0,
+        borderBottom: 10.0,
+        borderLeft: 10.0,
+        borderRight: 10.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_border_stretch_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        borderTop: 10.0,
+        borderBottom: 10.0,
+        width: 100.0,
+        height: 100.0,
+        borderLeft: 10.0,
+        borderRight: 10.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_border_center_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifyCenter,
+        alignItems: CssAlignCenter,
+        borderTop: 10.0,
+        borderBottom: 20.0,
+        width: 100.0,
+        height: 100.0,
+        borderStart: 10.0,
+        borderEnd: 20.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_max_width () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, maxWidth: 50.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_max_height () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, maxHeight: 50.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_padding_no_size () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        paddingTop: 10.0,
+        paddingBottom: 10.0,
+        paddingLeft: 10.0,
+        paddingRight: 10.0
+      };
+      let root = LayoutSupport.createNode withChildren::[||] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_padding_container_match_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        paddingTop: 10.0,
+        paddingBottom: 10.0,
+        paddingLeft: 10.0,
+        paddingRight: 10.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_padding_stretch_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        paddingTop: 10.0,
+        paddingBottom: 10.0,
+        width: 100.0,
+        height: 100.0,
+        paddingLeft: 10.0,
+        paddingRight: 10.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_padding_center_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifyCenter,
+        alignItems: CssAlignCenter,
+        paddingTop: 10.0,
+        paddingBottom: 20.0,
+        width: 100.0,
+        height: 100.0,
+        paddingStart: 10.0,
+        paddingEnd: 20.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_absolute_layout_width_height_start_top () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        positionType: CssPositionAbsolute,
+        top: 10.0,
+        start: 10.0,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_absolute_layout_width_height_end_bottom () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        positionType: CssPositionAbsolute,
+        bottom: 10.0,
+        endd: 10.0,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_absolute_layout_start_top_end_bottom () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        positionType: CssPositionAbsolute,
+        top: 10.0,
+        bottom: 10.0,
+        endd: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_absolute_layout_width_height_start_top_end_bottom () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        positionType: CssPositionAbsolute,
+        top: 10.0,
+        bottom: 10.0,
+        start: 10.0,
+        endd: 10.0,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        overflow: Hidden,
+        width: 50.0,
+        height: 50.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, positionType: CssPositionAbsolute};
+      let root_child0_child0_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_child0 =
+        LayoutSupport.createNode withChildren::[||] andStyle::root_child0_child0_style ();
+      let root_child0 =
+        LayoutSupport.createNode withChildren::[|root_child0_child0|] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_direction_column_no_height () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_direction_row_no_width () => {
+      let root_style = {...LayoutSupport.defaultStyle, flexDirection: CssFlexDirectionRow, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_direction_column () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_direction_row () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_direction_column_reverse () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionColumnReverse,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_direction_row_reverse () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRowReverse,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_wrap_column () => {
+      let root_style = {...LayoutSupport.defaultStyle, flexWrap: CssWrap, width: 60.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_wrap_row () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        flexWrap: CssWrap,
+        width: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {...LayoutSupport.defaultStyle, width: 30.0, height: 30.0};
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_wrap_row_align_items_flex_end () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        alignItems: CssAlignFlexEnd,
+        flexWrap: CssWrap,
+        width: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexEnd,
+        width: 30.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexEnd,
+        width: 30.0,
+        height: 20.0
+      };
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexEnd,
+        width: 30.0,
+        height: 30.0
+      };
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignFlexEnd,
+        width: 30.0,
+        height: 30.0
+      };
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_wrap_row_align_items_center () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        alignItems: CssAlignCenter,
+        flexWrap: CssWrap,
+        width: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 30.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 30.0,
+        height: 20.0
+      };
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 30.0,
+        height: 30.0
+      };
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 30.0,
+        height: 30.0
+      };
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_start () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginStart: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_end () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        justifyContent: CssJustifyFlexEnd,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginEnd: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_left () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginLeft: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_top () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, marginTop: 10.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_right () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        justifyContent: CssJustifyFlexEnd,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0, marginRight: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_bottom () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifyFlexEnd,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, marginBottom: 10.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_content_flex_start () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignContent: CssAlignFlexStart,
+        flexWrap: CssWrap,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+          andStyle::root_style
+          ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_content_flex_end () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignContent: CssAlignFlexEnd,
+        flexWrap: CssWrap,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+          andStyle::root_style
+          ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_content_center () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignContent: CssAlignCenter,
+        flexWrap: CssWrap,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0, height: 10.0};
+      let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+          andStyle::root_style
+          ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_align_content_stretch () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        alignContent: CssAlignStretch,
+        flexWrap: CssWrap,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 50.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 50.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 50.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root_child3_style = {...LayoutSupport.defaultStyle, width: 50.0};
+      let root_child3 = LayoutSupport.createNode withChildren::[||] andStyle::root_child3_style ();
+      let root_child4_style = {...LayoutSupport.defaultStyle, width: 50.0};
+      let root_child4 = LayoutSupport.createNode withChildren::[||] andStyle::root_child4_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2, root_child3, root_child4|]
+          andStyle::root_style
+          ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_row_flex_start () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_row_flex_end () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        justifyContent: CssJustifyFlexEnd,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_row_center () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        justifyContent: CssJustifyCenter,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_row_space_between () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        justifyContent: CssJustifySpaceBetween,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_row_space_around () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        justifyContent: CssJustifySpaceAround,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, width: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_column_flex_start () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 102.0, height: 102.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = LayoutSupport.defaultStyle;
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_column_flex_end () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifyFlexEnd,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_column_center () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifyCenter,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_column_space_between () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifySpaceBetween,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_justify_content_column_space_around () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifySpaceAround,
+        width: 102.0,
+        height: 102.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root_child2_style = {...LayoutSupport.defaultStyle, height: 10.0};
+      let root_child2 = LayoutSupport.createNode withChildren::[||] andStyle::root_child2_style ();
+      let root =
+        LayoutSupport.createNode
+          withChildren::[|root_child0, root_child1, root_child2|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_border_flex_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        borderTop: 10.0,
+        borderBottom: 10.0,
+        width: 100.0,
+        height: 100.0,
+        borderLeft: 10.0,
+        borderRight: 10.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_min_height () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, minHeight: 60.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_min_width () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, minWidth: 60.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_padding_flex_child () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        paddingTop: 10.0,
+        paddingBottom: 10.0,
+        width: 100.0,
+        height: 100.0,
+        paddingLeft: 10.0,
+        paddingRight: 10.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, width: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_and_flex_row () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        flexGrow: 1.0,
+        marginStart: 10.0,
+        marginEnd: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_and_flex_column () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        flexGrow: 1.0,
+        marginTop: 10.0,
+        marginBottom: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_and_stretch_row () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        flexGrow: 1.0,
+        marginTop: 10.0,
+        marginBottom: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_and_stretch_column () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        flexGrow: 1.0,
+        marginStart: 10.0,
+        marginEnd: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_with_sibling_row () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, marginEnd: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_margin_with_sibling_column () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, marginBottom: 10.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_basis_flex_grow_column () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, flexBasis: 50.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_basis_flex_grow_row () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0, flexBasis: 50.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexGrow: 1.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_basis_flex_shrink_column () => {
+      let root_style = {...LayoutSupport.defaultStyle, width: 100.0, height: 100.0};
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexShrink: 1.0, flexBasis: 100.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexBasis: 50.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_flex_basis_flex_shrink_row () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        flexDirection: CssFlexDirectionRow,
+        width: 100.0,
+        height: 100.0
+      };
+      let root_child0_style = {...LayoutSupport.defaultStyle, flexShrink: 1.0, flexBasis: 100.0};
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root_child1_style = {...LayoutSupport.defaultStyle, flexBasis: 50.0};
+      let root_child1 = LayoutSupport.createNode withChildren::[||] andStyle::root_child1_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0, root_child1|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_jwalke_border_width_only_start () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifyCenter,
+        alignItems: CssAlignCenter,
+        borderTop: 10.0,
+        borderBottom: 20.0,
+        width: 100.0,
+        height: 100.0,
+        borderStart: 10.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let bench_jwalke_border_width_only_end () => {
+      let root_style = {
+        ...LayoutSupport.defaultStyle,
+        justifyContent: CssJustifyCenter,
+        alignItems: CssAlignCenter,
+        borderTop: 10.0,
+        borderBottom: 20.0,
+        width: 100.0,
+        height: 100.0,
+        borderEnd: 10.0
+      };
+      let root_child0_style = {
+        ...LayoutSupport.defaultStyle,
+        alignSelf: CssAlignCenter,
+        width: 10.0,
+        height: 10.0
+      };
+      let root_child0 = LayoutSupport.createNode withChildren::[||] andStyle::root_child0_style ();
+      let root = LayoutSupport.createNode withChildren::[|root_child0|] andStyle::root_style ();
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;
+      Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl
+    };
+    let benchmarks = [];
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_items_stretch ?
+        [Bench.Test.create name::align_items_stretch bench_align_items_stretch, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_items_center ?
+        [Bench.Test.create name::align_items_center bench_align_items_center, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_items_flex_start ?
+        [Bench.Test.create name::align_items_flex_start bench_align_items_flex_start, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_items_flex_end ?
+        [Bench.Test.create name::align_items_flex_end bench_align_items_flex_end, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_self_center ?
+        [Bench.Test.create name::align_self_center bench_align_self_center, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_self_flex_end ?
+        [Bench.Test.create name::align_self_flex_end bench_align_self_flex_end, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_self_flex_start ?
+        [Bench.Test.create name::align_self_flex_start bench_align_self_flex_start, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_self_flex_end_override_flex_start ?
+        [
+          Bench.Test.create
+            name::align_self_flex_end_override_flex_start bench_align_self_flex_end_override_flex_start,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun border_no_size ?
+        [Bench.Test.create name::border_no_size bench_border_no_size, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun border_container_match_child ?
+        [
+          Bench.Test.create name::border_container_match_child bench_border_container_match_child,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun border_stretch_child ?
+        [Bench.Test.create name::border_stretch_child bench_border_stretch_child, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun border_center_child ?
+        [Bench.Test.create name::border_center_child bench_border_center_child, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun max_width ?
+        [Bench.Test.create name::max_width bench_max_width, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun max_height ?
+        [Bench.Test.create name::max_height bench_max_height, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun padding_no_size ?
+        [Bench.Test.create name::padding_no_size bench_padding_no_size, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun padding_container_match_child ?
+        [
+          Bench.Test.create name::padding_container_match_child bench_padding_container_match_child,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun padding_stretch_child ?
+        [Bench.Test.create name::padding_stretch_child bench_padding_stretch_child, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun padding_center_child ?
+        [Bench.Test.create name::padding_center_child bench_padding_center_child, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun absolute_layout_width_height_start_top ?
+        [
+          Bench.Test.create
+            name::absolute_layout_width_height_start_top bench_absolute_layout_width_height_start_top,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun absolute_layout_width_height_end_bottom ?
+        [
+          Bench.Test.create
+            name::absolute_layout_width_height_end_bottom bench_absolute_layout_width_height_end_bottom,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun absolute_layout_start_top_end_bottom ?
+        [
+          Bench.Test.create
+            name::absolute_layout_start_top_end_bottom bench_absolute_layout_start_top_end_bottom,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun absolute_layout_width_height_start_top_end_bottom ?
+        [
+          Bench.Test.create
+            name::absolute_layout_width_height_start_top_end_bottom
+            bench_absolute_layout_width_height_start_top_end_bottom,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent ?
+        [
+          Bench.Test.create
+            name::do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent
+            bench_do_not_clamp_height_of_absolute_node_to_height_of_its_overflow_hidden_parent,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_direction_column_no_height ?
+        [
+          Bench.Test.create name::flex_direction_column_no_height bench_flex_direction_column_no_height,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_direction_row_no_width ?
+        [
+          Bench.Test.create name::flex_direction_row_no_width bench_flex_direction_row_no_width,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_direction_column ?
+        [Bench.Test.create name::flex_direction_column bench_flex_direction_column, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_direction_row ?
+        [Bench.Test.create name::flex_direction_row bench_flex_direction_row, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_direction_column_reverse ?
+        [
+          Bench.Test.create name::flex_direction_column_reverse bench_flex_direction_column_reverse,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_direction_row_reverse ?
+        [
+          Bench.Test.create name::flex_direction_row_reverse bench_flex_direction_row_reverse,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun wrap_column ?
+        [Bench.Test.create name::wrap_column bench_wrap_column, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun wrap_row ?
+        [Bench.Test.create name::wrap_row bench_wrap_row, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun wrap_row_align_items_flex_end ?
+        [
+          Bench.Test.create name::wrap_row_align_items_flex_end bench_wrap_row_align_items_flex_end,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun wrap_row_align_items_center ?
+        [
+          Bench.Test.create name::wrap_row_align_items_center bench_wrap_row_align_items_center,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_start ?
+        [Bench.Test.create name::margin_start bench_margin_start, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_end ?
+        [Bench.Test.create name::margin_end bench_margin_end, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_left ?
+        [Bench.Test.create name::margin_left bench_margin_left, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_top ?
+        [Bench.Test.create name::margin_top bench_margin_top, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_right ?
+        [Bench.Test.create name::margin_right bench_margin_right, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_bottom ?
+        [Bench.Test.create name::margin_bottom bench_margin_bottom, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_content_flex_start ?
+        [Bench.Test.create name::align_content_flex_start bench_align_content_flex_start, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_content_flex_end ?
+        [Bench.Test.create name::align_content_flex_end bench_align_content_flex_end, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_content_center ?
+        [Bench.Test.create name::align_content_center bench_align_content_center, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun align_content_stretch ?
+        [Bench.Test.create name::align_content_stretch bench_align_content_stretch, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_row_flex_start ?
+        [
+          Bench.Test.create name::justify_content_row_flex_start bench_justify_content_row_flex_start,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_row_flex_end ?
+        [
+          Bench.Test.create name::justify_content_row_flex_end bench_justify_content_row_flex_end,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_row_center ?
+        [
+          Bench.Test.create name::justify_content_row_center bench_justify_content_row_center,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_row_space_between ?
+        [
+          Bench.Test.create name::justify_content_row_space_between bench_justify_content_row_space_between,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_row_space_around ?
+        [
+          Bench.Test.create name::justify_content_row_space_around bench_justify_content_row_space_around,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_column_flex_start ?
+        [
+          Bench.Test.create name::justify_content_column_flex_start bench_justify_content_column_flex_start,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_column_flex_end ?
+        [
+          Bench.Test.create name::justify_content_column_flex_end bench_justify_content_column_flex_end,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_column_center ?
+        [
+          Bench.Test.create name::justify_content_column_center bench_justify_content_column_center,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_column_space_between ?
+        [
+          Bench.Test.create
+            name::justify_content_column_space_between bench_justify_content_column_space_between,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun justify_content_column_space_around ?
+        [
+          Bench.Test.create
+            name::justify_content_column_space_around bench_justify_content_column_space_around,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun border_flex_child ?
+        [Bench.Test.create name::border_flex_child bench_border_flex_child, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun min_height ?
+        [Bench.Test.create name::min_height bench_min_height, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun min_width ?
+        [Bench.Test.create name::min_width bench_min_width, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun padding_flex_child ?
+        [Bench.Test.create name::padding_flex_child bench_padding_flex_child, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_and_flex_row ?
+        [Bench.Test.create name::margin_and_flex_row bench_margin_and_flex_row, ...benchmarks] : benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_and_flex_column ?
+        [Bench.Test.create name::margin_and_flex_column bench_margin_and_flex_column, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_and_stretch_row ?
+        [Bench.Test.create name::margin_and_stretch_row bench_margin_and_stretch_row, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_and_stretch_column ?
+        [Bench.Test.create name::margin_and_stretch_column bench_margin_and_stretch_column, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_with_sibling_row ?
+        [Bench.Test.create name::margin_with_sibling_row bench_margin_with_sibling_row, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun margin_with_sibling_column ?
+        [
+          Bench.Test.create name::margin_with_sibling_column bench_margin_with_sibling_column,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_basis_flex_grow_column ?
+        [
+          Bench.Test.create name::flex_basis_flex_grow_column bench_flex_basis_flex_grow_column,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_basis_flex_grow_row ?
+        [Bench.Test.create name::flex_basis_flex_grow_row bench_flex_basis_flex_grow_row, ...benchmarks] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_basis_flex_shrink_column ?
+        [
+          Bench.Test.create name::flex_basis_flex_shrink_column bench_flex_basis_flex_shrink_column,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun flex_basis_flex_shrink_row ?
+        [
+          Bench.Test.create name::flex_basis_flex_shrink_row bench_flex_basis_flex_shrink_row,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun jwalke_border_width_only_start ?
+        [
+          Bench.Test.create name::jwalke_border_width_only_start bench_jwalke_border_width_only_start,
+          ...benchmarks
+        ] :
+        benchmarks;
+    let benchmarks =
+      LayoutTestUtils.shouldRun jwalke_border_width_only_end ?
+        [
+          Bench.Test.create name::jwalke_border_width_only_end bench_jwalke_border_width_only_end,
+          ...benchmarks
+        ] :
+        benchmarks;
+    Command.run (Bench.make_command benchmarks)
+  }
+} else {
   it
     align_items_stretch
     (
@@ -4836,15 +7437,6 @@ for ii in 0 to times {
             [({...root_child0.layout, top: 40.0, left: 50.0, width: 10.0, height: 10.0}, root_child0.layout)]
         }
       }
-    )
-};
-
-let endTime = Sys.time ();
-
-if (times > 0) {
-  print_string "TOTAL TIME:\n";
-  print_float (endTime -. startTime);
-  print_newline ()
-} else {
+    );
   LayoutTestUtils.displayOutcomes ()
 };

@@ -35,6 +35,18 @@ let gPrintChanges = {contents: false};
 
 let gPrintSkips = {contents: false};
 
+let measureString = "measure";
+
+let stretchString = "stretch";
+
+let absMeasureString = "abs-measure";
+
+let absLayoutString = "abs-layout";
+
+let initialString = "initial";
+
+let flexString = "flex";
+
 let spacer = "                                                            ";
 
 let getSpacer level => {
@@ -329,19 +341,19 @@ and layoutNodeImpl
   /* and (~-.) = (~-) */
   and (~-) = (~-.);
   /* and (!) a => not a */
-  let re_assert cond msg =>
-    if (not cond) {
-      raise (Invalid_argument msg)
-    };
+  /* let re_assert cond msg => */
+  /*   if (not cond) { */
+  /*     raise (Invalid_argument msg) */
+  /*   }; */
 
   /** START_GENERATED **/
   open ReJsPrelude;
-  re_assert
-    (isUndefined availableWidth ? widthMeasureMode === CssMeasureModeUndefined : true)
-    "availableWidth is indefinite so widthMeasureMode must be CssMeasureModeUndefined";
-  re_assert
-    (isUndefined availableHeight ? heightMeasureMode === CssMeasureModeUndefined : true)
-    "availableHeight is indefinite so heightMeasureMode must be CssMeasureModeUndefined";
+  /* re_assert */
+  /*   (isUndefined availableWidth ? widthMeasureMode === CssMeasureModeUndefined : true) */
+  /*   "availableWidth is indefinite so widthMeasureMode must be CssMeasureModeUndefined"; */
+  /* re_assert */
+  /*   (isUndefined availableHeight ? heightMeasureMode === CssMeasureModeUndefined : true) */
+  /*   "availableHeight is indefinite so heightMeasureMode must be CssMeasureModeUndefined"; */
   let paddingAndBorderAxisRow = getPaddingAndBorderAxis node CssFlexDirectionRow;
   let paddingAndBorderAxisColumn = getPaddingAndBorderAxis node CssFlexDirectionColumn;
   let marginAxisRow = getMarginAxis node CssFlexDirectionRow;
@@ -560,7 +572,7 @@ and layoutNodeImpl
                 childWidthMeasureMode.contents
                 childHeightMeasureMode.contents
                 false
-                "measure";
+                measureString;
             child.contents.layout.computedFlexBasis =
               fmaxf
                 (isMainAxisRow ? child.contents.layout.measuredWidth : child.contents.layout.measuredHeight)
@@ -780,7 +792,7 @@ and layoutNodeImpl
                   childWidthMeasureMode.contents
                   childHeightMeasureMode.contents
                   (performLayout && !requiresStretchLayout)
-                  "flex";
+                  flexString;
               currentRelativeChild.contents = currentRelativeChild.contents.nextChild
             }
           };
@@ -911,7 +923,7 @@ and layoutNodeImpl
                         childWidthMeasureMode.contents
                         childHeightMeasureMode.contents
                         true
-                        "stretch";
+                        stretchString;
                     ()
                   }
                 } else if (
@@ -1142,7 +1154,7 @@ and layoutNodeImpl
                   childWidthMeasureMode.contents
                   childHeightMeasureMode.contents
                   false
-                  "abs-measure";
+                  absMeasureString;
               childWidth.contents =
                 currentAbsoluteChild.contents.layout.measuredWidth +
                 getMarginAxis currentAbsoluteChild.contents CssFlexDirectionRow;
@@ -1159,7 +1171,7 @@ and layoutNodeImpl
                 CssMeasureModeExactly
                 CssMeasureModeExactly
                 true
-                "abs-layout";
+                absLayoutString;
             if (
               isTrailingPosDefinedWithFallback currentAbsoluteChild.contents mainAxis &&
               !(isLeadingPosDefinedWithFallback currentAbsoluteChild.contents mainAxis)
@@ -1252,7 +1264,14 @@ let layoutNode node availableWidth availableHeight parentDirection => {
     };
   if (
     layoutNodeInternal
-      node availableWidth availableHeight parentDirection widthMeasureMode heightMeasureMode true "initial"
+      node
+      availableWidth
+      availableHeight
+      parentDirection
+      widthMeasureMode
+      heightMeasureMode
+      true
+      initialString
   ) {
     setPosition node node.layout.direction;
     if gPrintTree.contents {
