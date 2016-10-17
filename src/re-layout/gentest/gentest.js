@@ -116,6 +116,7 @@ function printTest(LTRContainer, RTLContainer) {
       '};'
     ];
     allBenchmarkLinesAsOne = allBenchmarkLinesAsOne.concat([
+      '/* ' + testName + ' */',
       setupTreeStr,
       performLtrLine,
       performRtlLine,
