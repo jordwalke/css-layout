@@ -42,7 +42,6 @@
       }
     </style>
   </head>
-
   <body>
     <div id='ltr-container'>
 
@@ -56,5 +55,46 @@
 
       <div id='default'></div>
     </div>
+    <button style="top:20px; left: 100px;" id="fixedBtn">Copy Test to Clipboard (FixedPoint) </button>
+    <button style="top:20px; left: 400px;" id="floatBtn">Copy Test to Clipboard (FloatingPoint) </button>
+    <script type="text/javascript">
+          
+      function copyTextToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.style.position = 'fixed';
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        // textArea.style.width = '2em';
+        // textArea.style.height = '2em';
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          var res = document.execCommand('copy');
+          console.log('Copied:');
+        } catch (err) {
+          console.log('Error copying');
+        }
+        document.body.removeChild(textArea);
+      }
+
+
+      var copyFixedPointTest = document.querySelector('#fixedBtn');
+      var copyFloatingPointTest = document.querySelector('#floatBtn');
+
+      copyFixedPointTest.addEventListener('click', function(event) {
+        copyTextToClipboard(window.fixedPointTest);
+      });
+
+
+      copyFloatingPointTest.addEventListener('click', function(event) {
+        copyTextToClipboard(window.floatingPointTest);
+      });
+    </script>
   </body>
+
 </html>

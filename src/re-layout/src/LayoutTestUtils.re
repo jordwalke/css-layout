@@ -1,8 +1,12 @@
+open LayoutSupport;
+
+let round num => int_of_float (floor (num +. 0.5));
+
+open LayoutValue;
+
 let exceptions = {contents: []};
 
 let failures = {contents: []};
-
-external reraise : exn => _ = "%reraise";
 
 let testCount = {contents: 0};
 
@@ -142,20 +146,11 @@ let rec best cmp extract hd tl =>
     cmp minFromTail hdVal ? minFromTail : hdVal
   };
 
-let round num => {
-  let floored = floor num;
-  if (num -. floored > 0.5) {
-    int_of_float (floor (num +. 1.0))
-  } else {
-    int_of_float floored
-  }
-};
-
 let renderBox matrix minLeft minTop layout ch => {
-  let leftIndex = int_of_float (floor (layout.LayoutTypes.left -. minLeft));
-  let topIndex = int_of_float (floor (layout.top -. minTop));
-  let rightIndex = round (layout.left +. layout.width -. minLeft);
-  let bottomIndex = round (layout.top +. layout.height -. minTop);
+  let leftIndex = int_of_float (scalarToFloat (layout.LayoutTypes.left -. minLeft));
+  let topIndex = int_of_float (scalarToFloat (layout.top -. minTop));
+  let rightIndex = round (scalarToFloat (layout.left +. layout.width -. minLeft));
+  let bottomIndex = round (scalarToFloat (layout.top +. layout.height -. minTop));
   for y in topIndex to bottomIndex {
     for x in leftIndex to rightIndex {
       if (x === leftIndex || x === rightIndex || y === topIndex || y === bottomIndex) {
@@ -178,8 +173,8 @@ let renderDiagram (containerLayout: LayoutTypes.cssLayout) childLayouts containe
   /**
    * Add + 1 so that we can render zero width as one wide.
    */
-  let numCols = round (maxRight -. minLeft) + 1;
-  let numRows = round (maxBottom -. minTop) + 1;
+  let numCols = round (scalarToFloat (maxRight -. minLeft)) + 1;
+  let numRows = round (scalarToFloat (maxBottom -. minTop)) + 1;
   let matrix = Array.make_matrix numCols numRows '.';
   renderBox matrix minLeft minTop containerLayout containerChar;
   List.iter (fun childLayout => renderBox matrix minLeft minTop childLayout childChar) childLayouts;

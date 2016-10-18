@@ -43,16 +43,19 @@ type measureMode =
 
 let css_max_cached_result_count = 6;
 
+type unitOfM = LayoutValue.scalar;
+
+
 /**
  * Intentionally, nothing is mutable inside each
  */
 type cachedMeasurement = {
-  mutable availableWidth: float,
-  mutable availableHeight: float,
+  mutable availableWidth: unitOfM,
+  mutable availableHeight: unitOfM,
   mutable widthMeasureMode: measureMode,
   mutable heightMeasureMode: measureMode,
-  mutable computedWidth: float,
-  mutable computedHeight: float
+  mutable computedWidth: unitOfM,
+  mutable computedHeight: unitOfM
 };
 
 type overflow =
@@ -64,7 +67,7 @@ type wrapType =
   | CssNoWrap
   | CssWrap;
 
-type dimensions = {width: float, height: float};
+type dimensions = {width: unitOfM, height: unitOfM};
 
 type specificDirection =
   | Left
@@ -72,7 +75,7 @@ type specificDirection =
   | Top
   | Bottom;
 
-type coordinates = {left: float, top: float};
+type coordinates = {left: unitOfM, top: unitOfM};
 
 type cssStyle = {
   direction: direction,
@@ -84,33 +87,33 @@ type cssStyle = {
   positionType: positionType,
   flexWrap: wrapType,
   overflow: overflow,
-  flexGrow: float,
-  flexShrink: float,
-  flexBasis: float,
-  marginLeft: float,
-  marginTop: float,
-  marginRight: float,
-  marginBottom: float,
-  marginStart: float,
-  marginEnd: float,
-  width: float,
-  height: float,
-  minWidth: float,
-  minHeight: float,
-  maxWidth: float,
-  maxHeight: float,
-  left: float,
-  top: float,
-  right: float,
-  bottom: float,
+  flexGrow: unitOfM,
+  flexShrink: unitOfM,
+  flexBasis: unitOfM,
+  marginLeft: unitOfM,
+  marginTop: unitOfM,
+  marginRight: unitOfM,
+  marginBottom: unitOfM,
+  marginStart: unitOfM,
+  marginEnd: unitOfM,
+  width: unitOfM,
+  height: unitOfM,
+  minWidth: unitOfM,
+  minHeight: unitOfM,
+  maxWidth: unitOfM,
+  maxHeight: unitOfM,
+  left: unitOfM,
+  top: unitOfM,
+  right: unitOfM,
+  bottom: unitOfM,
   /**
    * Start position.
    */
-  start: float,
+  start: unitOfM,
   /**
    * End position.
    */
-  endd: float,
+  endd: unitOfM,
   /**
    * You should skip all the rules that contain negative values for the
    * following attributes. For example:
@@ -121,18 +124,18 @@ type cssStyle = {
    *   {left: -5 ...}
    *   {left: 0 ...}
    */
-  paddingLeft: float,
-  paddingTop: float,
-  paddingRight: float,
-  paddingBottom: float,
-  paddingStart: float,
-  paddingEnd: float,
-  borderLeft: float,
-  borderTop: float,
-  borderRight: float,
-  borderBottom: float,
-  borderStart: float,
-  borderEnd: float
+  paddingLeft: unitOfM,
+  paddingTop: unitOfM,
+  paddingRight: unitOfM,
+  paddingBottom: unitOfM,
+  paddingStart: unitOfM,
+  paddingEnd: unitOfM,
+  borderLeft: unitOfM,
+  borderTop: unitOfM,
+  borderRight: unitOfM,
+  borderBottom: unitOfM,
+  borderStart: unitOfM,
+  borderEnd: unitOfM
 };
 
 
@@ -141,19 +144,19 @@ type cssStyle = {
  * styles and inheritance.
  */
 type cssLayout = {
-  mutable left: float,
-  mutable top: float,
-  mutable right: float,
-  mutable bottom: float,
-  mutable width: float,
-  mutable height: float,
+  mutable left: unitOfM,
+  mutable top: unitOfM,
+  mutable right: unitOfM,
+  mutable bottom: unitOfM,
+  mutable width: unitOfM,
+  mutable height: unitOfM,
   mutable direction: direction,
   /* Instead of recomputing the entire layout every single time, we
    * cache some information to break early when nothing changed */
   mutable hasNewLayout: bool,
   mutable generationCount: int,
   mutable lastParentDirection: direction,
-  mutable computedFlexBasis: float,
+  mutable computedFlexBasis: unitOfM,
   mutable nextCachedMeasurementsIndex: int,
   /**
    * Hardcoded to 6 previous measurements.
@@ -164,8 +167,8 @@ type cssLayout = {
   mutable cachedMeasurement4: cachedMeasurement,
   mutable cachedMeasurement5: cachedMeasurement,
   mutable cachedMeasurement6: cachedMeasurement,
-  mutable measuredWidth: float,
-  mutable measuredHeight: float,
+  mutable measuredWidth: unitOfM,
+  mutable measuredHeight: unitOfM,
   mutable cachedLayout: cachedMeasurement
 };
 
@@ -174,7 +177,7 @@ type node 'context = {
   layout: cssLayout,
   mutable lineIndex: int,
   mutable nextChild: node 'context,
-  measure: 'context => float => measureMode => float => measureMode => dimensions,
+  measure: 'context => unitOfM => measureMode => unitOfM => measureMode => dimensions,
   print: option ('context => unit),
   mutable children: array (node 'context),
   isDirty: 'context => bool,

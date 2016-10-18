@@ -8,10 +8,11 @@
  */
 
 window.onload = function() {
- printTest(document.body.children[0], document.body.children[1]);
+  window.fixedPointTest = printTest(false, document.body.children[0], document.body.children[1]);
+  window.floatingPointTest = printTest(true, document.body.children[0], document.body.children[1]);
 }
 
-function printTest(LTRContainer, RTLContainer) {
+function printTest(useFloats, LTRContainer, RTLContainer) {
   var commentLines = [
     '/**',
     ' * Copyright (c) 2014-present, Facebook, Inc.',
@@ -86,24 +87,25 @@ function printTest(LTRContainer, RTLContainer) {
     testNameLines.push('let ' + testName + ' = "'+ testName + '";');
     let setupTreeStr =
       '  ' + setupTestTree(
+        useFloats,
         testName,
         undefined,
         treeWithComputedStyle[i],
         'root',
         null
       ).join('\n');
-    let performLtrLine = '  Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionLtr;';
-    let performRtlLine = '  Layout.layoutNode root LayoutSupport.cssUndefined LayoutSupport.cssUndefined CssDirectionRtl;';
+    let performLtrLine = '  Layout.layoutNode root cssUndefined cssUndefined CssDirectionLtr;';
+    let performRtlLine = '  Layout.layoutNode root cssUndefined cssUndefined CssDirectionRtl;';
     testLines = testLines.concat([
       'it ' + testName + ' (fun () => {',
       setupTreeStr,
       performLtrLine,
       '',
-      '  ' + assertTestTree(LTRLayoutTree[i], 'root', null).join('\n  '),
+      '  ' + assertTestTree(useFloats, LTRLayoutTree[i], 'root', null).join('\n  '),
       '',
       performRtlLine,
       '',
-      '  ' + assertTestTree(RTLLayoutTree[i], 'root', null).join('\n  '),
+      '  ' + assertTestTree(useFloats, RTLLayoutTree[i], 'root', null).join('\n  '),
       '});',
       ''
     ]);
@@ -143,18 +145,18 @@ function printTest(LTRContainer, RTLContainer) {
   let totalLines = [
     '{commentLines}',
     'open LayoutTestUtils;',
+    'open LayoutValue;',
     '{testNameLines}',
-    'open Core.Std;',
     'open Core_bench.Std;',
     'if (LayoutTestUtils.runMode === Bench) {',
     '  if LayoutTestUtils.shouldBenchmarkAllAsOne {',
-    '    Command.run (Bench.make_command [Bench.Test.create name::"all-benchmarks" (fun()=>{',
+    '    Core.Std.Command.run (Bench.make_command [Bench.Test.create name::"all-benchmarks" (fun()=>{',
     '      {allBenchmarkLinesAsOne}',
     '    })]);',
     '  } else {',
     '    {benchmarkFunctionDefinitions}',
     '    {reasonListOfCoreBenchmarks}',
-    '    Command.run (Bench.make_command benchmarks);',
+    '    Core.Std.Command.run (Bench.make_command benchmarks);',
     '  }',
     '} else {',
     '  {testLines}',
@@ -166,27 +168,34 @@ function printTest(LTRContainer, RTLContainer) {
   .replace('{benchmarkFunctionDefinitions}', benchmarkFunctionDefinitions.join('\n    '))
   .replace('{reasonListOfCoreBenchmarks}', reasonListOfCoreBenchmarks.join('\n    '))
   .replace('{testLines}', testLines.join('\n  '));
-  console.log(totalLines);
+  return totalLines;
 }
 
-let ensureFloat = (v) => (v + '').indexOf('.') === -1 ? (v + '.0') : v;
+let ensureInt = (v) => v != null ? '' + (v * 1000) : '0';
+let ensureFloat = (v) => v != null ? '' + (v) + '.0' : '0.0';
 
 let errors = [];
 
 let testNum = 0;
 
-let createLayoutExtensionNode = (nodeName, top, left, width, height) =>
-  ('{...' + nodeName + '.layout, top:layoutTop, left: layoutLeft, width: layoutWidth, height: layoutHeight}')
-    .replace('layoutTop', ensureFloat(top))
-    .replace('layoutLeft', ensureFloat(left))
-    .replace('layoutWidth', ensureFloat(width))
-    .replace('layoutHeight', ensureFloat(height));
+let createLayoutExtensionNode = (useFloats, nodeName, top, left, width, height) => {
+  let converter = useFloats ? ensureFloat : ensureInt;
+  return (
+    '{...' +
+    nodeName +
+    '.layout, top:layoutTop, left: layoutLeft, width: layoutWidth, height: layoutHeight}'
+  ).replace('layoutTop', converter(top))
+   .replace('layoutLeft', converter(left))
+   .replace('layoutWidth', converter(width))
+   .replace('layoutHeight', converter(height));
+};
 
-const createInequalityChecker = (node, nodeName) => {
-  return nodeName + '.layout.top != ' + ensureFloat(node.top) + ' || ' +
-    nodeName + '.layout.left != ' + ensureFloat(node.left) + ' || ' +
-    nodeName + '.layout.width != ' + ensureFloat(node.width) + ' || ' +
-    nodeName + '.layout.height != ' + ensureFloat(node.height);
+const createInequalityChecker = (useFloats, node, nodeName) => {
+  let converter = useFloats ? ensureFloat : ensureInt;
+  return nodeName + '.layout.top != ' + converter(node.top) + ' || ' +
+    nodeName + '.layout.left != ' + converter(node.left) + ' || ' +
+    nodeName + '.layout.width != ' + converter(node.width) + ' || ' +
+    nodeName + '.layout.height != ' + converter(node.height);
 };
 
 /**
@@ -194,7 +203,7 @@ const createInequalityChecker = (node, nodeName) => {
  *   parentName is null || hasChildren (because it's nice to see the node
  *   validated again as a container this time).
  */
-function assertTestTreePrint(node, nodeName, parentNode) {
+function assertTestTreePrint(useFloats, node, nodeName, parentNode) {
   let shouldValidate =
     parentNode == null || node.children.length !== 0;
 
@@ -204,7 +213,7 @@ function assertTestTreePrint(node, nodeName, parentNode) {
     let childItems = node.children.map(
       (childNode, i) => {
         const childName = nodeName + '_child' + i;
-        return '  (' + createLayoutExtensionNode(childName, childNode.top, childNode.left, childNode.width, childNode.height) + ', ' + childName + '.layout),';
+        return '  (' + createLayoutExtensionNode(useFloats, childName, childNode.top, childNode.left, childNode.width, childNode.height) + ', ' + childName + '.layout),';
       }
     );
     let childLines = ['['].concat(childItems).concat([']']);
@@ -212,7 +221,7 @@ function assertTestTreePrint(node, nodeName, parentNode) {
       [
         'assertLayouts testNum (expectedContainerLayout, observedContainerLayout)'
           .replace('testNum', testNum++)
-          .replace('expectedContainerLayout', createLayoutExtensionNode(nodeName, node.top, node.left, node.width, node.height))
+          .replace('expectedContainerLayout', createLayoutExtensionNode(useFloats, nodeName, node.top, node.left, node.width, node.height))
           .replace('observedContainerLayout', nodeName + '.layout'),
       ].concat(childLines).concat([';']);
 
@@ -220,33 +229,33 @@ function assertTestTreePrint(node, nodeName, parentNode) {
     for (var i = 0; i < node.children.length; i++) {
       recursePrettyPrintLines.push('');
       var childName = nodeName + '_child' + i;
-      recursePrettyPrintLines = recursePrettyPrintLines.concat(assertTestTreePrint(node.children[i], childName, node));
+      recursePrettyPrintLines = recursePrettyPrintLines.concat(assertTestTreePrint(useFloats, node.children[i], childName, node));
     }
     let doThePrettyPrintingTestStr = assertionPrintingLines.concat(recursePrettyPrintLines);
     return doThePrettyPrintingTestStr.join('\n');
   }
 };
 
-function assertTestTreeFast(node, nodeName, parentNode) {
+function assertTestTreeFast(useFloats, node, nodeName, parentNode) {
   return [
-    createInequalityChecker(node, nodeName)
+    createInequalityChecker(useFloats, node, nodeName)
   ].concat(node.children.map((childNode, i) => {
     const childName = nodeName + '_child' + i;
-    return assertTestTreeFast(childNode, childName, node);
+    return assertTestTreeFast(useFloats, childNode, childName, node);
   })).join(' ||\n');
 };
 
-function assertTestTree(node, nodeName, parentNode) {
-  let fastNumericCheckExprStr = assertTestTreeFast(node, nodeName, parentNode);
+function assertTestTree(useFloats, node, nodeName, parentNode) {
+  let fastNumericCheckExprStr = assertTestTreeFast(useFloats, node, nodeName, parentNode);
   let testAndPrettyPrint = [
     'if (' + fastNumericCheckExprStr + ') {',
-    '  ' + assertTestTreePrint(node, nodeName, parentNode),
+    '  ' + assertTestTreePrint(useFloats, node, nodeName, parentNode),
     '};'
   ];
   return testAndPrettyPrint;
 };
 
-function setupTestTree(testName, parent, node, nodeName, parentName, index) {
+function setupTestTree(useFloats, testName, parent, node, nodeName, parentName, index) {
   var lines = [];
 
   var styleLines = [];
@@ -266,60 +275,61 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
       continue;
     }
     let val = node.computedStyleForKebabs[style];
+    let ensurer = useFloats ? ensureFloat : ensureInt;
     if (val !== getDefaultStyleValue(style)) {
       switch (style) {
         case 'margin-left':
           if (node.rawStyle.indexOf('margin-left-because-start') !== -1) {
-            styleLines.push('marginStart: ' + pixelValue(val));
+            styleLines.push('marginStart: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('margin-left-because-end') !== -1) {
-            styleLines.push('marginEnd: ' + pixelValue(val));
+            styleLines.push('marginEnd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('marginLeft: ' + pixelValue(val));
+            styleLines.push('marginLeft: ' + pixelValue(useFloats, val));
           }
           break;
         case 'margin-right':
           if (node.rawStyle.indexOf('margin-right-because-start') !== -1) {
-            styleLines.push('marginStart: ' + pixelValue(val));
+            styleLines.push('marginStart: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('margin-right-because-end') !== -1) {
-            styleLines.push('marginEnd: ' + pixelValue(val));
+            styleLines.push('marginEnd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('marginRight: ' + pixelValue(val));
+            styleLines.push('marginRight: ' + pixelValue(useFloats, val));
           }
           break;
         case 'padding-left':
           if (node.rawStyle.indexOf('padding-left-because-start') !== -1) {
-            styleLines.push('paddingStart: ' + pixelValue(val));
+            styleLines.push('paddingStart: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('padding-left-because-end') !== -1) {
-            styleLines.push('paddingEnd: ' + pixelValue(val));
+            styleLines.push('paddingEnd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('paddingLeft: ' + pixelValue(val));
+            styleLines.push('paddingLeft: ' + pixelValue(useFloats, val));
           }
           break;
         case 'padding-right':
           if (node.rawStyle.indexOf('padding-right-because-start') !== -1) {
-            styleLines.push('paddingStart: ' + pixelValue(val));
+            styleLines.push('paddingStart: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('padding-right-because-end') !== -1) {
-            styleLines.push('paddingEnd: ' + pixelValue(val));
+            styleLines.push('paddingEnd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('paddingRight: ' + pixelValue(val));
+            styleLines.push('paddingRight: ' + pixelValue(useFloats, val));
           }
           break;
         case 'border-left-width':
           if (node.rawStyle.indexOf('border-left-width-because-start') !== -1) {
-            styleLines.push('borderStart: ' + pixelValue(val));
+            styleLines.push('borderStart: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('border-left-width-because-end') !== -1) {
-            styleLines.push('borderEnd: ' + pixelValue(val));
+            styleLines.push('borderEnd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('borderLeft: ' + pixelValue(val));
+            styleLines.push('borderLeft: ' + pixelValue(useFloats, val));
           }
           break;
         case 'border-right-width':
           if (node.rawStyle.indexOf('border-right-width-because-start') !== -1) {
-            styleLines.push('borderStart: ' + pixelValue(val));
+            styleLines.push('borderStart: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('border-right-width-because-end') !== -1) {
-            styleLines.push('borderEnd: ' + pixelValue(val));
+            styleLines.push('borderEnd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('borderRight: ' + pixelValue(val));
+            styleLines.push('borderRight: ' + pixelValue(useFloats, val));
           }
           break;
         case 'direction':
@@ -352,73 +362,73 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
           styleLines.push('overflow: ' + overflowValue(val));
           break;
         case 'flex-grow':
-          styleLines.push('flexGrow: ' + ensureFloat(val));
+          styleLines.push('flexGrow: ' + ensurer(val));
           break;
         case 'flex-shrink':
-          styleLines.push('flexShrink: ' +  ensureFloat(val));
+          styleLines.push('flexShrink: ' +  ensurer(val));
           break;
         case 'flex-basis':
-          styleLines.push('flexBasis: ' +  pixelValue(val));
+          styleLines.push('flexBasis: ' +  pixelValue(useFloats, val));
           break;
         case 'left':
           if (node.rawStyle.indexOf('left-because-start') !== -1) {
-            styleLines.push('start: ' + pixelValue(val));
+            styleLines.push('start: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('left-because-end') !== -1) {
-            styleLines.push('endd: ' + pixelValue(val));
+            styleLines.push('endd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('left: ' + pixelValue(val));
+            styleLines.push('left: ' + pixelValue(useFloats, val));
           }
           break;
         case 'top':
-          styleLines.push('top: ' + pixelValue(val));
+          styleLines.push('top: ' + pixelValue(useFloats, val));
           break;
         case 'right':
           if (node.rawStyle.indexOf('right-because-start') !== -1) {
-            styleLines.push('start: ' + pixelValue(val));
+            styleLines.push('start: ' + pixelValue(useFloats, val));
           } else if (node.rawStyle.indexOf('right-because-end') !== -1) {
-            styleLines.push('endd: ' + pixelValue(val));
+            styleLines.push('endd: ' + pixelValue(useFloats, val));
           } else {
-            styleLines.push('right: ' + pixelValue(val));
+            styleLines.push('right: ' + pixelValue(useFloats, val));
           }
           break;
         case 'bottom':
-          styleLines.push('bottom: ' + pixelValue(val));
+          styleLines.push('bottom: ' + pixelValue(useFloats, val));
           break;
         case 'margin-top':
-          styleLines.push('marginTop: ' + pixelValue(val));
+          styleLines.push('marginTop: ' + pixelValue(useFloats, val));
           break;
         case 'margin-bottom':
-          styleLines.push('marginBottom: ' + pixelValue(val));
+          styleLines.push('marginBottom: ' + pixelValue(useFloats, val));
           break;
         case 'padding-top':
-          styleLines.push('paddingTop: ' + pixelValue(val));
+          styleLines.push('paddingTop: ' + pixelValue(useFloats, val));
           break;
         case 'padding-bottom':
-          styleLines.push('paddingBottom: ' + pixelValue(val));
+          styleLines.push('paddingBottom: ' + pixelValue(useFloats, val));
           break;
         case 'border-top-width':
-          styleLines.push('borderTop: ' + pixelValue(val));
+          styleLines.push('borderTop: ' + pixelValue(useFloats, val));
           break;
         case 'border-bottom-width':
-          styleLines.push('borderBottom: ' + pixelValue(val));
+          styleLines.push('borderBottom: ' + pixelValue(useFloats, val));
           break;
         case 'width':
-          styleLines.push('width: ' + pixelValue(val));
+          styleLines.push('width: ' + pixelValue(useFloats, val));
           break;
         case 'min-width':
-          styleLines.push('minWidth: ' + pixelValue(val));
+          styleLines.push('minWidth: ' + pixelValue(useFloats, val));
           break;
         case 'max-width':
-          styleLines.push('maxWidth: ' + pixelValue(val));
+          styleLines.push('maxWidth: ' + pixelValue(useFloats, val));
           break;
         case 'height':
-          styleLines.push('height: ' + pixelValue(val));
+          styleLines.push('height: ' + pixelValue(useFloats, val));
           break;
         case 'min-height':
-          styleLines.push('minHeight: ' + pixelValue(val));
+          styleLines.push('minHeight: ' + pixelValue(useFloats, val));
           break;
         case 'max-height':
-          styleLines.push('maxHeight: ' +  pixelValue(val));
+          styleLines.push('maxHeight: ' +  pixelValue(useFloats, val));
           break;
       }
     }
@@ -441,6 +451,7 @@ function setupTestTree(testName, parent, node, nodeName, parentName, index) {
     var childName = nodeName + '_child' + i;
     lines = lines.concat(
         setupTestTree(
+            useFloats,
             testName + ' (child)',
             node,
             node.children[i],
@@ -517,15 +528,24 @@ function alignValue(value) {
   }
 }
 
-function pixelValue(value) {
+function pixelValue(useFloats, value) {
   switch (value) {
-    case 'auto': return 'LayoutSupport.cssUndefined';
-    case 'undefined': return 'LayoutSupport.cssUndefined';
-    default: return (
-      (value.replace('px', '')).indexOf('.') === -1 ?
-        (value.replace('px', '')) + '.0' :
-        (value.replace('px', ''))
-    );
+    case 'auto': return 'cssUndefined';
+    case 'undefined': return 'cssUndefined';
+    default:
+      let hasNoDot = value.replace('px', '').indexOf('.') === -1;
+      if (useFloats) {
+        return (
+          hasNoDot ? (value.replace('px', '')) + '.0' :
+            '' + (+value.replace('px', ''))
+        );
+      } else {
+        return (
+          (value.replace('px', '')).indexOf('.') === -1 ?
+            (value.replace('px', '')) + '000' :
+            '' + ((+value.replace('px', '')) * 1000)
+        );
+      }
   }
 }
 

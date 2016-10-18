@@ -39,20 +39,18 @@ external reraise : exn => _ = "%reraise";
  */
 open LayoutTypes;
 
-let cssUndefined = nan;
+open LayoutValue;
 
 let positive_flex_is_auto = false;
 
 let gCurrentGenerationCount = 0;
 
-let (<|) a b => a b;
-
-let is_nan (x: float) => x != x;
-
-let isUndefined (x: float) => x != x;
-
 let failOnDummyMeasure = true;
 
+
+/**
+ * In the integer encoding of all
+ */
 let dummyMeasure context width widthMeasureMode height heightMeasureMode =>
   if failOnDummyMeasure {
     raise (
@@ -61,7 +59,7 @@ let dummyMeasure context width widthMeasureMode height heightMeasureMode =>
       )
     )
   } else {
-    {width: 0.0, height: 0.0}
+    {width: zero, height: zero}
   };
 
 let dummyIsDirty context => false;
@@ -91,12 +89,12 @@ let dummyIsDirty context => false;
 
  */
 let dummyCachedMeasurement = {
-  availableWidth: 0.0,
-  availableHeight: 0.0,
+  availableWidth: zero,
+  availableHeight: zero,
   widthMeasureMode: CSS_MEASURE_MODE_NEGATIVE_ONE_WHATEVER_THAT_MEANS,
   heightMeasureMode: CSS_MEASURE_MODE_NEGATIVE_ONE_WHATEVER_THAT_MEANS,
-  computedWidth: 0.0,
-  computedHeight: 0.0
+  computedWidth: zero,
+  computedHeight: zero
 };
 
 let defaultStyle = {
@@ -112,21 +110,21 @@ let defaultStyle = {
   /**
    * Properties that start out as zero.
    */
-  flexGrow: 0.0,
-  flexShrink: 0.0,
+  flexGrow: zero,
+  flexShrink: zero,
   flexBasis: cssUndefined,
-  marginLeft: 0.0,
-  marginTop: 0.0,
-  marginRight: 0.0,
-  marginBottom: 0.0,
-  paddingLeft: 0.0,
-  paddingTop: 0.0,
-  paddingRight: 0.0,
-  paddingBottom: 0.0,
-  borderLeft: 0.0,
-  borderTop: 0.0,
-  borderRight: 0.0,
-  borderBottom: 0.0,
+  marginLeft: zero,
+  marginTop: zero,
+  marginRight: zero,
+  marginBottom: zero,
+  paddingLeft: zero,
+  paddingTop: zero,
+  paddingRight: zero,
+  paddingBottom: zero,
+  borderLeft: zero,
+  borderTop: zero,
+  borderRight: zero,
+  borderBottom: zero,
   /**
    * Properties that start out as undefined.
    */
@@ -175,10 +173,10 @@ let rec theNullNode = {
      * Start out as zero.
      */
     computedFlexBasis: cssUndefined,
-    left: 0.0,
-    top: 0.0,
-    right: 0.0,
-    bottom: 0.0,
+    left: zero,
+    top: zero,
+    right: zero,
+    bottom: zero,
     /**
      * Start out as undefined.
      */
@@ -293,7 +291,7 @@ let styleLeadingPositionForAxis node axis =>
 
 let styleLeadingPositionForAxisOrZero node axis => {
   let leadingPos = styleLeadingPositionForAxis node axis;
-  not (isUndefined leadingPos) ? leadingPos : 0.0
+  not (isUndefined leadingPos) ? leadingPos : zero
 };
 
 let styleLeadingPaddingForAxis node axis =>
@@ -334,7 +332,7 @@ let styleTrailingPositionForAxis node axis =>
 
 let styleTrailingPositionForAxisOrZero node axis => {
   let leadingPos = styleTrailingPositionForAxis node axis;
-  not (isUndefined leadingPos) ? leadingPos : 0.0
+  not (isUndefined leadingPos) ? leadingPos : zero
 };
 
 let styleTrailingPaddingForAxis node axis =>
@@ -440,7 +438,7 @@ let getCrossFlexDirection flex_direction direction =>
 
 let isFlex node =>
   node.style.positionType === CssPositionRelative && (
-    node.style.flexGrow != 0.0 || node.style.flexShrink != 0.0
+    node.style.flexGrow != zero || node.style.flexShrink != zero
   );
 
 let getLeadingMargin node axis =>
@@ -458,39 +456,39 @@ let getTrailingMargin node axis =>
   };
 
 let getLeadingPadding node axis =>
-  if (isRowDirection axis && not (isUndefined node.style.paddingStart) && node.style.paddingStart >= 0.0) {
+  if (isRowDirection axis && not (isUndefined node.style.paddingStart) && node.style.paddingStart >= zero) {
     node.style.paddingStart
   } else {
     let leadingPadding = styleLeadingPaddingForAxis node axis;
-    if (leadingPadding >= 0.0) {
+    if (leadingPadding >= zero) {
       leadingPadding
     } else {
-      0.0
+      zero
     }
   };
 
 let getTrailingPadding node axis =>
-  if (isRowDirection axis && not (isUndefined node.style.paddingEnd) && node.style.paddingEnd >= 0.0) {
+  if (isRowDirection axis && not (isUndefined node.style.paddingEnd) && node.style.paddingEnd >= zero) {
     node.style.paddingEnd
   } else {
     let trailingPadding = styleTrailingPaddingForAxis node axis;
-    trailingPadding >= 0.0 ? trailingPadding : 0.0
+    trailingPadding >= zero ? trailingPadding : zero
   };
 
 let getLeadingBorder node axis =>
-  if (isRowDirection axis && not (isUndefined node.style.borderStart) && node.style.borderStart >= 0.0) {
+  if (isRowDirection axis && not (isUndefined node.style.borderStart) && node.style.borderStart >= zero) {
     node.style.borderStart
   } else {
     let leadingBorder = styleLeadingBorderForAxis node axis;
-    leadingBorder >= 0.0 ? leadingBorder : 0.0
+    leadingBorder >= zero ? leadingBorder : zero
   };
 
 let getTrailingBorder node axis =>
-  if (isRowDirection axis && not (isUndefined node.style.borderEnd) && node.style.borderEnd >= 0.0) {
+  if (isRowDirection axis && not (isUndefined node.style.borderEnd) && node.style.borderEnd >= zero) {
     node.style.borderEnd
   } else {
     let trailingBorder = styleTrailingBorderForAxis node axis;
-    trailingBorder >= 0.0 ? trailingBorder : 0.0
+    trailingBorder >= zero ? trailingBorder : zero
   };
 
 let getLeadingPaddingAndBorder node axis => getLeadingPadding node axis +. getLeadingBorder node axis;
@@ -510,12 +508,12 @@ let getDimWithMargin node axis =>
 
 let isStyleDimDefined node axis => {
   let value = styleDimensionForAxis node axis;
-  not (isUndefined value) && value >= 0.0
+  not (isUndefined value) && value >= zero
 };
 
 let isLayoutDimDefined node axis => {
   let value = layoutMeasuredDimensionForAxis node axis;
-  not (isUndefined value) && value >= 0.0
+  not (isUndefined value) && value >= zero
 };
 
 let isLeadingPosDefinedWithFallback node axis =>
@@ -548,7 +546,7 @@ let getTrailingPositionWithFallback node axis =>
     styleTrailingPositionForAxisOrZero node axis
   };
 
-let normalizePosition position => not (isUndefined position) ? position : 0.0;
+let normalizePosition position => not (isUndefined position) ? position : zero;
 
 let boundAxisWithinMinAndMax node axis value => {
   let (min, max) =
@@ -561,13 +559,13 @@ let boundAxisWithinMinAndMax node axis value => {
     };
   let boundValue = value;
   let nextBoundValue =
-    if (not (isUndefined max) && max >= 0.0 && boundValue > max) {
+    if (not (isUndefined max) && max >= zero && boundValue > max) {
       max
     } else {
       boundValue
     };
   let nextNextBoundValue =
-    if (not (isUndefined min) && min >= 0.0 && nextBoundValue < min) {
+    if (not (isUndefined min) && min >= zero && nextBoundValue < min) {
       min
     } else {
       nextBoundValue
@@ -637,22 +635,11 @@ let setPosition node direction => {
     node crossAxis (getTrailingMargin node crossAxis +. getRelativePosition node crossAxis)
 };
 
-let cssNodeStyleSetFlex node flex =>
-  if (isUndefined flex || flex == 0.0) {
-    {...node, flexGrow: 0.0, flexShrink: 0.0, flexBasis: cssUndefined}
-  } else if (
-    flex > 0.0
-  ) {
-    {...node, flexGrow: flex, flexShrink: 0.0, flexBasis: 0.0}
-  } else {
-    {...node, flexGrow: 0.0, flexShrink: -. flex, flexBasis: cssUndefined}
-  };
-
 let cssNodeStyleGetFlex node =>
-  if (node.style.flexGrow > 0.0) {
+  if (node.style.flexGrow > zero) {
     node.style.flexGrow
-  } else if (node.style.flexShrink > 0.0) {
+  } else if (node.style.flexShrink > zero) {
     -. node.style.flexShrink
   } else {
-    0.0
+    zero
   };

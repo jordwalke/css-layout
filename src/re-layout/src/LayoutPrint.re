@@ -1,6 +1,8 @@
 open LayoutTypes;
 
-let isNan value => classify_float value === FP_nan;
+open LayoutSupport;
+
+open LayoutValue;
 
 let shouldFilter = true;
 
@@ -10,23 +12,23 @@ let indent n =>
   };
 
 let print_number_0 (indentNum, str, number) =>
-  if (not shouldFilter || not (number == 0.0)) {
+  if (not shouldFilter || not (number == zero)) {
     indent indentNum;
-    Printf.printf "%s: %g,\n" str number
+    Printf.printf "%s: %s,\n" str (scalarToString number)
   };
 
 let print_number_nan (indentNum, str, number) =>
-  if (not shouldFilter || not (isNan number)) {
+  if (not shouldFilter || not (isUndefined number)) {
     indent indentNum;
-    Printf.printf "%s: %g,\n" str number
+    Printf.printf "%s: %s,\n" str (scalarToString number)
   };
 
 let layoutStr layout =>
   "{left:" ^
-  string_of_float layout.left ^
+  scalarToString layout.left ^
   ", top:" ^
-  string_of_float layout.top ^
-  ", width:" ^ string_of_float layout.width ^ ", height:" ^ string_of_float layout.height ^ "}";
+  scalarToString layout.top ^
+  ", width:" ^ scalarToString layout.width ^ ", height:" ^ scalarToString layout.height ^ "}";
 
 let rec printCssNodeRec (node, options, level) => {
   indent level;
@@ -46,7 +48,7 @@ let rec printCssNodeRec (node, options, level) => {
     print_number_0 (level + 2, "left", node.layout.left);
     /* indent (level + 2); */
     /* Printf.printf "shouldUpdate: %b,\n" node.layout.shouldUpdate; */
-    print_number_0 (level + 2, "generationCount", float_of_int node.layout.generationCount);
+    /* print_number_0 (level + 2, "generationCount", float_of_int node.layout.generationCount); */
     indent (level + 1);
     Printf.printf "},\n"
   };
@@ -138,7 +140,7 @@ let rec printCssNodeRec (node, options, level) => {
       indent (level + 2);
       Printf.printf "alignSelf: 'stretch',\n"
     };
-    print_number_nan (level + 2, "flex", LayoutSupport.cssNodeStyleGetFlex node);
+    /* print_number_nan (level + 2, "flex", LayoutSupport.cssNodeStyleGetFlex node); */
     if (node.style.overflow == Hidden) {
       indent (level + 2);
       Printf.printf "overflow: 'hidden',\n"
