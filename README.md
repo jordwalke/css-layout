@@ -1,6 +1,9 @@
 
 # ReLayout: Reason CSS Flexbox implementation.
 
+[![Build Status](https://travis-ci.org/jordwalke/ReLayout.svg?branch=master)](https://travis-ci.org/jordwalke/ReLayout)
+
+
 This is a [`Reason`](https://github.com/facebook/reason) implementation of CSS Flexbox layout.
 It is a port of the [`css-layout`](https://github.com/facebook/css-layout)
 project.
