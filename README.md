@@ -15,17 +15,41 @@ npm install
 
 ## Rebuilding
 ```sh
-npm run reasonbuild
+npm run build
 ```
 
-### Testing
+## Running Tests
+```sh
+npm run test
+```
+
+## Running Benchmarks
+```sh
+npm run bench
+```
+
+## Testing and running the Floating Point Representation:
+
+There are two implementations of layout data encodings, one uses fixed point
+with explicit rounding, and the other uses floating point. The default is
+currently fixed point. You can toggle between the two by doing the following:
+
+- To test the floating point representation, open `./src/LayoutValue.re` and
+  uncomment out the commented lines, and comment out the uncommented lines.
+- Open `package.json` and replace `src/LayoutTestFixedEncoding.re` with
+  `src/LayoutTestFloatEncoding.re`.
+- Run `npm run build`, `npm run test`, `npm run bench`.
+
+### Adding Tests
 For any changes you make you should ensure that all the tests are passing. In case you make any fixes or additions to the library please also add at least one test to ensure we don't break anything in the future. Tests are located in `tests/CSSLayoutTest.cpp`. Run the tests by executing `buck test //:CSSLayout`.
 
 Instead of manually writing a test which ensures parity with web
 implementations of flexbox you can run `gentest/gentest.sh` to generated a test
 for you. After running `gentest/gentest.sh` a editor window should pop open
 (make sure you have `$EDITOR` env variable exported). Here you can write html
-which you want to verify in CSSLayout, such as the following.
+which you want to verify in CSSLayout, such as the following. It will then open
+a browser window, and provide two buttons for you to click which will copy
+`Reason` test cases to the clipboard.
 
 
 ```
