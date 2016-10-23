@@ -1,10 +1,10 @@
 
-# ReSS: Reason CSS Flexbox implementation.
+# ReLayout: Reason CSS Flexbox implementation.
 
-This is a fork of the `css-layout` project, which has been ported to `Reason`.
+This is a [`Reason`](https://github.com/facebook/reason) implementation of CSS Flexbox layout.
+It is a port of the [`css-layout`](https://github.com/facebook/css-layout)
+project.
 
-At this point, only the source transformation has been done (from JS to Reason
-using a series of tools such as [ReJs](https://github.com/jaredly/rejs).
 
 ## Building and Installing
 ```sh
